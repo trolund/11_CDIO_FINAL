@@ -9,7 +9,7 @@ import java.util.List;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dto.OperatorDTO;
-import final_cdio_11.java.utils.SecUtils;
+import final_cdio_11.java.utils.Utils;
 
 /*
  * Operator data access object implementation.
@@ -97,7 +97,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			createOprStmt.setString(2, opr.getOprName());
 			createOprStmt.setString(3, opr.getOprIni());
 			createOprStmt.setString(4, opr.getOprCpr());
-			createOprStmt.setString(5, SecUtils.getInstance().sha256(opr.getOprPassword()));
+			createOprStmt.setString(5, Utils.getInstance().sha256(opr.getOprPassword()));
 			createOprStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -123,7 +123,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			updateOprStmt.setString(1, opr.getOprName());
 			updateOprStmt.setString(2, opr.getOprIni());
 			updateOprStmt.setString(3, opr.getOprCpr());
-			updateOprStmt.setString(4, SecUtils.getInstance().sha256(opr.getOprPassword()));
+			updateOprStmt.setString(4, Utils.getInstance().sha256(opr.getOprPassword()));
 			updateOprStmt.setInt(5, opr.getOprId());
 			updateOprStmt.executeUpdate();
 		} catch (SQLException e) {

@@ -1,4 +1,4 @@
-package RESTResources;
+package final_cdio_11.RESTResources;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

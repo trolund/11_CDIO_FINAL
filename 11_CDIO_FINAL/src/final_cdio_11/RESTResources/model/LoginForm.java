@@ -1,4 +1,4 @@
-package RESTResources.model;
+package final_cdio_11.RESTResources.model;
 
 public class LoginForm {
 	

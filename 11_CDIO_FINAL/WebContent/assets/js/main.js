@@ -161,7 +161,7 @@ $.getJSON('api/opr/' + id, function(data) {
 	  success: function(resultData) {
           rols = resultData;
 	    $('#oprRoles').html(resultData).fadeIn(1000); // skriver roller på label.
-        if(rols.indexOf("Admin") !== -1){ // gem menu punkter som kun skal kunne bruges af admin
+        if(rols.indexOf("Admin") == -1){ // gem menu punkter som kun skal kunne bruges af admin
             $('#user_but').hide();
         }
 	  },

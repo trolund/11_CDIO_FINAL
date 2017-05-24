@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.utils.Utils;
+
 /*
  * Singleton database connector class.
  * 
@@ -31,47 +34,67 @@ public class Connector {
 	 */
 	private static final Connector instance = new Connector();
 
-	private DBInfoHandler dbInfoHandler;
+	private Utils utils;
+	private TextHandler textHandler;
+	private FileHandler fileHandler;
 
 	/*
-	 * Database connection object and HashMap object to store all 
-	 * SQL queries used by this application.
+	 * Database connection object and HashMap object to store all SQL queries
+	 * used by this application.
 	 */
 	private Connection connection;
 
 	/*
-	 * Constructor that loads all of the configuration files at startup
-	 * and creates a database connection immediately.
+	 * Constructor that loads all of the configuration files at startup and
+	 * creates a database connection immediately.
 	 */
 	private Connector() {
-		dbInfoHandler = DBInfoHandler.getInstance();
+		utils = Utils.getInstance();
+		textHandler = TextHandler.getInstance();
+		fileHandler = FileHandler.getInstance();
+
 		setupConnectionProperties();
 
 		try {
 			Class.forName(driverClass);
-			//url = driver + "://" + host + ":" + port + "/" + database;
-			url = driver + "://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false";
+			url = driver + "://" + host + ":" + port + "/" + database;
+
+			if (utils.TEST_ENABLED) {
+				url = driver + "://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false";
+			}
+
 			connection = DriverManager.getConnection(url, username, password);
+
+			if (utils.DEV_ENABLED) {
+				utils.logMessage(textHandler.devConnectionMessage + url);
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			try {
+				connection.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			System.exit(1);
 		}
 	}
 
 	/*
-	 * Method to close a desired PreparedStatement
-	 * and ResultSet.
+	 * Method to close a desired PreparedStatement and ResultSet.
 	 */
 	public void cleanup(PreparedStatement stmt, ResultSet rs) throws SQLException {
-		if (stmt != null) stmt.close();
-		if (rs != null) rs.close();
+		if (stmt != null)
+			stmt.close();
+		if (rs != null)
+			rs.close();
 	}
 
 	/*
 	 * Method to close a desired PreparedStatement.
 	 */
 	public void cleanup(PreparedStatement stmt) throws SQLException {
-		if (stmt != null) stmt.close();
+		if (stmt != null)
+			stmt.close();
 	}
 
 	/*
@@ -79,6 +102,10 @@ public class Connector {
 	 */
 	public void closeConnection() throws SQLException {
 		connection.close();
+
+		if (utils.DEV_ENABLED) {
+			//utils.logMessage(textHandler.devConnectionClosedMessage);
+		}
 	}
 
 	/*
@@ -97,21 +124,26 @@ public class Connector {
 
 	// Temporary method
 	public String getQuery(String key) {
-		return dbInfoHandler.getSQL(key);
+		return fileHandler.getSQL(key);
 	}
 
 	private void setupConnectionProperties() {
-		this.driverClass = dbInfoHandler.getSQL("DRIVER_CLASS");
-		this.driver = dbInfoHandler.getSQL("DRIVER");
-		this.host = dbInfoHandler.getSQL("HOST");
-		this.port = Integer.parseInt(dbInfoHandler.getSQL("PORT"));
-		this.database = dbInfoHandler.getSQL("DATABASE");
-		this.username = dbInfoHandler.getSQL("USERNAME");
-		this.password = dbInfoHandler.getSQL("PASSWORD");
+		this.driverClass = fileHandler.getSQL("DRIVER_CLASS");
+		this.driver = fileHandler.getSQL("DRIVER");
+		this.host = fileHandler.getSQL("HOST");
+		this.port = Integer.parseInt(fileHandler.getSQL("PORT"));
+		this.database = fileHandler.getSQL("DATABASE");
+		this.username = fileHandler.getSQL("USERNAME");
+		this.password = fileHandler.getSQL("PASSWORD");
 	}
 
 	private Connection createConnection() throws SQLException {
 		Connection newConnection = DriverManager.getConnection(url, username, password);
+
+		if (utils.DEV_ENABLED) {
+			//utils.logMessage(textHandler.devNewConnectionMessage);
+		}
+
 		return newConnection;
 	}
 

@@ -1,4 +1,4 @@
-package RESTResources;
+package final_cdio_11.RESTResources;
 
 import java.io.IOException;
 import java.security.Key;
@@ -15,12 +15,12 @@ import javax.ws.rs.core.Response.Status;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import RESTResources.model.LoginForm;
+import final_cdio_11.RESTResources.model.LoginForm;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
-import final_cdio_11.java.utils.SecUtils;
+import final_cdio_11.java.utils.Utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -93,7 +93,7 @@ public class RESTLogin {
 	}
 
 	private boolean validate(String password, OperatorDTO oprDTO) {
-		SecUtils secUtil = SecUtils.getInstance();
+		Utils secUtil = Utils.getInstance();
 		
 		if (secUtil.sha256(password).equals(oprDTO.getOprPassword())) {
 			return true;

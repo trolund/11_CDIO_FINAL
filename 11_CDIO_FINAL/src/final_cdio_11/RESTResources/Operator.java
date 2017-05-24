@@ -1,4 +1,4 @@
-package RESTResources;
+package final_cdio_11.RESTResources;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -15,15 +15,15 @@ import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import RESTResources.model.LoginForm;
-import RESTResources.model.creatUserFormPOJO;
+import final_cdio_11.RESTResources.model.LoginForm;
+import final_cdio_11.RESTResources.model.creatUserFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.utils.SecUtils;
+import final_cdio_11.java.utils.Utils;
 
 @Path("/opr")
 public class Operator {
@@ -64,7 +64,7 @@ public class Operator {
 		System.out.println("Id: " + id + ", Password: " + password);
 
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-		SecUtils secUtil = SecUtils.getInstance();
+		Utils secUtil = Utils.getInstance();
 
 		OperatorDTO oprDTO = null;
 		try {
