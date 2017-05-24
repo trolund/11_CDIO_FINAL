@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Login</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+  <div id="login_box">
+    <h1>Login</h1>
+    <form action="/CDIO_D3/api/opr/verify" method="post">
+      <p>ID</p>
+      <input type="text" name="oprId" value="ID">
+      <br>
+      <p>Password</p>
+      <input type="password" name="password" value="password">
+      <br><br>
+      <input id="login_but" type="submit" value="Login">
+    </form>
+  </div>
+</body>
+</html>

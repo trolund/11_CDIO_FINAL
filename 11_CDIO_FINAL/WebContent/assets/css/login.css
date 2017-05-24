@@ -1,0 +1,87 @@
+body {
+    background-color:#333;
+    background-image: url(../../assets/classy_fabric.png);
+    color: #545454;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;  
+}
+
+h1 {
+    color: black;
+    padding-top: 15px;
+    position: relative;
+}
+
+p {
+    color: black;
+}
+
+#login_container {
+    height: auto;
+    width: 300px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    border-radius: 5px;
+    border: solid 1px #999;
+    background-color: #3fb0ac;
+    -webkit-box-shadow: 0 0 10px 1px #000;
+    box-shadow: 0 0 10px 1px #000;
+    z-index: 99999;
+}
+
+#login_box {
+    background-color: #3fb0ac;
+    background-color: rgba(63,176,172, 0.8);
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3fb0ac+52,008c77+100,008c77+100&1+0,0.55+0,0.7+100 */
+    background: -moz-linear-gradient(top, rgba(63,176,172,0.55) 0%, rgba(63,176,172,0.63) 52%, rgba(0,140,119,0.7) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(63,176,172,0.55) 0%,rgba(63,176,172,0.63) 52%,rgba(0,140,119,0.7) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(63,176,172,0.55) 0%,rgba(63,176,172,0.63) 52%,rgba(0,140,119,0.7) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c3fb0ac', endColorstr='#b3008c77',GradientType=0 ); /* IE6-9 */
+   
+    height: 300px;
+    width: 260px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0px;
+    border-radius: 5px;
+    margin-top: 200px;
+    -webkit-box-shadow: 0 0 10px 1px #000;
+    box-shadow: 0 0 10px 1px #000;
+    z-index: 99999;
+}
+
+#login_box input {
+    font-size: 15px;
+    outline:none;
+    border: 0px;
+    background-color: transparent;
+    border-bottom: 2px #173e43 solid;
+    transition: background 0.2s;
+}
+
+#login_box input[type=submit] {
+    margin-top: 10px;
+    height: 40px;
+    width: 100%;
+    outline:none;
+    border: 0px;
+    padding: 5px;
+    border-top: solid #173e43 1px;
+    border-bottom: solid #173e43 1px;
+    position:relative;
+}
+
+#login_but:hover {
+    color: #fff;
+    background-color: #173e43;
+    -webkit-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+    box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+}
