@@ -38,9 +38,8 @@ public class TestSQLRoleDAO {
 		roleDAO = null;
 	}
 
-	/* 
-	 * Testing SQLRoleDAO.getOprRoles(oprId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLRoleDAO.getOprRoles(oprId) Positive atomic test
 	 */
 	@Test
 	public void testGetOprRolesPositive() {
@@ -60,9 +59,8 @@ public class TestSQLRoleDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRoleDAO.getOprRoles(oprId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLRoleDAO.getOprRoles(oprId) Negative atomic test
 	 */
 	@Test
 	public void testGetOprRolesNegative() {
@@ -82,9 +80,8 @@ public class TestSQLRoleDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRoleDAO.getRoleList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLRoleDAO.getRoleList() Positive atomic test
 	 */
 	@Test
 	public void testGetRoleListPositive() {
@@ -104,19 +101,18 @@ public class TestSQLRoleDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRoleDAO.createRole(roleDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLRoleDAO.createRole(roleDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateRolePositive() {
 		try {
 			/* Make sure the RoleDTO does not already exist. */
-			roleDAO.deleteRole(new RoleDTO(1, "Admin"));
+			roleDAO.deleteRole(new RoleDTO(1, "Admin", 0));
 
 			System.out.println("\n" + spr + " Testing SQLRoleDAO.createRole(roleDTO) Positive " + spr);
 
-			RoleDTO roleDTO = new RoleDTO(1, "Admin");
+			RoleDTO roleDTO = new RoleDTO(1, "Admin", 0);
 			roleDAO.createRole(roleDTO);
 			System.out.println("Created: " + roleDTO);
 
@@ -128,16 +124,15 @@ public class TestSQLRoleDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRoleDAO.createRole(roleDTO)
-	 * Negative atomic test
+	/*
+	 * Testing SQLRoleDAO.createRole(roleDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateRoleNegative() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLRoleDAO.createRole(roleDTO) Negative " + spr);
 
-			RoleDTO roleDTO = new RoleDTO(1, "Operator");
+			RoleDTO roleDTO = new RoleDTO(1, "Operator", 0);
 			roleDAO.createRole(roleDTO);
 			System.out.println("Created: " + roleDTO);
 
@@ -150,15 +145,14 @@ public class TestSQLRoleDAO {
 	}
 
 	/*
-	 * Testing SQLRoleDAO.deleteRole(RoleDTO)
-	 * Positive atomic test
+	 * Testing SQLRoleDAO.deleteRole(RoleDTO) Positive atomic test
 	 */
 	@Test
 	public void testDeleteOperatorPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLRoleDAO.deleteRole(RoleDTO) Positive " + spr);
 			/* Creating RoleDTO to make sure that it exists. */
-			RoleDTO roleDTO = new RoleDTO(3, "Pharmacist");
+			RoleDTO roleDTO = new RoleDTO(3, "Pharmacist", 0);
 			roleDAO.deleteRole(roleDTO);
 			roleDAO.createRole(roleDTO);
 

@@ -8,7 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 
-import final_cdio_11.RESTResources.model.LoginForm;
+import final_cdio_11.RESTResources.model.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
@@ -48,7 +48,7 @@ public class RESTLogin {
 
 	@POST
 	@Path("/verify")
-	public String getLogin(LoginForm data) {
+	public String getLogin(LoginFormPOJO data) {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 
 		int id = data.getOprId();

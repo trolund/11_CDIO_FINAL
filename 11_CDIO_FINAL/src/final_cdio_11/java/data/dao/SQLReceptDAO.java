@@ -37,9 +37,10 @@ public class SQLReceptDAO implements IReceptDAO {
 			getReceptStmt.setInt(1, receptId);
 			rs = getReceptStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("Recept with receptId [" + receptId + "] does not exist!");
+			if (!rs.first())
+				throw new DALException("Recept with receptId [" + receptId + "] does not exist!");
 
-			return new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn"));
+			return new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
@@ -65,10 +66,11 @@ public class SQLReceptDAO implements IReceptDAO {
 			getReceptListStmt = connector.getConnection().prepareStatement(getReceptListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getReceptListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No Recept's exist!");
+			if (!rs.first())
+				throw new DALException("No Recept's exist!");
 
 			do {
-				receptList.add(new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn")));
+				receptList.add(new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn"), rs.getInt("status")));
 			} while (rs.next());
 			return receptList;
 		} catch (SQLException e) {
@@ -94,6 +96,7 @@ public class SQLReceptDAO implements IReceptDAO {
 			createReceptStmt = connector.getConnection().prepareStatement(createReceptSql);
 			createReceptStmt.setInt(1, recept.getReceptId());
 			createReceptStmt.setString(2, recept.getReceptName());
+			createReceptStmt.setInt(3, recept.getStatus());
 			createReceptStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -118,6 +121,7 @@ public class SQLReceptDAO implements IReceptDAO {
 			updateReceptStmt = connector.getConnection().prepareStatement(updateReceptSql);
 			updateReceptStmt.setString(1, recept.getReceptName());
 			updateReceptStmt.setInt(2, recept.getReceptId());
+			updateReceptStmt.setInt(3, recept.getStatus());
 			updateReceptStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

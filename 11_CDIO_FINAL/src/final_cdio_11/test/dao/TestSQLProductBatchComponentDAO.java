@@ -39,9 +39,8 @@ public class TestSQLProductBatchComponentDAO {
 		pbcDAO = null;
 	}
 
-	/* 
-	 * Testing SQLProductBatchComponentDAO.getPBC(pbId, rbId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchComponentDAO.getPBC(pbId, rbId) Positive atomic test
 	 */
 	@Test
 	public void testGetPBCPositive() {
@@ -62,9 +61,8 @@ public class TestSQLProductBatchComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchComponentDAO.getPBC(pbId, rbId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLProductBatchComponentDAO.getPBC(pbId, rbId) Negative atomic test
 	 */
 	@Test
 	public void testGetPBCNegative() {
@@ -88,9 +86,8 @@ public class TestSQLProductBatchComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchComponentDAO.getPBCList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchComponentDAO.getPBCList() Positive atomic test
 	 */
 	@Test
 	public void testGetPBCListPositive() {
@@ -108,9 +105,8 @@ public class TestSQLProductBatchComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchComponentDAO.getPBCList(rbId);
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchComponentDAO.getPBCList(rbId); Positive atomic test
 	 */
 	@Test
 	public void testGetPBCListParameterPositive() {
@@ -130,8 +126,7 @@ public class TestSQLProductBatchComponentDAO {
 	}
 
 	/*
-	 * Testing SQLProductBatchComponentDAO.createPBC(pbcDTO)
-	 * Positive atomic test
+	 * Testing SQLProductBatchComponentDAO.createPBC(pbcDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreatePBCPositive() {
@@ -143,7 +138,7 @@ public class TestSQLProductBatchComponentDAO {
 
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.createPBC(pbcDTO) Positive " + spr);
 
-			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 502.23, 43.23, 1);
+			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 502.23, 43.23, 1, 0);
 			pbcDAO.createProductBatchComponent(pbcDTO);
 			System.out.println("Created: " + pbcDTO);
 
@@ -156,8 +151,7 @@ public class TestSQLProductBatchComponentDAO {
 	}
 
 	/*
-	 * Testing SQLProductBatchComponentDAO.createPBC(pbcDTO)
-	 * Negative atomic test
+	 * Testing SQLProductBatchComponentDAO.createPBC(pbcDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreatePBCNegative() {
@@ -166,7 +160,7 @@ public class TestSQLProductBatchComponentDAO {
 			int rbId = 2;
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.createPBC(pbcDTO) Negative " + spr);
 
-			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 432.23, 23.23, 1);
+			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 432.23, 23.23, 1, 0);
 			pbcDAO.createProductBatchComponent(pbcDTO);
 			System.out.println("Created: " + pbcDTO);
 
@@ -178,9 +172,8 @@ public class TestSQLProductBatchComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchComponentDAO.updatePBC(pbcDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchComponentDAO.updatePBC(pbcDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdatePBCPositive() {
@@ -190,13 +183,13 @@ public class TestSQLProductBatchComponentDAO {
 			int pbId = 2;
 			int rbId = 3;
 			pbcDAO.deleteProductBatchComponent(pbId, rbId);
-			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 99.99, 11.22, 1);
+			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 99.99, 11.22, 1, 0);
 			pbcDAO.createProductBatchComponent(pbcDTO);
 
 			double newTara = 23423.234;
 			double newNetto = 555.342;
 
-			ProductBatchComponentDTO updatedPbcDTO = new ProductBatchComponentDTO(pbId, rbId, newTara, newNetto, 1);
+			ProductBatchComponentDTO updatedPbcDTO = new ProductBatchComponentDTO(pbId, rbId, newTara, newNetto, 1, 0);
 
 			System.out.println("Created: " + pbcDAO.getProductBatchComponent(pbId, rbId));
 			pbcDAO.updateProductBatchComponent(updatedPbcDTO);
@@ -216,8 +209,7 @@ public class TestSQLProductBatchComponentDAO {
 	}
 
 	/*
-	 * Testing SQLProductBatchComponentDAO.deletePBC(pbId, rbId)
-	 * Positive atomic test
+	 * Testing SQLProductBatchComponentDAO.deletePBC(pbId, rbId) Positive atomic test
 	 */
 	@Test
 	public void testDeletePBCPositive() {
@@ -227,7 +219,7 @@ public class TestSQLProductBatchComponentDAO {
 			int pbId = 2;
 			int rbId = 3;
 			pbcDAO.deleteProductBatchComponent(pbId, rbId);
-			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 22.22, 33.33, 1);
+			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 22.22, 33.33, 1, 0);
 			pbcDAO.createProductBatchComponent(pbcDTO);
 
 			System.out.println("Created: " + pbcDTO);

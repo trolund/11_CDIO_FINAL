@@ -19,7 +19,7 @@ import final_cdio_11.java.data.dto.view.VAdminForemanPBCDTO;
 import final_cdio_11.java.data.dto.view.VAdminOperatorDTO;
 
 @Path("/View")
-public class RESTVeiw {
+public class RESTView {
 	
 	@GET
 	@Path("/AdminForemanList")

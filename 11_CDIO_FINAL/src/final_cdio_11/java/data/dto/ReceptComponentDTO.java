@@ -10,12 +10,14 @@ public class ReceptComponentDTO {
 	private int raavareId;
 	private double nomNetto;
 	private double tolerance;
+	private int status;
 
-	public ReceptComponentDTO(int receptId, int raavareId, double nomNetto, double tolerance) {
+	public ReceptComponentDTO(int receptId, int raavareId, double nomNetto, double tolerance, int status) {
 		this.receptId = receptId;
 		this.raavareId = raavareId;
 		this.nomNetto = nomNetto;
 		this.tolerance = tolerance;
+		this.status = status;
 	}
 
 	public int getReceptId() {
@@ -34,9 +36,13 @@ public class ReceptComponentDTO {
 		return tolerance;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
 	@Override
 	public String toString() {
-		return "ReceptComponentDTO [receptId=" + receptId + ", raavareId=" + raavareId + ", nomNetto=" + nomNetto + ", tolerance=" + tolerance + "]";
+		return "ReceptComponentDTO [receptId=" + receptId + ", raavareId=" + raavareId + ", nomNetto=" + nomNetto + ", tolerance=" + tolerance + ", status=" + status + "]";
 	}
 
 }

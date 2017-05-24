@@ -7,30 +7,36 @@ package final_cdio_11.java.data.dto;
 public class ProductBatchDTO {
 
 	private int pbId;
-	private int status;
+	private int itemStatus;
 	private int receptId;
+	private int status;
 
-	public ProductBatchDTO(int pbId, int status, int receptId) {
+	public ProductBatchDTO(int pbId, int itemStatus, int receptId, int status) {
 		this.pbId = pbId;
-		this.status = status;
+		this.itemStatus = itemStatus;
 		this.receptId = receptId;
+		this.status = status;
 	}
 
 	public int getpbId() {
 		return pbId;
 	}
 
-	public int getStatus() {
-		return status;
+	public int getItemStatus() {
+		return itemStatus;
 	}
 
 	public int getReceptId() {
 		return receptId;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductBatchDTO [pbId=" + pbId + ", status=" + status + ", receptId=" + receptId + "]";
+		return "ProductBatchDTO [pbId=" + pbId + ", status=" + itemStatus + ", receptId=" + receptId + ", status=" + status + "]";
 	}
 
 }

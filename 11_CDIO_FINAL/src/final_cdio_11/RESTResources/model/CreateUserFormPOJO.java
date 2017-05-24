@@ -3,17 +3,17 @@ package final_cdio_11.RESTResources.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class creatUserFormPOJO {
+public class CreateUserFormPOJO {
 
-	int oprId;
-	String oprName;
-	String oprIni;
-	String oprCpr;
-	String oprPassword;
-	String oprRole1;
-	String oprRole2;
-	String oprRole3;
-	String oprRole4;
+	private int oprId;
+	private String oprName;
+	private String oprLastName;
+	private String oprIni;
+	private String oprEmail;
+	private String oprCpr;
+	private String oprPassword;
+	private int status;
+	private String oprRole1, oprRole2, oprRole3, oprRole4;
 
 	public int getOprId() {
 		return oprId;
@@ -31,12 +31,28 @@ public class creatUserFormPOJO {
 		this.oprName = oprName;
 	}
 
+	public String getOprLastName() {
+		return oprLastName;
+	}
+
+	public void setOprLastName(String oprLastName) {
+		this.oprLastName = oprLastName;
+	}
+
 	public String getOprIni() {
 		return oprIni;
 	}
 
 	public void setOprIni(String oprIni) {
 		this.oprIni = oprIni;
+	}
+
+	public String getOprEmail() {
+		return oprEmail;
+	}
+
+	public void setOprEmail(String oprEmail) {
+		this.oprEmail = oprEmail;
 	}
 
 	public String getOprCpr() {
@@ -55,26 +71,12 @@ public class creatUserFormPOJO {
 		this.oprPassword = oprPassword;
 	}
 
-	public List<String> getOprRole() {
-		List<String> liste = new ArrayList<>();
+	public int getStatus() {
+		return status;
+	}
 
-		if (oprRole1 != "None") {
-			liste.add(oprRole1);
-		}
-
-		if (oprRole2 != "None") {
-			liste.add(oprRole2);
-		}
-
-		if (oprRole3 != "None") {
-			liste.add(oprRole3);
-		}
-
-		if (oprRole4 != "None") {
-			liste.add(oprRole4);
-		}
-
-		return liste;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public String getOprRole1() {
@@ -107,6 +109,28 @@ public class creatUserFormPOJO {
 
 	public void setOprRole4(String oprRole4) {
 		this.oprRole4 = oprRole4;
+	}
+
+	public List<String> getOprRole() {
+		List<String> list = new ArrayList<>();
+
+		if (oprRole1 != "None") {
+			list.add(oprRole1);
+		}
+
+		if (oprRole2 != "None") {
+			list.add(oprRole2);
+		}
+
+		if (oprRole3 != "None") {
+			list.add(oprRole3);
+		}
+
+		if (oprRole4 != "None") {
+			list.add(oprRole4);
+		}
+
+		return list;
 	}
 
 }

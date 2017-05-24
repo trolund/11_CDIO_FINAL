@@ -37,9 +37,10 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			getRaavareStmt.setInt(1, raavareId);
 			rs = getRaavareStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("Raavare with raavareId [" + raavareId + "] does not exist!");
+			if (!rs.first())
+				throw new DALException("Raavare with raavareId [" + raavareId + "] does not exist!");
 
-			return new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"));
+			return new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
@@ -65,10 +66,11 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			getRaavareListStmt = connector.getConnection().prepareStatement(getRaavareListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getRaavareListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No Raavare's exist!");
+			if (!rs.first())
+				throw new DALException("No Raavare's exist!");
 
 			do {
-				raavareList.add(new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer")));
+				raavareList.add(new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getInt("status")));
 			} while (rs.next());
 			return raavareList;
 		} catch (SQLException e) {
@@ -95,6 +97,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			createRaavareStmt.setInt(1, raavare.getRaavareId());
 			createRaavareStmt.setString(2, raavare.getraavareName());
 			createRaavareStmt.setString(3, raavare.getSupplier());
+			createRaavareStmt.setInt(4, raavare.getStatus());
 			createRaavareStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -119,7 +122,8 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			updateRaavareStmt = connector.getConnection().prepareStatement(updateRaavareSql);
 			updateRaavareStmt.setString(1, raavare.getraavareName());
 			updateRaavareStmt.setString(2, raavare.getSupplier());
-			updateRaavareStmt.setInt(3, raavare.getRaavareId());
+			updateRaavareStmt.setInt(3, raavare.getStatus());
+			updateRaavareStmt.setInt(4, raavare.getRaavareId());
 			updateRaavareStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

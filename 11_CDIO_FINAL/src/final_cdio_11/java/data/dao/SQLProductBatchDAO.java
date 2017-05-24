@@ -37,9 +37,10 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 			getPBStmt.setInt(1, pbId);
 			rs = getPBStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("ProductBatch with pbId [" + pbId + "] does not exist!");
+			if (!rs.first())
+				throw new DALException("ProductBatch with pbId [" + pbId + "] does not exist!");
 
-			return new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id"));
+			return new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
@@ -65,10 +66,11 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 			getPBListStmt = connector.getConnection().prepareStatement(getPBListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getPBListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No ProductBatch's exist!");
+			if (!rs.first())
+				throw new DALException("No ProductBatch's exist!");
 
 			do {
-				pbList.add(new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id")));
+				pbList.add(new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id"), rs.getInt("status")));
 			} while (rs.next());
 			return pbList;
 		} catch (SQLException e) {
@@ -93,8 +95,9 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 		try {
 			createPBStmt = connector.getConnection().prepareStatement(createPBSql);
 			createPBStmt.setInt(1, pbDTO.getpbId());
-			createPBStmt.setInt(2, pbDTO.getStatus());
+			createPBStmt.setInt(2, pbDTO.getItemStatus());
 			createPBStmt.setInt(3, pbDTO.getReceptId());
+			createPBStmt.setInt(4, pbDTO.getStatus());
 			createPBStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -117,9 +120,10 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 		PreparedStatement updatePBStmt = null;
 		try {
 			updatePBStmt = connector.getConnection().prepareStatement(updatePBSql);
-			updatePBStmt.setInt(1, pbDTO.getStatus());
-			updatePBStmt.setInt(2, pbDTO.getpbId());
-			updatePBStmt.setInt(3, pbDTO.getReceptId());
+			updatePBStmt.setInt(1, pbDTO.getItemStatus());
+			updatePBStmt.setInt(2, pbDTO.getStatus());
+			updatePBStmt.setInt(3, pbDTO.getpbId());
+			updatePBStmt.setInt(4, pbDTO.getReceptId());
 			updatePBStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

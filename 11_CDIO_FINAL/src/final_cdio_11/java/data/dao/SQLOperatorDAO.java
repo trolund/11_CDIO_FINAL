@@ -38,9 +38,10 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			getOprStmt.setInt(1, oprId);
 			rs = getOprStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("Operator id [" + oprId + "] does not exist!");
+			if (!rs.first())
+				throw new DALException("Operator id [" + oprId + "] does not exist!");
 
-			return new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"));
+			return new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("opr_efternavn"), rs.getString("ini"), rs.getString("email"), rs.getString("cpr"), rs.getString("password"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
@@ -66,10 +67,11 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			getOprListStmt = connector.getConnection().prepareStatement(getOprListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getOprListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No operators exist!");
+			if (!rs.first())
+				throw new DALException("No operators exist!");
 
 			do {
-				oprList.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password")));
+				oprList.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("opr_efternavn"), rs.getString("ini"), rs.getString("email"), rs.getString("cpr"), rs.getString("password"), rs.getInt("status")));
 			} while (rs.next());
 			return oprList;
 		} catch (SQLException e) {
@@ -95,9 +97,12 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			createOprStmt = connector.getConnection().prepareStatement(createOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			createOprStmt.setInt(1, opr.getOprId());
 			createOprStmt.setString(2, opr.getOprName());
-			createOprStmt.setString(3, opr.getOprIni());
-			createOprStmt.setString(4, opr.getOprCpr());
-			createOprStmt.setString(5, Utils.getInstance().sha256(opr.getOprPassword()));
+			createOprStmt.setString(3, opr.getOprLastName());
+			createOprStmt.setString(4, opr.getOprIni());
+			createOprStmt.setString(5, opr.getOprEmail());
+			createOprStmt.setString(6, opr.getOprCpr());
+			createOprStmt.setString(7, Utils.getInstance().sha256(opr.getOprPassword()));
+			createOprStmt.setInt(8, opr.getStatus());
 			createOprStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -121,10 +126,13 @@ public class SQLOperatorDAO implements IOperatorDAO {
 		try {
 			updateOprStmt = connector.getConnection().prepareStatement(updateOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			updateOprStmt.setString(1, opr.getOprName());
+			updateOprStmt.setString(2, opr.getOprLastName());
 			updateOprStmt.setString(2, opr.getOprIni());
-			updateOprStmt.setString(3, opr.getOprCpr());
-			updateOprStmt.setString(4, Utils.getInstance().sha256(opr.getOprPassword()));
-			updateOprStmt.setInt(5, opr.getOprId());
+			updateOprStmt.setString(3, opr.getOprEmail());
+			updateOprStmt.setString(4, opr.getOprCpr());
+			updateOprStmt.setString(5, Utils.getInstance().sha256(opr.getOprPassword()));
+			updateOprStmt.setInt(6, opr.getStatus());
+			updateOprStmt.setInt(7, opr.getOprId());
 			updateOprStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

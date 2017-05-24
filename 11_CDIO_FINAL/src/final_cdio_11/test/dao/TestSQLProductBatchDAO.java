@@ -39,9 +39,8 @@ public class TestSQLProductBatchDAO {
 		pbDAO = null;
 	}
 
-	/* 
-	 * Testing SQLProductBatchDAO.getProductBatch(pbId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchDAO.getProductBatch(pbId) Positive atomic test
 	 */
 	@Test
 	public void testGetProductBatchPositive() {
@@ -61,9 +60,8 @@ public class TestSQLProductBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchDAO.getProductBatch(pbId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLProductBatchDAO.getProductBatch(pbId) Negative atomic test
 	 */
 	@Test
 	public void testGetProductBatchNegative() {
@@ -87,9 +85,8 @@ public class TestSQLProductBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchDAO.getProductBatchList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchDAO.getProductBatchList() Positive atomic test
 	 */
 	@Test
 	public void testGetProductBatchListPositive() {
@@ -107,9 +104,8 @@ public class TestSQLProductBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchDAO.createProductBatch(pbDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchDAO.createProductBatch(pbDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateProductBatchPositive() {
@@ -119,7 +115,7 @@ public class TestSQLProductBatchDAO {
 			pbDAO.deleteProductBatch(pbId);
 
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.createProductBatch(pbDTO) Positive " + spr);
-			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 2223, 1);
+			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 2223, 1, 0);
 
 			pbDAO.createProductBatch(pbDTO);
 			System.out.println("Created: " + pbDTO);
@@ -132,16 +128,15 @@ public class TestSQLProductBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchDAO.createProductBatch(pbDTO)
-	 * Negative atomic test
+	/*
+	 * Testing SQLProductBatchDAO.createProductBatch(pbDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateProductBatchNegative() {
 		try {
 			int pbId = 1;
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.createProductBatch(pbDTO) Negative " + spr);
-			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 2223, 1);
+			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 2223, 1, 0);
 
 			pbDAO.createProductBatch(pbDTO);
 			System.out.println("Created: " + pbDTO);
@@ -154,9 +149,8 @@ public class TestSQLProductBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLProductBatchDAO.updateProductBatch(pbDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLProductBatchDAO.updateProductBatch(pbDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdateProductBatchPositive() {
@@ -165,12 +159,12 @@ public class TestSQLProductBatchDAO {
 			/* Creating pbDTO to make sure that it exists. */
 			int pbId = 43;
 			pbDAO.deleteProductBatch(pbId);
-			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 22235323, 1);
+			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 22235323, 1, 0);
 			pbDAO.createProductBatch(pbDTO);
 
 			int newStatus = 9393;
 
-			ProductBatchDTO updatedPbDTO = new ProductBatchDTO(pbId, newStatus, 1);
+			ProductBatchDTO updatedPbDTO = new ProductBatchDTO(pbId, newStatus, 1, 0);
 
 			System.out.println("Created: " + pbDAO.getProductBatch(pbId));
 			pbDAO.updateProductBatch(updatedPbDTO);
@@ -190,8 +184,7 @@ public class TestSQLProductBatchDAO {
 	}
 
 	/*
-	 * Testing SQLProductBatchDAO.deleteProductBatch(pbId)
-	 * Positive atomic test
+	 * Testing SQLProductBatchDAO.deleteProductBatch(pbId) Positive atomic test
 	 */
 	@Test
 	public void testDeleteProductBatchPositive() {
@@ -200,7 +193,7 @@ public class TestSQLProductBatchDAO {
 			/* Creating ProductBatchDTO to make sure that it exists. */
 			int pbId = 81;
 			pbDAO.deleteProductBatch(pbId);
-			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 93459345, 1);
+			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 93459345, 1, 0);
 			pbDAO.createProductBatch(pbDTO);
 
 			System.out.println("Created: " + pbDTO);

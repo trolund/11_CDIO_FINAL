@@ -8,10 +8,12 @@ public class RoleDTO {
 
 	private int oprId;
 	private String roleName;
+	private int status;
 
-	public RoleDTO(int oprId, String roleName) {
+	public RoleDTO(int oprId, String roleName, int status) {
 		this.oprId = oprId;
 		this.roleName = roleName;
+		this.status = status;
 	}
 
 	public int getOprId() {
@@ -22,9 +24,13 @@ public class RoleDTO {
 		return roleName;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
 	@Override
 	public String toString() {
-		return "RoleDTO [oprId=" + oprId + ", roleName=" + roleName + "]";
+		return "RoleDTO [oprId=" + oprId + ", roleName=" + roleName + ", status=" + status + "]";
 	}
 
 }

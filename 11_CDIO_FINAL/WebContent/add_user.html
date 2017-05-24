@@ -7,18 +7,18 @@ $(document).ready(function() {
     }); 
 });
 
-// cancel icon creat user box
+// cancel icon create user box
 $(document).ready(function() {
     $("#cancel_Icon").click(function(){
         $("#AddUser_Box").hide(400);
     }); 
 });
     
-// post creat user data
+// post create user data
 $(document).ready(function() {
   $("#Submit_CreateUser").click(function() {
       
-      var data = $('#creatUserForm').serializeJSON();    
+      var data = $('#CreateUserForm').serializeJSON();    
       
       jQuery.ajax({
 		url : "api/opr/addopr",
@@ -27,12 +27,12 @@ $(document).ready(function() {
 		method: 'POST',
 		success : function(data){
             console.log(data);
-            $('#CreatMSG').html(data);
+            $('#CreateMSG').html(data);
             loadUsers(); // updata liste.
 		},
 		error: function(jqXHR, text, error){ 
                console.log(data);
-            $('#CreatMSG').html(data).fadeToggle(500);
+            $('#CreateMSG').html(data).fadeToggle(500);
              $("#AddUser_Box").show(400);
             
 		}
@@ -40,7 +40,7 @@ $(document).ready(function() {
 });   
   });
     
-// creat dommy user  
+// create dommy user  
 $(document).ready(function() {
   $("#Submit_CreateUser_dummy").click(function() {
       
@@ -51,7 +51,7 @@ $(document).ready(function() {
         $('#oprPassword').val('pass');
         $('#oprRole1').val('admin'); 
       
-      var data = $('#creatUserForm').serializeJSON();    
+      var data = $('#CreateUserForm').serializeJSON();    
       
       jQuery.ajax({
 		url : "api/opr/addopr",
@@ -60,12 +60,12 @@ $(document).ready(function() {
 		method: 'POST',
 		success : function(data){
             console.log(data);
-            $('#CreatMSG').html(data);
-            loadUsers(); // updata liste.
+            $('#CreateMSG').html(data);
+            loadUsers();
 		},
 		error: function(jqXHR, text, error){ 
                console.log(data);
-            $('#CreatMSG').html(data).fadeToggle(500);
+            $('#CreateMSG').html(data).fadeToggle(500);
              $("#AddUser_Box").show();
             
 		}
@@ -77,7 +77,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("#refresh_But").click(function() {  
       
-      console.log('refresh of users');
+      console.log('Refreshing users.');
       loadUsers();
       
 });
@@ -117,7 +117,7 @@ $(document).ready(function() {
 <div id="AddUser_Box">
   <img id="cancel_Icon" src="assets/img/Cancel_Icon.png"> 
     <h1>Create user</h1>
-  <form id="creatUserForm" method="POST" action="api/opr/addopr">
+  <form id="CreateUserForm" method="POST" action="api/opr/addopr">
       Id<br>
     <input type="text" name="oprId" id="oprId">
     <br>
@@ -132,7 +132,7 @@ $(document).ready(function() {
     <br>
     Password <br>
     <input type="text" name="oprPassword" id="oprPassword">
-      <p id="CreatMSG"></p>
+      <p id="CreateMSG"></p>
     <br>
     <br>
     
@@ -180,17 +180,15 @@ $(document).ready(function() {
 </div>
 <!--create user popup slut-->
 
-<button id="Adduser_But">Add user</button><button id="refresh_But">Refresh user list</button>
+<button id="Adduser_But">Add User</button><button id="refresh_But">Refresh List</button>
 <table id="table_con">
 <tr>
   <td>Id</td>
   <td>Name</td>
   <td>Initials</td>
   <td>Cpr</td>
-  <td>passwords</td>
+  <td>Password</td>
   <td>Delete</td>
   <td>Edit</td>
 </tr>
 </table>
-
-

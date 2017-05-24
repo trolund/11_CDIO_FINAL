@@ -1,11 +1,10 @@
 package final_cdio_11.RESTResources.model;
 
-public class LoginForm {
-	
-	private int oprId;
-    private String password;
+public class LoginFormPOJO {
 
-	
+	private int oprId;
+	private String password;
+
 	public int getOprId() {
 		return oprId;
 	}
@@ -20,5 +19,6 @@ public class LoginForm {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}    
+	}
+
 }

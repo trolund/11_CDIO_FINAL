@@ -15,8 +15,8 @@ import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import final_cdio_11.RESTResources.model.LoginForm;
-import final_cdio_11.RESTResources.model.creatUserFormPOJO;
+import final_cdio_11.RESTResources.model.CreateUserFormPOJO;
+import final_cdio_11.RESTResources.model.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
@@ -27,7 +27,7 @@ import final_cdio_11.java.utils.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
 @Path("/opr")
-public class Operator {
+public class RESTOperator {
 
 	private final Utils utils = Utils.getInstance();
 	private final TextHandler textHandler = TextHandler.getInstance();
@@ -73,7 +73,7 @@ public class Operator {
 	@Path("/verify")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String verify(LoginForm formData) throws JsonParseException, JsonMappingException, IOException {
+	public String verify(LoginFormPOJO formData) throws JsonParseException, JsonMappingException, IOException {
 		int oprId = formData.getOprId();
 		String password = formData.getPassword();
 
@@ -106,29 +106,29 @@ public class Operator {
 	@Path("/addopr")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String Addopr(creatUserFormPOJO formData) throws DALException {
+	public String Addopr(CreateUserFormPOJO formData) throws DALException {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
-		OperatorDTO oprDTO = new OperatorDTO(formData.getOprId(), formData.getOprName(), formData.getOprIni(), formData.getOprCpr(), formData.getOprPassword());
+		OperatorDTO oprDTO = new OperatorDTO(formData.getOprId(), formData.getOprName(), formData.getOprLastName(), formData.getOprIni(), formData.getOprEmail(), formData.getOprCpr(), formData.getOprPassword(), formData.getStatus());
 
 		if (formData.getOprRole1().equals("None")) {
-			RoleDTO roleDTO1 = new RoleDTO(formData.getOprId(), formData.getOprRole1());
+			RoleDTO roleDTO1 = new RoleDTO(formData.getOprId(), formData.getOprRole1(), formData.getStatus());
 			roleDAO.createRole(roleDTO1);
 		}
 
 		if (formData.getOprRole2().equals("None")) {
-			RoleDTO roleDTO2 = new RoleDTO(formData.getOprId(), formData.getOprRole2());
+			RoleDTO roleDTO2 = new RoleDTO(formData.getOprId(), formData.getOprRole2(), formData.getStatus());
 			roleDAO.createRole(roleDTO2);
 		}
 
 		if (formData.getOprRole3().equals("None")) {
-			RoleDTO roleDTO3 = new RoleDTO(formData.getOprId(), formData.getOprRole3());
+			RoleDTO roleDTO3 = new RoleDTO(formData.getOprId(), formData.getOprRole3(), formData.getStatus());
 			roleDAO.createRole(roleDTO3);
 		}
 
 		if (formData.getOprRole4().equals("None")) {
-			RoleDTO roleDTO4 = new RoleDTO(formData.getOprId(), formData.getOprRole4());
+			RoleDTO roleDTO4 = new RoleDTO(formData.getOprId(), formData.getOprRole4(), formData.getStatus());
 			roleDAO.createRole(roleDTO4);
 		}
 
@@ -166,7 +166,7 @@ public class Operator {
 
 		for (OperatorDTO oprDTO : oprList) {
 			if (oprDTO.getOprId() == id) {
-				creatUserFormPOJO pojo = new creatUserFormPOJO();
+				CreateUserFormPOJO pojo = new CreateUserFormPOJO();
 				try {
 					List<RoleDTO> roleList = new SQLRoleDAO(Connector.getInstance()).getOprRoles(id);
 					pojo.setOprId(oprDTO.getOprId());

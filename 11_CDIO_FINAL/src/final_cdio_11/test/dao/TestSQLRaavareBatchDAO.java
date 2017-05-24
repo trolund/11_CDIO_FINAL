@@ -39,9 +39,8 @@ public class TestSQLRaavareBatchDAO {
 		rbDAO = null;
 	}
 
-	/* 
-	 * Testing SQLRaavareBatchDAO.getRaavareBatch(rbId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLRaavareBatchDAO.getRaavareBatch(rbId) Positive atomic test
 	 */
 	@Test
 	public void testGetRaavareBatchPositive() {
@@ -61,9 +60,8 @@ public class TestSQLRaavareBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRaavareBatchDAO.getRaavareBatch(rbId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLRaavareBatchDAO.getRaavareBatch(rbId) Negative atomic test
 	 */
 	@Test
 	public void testGetRaavareBatchNegative() {
@@ -87,9 +85,8 @@ public class TestSQLRaavareBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRaavareBatchDAO.getRaavareBatchList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLRaavareBatchDAO.getRaavareBatchList() Positive atomic test
 	 */
 	@Test
 	public void testGetRaavareBatchListPositive() {
@@ -107,9 +104,8 @@ public class TestSQLRaavareBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRaavareBatchDAO.getRaavareBatchList(raavareId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLRaavareBatchDAO.getRaavareBatchList(raavareId) Positive atomic test
 	 */
 	@Test
 	public void testGetRaavareBatchListParameterPositive() {
@@ -129,8 +125,7 @@ public class TestSQLRaavareBatchDAO {
 	}
 
 	/*
-	 * Testing SQLRaavareBatchDAO.createRaavareBatch(rbDTO)
-	 * Positive atomic test
+	 * Testing SQLRaavareBatchDAO.createRaavareBatch(rbDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateRaavareBatchPositive() {
@@ -141,7 +136,7 @@ public class TestSQLRaavareBatchDAO {
 
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.createRaavareBatch(rbDTO) Positive " + spr);
 
-			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 42);
+			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 42, 0);
 			rbDAO.createRaavareBatch(rbDTO);
 			System.out.println("Created: " + rbDTO);
 
@@ -154,8 +149,7 @@ public class TestSQLRaavareBatchDAO {
 	}
 
 	/*
-	 * Testing SQLRaavareBatchDAO.createRaavareBatch(rbDTO)
-	 * Negative atomic test
+	 * Testing SQLRaavareBatchDAO.createRaavareBatch(rbDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateRaavareBatchNegative() {
@@ -163,7 +157,7 @@ public class TestSQLRaavareBatchDAO {
 			int rbId = 1;
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.createRaavareBatch(rbDTO) Negative " + spr);
 
-			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 42);
+			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 42, 0);
 			rbDAO.createRaavareBatch(rbDTO);
 			System.out.println("Created: " + rbDTO);
 
@@ -175,9 +169,8 @@ public class TestSQLRaavareBatchDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRaavareBatchDAO.updateRaavareBatch(rbDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLRaavareBatchDAO.updateRaavareBatch(rbDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdateRaavareBatchPositive() {
@@ -186,12 +179,12 @@ public class TestSQLRaavareBatchDAO {
 			/* Creating RaavareBatchDTO to make sure that it exists. */
 			int rbId = 423;
 			rbDAO.deleteRaavareBatch(rbId);
-			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 5435);
+			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 5435, 0);
 			rbDAO.createRaavareBatch(rbDTO);
 
 			int newAmount = 9999;
 
-			RaavareBatchDTO updatedRbDTO = new RaavareBatchDTO(rbId, 1, newAmount);
+			RaavareBatchDTO updatedRbDTO = new RaavareBatchDTO(rbId, 1, newAmount, 0);
 
 			System.out.println("Created: " + rbDAO.getRaavareBatch(rbId));
 			rbDAO.updateRaavareBatch(updatedRbDTO);
@@ -211,8 +204,7 @@ public class TestSQLRaavareBatchDAO {
 	}
 
 	/*
-	 * Testing SQLRaavareBatchDAO.deleteRaavareBatch(rbId)
-	 * Positive atomic test
+	 * Testing SQLRaavareBatchDAO.deleteRaavareBatch(rbId) Positive atomic test
 	 */
 	@Test
 	public void testDeleteRaavareBatchPositive() {
@@ -221,7 +213,7 @@ public class TestSQLRaavareBatchDAO {
 			/* Creating RaavareBatchDTO to make sure that it exists. */
 			int rbId = 4552;
 			rbDAO.deleteRaavareBatch(rbId);
-			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 666669);
+			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 666669, 0);
 			rbDAO.createRaavareBatch(rbDTO);
 
 			System.out.println("Created: " + rbDTO);

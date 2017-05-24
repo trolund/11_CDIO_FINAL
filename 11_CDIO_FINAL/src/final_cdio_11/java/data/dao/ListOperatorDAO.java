@@ -14,15 +14,15 @@ public class ListOperatorDAO implements IOperatorDAO {
 	/* Initializing the oprList as well as two sample objects */
 	public ListOperatorDAO() {
 		oprList = new ArrayList<>();
-		oprList.add(new OperatorDTO(101, "Stig", "HGH", "123456-6543", "givos12"));
-		oprList.add(new OperatorDTO(102, "Finn", "FGS", "987654-4567", "givos12"));
+		oprList.add(new OperatorDTO(101, "Stig", "Høgh", "HGH", "dtu@dtu.dk", "123456-6543", "givos12", 0));
+		oprList.add(new OperatorDTO(102, "Finn", "Gustafsson", "FGS", "dtu@dtu.dk", "987654-4567", "givos12", 0));
 	}
 
 	/* Method to retrieve an OperatorDTO */
 	@Override
 	public OperatorDTO getOperator(int oprId) throws DALException {
 		for (OperatorDTO dto : oprList) {
-			if (oprId == dto.getOprId()) {
+			if (oprId == dto.getOprId() && dto.getStatus() != 1) {
 				return dto;
 			}
 		}
@@ -50,7 +50,7 @@ public class ListOperatorDAO implements IOperatorDAO {
 	@Override
 	public void updateOperator(OperatorDTO opr) throws DALException {
 		for (int i = 0; i < oprList.size(); i++) {
-			if (opr.getOprId() == oprList.get(i).getOprId()) {
+			if (opr.getOprId() == oprList.get(i).getOprId() && opr.getStatus() != 1) {
 				oprList.remove(i);
 				oprList.add(i, opr);
 			}
@@ -61,7 +61,7 @@ public class ListOperatorDAO implements IOperatorDAO {
 	@Override
 	public void deleteOperator(int oprId) throws DALException {
 		for (int i = 0; i < oprList.size(); i++) {
-			if (oprList.get(i).getOprId() == oprId) {
+			if (oprList.get(i).getOprId() == oprId && oprList.get(i).getStatus() != 1) {
 				oprList.remove(i);
 			}
 		}

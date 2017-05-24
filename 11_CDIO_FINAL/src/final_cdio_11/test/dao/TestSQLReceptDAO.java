@@ -39,9 +39,8 @@ public class TestSQLReceptDAO {
 		receptDAO = null;
 	}
 
-	/* 
-	 * Testing SQLReceptDAO.getRecept(receptId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLReceptDAO.getRecept(receptId) Positive atomic test
 	 */
 	@Test
 	public void testGetReceptPositive() {
@@ -61,9 +60,8 @@ public class TestSQLReceptDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLReceptDAO.getRecept(receptId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLReceptDAO.getRecept(receptId) Negative atomic test
 	 */
 	@Test
 	public void testGetReceptNegative() {
@@ -83,9 +81,8 @@ public class TestSQLReceptDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLReceptDAO.getReceptList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLReceptDAO.getReceptList() Positive atomic test
 	 */
 	@Test
 	public void testGetReceptListPositive() {
@@ -104,8 +101,7 @@ public class TestSQLReceptDAO {
 	}
 
 	/*
-	 * Testing SQLReceptDAO.createRecept(receptDTO)
-	 * Positive atomic test
+	 * Testing SQLReceptDAO.createRecept(receptDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateReceptPositive() {
@@ -116,7 +112,7 @@ public class TestSQLReceptDAO {
 
 			System.out.println("\n" + spr + " Testing SQLReceptDAO.createRecept(receptDTO) Positive " + spr);
 
-			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed");
+			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed", 0);
 			receptDAO.createRecept(receptDTO);
 			System.out.println("Created: " + receptDTO);
 
@@ -129,8 +125,7 @@ public class TestSQLReceptDAO {
 	}
 
 	/*
-	 * Testing SQLReceptDAO.createRecept(receptDTO)
-	 * Negative atomic test
+	 * Testing SQLReceptDAO.createRecept(receptDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateReceptNegative() {
@@ -139,7 +134,7 @@ public class TestSQLReceptDAO {
 
 			System.out.println("\n" + spr + " Testing SQLReceptDAO.createRecept(receptDTO) Negative " + spr);
 
-			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed");
+			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed", 0);
 			receptDAO.createRecept(receptDTO);
 			System.out.println("Created: " + receptDTO);
 
@@ -151,9 +146,8 @@ public class TestSQLReceptDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLReceptDAO.updateRecept(receptDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLReceptDAO.updateRecept(receptDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdateReceptPositive() {
@@ -162,12 +156,12 @@ public class TestSQLReceptDAO {
 			/* Creating ReceptDTO to make sure that it exists. */
 			int receptId = 32;
 			receptDAO.deleteRecept(receptId);
-			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed Chocolates");
+			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed Chocolates", 0);
 			receptDAO.createRecept(receptDTO);
 
 			String newName = "Unmixed Fish";
 
-			ReceptDTO updatedReceptDTO = new ReceptDTO(receptId, newName);
+			ReceptDTO updatedReceptDTO = new ReceptDTO(receptId, newName, 0);
 
 			System.out.println("Created: " + receptDAO.getRecept(receptId));
 			receptDAO.updateRecept(updatedReceptDTO);
@@ -187,8 +181,7 @@ public class TestSQLReceptDAO {
 	}
 
 	/*
-	 * Testing SQLReceptDAO.deleteRecept(receptId)
-	 * Positive atomic test
+	 * Testing SQLReceptDAO.deleteRecept(receptId) Positive atomic test
 	 */
 	@Test
 	public void testDeleteReceptPositive() {
@@ -197,7 +190,7 @@ public class TestSQLReceptDAO {
 			/* Creating ReceptDTO to make sure that it exists. */
 			int receptId = 433;
 			receptDAO.deleteRecept(receptId);
-			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed Seafood");
+			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed Seafood", 0);
 			receptDAO.createRecept(receptDTO);
 
 			System.out.println("Created: " + receptDTO);

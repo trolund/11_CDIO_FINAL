@@ -37,9 +37,10 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			getRBStmt.setInt(1, rbId);
 			rs = getRBStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("RaavareBatch with rbId [" + rbId + "] does not exist!");
+			if (!rs.first())
+				throw new DALException("RaavareBatch with rbId [" + rbId + "] does not exist!");
 
-			return new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"));
+			return new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
@@ -64,10 +65,11 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			getRBListStmt = connector.getConnection().prepareStatement(getRBListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getRBListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No RaavareBatch's exist!");
+			if (!rs.first())
+				throw new DALException("No RaavareBatch's exist!");
 
 			do {
-				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde")));
+				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"), rs.getInt("status")));
 			} while (rs.next());
 			return rbList;
 		} catch (SQLException e) {
@@ -96,10 +98,11 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			getRBListIdStmt.setInt(1, raavareId);
 			rs = getRBListIdStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No RaavareBatch's exist with raavareId: " + raavareId + "!");
+			if (!rs.first())
+				throw new DALException("No RaavareBatch's exist with raavareId: " + raavareId + "!");
 
 			do {
-				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde")));
+				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"), rs.getInt("status")));
 			} while (rs.next());
 			return rbList;
 		} catch (SQLException e) {
@@ -126,6 +129,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			createRBStmt.setInt(1, rbDTO.getrBId());
 			createRBStmt.setInt(2, rbDTO.getRaavareId());
 			createRBStmt.setDouble(3, rbDTO.getAmount());
+			createRBStmt.setInt(4, rbDTO.getStatus());
 			createRBStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -149,8 +153,9 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 		try {
 			updateRBStmt = connector.getConnection().prepareStatement(updateRBCSql);
 			updateRBStmt.setDouble(1, rbDTO.getAmount());
-			updateRBStmt.setInt(2, rbDTO.getrBId());
-			updateRBStmt.setInt(3, rbDTO.getRaavareId());
+			updateRBStmt.setInt(2, rbDTO.getStatus());
+			updateRBStmt.setInt(3, rbDTO.getrBId());
+			updateRBStmt.setInt(4, rbDTO.getRaavareId());
 			updateRBStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

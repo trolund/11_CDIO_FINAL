@@ -39,9 +39,8 @@ public class TestSQLReceptComponentDAO {
 		rcDAO = null;
 	}
 
-	/* 
-	 * Testing SQLReceptComponentDAO.getRC(receptId, raavareId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLReceptComponentDAO.getRC(receptId, raavareId) Positive atomic test
 	 */
 	@Test
 	public void testGetRCPositive() {
@@ -62,9 +61,8 @@ public class TestSQLReceptComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLReceptComponentDAO.getRC(receptId, raavareId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLReceptComponentDAO.getRC(receptId, raavareId) Negative atomic test
 	 */
 	@Test
 	public void testGetRCNegative() {
@@ -85,9 +83,8 @@ public class TestSQLReceptComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLReceptComponentDAO.getRCList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLReceptComponentDAO.getRCList() Positive atomic test
 	 */
 	@Test
 	public void testGetRCListPositive() {
@@ -105,9 +102,8 @@ public class TestSQLReceptComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLReceptComponentDAO.getRCList(receptId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLReceptComponentDAO.getRCList(receptId) Positive atomic test
 	 */
 	@Test
 	public void testGetRCListParameterPositive() {
@@ -127,8 +123,7 @@ public class TestSQLReceptComponentDAO {
 	}
 
 	/*
-	 * Testing SQLReceptComponentDAO.createRC(rcDTO)
-	 * Positive atomic test
+	 * Testing SQLReceptComponentDAO.createRC(rcDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateRCPositive() {
@@ -140,7 +135,7 @@ public class TestSQLReceptComponentDAO {
 
 			System.out.println("\n" + spr + " Testing SQLReceptComponentDAO.createRC(rcDTO) Positive " + spr);
 
-			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 23.23, 44.44);
+			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 23.23, 44.44, 0);
 			rcDAO.createReceptComponent(rcDTO);
 			System.out.println("Created: " + rcDTO);
 
@@ -153,8 +148,7 @@ public class TestSQLReceptComponentDAO {
 	}
 
 	/*
-	 * Testing SQLReceptComponentDAO.createRC(rcDTO)
-	 * Negative atomic test
+	 * Testing SQLReceptComponentDAO.createRC(rcDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateRCNegative() {
@@ -164,7 +158,7 @@ public class TestSQLReceptComponentDAO {
 
 			System.out.println("\n" + spr + " Testing SQLReceptComponentDAO.createRC(rcDTO) Negative " + spr);
 
-			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 23.23, 44.44);
+			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 23.23, 44.44, 0);
 			rcDAO.createReceptComponent(rcDTO);
 			System.out.println("Created: " + rcDTO);
 
@@ -176,9 +170,8 @@ public class TestSQLReceptComponentDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLReceptComponentDAO.updateRC(rcDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLReceptComponentDAO.updateRC(rcDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdateRCPositive() {
@@ -188,13 +181,13 @@ public class TestSQLReceptComponentDAO {
 			int receptId = 2;
 			int raavareId = 3;
 			rcDAO.deleteReceptComponent(receptId, raavareId);
-			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 50.00, 66.44);
+			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 50.00, 66.44, 0);
 			rcDAO.createReceptComponent(rcDTO);
 
 			double newNomNetto = 234.43;
 			double newTolerance = 32.325;
 
-			ReceptComponentDTO UpdatedRcDTO = new ReceptComponentDTO(receptId, raavareId, newNomNetto, newTolerance);
+			ReceptComponentDTO UpdatedRcDTO = new ReceptComponentDTO(receptId, raavareId, newNomNetto, newTolerance, 0);
 
 			System.out.println("Created: " + rcDAO.getReceptComponent(receptId, raavareId));
 			rcDAO.updateReceptComponent(UpdatedRcDTO);
@@ -214,8 +207,7 @@ public class TestSQLReceptComponentDAO {
 	}
 
 	/*
-	 * Testing SQLReceptComponentDAO.deleteRC(receptId, raavareId)
-	 * Positive atomic test
+	 * Testing SQLReceptComponentDAO.deleteRC(receptId, raavareId) Positive atomic test
 	 */
 	@Test
 	public void testDeletePBCPositive() {
@@ -225,7 +217,7 @@ public class TestSQLReceptComponentDAO {
 			int receptId = 2;
 			int raavareId = 2;
 			rcDAO.deleteReceptComponent(receptId, raavareId);
-			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 50.00, 66.44);
+			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 50.00, 66.44, 0);
 			rcDAO.createReceptComponent(rcDTO);
 
 			System.out.println("Created: " + rcDTO);

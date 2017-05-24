@@ -25,8 +25,7 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 	}
 
 	/*
-	 * Method to receive an existing ReceptComponent with receptId and raavareId
-	 * stored in the database.
+	 * Method to receive an existing ReceptComponent with receptId and raavareId stored in the database.
 	 */
 	@Override
 	public ReceptComponentDTO getReceptComponent(int receptId, int raavareId) throws DALException {
@@ -39,9 +38,10 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			getRCStmt.setInt(2, raavareId);
 			rs = getRCStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("ReceptComponent with receptId [" + receptId + "] and raavareId [" + raavareId + "] does not exist!");
+			if (!rs.first())
+				throw new DALException("ReceptComponent with receptId [" + receptId + "] and raavareId [" + raavareId + "] does not exist!");
 
-			return new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getDouble("tolerance"));
+			return new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getDouble("tolerance"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
@@ -68,10 +68,11 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			getRCListIdStmt.setInt(1, receptId);
 			rs = getRCListIdStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No ReceptComponent's exist with receptId: " + receptId + "!");
+			if (!rs.first())
+				throw new DALException("No ReceptComponent's exist with receptId: " + receptId + "!");
 
 			do {
-				rcList.add(new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getInt("tolerance")));
+				rcList.add(new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getInt("tolerance"), rs.getInt("status")));
 			} while (rs.next());
 			return rcList;
 		} catch (SQLException e) {
@@ -99,10 +100,11 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			getRCListStmt = connector.getConnection().prepareStatement(getRCListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getRCListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No ReceptComponent's exist!");
+			if (!rs.first())
+				throw new DALException("No ReceptComponent's exist!");
 
 			do {
-				rcList.add(new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getInt("tolerance")));
+				rcList.add(new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getInt("tolerance"), rs.getInt("status")));
 			} while (rs.next());
 			return rcList;
 		} catch (SQLException e) {
@@ -154,8 +156,9 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			updateRCStmt = connector.getConnection().prepareStatement(updateRCSql);
 			updateRCStmt.setDouble(1, rc.getNomNetto());
 			updateRCStmt.setDouble(2, rc.getTolerance());
-			updateRCStmt.setInt(3, rc.getReceptId());
-			updateRCStmt.setInt(4, rc.getRaavareId());
+			updateRCStmt.setInt(3, rc.getStatus());
+			updateRCStmt.setInt(4, rc.getReceptId());
+			updateRCStmt.setInt(5, rc.getRaavareId());
 			updateRCStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

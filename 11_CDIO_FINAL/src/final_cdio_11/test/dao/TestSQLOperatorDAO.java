@@ -39,9 +39,8 @@ public class TestSQLOperatorDAO {
 		oprDAO = null;
 	}
 
-	/* 
-	 * Testing SQLOperatorDAO.getOperator(oprId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLOperatorDAO.getOperator(oprId) Positive atomic test
 	 */
 	@Test
 	public void testGetOperatorPositive() {
@@ -61,9 +60,8 @@ public class TestSQLOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLOperatorDAO.getOperator(oprId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLOperatorDAO.getOperator(oprId) Negative atomic test
 	 */
 	@Test
 	public void testGetOperatorNegative() {
@@ -86,9 +84,8 @@ public class TestSQLOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLOperatorDAO.getOperatorList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLOperatorDAO.getOperatorList() Positive atomic test
 	 */
 	@Test
 	public void testGetOperatorListPositive() {
@@ -106,9 +103,8 @@ public class TestSQLOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLOperatorDAO.createOperator(oprDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLOperatorDAO.createOperator(oprDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateOperatorPositive() {
@@ -119,7 +115,7 @@ public class TestSQLOperatorDAO {
 
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.createOperator(oprDTO) Positive " + spr);
 
-			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jezzie", "JZE", "32342-2343", "badpassword");
+			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jezzie", "Jazzak", "JZE", "j@j.jk", "32342-2343", "badpassword", 0);
 			oprDAO.createOperator(oprDTO);
 			System.out.println("Created: " + oprDTO);
 
@@ -131,9 +127,8 @@ public class TestSQLOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLOperatorDAO.createOperator(oprDTO)
-	 * Negative atomic test
+	/*
+	 * Testing SQLOperatorDAO.createOperator(oprDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateOperatorNegative() {
@@ -142,7 +137,7 @@ public class TestSQLOperatorDAO {
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.createOperator(oprDTO) Negative " + spr);
 
 			System.out.println("Attempting to create OperatorDTO with oprId: " + oprId);
-			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jezzie", "JZE", "32342-2343", "badpassword");
+			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jezzie", "Jazzak", "JZE", "j@j.jk", "32342-2343", "badpassword", 0);
 			oprDAO.createOperator(oprDTO);
 			System.out.println("Created: " + oprDTO);
 
@@ -154,9 +149,8 @@ public class TestSQLOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLOperatorDAO.updateOperator(oprDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLOperatorDAO.updateOperator(oprDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdateOperatorPositive() {
@@ -165,13 +159,13 @@ public class TestSQLOperatorDAO {
 			/* Creating OperatorDTO to make sure that it exists. */
 			int oprId = 842;
 			oprDAO.deleteOperator(oprId);
-			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jason", "JSN", "23234", "jason4lyfe");
+			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jason", "Jackson", "JSN", "j@j.jk", "23234", "jason4lyfe", 0);
 			oprDAO.createOperator(oprDTO);
 
 			String newName = "Dannuke";
 			String newCpr = "9999";
 
-			OperatorDTO updatedOprDTO = new OperatorDTO(oprId, newName, oprDTO.getOprIni(), newCpr, oprDTO.getOprPassword());
+			OperatorDTO updatedOprDTO = new OperatorDTO(oprId, newName, oprDTO.getOprLastName(), oprDTO.getOprIni(), oprDTO.getOprEmail(), newCpr, oprDTO.getOprPassword(), oprDTO.getStatus());
 
 			System.out.println("Created: " + oprDAO.getOperator(oprId));
 			oprDAO.updateOperator(updatedOprDTO);
@@ -191,8 +185,7 @@ public class TestSQLOperatorDAO {
 	}
 
 	/*
-	 * Testing SQLOperatorDAO.deleteOperator(oprId)
-	 * Positive atomic test
+	 * Testing SQLOperatorDAO.deleteOperator(oprId) Positive atomic test
 	 */
 	@Test
 	public void testDeleteOperatorPositive() {
@@ -201,7 +194,7 @@ public class TestSQLOperatorDAO {
 			/* Creating OperatorDTO to make sure that it exists. */
 			int oprId = 3234;
 			oprDAO.deleteOperator(oprId);
-			OperatorDTO oprDTO = new OperatorDTO(oprId, "Drake", "DKE", "94432", "thuglyfe");
+			OperatorDTO oprDTO = new OperatorDTO(oprId, "Drake", "Drakenson", "DKE", "dk@dk.dk", "94432", "thuglyfe", 0);
 			oprDAO.createOperator(oprDTO);
 
 			System.out.println("Created: " + oprDTO);

@@ -39,9 +39,8 @@ public class TestSQLRaavareDAO {
 		raavareDAO = null;
 	}
 
-	/* 
-	 * Testing SQLRaavareDAO.getRaavare(raavareId)
-	 * Positive atomic test
+	/*
+	 * Testing SQLRaavareDAO.getRaavare(raavareId) Positive atomic test
 	 */
 	@Test
 	public void testGetRaavarePositive() {
@@ -61,9 +60,8 @@ public class TestSQLRaavareDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRaavareDAO.getRaavare(raavareId)
-	 * Negative atomic test
+	/*
+	 * Testing SQLRaavareDAO.getRaavare(raavareId) Negative atomic test
 	 */
 	@Test
 	public void testGetRaavareNegative() {
@@ -83,9 +81,8 @@ public class TestSQLRaavareDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRaavareDAO.getRaavareList()
-	 * Positive atomic test
+	/*
+	 * Testing SQLRaavareDAO.getRaavareList() Positive atomic test
 	 */
 	@Test
 	public void testGetRaavareListPositive() {
@@ -104,8 +101,7 @@ public class TestSQLRaavareDAO {
 	}
 
 	/*
-	 * Testing SQLRaavareDAO.createRaavare(raavareDTO)
-	 * Positive atomic test
+	 * Testing SQLRaavareDAO.createRaavare(raavareDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateRaavarePositive() {
@@ -116,7 +112,7 @@ public class TestSQLRaavareDAO {
 
 			System.out.println("\n" + spr + " Testing SQLRaavareDAO.createRaavare(raavareDTO) Positive " + spr);
 
-			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Musling", "Dong Energy");
+			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Musling", "Dong Energy", 0);
 			raavareDAO.createRaavare(raavareDTO);
 			System.out.println("Created: " + raavareDTO);
 
@@ -129,8 +125,7 @@ public class TestSQLRaavareDAO {
 	}
 
 	/*
-	 * Testing SQLRaavareDAO.createRaavare(raavareDTO)
-	 * Negative atomic test
+	 * Testing SQLRaavareDAO.createRaavare(raavareDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateRaavareNegative() {
@@ -138,7 +133,7 @@ public class TestSQLRaavareDAO {
 			int raavareId = 1;
 			System.out.println("\n" + spr + " Testing SQLRaavareDAO.createRaavare(raavareDTO) Negative " + spr);
 
-			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Meat", "Dong");
+			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Meat", "Dong", 0);
 			raavareDAO.createRaavare(raavareDTO);
 			System.out.println("Created: " + raavareDTO);
 
@@ -150,9 +145,8 @@ public class TestSQLRaavareDAO {
 		}
 	}
 
-	/* 
-	 * Testing SQLRaavareDAO.updateRaavare(raavareDTO)
-	 * Positive atomic test
+	/*
+	 * Testing SQLRaavareDAO.updateRaavare(raavareDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdateRaavarePositive() {
@@ -161,13 +155,13 @@ public class TestSQLRaavareDAO {
 			/* Creating RaavareDTO to make sure that it exists. */
 			int raavareId = 423;
 			raavareDAO.deleteRaavare(423);
-			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Fish", "Fish Sticks");
+			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Fish", "Fish Sticks", 0);
 			raavareDAO.createRaavare(raavareDTO);
 
 			String newName = "Salt Fish";
 			String newSupplier = "US of A";
 
-			RaavareDTO updatedRaavareDTO = new RaavareDTO(raavareId, newName, newSupplier);
+			RaavareDTO updatedRaavareDTO = new RaavareDTO(raavareId, newName, newSupplier, 0);
 
 			System.out.println("Created: " + raavareDAO.getRaavare(raavareId));
 			raavareDAO.updateRaavare(updatedRaavareDTO);
@@ -187,8 +181,7 @@ public class TestSQLRaavareDAO {
 	}
 
 	/*
-	 * Testing SQLRaavareDAO.deleteRaavare(raavareId)
-	 * Positive atomic test
+	 * Testing SQLRaavareDAO.deleteRaavare(raavareId) Positive atomic test
 	 */
 	@Test
 	public void testDeleteRaavarePositive() {
@@ -197,7 +190,7 @@ public class TestSQLRaavareDAO {
 			/* Creating RaavareDTO to make sure that it exists. */
 			int raavareId = 334;
 			raavareDAO.deleteRaavare(raavareId);
-			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Veron", "Weat & Co.");
+			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Veron", "Weat & Co.", 0);
 			raavareDAO.createRaavare(raavareDTO);
 
 			System.out.println("Created: " + raavareDTO);

@@ -38,9 +38,10 @@ public class SQLProductBatchComponentDAO implements IProductBatchComponentDAO {
 			getPBCStmt.setInt(2, rbId);
 			rs = getPBCStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("ProductBatchComponent with pbId [" + pbId + "] and rbId [" + rbId + "] does not exist!");
+			if (!rs.first())
+				throw new DALException("ProductBatchComponent with pbId [" + pbId + "] and rbId [" + rbId + "] does not exist!");
 
-			return new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id"));
+			return new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
@@ -67,10 +68,11 @@ public class SQLProductBatchComponentDAO implements IProductBatchComponentDAO {
 			getPBCListStmt.setInt(1, pbId);
 			rs = getPBCListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No ProductBatchComponent's exist with pbId: " + pbId + "!");
+			if (!rs.first())
+				throw new DALException("No ProductBatchComponent's exist with pbId: " + pbId + "!");
 
 			do {
-				pbcList.add(new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id")));
+				pbcList.add(new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id"), rs.getInt("status")));
 			} while (rs.next());
 			return pbcList;
 		} catch (SQLException e) {
@@ -98,10 +100,11 @@ public class SQLProductBatchComponentDAO implements IProductBatchComponentDAO {
 			getPBCListStmt = connector.getConnection().prepareStatement(getPBCListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getPBCListStmt.executeQuery();
 
-			if (!rs.first()) throw new DALException("No ProductBatchComponent's exist!");
+			if (!rs.first())
+				throw new DALException("No ProductBatchComponent's exist!");
 
 			do {
-				pbcList.add(new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id")));
+				pbcList.add(new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id"), rs.getInt("status")));
 			} while (rs.next());
 			return pbcList;
 		} catch (SQLException e) {
@@ -130,6 +133,7 @@ public class SQLProductBatchComponentDAO implements IProductBatchComponentDAO {
 			createPBCStmt.setDouble(3, pbc.getTara());
 			createPBCStmt.setDouble(4, pbc.getNetto());
 			createPBCStmt.setInt(5, pbc.getOprId());
+			createPBCStmt.setInt(6, pbc.getStatus());
 			createPBCStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -154,9 +158,10 @@ public class SQLProductBatchComponentDAO implements IProductBatchComponentDAO {
 			updatePBCStmt = connector.getConnection().prepareStatement(updatePBCSql);
 			updatePBCStmt.setDouble(1, pbc.getTara());
 			updatePBCStmt.setDouble(2, pbc.getNetto());
-			updatePBCStmt.setInt(3, pbc.getpbId());
-			updatePBCStmt.setInt(4, pbc.getrbId());
-			updatePBCStmt.setInt(5, pbc.getOprId());
+			updatePBCStmt.setInt(3, pbc.getStatus());
+			updatePBCStmt.setInt(4, pbc.getpbId());
+			updatePBCStmt.setInt(5, pbc.getrbId());
+			updatePBCStmt.setInt(6, pbc.getOprId());
 			updatePBCStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

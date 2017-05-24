@@ -36,9 +36,8 @@ public class TestListOperatorDAO {
 		oprDAO = null;
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.getOperator(oprId)
-	 * Positive atomic test
+	/*
+	 * Testing ListOperatorDAO.getOperator(oprId) Positive atomic test
 	 */
 	@Test
 	public void testGetOperatorPositive() {
@@ -58,9 +57,8 @@ public class TestListOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.getOperator(oprId)
-	 * Negative atomic test
+	/*
+	 * Testing ListOperatorDAO.getOperator(oprId) Negative atomic test
 	 */
 	@Test
 	public void testGetOperatorNegative() {
@@ -77,9 +75,8 @@ public class TestListOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.getOperatorList()
-	 * Positive atomic test
+	/*
+	 * Testing ListOperatorDAO.getOperatorList() Positive atomic test
 	 */
 	@Test
 	public void testGetOperatorListPositive() {
@@ -97,9 +94,8 @@ public class TestListOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.createOperator(oprDTO)
-	 * Positive atomic test
+	/*
+	 * Testing ListOperatorDAO.createOperator(oprDTO) Positive atomic test
 	 */
 	@Test
 	public void testCreateOperatorPositive() {
@@ -108,7 +104,7 @@ public class TestListOperatorDAO {
 			int oprId = 49;
 			boolean expected = true;
 			boolean actual = false;
-			oprDAO.createOperator(new OperatorDTO(oprId, "Franco", "Francis", "6666-666-69", "666"));
+			oprDAO.createOperator(new OperatorDTO(oprId, "Franco", "Francis", "FRC", "frc@fr.fr", "6666-666-69", "666", 0));
 			for (OperatorDTO dto : oprDAO.getOperatorList()) {
 				if (dto.getOprId() == oprId) {
 					actual = true;
@@ -122,16 +118,15 @@ public class TestListOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.createOperator(oprDTO)
-	 * Negative atomic test
+	/*
+	 * Testing ListOperatorDAO.createOperator(oprDTO) Negative atomic test
 	 */
 	@Test
 	public void testCreateOperatorNegative() {
 		try {
 			System.out.println("\n" + spr + " Testing ListOperatorDAO.createOperator() Negative " + spr);
 			int oprId = 101;
-			oprDAO.createOperator(new OperatorDTO(oprId, "Franco", "Francis", "6666-666-69", "666"));
+			oprDAO.createOperator(new OperatorDTO(oprId, "Franco", "Franciz", "FRC", "fr@fr.fr", "6666-666-69", "666", 0));
 			fail("Failed: Managed to create existing operator!");
 			System.out.println(lspr);
 		} catch (DALException e) {
@@ -140,22 +135,21 @@ public class TestListOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.updateOperator(oprDTO)
-	 * Positive atomic test
+	/*
+	 * Testing ListOperatorDAO.updateOperator(oprDTO) Positive atomic test
 	 */
 	@Test
 	public void testUpdateOperatorPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing ListOperatorDAO.updateOperator(oprDTO) Positive " + spr);
 			int oprId = 99;
-			oprDAO.createOperator(new OperatorDTO(oprId, "Jim", "JM", "999999-1122", "password"));
+			oprDAO.createOperator(new OperatorDTO(oprId, "Jim", "Jimson", "JM", "jim@jm.jk", "999999-1122", "password", 0));
 			System.out.println("Created: " + oprDAO.getOperator(oprId));
 
-			oprDAO.updateOperator(new OperatorDTO(99, "Jim", "JIMMIE", "111111-4444", "nytpassword"));
+			oprDAO.updateOperator(new OperatorDTO(99, "Jim", "Jimmie", "JM123", "jim@jm.jm", "111111-4444", "nytpassword", 0));
 			System.out.println("Updated: " + oprDAO.getOperator(oprId));
 
-			String expected = "JIMMIE";
+			String expected = "JM123";
 			String actual = oprDAO.getOperator(99).getOprIni();
 
 			assertEquals("Failed: Did not update the DTO correctly.", expected, actual);
@@ -165,9 +159,8 @@ public class TestListOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.updateOperator(oprDTO)
-	 * Negative atomic test
+	/*
+	 * Testing ListOperatorDAO.updateOperator(oprDTO) Negative atomic test
 	 */
 	@Test
 	public void testUpdateOperatorNegative() {
@@ -175,7 +168,7 @@ public class TestListOperatorDAO {
 			System.out.println("\n" + spr + " Testing ListOperatorDAO.updateOperator(oprDTO) Negative " + spr);
 			int oprId = 99;
 
-			oprDAO.updateOperator(new OperatorDTO(99, "Jim", "JIMMIE", "111111-4444", "nytpassword"));
+			oprDAO.updateOperator(new OperatorDTO(99, "Jim", "Jimmie", "JM", "jk@jk.jk", "111111-4444", "nytpassword", 0));
 			System.out.println("Updated: " + oprDAO.getOperator(oprId));
 			fail("Failed: Updated non-existent operator!");
 
@@ -186,9 +179,8 @@ public class TestListOperatorDAO {
 		}
 	}
 
-	/* 
-	 * Testing ListOperatorDAO.deleteOperator(oprId)
-	 * Positive atomic test
+	/*
+	 * Testing ListOperatorDAO.deleteOperator(oprId) Positive atomic test
 	 */
 	@Test
 	public void testDeleteOperatorPositive() {
@@ -196,7 +188,7 @@ public class TestListOperatorDAO {
 			System.out.println("\n" + spr + " Testing ListOperatorDAO.deleteOperator(oprDTO) Positive " + spr);
 			int oprId = 54;
 
-			oprDAO.createOperator(new OperatorDTO(oprId, "John", "JN", "999999-1234", "pumpkin"));
+			oprDAO.createOperator(new OperatorDTO(oprId, "John", "Johnson", "JN", "john@sen.jk", "999999-1234", "pumpkin", 0));
 			System.out.println("Created: " + oprDAO.getOperator(oprId));
 
 			oprDAO.deleteOperator(oprId);
