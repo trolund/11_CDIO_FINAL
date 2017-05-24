@@ -1,16 +1,16 @@
 # CDIO-FINAL (Group 11)
 
-This project is created in cooperation with 02324 Advanced Programming and 02327 Preliminary databases and database programming at DTU, Technical University of Denmark.
+_This project is created in cooperation with 02324 Advanced Programming and 02327 Preliminary databases and database programming at DTU, Technical University of Denmark._
 
 ## Information
-Daniel Anusic (s155005)
+_Daniel Anusic (s155005)_
 
-Daniel Larsen (s151641)
+_Daniel Larsen (s151641)_
 
-Thomas Mascagni (s165201)
+_Thomas Mascagni (s165201)_
 
-Behnia Farazan (s165203)
+_Behnia Farazan (s165203)_
 
-Troels Lund (s161791)
+_Troels Lund (s161791)_
 
-Helene Zgaya (s104745)
+_Helene Zgaya (s104745)_
