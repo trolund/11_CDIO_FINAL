@@ -16,3 +16,7 @@ _Behnia Farazan (s165203)_
 _Troels Lund (s161791)_
 
 _Helene Zgaya (s104745)_
+
+## License
+
+[MIT](LICENSE.md)
