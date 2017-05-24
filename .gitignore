@@ -1,0 +1,14 @@
+/11_CDIO_D3/bin
+/bin
+/11_CDIO_D3/build
+/build
+/11_CDIO_D3/out
+/out
+/11_CDIO_D3/target
+/target
+/11_CDIO_D3/mysql_mariadb.config
+/11_CDIO_D3/mysql_oracle.config
+/mysql_mariadb.config
+/mysql_oracle.config
+/.DS_Store
+/11_CDIO_D3/.DS_Store
