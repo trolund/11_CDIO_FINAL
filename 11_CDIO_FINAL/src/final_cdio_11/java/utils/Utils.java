@@ -14,8 +14,6 @@ public class Utils {
 	 */
 	private static final Utils instance = new Utils();
 
-	private final TextHandler textHandler;
-
 	/*
 	 * Application Flags
 	 */
@@ -23,7 +21,12 @@ public class Utils {
 	public final boolean TEST_ENABLED = false;
 
 	/*
-	 * private constructor. Can't be instantiated.
+	 * Class object fields.
+	 */
+	private final TextHandler textHandler;
+
+	/*
+	 * Private constructor. Can't be instantiated.
 	 */
 	private Utils() {
 		textHandler = TextHandler.getInstance();
@@ -34,6 +37,9 @@ public class Utils {
 		}
 	}
 
+	/*
+	 * Log the message to the console. Not saved.
+	 */
 	public void logMessage(String message) {
 		String messagePrefix = "[DEV-LOG " + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] ";
 		message = messagePrefix + message;

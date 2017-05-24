@@ -29,24 +29,21 @@ public class Connector {
 	private String password;
 	private String url;
 
-	/*
-	 * Singleton instance of this class.
-	 */
+	/* Singleton instance of this class. */
 	private static final Connector instance = new Connector();
 
+	/* Class object fields. */
 	private Utils utils;
 	private TextHandler textHandler;
 	private FileHandler fileHandler;
 
 	/*
-	 * Database connection object and HashMap object to store all SQL queries
-	 * used by this application.
+	 * Database connection object and HashMap object to store all SQL queries used by this application.
 	 */
 	private Connection connection;
 
 	/*
-	 * Constructor that loads all of the configuration files at startup and
-	 * creates a database connection immediately.
+	 * Constructor that loads all of the configuration files at startup and creates a database connection immediately.
 	 */
 	private Connector() {
 		utils = Utils.getInstance();
@@ -102,10 +99,6 @@ public class Connector {
 	 */
 	public void closeConnection() throws SQLException {
 		connection.close();
-
-		if (utils.DEV_ENABLED) {
-			//utils.logMessage(textHandler.devConnectionClosedMessage);
-		}
 	}
 
 	/*
@@ -139,11 +132,6 @@ public class Connector {
 
 	private Connection createConnection() throws SQLException {
 		Connection newConnection = DriverManager.getConnection(url, username, password);
-
-		if (utils.DEV_ENABLED) {
-			//utils.logMessage(textHandler.devNewConnectionMessage);
-		}
-
 		return newConnection;
 	}
 

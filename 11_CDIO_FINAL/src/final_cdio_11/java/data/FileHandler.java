@@ -17,11 +17,9 @@ import final_cdio_11.java.utils.Utils;
 public class FileHandler {
 
 	/*
-	 * MYSQL_CONFIG_FILE: Path to the database configuration file.
-	 * SQL_CONFIG_FILE: Path to the SQL query configuration file.
+	 * MYSQL_CONFIG_FILE: Path to the database configuration file. SQL_CONFIG_FILE: Path to the SQL query configuration file.
 	 */
-	// private final URL MYSQL_CONFIG_FILE =
-	// DBInfoHandler.class.getResource("/mysql_mariadb.config");
+	// private final URL MYSQL_CONFIG_FILE = DBInfoHandler.class.getResource("/mysql_mariadb.config");
 	private final URL MYSQL_CONFIG_FILE = FileHandler.class.getResource("/mysql_oracle.config");
 	private final URL SQL_CONFIG_FILE = FileHandler.class.getResource("/sql.config");
 
@@ -35,8 +33,8 @@ public class FileHandler {
 	private FileHandler() {
 		utils = Utils.getInstance();
 		textHandler = TextHandler.getInstance();
-
 		sqlHashMap = new HashMap<>();
+
 		// createSQLProperties();
 		loadDatabaseProperties();
 		loadSQLProperties();
@@ -53,8 +51,7 @@ public class FileHandler {
 		p.setProperty("getOprSql", "SELECT * FROM operatoer WHERE opr_id = ?");
 		p.setProperty("getOprListSql", "SELECT * FROM operatoer");
 		p.setProperty("createOprSql", "CALL CREATE_OPERATOR(?, ?, ?, ?, ?)");
-		p.setProperty("updateOprSql",
-				"UPDATE operatoer SET opr_navn = ?, ini = ?, cpr = ?, password = ? WHERE opr_id = ?");
+		p.setProperty("updateOprSql", "UPDATE operatoer SET opr_navn = ?, ini = ?, cpr = ?, password = ? WHERE opr_id = ?");
 		p.setProperty("deleteOprRolesSql", "CALL DELETE_OPR_ROLES(?)");
 		p.setProperty("deleteOprSql", "DELETE FROM operatoer WHERE opr_id = ?");
 
@@ -62,10 +59,8 @@ public class FileHandler {
 		p.setProperty("getPBCSql", "SELECT * FROM produktbatchkomponent WHERE pb_id = ? AND rb_id = ?");
 		p.setProperty("getPBCListIdSql", "SELECT * FROM produktbatchkomponent WHERE pb_id = ?");
 		p.setProperty("getPBCListSql", "SELECT * FROM produktbatchkomponent");
-		p.setProperty("createPBCSql",
-				"INSERT INTO produktbatchkomponent(pb_id, rb_id, tara, netto, opr_id) VALUES (?, ?, ?, ?, ?)");
-		p.setProperty("updatePBCSql",
-				"UPDATE produktbatchkomponent SET tara = ?, netto = ? WHERE pb_id = ? AND rb_id = ? AND opr_id = ?");
+		p.setProperty("createPBCSql", "INSERT INTO produktbatchkomponent(pb_id, rb_id, tara, netto, opr_id) VALUES (?, ?, ?, ?, ?)");
+		p.setProperty("updatePBCSql", "UPDATE produktbatchkomponent SET tara = ?, netto = ? WHERE pb_id = ? AND rb_id = ? AND opr_id = ?");
 		p.setProperty("deletePBCSql", "DELETE FROM produktbatchkomponent WHERE pb_id = ? AND rb_id = ?");
 
 		/* ProductBatch SQL */
@@ -86,8 +81,7 @@ public class FileHandler {
 		/* Raavare SQL */
 		p.setProperty("getRaavareSql", "SELECT * FROM raavare WHERE raavare_id = ?");
 		p.setProperty("getRaavareListSql", "SELECT * FROM raavare");
-		p.setProperty("createRaavareSql",
-				"INSERT INTO raavare(raavare_id, raavare_navn, leverandoer) VALUES (?, ?, ?)");
+		p.setProperty("createRaavareSql", "INSERT INTO raavare(raavare_id, raavare_navn, leverandoer) VALUES (?, ?, ?)");
 		p.setProperty("updateRaavareSql", "UPDATE raavare SET raavare_navn = ?, leverandoer = ? WHERE raavare_id = ?");
 		p.setProperty("deleteRaavareSql", "DELETE FROM raavare WHERE raavare_id = ?");
 
@@ -96,8 +90,7 @@ public class FileHandler {
 		p.setProperty("getRCListIdSql", "SELECT * FROM receptkomponent WHERE recept_id = ?");
 		p.setProperty("getRCListSql", "SELECT * FROM receptkomponent");
 		p.setProperty("createRCSql", "CALL CREATE_RECEPTKOMPONENT(?, ?, ?, ?)");
-		p.setProperty("updateRCSql",
-				"UPDATE receptkomponent SET nom_netto = ?, tolerance = ? WHERE recept_id = ? AND raavare_id = ?");
+		p.setProperty("updateRCSql", "UPDATE receptkomponent SET nom_netto = ?, tolerance = ? WHERE recept_id = ? AND raavare_id = ?");
 		p.setProperty("deleteRCSql", "DELETE FROM receptkomponent WHERE recept_id = ? AND raavare_id = ?");
 
 		/* Recept SQL */
@@ -185,8 +178,7 @@ public class FileHandler {
 	}
 
 	/*
-	 * Method to load the SQL query configuration file and put all of the
-	 * information into a HashMap.
+	 * Method to load the SQL query configuration file and put all of the information into a HashMap.
 	 */
 	private void loadSQLProperties() {
 		Properties p = new Properties();
@@ -216,6 +208,9 @@ public class FileHandler {
 		return sqlHashMap.get(key);
 	}
 
+	/*
+	 * Method to return the Singleton instance of this class.
+	 */
 	public static synchronized FileHandler getInstance() {
 		return instance;
 	}

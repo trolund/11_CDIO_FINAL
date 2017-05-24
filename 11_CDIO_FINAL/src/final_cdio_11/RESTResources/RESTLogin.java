@@ -1,25 +1,19 @@
 package final_cdio_11.RESTResources;
 
-import java.io.IOException;
 import java.security.Key;
 import java.util.Date;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 import final_cdio_11.RESTResources.model.LoginForm;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
+import final_cdio_11.java.utils.TextHandler;
 import final_cdio_11.java.utils.Utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -33,32 +27,30 @@ import io.jsonwebtoken.impl.crypto.MacProvider;
 
 @Path("/login")
 public class RESTLogin {
-	
+
+	private final Utils utils = Utils.getInstance();
+	private final TextHandler textHandler = TextHandler.getInstance();
+
 	@POST
-	@Path("/veridateToken")
+	@Path("/verifyToken")
 	public static Jws<Claims> validateToken(String tokenString) {
 		Claims claims = null;
-		try{
-		 		claims =
-		Jwts.parser().setSigningKey(key)
-		.parseClaimsJws(tokenString).getBody();
-		} catch (ExpiredJwtException | UnsupportedJwtException |
-		 MalformedJwtException | SignatureException
-						| IllegalArgumentException e) {
-					// Do something with those exceptions!
-				
-				}
-				return (Jws<Claims>) claims;
-					
-			}
+		try {
+			claims = Jwts.parser().setSigningKey(key).parseClaimsJws(tokenString).getBody();
+		} catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
+
+		}
+		return (Jws<Claims>) claims;
+
+	}
 
 	private static Key key = MacProvider.generateKey(SignatureAlgorithm.HS512);
 
 	@POST
 	@Path("/verify")
-	public String getLogin(LoginForm data){
+	public String getLogin(LoginForm data) {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-		
+
 		int id = data.getOprId();
 		String password = data.getPassword();
 
@@ -67,26 +59,19 @@ public class RESTLogin {
 			oprDTO = oprDAO.getOperator(id);
 		} catch (DALException e) {
 			e.printStackTrace();
-			return "Id does not exist.";
+			return textHandler.errIdDoesNotExist;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-			return "Invalid Id.";
+			return textHandler.errIdInvalid;
 		}
-		
+
 		long nowMillis = System.currentTimeMillis();
 		long ttlMillis = 1000000; // 16.666666667min
-	    long expMillis = nowMillis + ttlMillis;
+		long expMillis = nowMillis + ttlMillis;
 		Date exp = new Date(expMillis);
-		
+
 		if (validate(password, oprDTO)) {
-			return Jwts.builder()
-					.setIssuer("Gruppe 11 web service")
-					.claim("Id", oprDTO.getOprId())
-					.claim("Name", oprDTO.getOprName())
-					.claim("Ini", oprDTO.getOprIni())
-					.setExpiration(exp)
-					.signWith(SignatureAlgorithm.HS512, key)
-					.compact();
+			return Jwts.builder().setIssuer("Gruppe 11 web service").claim("Id", oprDTO.getOprId()).claim("Name", oprDTO.getOprName()).claim("Ini", oprDTO.getOprIni()).setExpiration(exp).signWith(SignatureAlgorithm.HS512, key).compact();
 		} else {
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
@@ -94,13 +79,12 @@ public class RESTLogin {
 
 	private boolean validate(String password, OperatorDTO oprDTO) {
 		Utils secUtil = Utils.getInstance();
-		
+
 		if (secUtil.sha256(password).equals(oprDTO.getOprPassword())) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
 
 }
