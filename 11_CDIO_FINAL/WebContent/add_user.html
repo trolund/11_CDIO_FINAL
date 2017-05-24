@@ -40,7 +40,7 @@ $(document).ready(function() {
 });   
   });
     
-// create dommy user  
+// create dummy user  
 $(document).ready(function() {
   $("#Submit_CreateUser_dummy").click(function() {
       
@@ -64,25 +64,22 @@ $(document).ready(function() {
             loadUsers();
 		},
 		error: function(jqXHR, text, error){ 
-               console.log(data);
+            console.log(data);
             $('#CreateMSG').html(data).fadeToggle(500);
-             $("#AddUser_Box").show();
-            
+            $("#AddUser_Box").show();
+        
 		}
 	}); 
-});   
-  });
+  });   
+});
 
 //refresh button
 $(document).ready(function() {
-  $("#refresh_But").click(function() {  
-      
-      console.log('Refreshing users.');
-      loadUsers();
-      
+  $("#refresh_But").click(function() {       
+    	console.log('Refreshing users.');
+    	loadUsers();
+	});
 });
-  });
-
 
 //Delete users 
 //$(document).ready(function(){
@@ -115,17 +112,24 @@ $(document).ready(function() {
 
 <!--create user popup-->
 <div id="AddUser_Box">
-  <img id="cancel_Icon" src="assets/img/Cancel_Icon.png"> 
-    <h1>Create user</h1>
+  <img id="cancel_Icon" src="assets/img/cancel_icon.png"> 
+    <h1>Add User</h1>
   <form id="CreateUserForm" method="POST" action="api/opr/addopr">
-      Id<br>
+  
+    Id <br>
     <input type="text" name="oprId" id="oprId">
     <br>
-  	Name <br>
+  	First Name <br>
     <input type="text" name="oprName" id="oprName">	
+    <br>
+    Last Name <br>
+    <input type="text" name="oprLastName" id="oprLastName">	
     <br>
     Initials <br>
     <input type="text" name="oprIni" id="oprIni">
+    <br>
+    E-mail <br>
+    <input type="text" name="oprEmail" id="oprEmail">	
     <br>
     Cpr <br>
     <input type="text" name="oprCpr" id="oprCpr">
@@ -173,8 +177,8 @@ $(document).ready(function() {
     </select>
      
   <br><br>
-  <input id="Submit_CreateUser" type="button" value="Create user">
-      <input id="Submit_CreateUser_dummy" type="button" value="Create dummy user">
+  <input id="Submit_CreateUser" type="button" value="Add user">
+      <input id="Submit_CreateUser_dummy" type="button" value="Add dummy user">
     <p id="msg"></p>
 </form> 
 </div>

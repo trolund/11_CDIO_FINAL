@@ -23,8 +23,8 @@ $(document).ready(function() {
       $('#oprRoles').html('Rolle, rolle').delay(1000);
       $('#content_box').html('').delay(1000); 
      // window.location.reload(); måske skal den bruges....
+   });
 });
-  });
 
 //post login data
 $(document).ready(function() {
@@ -87,8 +87,8 @@ $(document).ready(function() {
     $("#content_box").load('add_user.html');
       $('#AddUser_Box').hide();
     loadUsers();
-});
   });
+});
 
 // hent liste af users og oversæt dem til tabel
 function loadUsers(){
@@ -100,21 +100,21 @@ function loadUsers(){
 	
         $.each(data, function(i, item) {
         	if(id == data[i].oprId){ // gør man ikke kan slette sig selv.
-        	$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprPassword + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_User">Edit</button>' + '</td>' + '</tr>');
+        	$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprPassword + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
         	else{
-            $('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprPassword + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_User">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_User">Edit</button>' + '</td>' + '</tr>');
+            $('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprPassword + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
         	});
         
-        $.getScript( "assets/js/del_Users.js", function( data, textStatus, jqxhr ) {
+        $.getScript( "assets/js/del_users.js", function( data, textStatus, jqxhr ) {
   console.log( data ); // Data returned
   console.log( textStatus ); // Success
   console.log( jqxhr.status ); // 200
   console.log( "js Load was performed." );
 });
         
-        $.getScript( "assets/js/edit_Users.js", function( data, textStatus, jqxhr ) {
+        $.getScript( "assets/js/edit_users.js", function( data, textStatus, jqxhr ) {
   console.log( data ); // Data returned
   console.log( textStatus ); // Success
   console.log( jqxhr.status ); // 200
@@ -145,7 +145,7 @@ for (i = 1; i < item.length; i++) {
 
 
 // load den user logget ind samt dens roller.
-function loadLoginUser(id){
+function loadLoginUser(id) {
 
 $.getJSON('api/opr/' + id, function(data) {
     
@@ -155,11 +155,11 @@ $.getJSON('api/opr/' + id, function(data) {
 	    console.log('User ' + data.oprId + ' name:' + data.oprName);
         
         jQuery.ajax({
-	  url: "api/opr/getOprRoleList/" + id,
-	  type: "GET",
-	  contentType: 'text/plain',
-	  success: function(resultData) {
-          rols = resultData;
+	    url: "api/opr/getOprRoleList/" + id,
+	    type: "GET",
+	    contentType: 'text/plain',
+	    success: function(resultData) {
+        rols = resultData;
 	    $('#oprRoles').html(resultData).fadeIn(1000); // skriver roller på label.
         if(rols.indexOf("Admin") == -1){ // gem menu punkter som kun skal kunne bruges af admin
             $('#user_but').hide();
