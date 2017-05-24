@@ -1,11 +1,196 @@
-<button>Add User</button><button>Refresh Userlist</button>
+<script>
+
+// Add user button
+$(document).ready(function() {
+    $("#Adduser_But").click(function(){
+        $("#AddUser_Box").show(400);
+    }); 
+});
+
+// cancel icon creat user box
+$(document).ready(function() {
+    $("#cancel_Icon").click(function(){
+        $("#AddUser_Box").hide(400);
+    }); 
+});
+    
+// post creat user data
+$(document).ready(function() {
+  $("#Submit_CreateUser").click(function() {
+      
+      var data = $('#creatUserForm').serializeJSON();    
+      
+      jQuery.ajax({
+		url : "api/opr/addopr",
+		data : data,
+		contentType: "application/json",
+		method: 'POST',
+		success : function(data){
+            console.log(data);
+            $('#CreatMSG').html(data);
+            loadUsers(); // updata liste.
+		},
+		error: function(jqXHR, text, error){ 
+               console.log(data);
+            $('#CreatMSG').html(data).fadeToggle(500);
+             $("#AddUser_Box").show(400);
+            
+		}
+	});  
+});   
+  });
+    
+// creat dommy user  
+$(document).ready(function() {
+  $("#Submit_CreateUser_dummy").click(function() {
+      
+        $('#oprId').val(Math.floor((Math.random() * 900) + 100));
+        $('#oprName').val('Dum Dummy');
+        $('#oprIni').val('DD');
+        $('#oprCpr').val('oprCpr');
+        $('#oprPassword').val('pass');
+        $('#oprRole1').val('admin'); 
+      
+      var data = $('#creatUserForm').serializeJSON();    
+      
+      jQuery.ajax({
+		url : "api/opr/addopr",
+		data : data,
+		contentType: "application/json",
+		method: 'POST',
+		success : function(data){
+            console.log(data);
+            $('#CreatMSG').html(data);
+            loadUsers(); // updata liste.
+		},
+		error: function(jqXHR, text, error){ 
+               console.log(data);
+            $('#CreatMSG').html(data).fadeToggle(500);
+             $("#AddUser_Box").show();
+            
+		}
+	}); 
+});   
+  });
+
+//refresh button
+$(document).ready(function() {
+  $("#refresh_But").click(function() {  
+      
+      console.log('refresh of users');
+      loadUsers();
+      
+});
+  });
+
+
+//Delete users 
+//$(document).ready(function(){
+//   $('.del_User').click(function(){
+//	   console.log('delete');  
+//       
+//        var id = $(this).prop('name');
+//
+//        console.log('delete' + id);  
+//        
+//     jQuery.ajax({
+//	  url: "api/opr/deleteOpr",
+//	  type: "POST",
+//      data : id,
+//	  contentType: "application/json",
+//	  success: function(resultData) {
+//         console.log(resultData);
+//         $(this).css('color', 'gray'); 
+//	  },
+//	  error : function(jqXHR, textStatus, errorThrown) {
+//          console.log(resultData);
+//	  },
+//	  timeout: 120000,
+//	});
+//    }); 
+//});
+
+
+</script>
+
+<!--create user popup-->
+<div id="AddUser_Box">
+  <img id="cancel_Icon" src="assets/img/Cancel_Icon.png"> 
+    <h1>Create user</h1>
+  <form id="creatUserForm" method="POST" action="api/opr/addopr">
+      Id<br>
+    <input type="text" name="oprId" id="oprId">
+    <br>
+  	Name <br>
+    <input type="text" name="oprName" id="oprName">	
+    <br>
+    Initials <br>
+    <input type="text" name="oprIni" id="oprIni">
+    <br>
+    Cpr <br>
+    <input type="text" name="oprCpr" id="oprCpr">
+    <br>
+    Password <br>
+    <input type="text" name="oprPassword" id="oprPassword">
+      <p id="CreatMSG"></p>
+    <br>
+    <br>
+    
+    Role 1:
+    <select name="oprRole1" id="oprRole1">
+      <option value="none">None</option>
+      <option value="admin">Admin</option>
+      <option value="pharmacist">Pharmacist</option>
+      <option value="foreman">Foreman</option>
+      <option value="operator">Operator</option>
+    </select>
+    
+    Role 2:
+    <select name="oprRole2">
+ 	  <option value="none">None</option>
+      <option value="admin">Admin</option>
+      <option value="pharmacist">Pharmacist</option>
+      <option value="foreman">Foreman</option>
+      <option value="operator">Operator</option>
+    </select>
+    
+    Role 3:
+    <select name="oprRole3">
+      <option value="none">None</option>
+      <option value="admin">Admin</option>
+      <option value="pharmacist">Pharmacist</option>
+      <option value="foreman">Foreman</option>
+      <option value="operator">Operator</option>
+    </select>
+    
+    Role 4:
+    <select name="oprRole4">
+	  <option value="none">None</option>
+      <option value="admin">Admin</option>
+      <option value="pharmacist">Pharmacist</option>
+      <option value="foreman">Foreman</option>
+      <option value="operator">Operator</option>
+    </select>
+     
+  <br><br>
+  <input id="Submit_CreateUser" type="button" value="Create user">
+      <input id="Submit_CreateUser_dummy" type="button" value="Create dummy user">
+    <p id="msg"></p>
+</form> 
+</div>
+<!--create user popup slut-->
+
+<button id="Adduser_But">Add user</button><button id="refresh_But">Refresh user list</button>
 <table id="table_con">
 <tr>
-  <td>ID</td>
+  <td>Id</td>
+  <td>Name</td>
   <td>Initials</td>
-  <td>Username</td>
-  <td>Password</td>
+  <td>Cpr</td>
+  <td>passwords</td>
   <td>Delete</td>
   <td>Edit</td>
 </tr>
 </table>
+
+
