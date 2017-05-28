@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
@@ -70,20 +71,19 @@ public class RESTRecept {
 	
 	@PUT
 	@Path("/updateRecept")
-	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateRecept(ReceptDTO obj){
+	public Response updateRecept(ReceptDTO obj){
 		
 		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
 		
 		try {
 			dao.updateRecept(obj);
-			return "Recept with id: " + obj.getReceptId() + "name: " + obj.getReceptName() + " - Updated";
+			return Response.status(200).entity("Recept with id: " + obj.getReceptId() + "name: " + obj.getReceptName() + " - Updated").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 		
-		return "Error updating recept - id: " + obj.getReceptId();		
+		return Response.status(400).entity("Error updating recept - id: " + obj.getReceptId()).build();		
 	}
 	
 	
