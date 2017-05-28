@@ -1,8 +1,10 @@
 package final_cdio_11.RESTResources;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -19,7 +21,6 @@ public class RESTRecept {
 	@GET
 	@Path("/getById")
 	@Produces(MediaType.TEXT_PLAIN)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public ReceptDTO getReceptById(@QueryParam("id") String id){
 		
 		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
@@ -27,11 +28,64 @@ public class RESTRecept {
 		try {
 			return dao.getRecept(Integer.parseInt(id));
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return null;	
 	}
+	
+	@DELETE 
+	@Path("/DELById")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String DELReceptById(@QueryParam("id") String id){
+		
+		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
+		
+		try {
+			dao.deleteRecept(Integer.parseInt(id));
+			return "Recept with id: " + id + "deletet!";
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+		
+		return "Error deleting recept - id: " + id;	
+	}
+	
+	@POST
+	@Path("/newRecept")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ReceptDTO newRecept(ReceptDTO obj){
+		
+		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
+		
+		try {
+			dao.createRecept(obj);;
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+		
+		return null;	
+	}
+	
+	@PUT
+	@Path("/newRecept")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateRecept(ReceptDTO obj){
+		
+		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
+		
+		try {
+			dao.updateRecept(obj);
+			return "Recept with id: " + obj.getReceptId() + "name: " + obj.getReceptName() + " - Updated";
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+		
+		return "Error updating recept - id: " + obj.getReceptId();		
+	}
+	
+	
 
 }
