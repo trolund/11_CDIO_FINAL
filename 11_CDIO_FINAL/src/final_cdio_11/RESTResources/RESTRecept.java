@@ -69,7 +69,7 @@ public class RESTRecept {
 	}
 	
 	@PUT
-	@Path("/newRecept")
+	@Path("/updateRecept")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String updateRecept(ReceptDTO obj){
