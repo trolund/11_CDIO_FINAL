@@ -15,97 +15,84 @@ import javax.ws.rs.core.Response;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
-import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
-import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ReceptDTO;
 
 @Path("/recept")
 public class RESTRecept {
-	
+
 	@GET
 	@Path("/getById")
 	@Produces(MediaType.TEXT_PLAIN)
-	public ReceptDTO getReceptById(@QueryParam("id") String id){
-		
-		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
-		
+	public ReceptDTO getReceptById(@QueryParam("receptId") String receptId) {
+		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+
 		try {
-			return dao.getRecept(Integer.parseInt(id));
+			return receptDAO.getRecept(Integer.parseInt(receptId));
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		
-		return null;	
+		return null;
 	}
-	
+
 	@GET
 	@Path("/getReceptList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ReceptDTO> getReceptList() {
-		SQLReceptDAO recDAO = new SQLReceptDAO(Connector.getInstance());
-
+		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 		List<ReceptDTO> recList = null;
 
 		try {
-			recList = recDAO.getReceptList();
+			recList = receptDAO.getReceptList();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 		return recList;
 	}
-	
-	@DELETE 
-	@Path("/DELById")
+
+	@DELETE
+	@Path("/delReceptById")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String DELReceptById(@QueryParam("id") String id){
-		
-		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
-		
+	public String delReceptById(@QueryParam("receptId") String receptId) {
+		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+
 		try {
-			dao.deleteRecept(Integer.parseInt(id));
-			return "Recept with id: " + id + "deletet!";
+			receptDAO.deleteRecept(Integer.parseInt(receptId));
+			return "Recept with id: " + receptId + "deleted!";
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		
-		return "Error deleting recept - id: " + id;	
+		return "Error deleting recept - id: " + receptId;
 	}
-	
+
 	@POST
-	@Path("/newRecept")
+	@Path("/createRecept")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ReceptDTO newRecept(ReceptDTO obj){
-		
-		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
-		
+	public ReceptDTO createRecept(ReceptDTO receptDTO) {
+		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+
 		try {
-			dao.createRecept(obj);;
+			receptDAO.createRecept(receptDTO);
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		
-		return null;	
+		return null;
 	}
-	
+
 	@PUT
 	@Path("/updateRecept")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateRecept(ReceptDTO obj){
-		
-		SQLReceptDAO dao = new SQLReceptDAO(Connector.getInstance());
-		
+	public Response updateRecept(ReceptDTO receptDTO) {
+		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+
 		try {
-			dao.updateRecept(obj);
-			return Response.status(200).entity("Recept with id: " + obj.getReceptId() + "name: " + obj.getReceptName() + " - Updated").build();
+			receptDAO.updateRecept(receptDTO);
+			return Response.status(200).entity("Recept with id: " + receptDTO.getReceptId() + "name: " + receptDTO.getReceptName() + " - Updated").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		
-		return Response.status(400).entity("Error updating recept - id: " + obj.getReceptId()).build();		
+		return Response.status(400).entity("Error updating recept - id: " + receptDTO.getReceptId()).build();
 	}
-	
-	
 
 }

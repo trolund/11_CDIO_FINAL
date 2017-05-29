@@ -30,11 +30,8 @@ public class Utils {
 	 */
 	private Utils() {
 		textHandler = TextHandler.getInstance();
-		if (DEV_ENABLED) {
-			logMessage(textHandler.devStartUpMessage);
-		} else if (TEST_ENABLED) {
-			logMessage(textHandler.testStartUpMessage);
-		}
+		if (DEV_ENABLED) logMessage(textHandler.devStartUpMessage);
+		else if (TEST_ENABLED) logMessage(textHandler.testStartUpMessage);
 	}
 
 	/*
@@ -56,8 +53,7 @@ public class Utils {
 			StringBuffer hexString = new StringBuffer();
 			for (int i = 0; i < hash.length; i++) {
 				String hex = Integer.toHexString(0xff & hash[i]);
-				if (hex.length() == 1)
-					hexString.append('0');
+				if (hex.length() == 1) hexString.append('0');
 				hexString.append(hex);
 			}
 			return hexString.toString();

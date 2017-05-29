@@ -37,6 +37,7 @@ public class SQLOperatorRecipeDAO implements IVOperatorRecipeDAO {
 			do {
 				vOperatorRecipeList.add(new VOperatorRecipeDTO(rs.getInt("raavare_id"), rs.getInt("recept_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getString("recept_navn"), rs.getDouble("nom_netto"), rs.getDouble("tolerance")));
 			} while (rs.next());
+
 			return vOperatorRecipeList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -65,6 +66,7 @@ public class SQLOperatorRecipeDAO implements IVOperatorRecipeDAO {
 			do {
 				vOperatorRecipeList.add(new VOperatorRecipeDTO(rs.getInt("raavare_id"), rs.getInt("recept_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getString("recept_navn"), rs.getDouble("nom_netto"), rs.getDouble("tolerance")));
 			} while (rs.next());
+
 			return vOperatorRecipeList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

@@ -37,8 +37,7 @@ public class SQLReceptDAO implements IReceptDAO {
 			getReceptStmt.setInt(1, receptId);
 			rs = getReceptStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("Recept with receptId [" + receptId + "] does not exist!");
+			if (!rs.first()) throw new DALException("Recept with receptId [" + receptId + "] does not exist!");
 
 			return new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn"), rs.getInt("status"));
 		} catch (SQLException e) {
@@ -66,12 +65,12 @@ public class SQLReceptDAO implements IReceptDAO {
 			getReceptListStmt = connector.getConnection().prepareStatement(getReceptListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getReceptListStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("No Recept's exist!");
+			if (!rs.first()) throw new DALException("No Recept's exist!");
 
 			do {
 				receptList.add(new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn"), rs.getInt("status")));
 			} while (rs.next());
+			
 			return receptList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

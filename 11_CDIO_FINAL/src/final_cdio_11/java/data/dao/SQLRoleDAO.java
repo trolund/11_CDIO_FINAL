@@ -38,12 +38,12 @@ public class SQLRoleDAO implements IRoleDAO {
 			getOprRolesStmt.setInt(1, oprId);
 			rs = getOprRolesStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("Operator id [" + oprId + "] has no roles or doesn't exist!");
+			if (!rs.first()) throw new DALException("Operator id [" + oprId + "] has no roles or doesn't exist!");
 
 			do {
 				roleList.add(new RoleDTO(rs.getInt("opr_id"), rs.getString("rolle_navn"), rs.getInt("status")));
 			} while (rs.next());
+
 			return roleList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -70,12 +70,12 @@ public class SQLRoleDAO implements IRoleDAO {
 			getRoleListStmt = connector.getConnection().prepareStatement(getRoleListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getRoleListStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("No roles exist!");
+			if (!rs.first()) throw new DALException("No roles exist!");
 
 			do {
 				roleList.add(new RoleDTO(rs.getInt("opr_id"), rs.getString("rolle_navn"), rs.getInt("status")));
 			} while (rs.next());
+
 			return roleList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

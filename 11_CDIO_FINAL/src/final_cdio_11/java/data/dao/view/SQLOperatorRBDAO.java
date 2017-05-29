@@ -37,6 +37,7 @@ public class SQLOperatorRBDAO implements IVOperatorRBDAO {
 			do {
 				vOperatorRBList.add(new VOperatorRBDTO(rs.getInt("raavare_id"), rs.getInt("rb_id"), rs.getInt("maengde"), rs.getString("raavare_navn"), rs.getString("leverandoer")));
 			} while (rs.next());
+
 			return vOperatorRBList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -65,6 +66,7 @@ public class SQLOperatorRBDAO implements IVOperatorRBDAO {
 			do {
 				vOperatorRBList.add(new VOperatorRBDTO(rs.getInt("raavare_id"), rs.getInt("rb_id"), rs.getInt("maengde"), rs.getString("raavare_navn"), rs.getString("leverandoer")));
 			} while (rs.next());
+
 			return vOperatorRBList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

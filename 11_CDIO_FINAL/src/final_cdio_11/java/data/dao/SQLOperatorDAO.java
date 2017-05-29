@@ -38,8 +38,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			getOprStmt.setInt(1, oprId);
 			rs = getOprStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("Operator id [" + oprId + "] does not exist!");
+			if (!rs.first()) throw new DALException("Operator id [" + oprId + "] does not exist!");
 
 			return new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("opr_efternavn"), rs.getString("ini"), rs.getString("email"), rs.getString("cpr"), rs.getString("password"), rs.getInt("status"));
 		} catch (SQLException e) {
@@ -67,12 +66,12 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			getOprListStmt = connector.getConnection().prepareStatement(getOprListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getOprListStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("No operators exist!");
+			if (!rs.first()) throw new DALException("No operators exist!");
 
 			do {
 				oprList.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("opr_efternavn"), rs.getString("ini"), rs.getString("email"), rs.getString("cpr"), rs.getString("password"), rs.getInt("status")));
 			} while (rs.next());
+			
 			return oprList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

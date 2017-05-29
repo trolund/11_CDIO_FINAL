@@ -37,6 +37,7 @@ public class SQLAdminForemanPBCDAO implements IVAdminForemanPBCDAO {
 			do {
 				vAdminForemanPBCList.add(new VAdminForemanPBCDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("status")));
 			} while (rs.next());
+			
 			return vAdminForemanPBCList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -65,6 +66,7 @@ public class SQLAdminForemanPBCDAO implements IVAdminForemanPBCDAO {
 			do {
 				vAdminForemanPBCList.add(new VAdminForemanPBCDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("status")));
 			} while (rs.next());
+			
 			return vAdminForemanPBCList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

@@ -5,8 +5,6 @@ package final_cdio_11.java.utils;
  */
 public class TextHandler {
 
-	private static final TextHandler instance = new TextHandler();
-
 	/* DEV_ENABLED messages. */
 	public final String devStartUpMessage = "Application started in [DEV_ENABLED] development mode.";
 	public final String devConnectionMessage = "Connected to database: ";
@@ -43,6 +41,8 @@ public class TextHandler {
 	public final String errIdInvalid = "Invalid Id.";
 	public final String errInvalidCredentials = "Invalid credentials.";
 	public final String errFailure = "Failure.";
+
+	private static final TextHandler instance = new TextHandler();
 
 	/*
 	 * Private constructor. Can't be instantiated.

@@ -37,8 +37,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			getRaavareStmt.setInt(1, raavareId);
 			rs = getRaavareStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("Raavare with raavareId [" + raavareId + "] does not exist!");
+			if (!rs.first()) throw new DALException("Raavare with raavareId [" + raavareId + "] does not exist!");
 
 			return new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getInt("status"));
 		} catch (SQLException e) {
@@ -66,12 +65,12 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			getRaavareListStmt = connector.getConnection().prepareStatement(getRaavareListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getRaavareListStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("No Raavare's exist!");
+			if (!rs.first()) throw new DALException("No Raavare's exist!");
 
 			do {
 				raavareList.add(new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getInt("status")));
 			} while (rs.next());
+			
 			return raavareList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

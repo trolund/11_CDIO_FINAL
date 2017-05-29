@@ -114,21 +114,10 @@ public class CreateUserFormPOJO {
 	public List<String> getOprRole() {
 		List<String> list = new ArrayList<>();
 
-		if (oprRole1 != "None") {
-			list.add(oprRole1);
-		}
-
-		if (oprRole2 != "None") {
-			list.add(oprRole2);
-		}
-
-		if (oprRole3 != "None") {
-			list.add(oprRole3);
-		}
-
-		if (oprRole4 != "None") {
-			list.add(oprRole4);
-		}
+		if (oprRole1 != "None") list.add(oprRole1);
+		if (oprRole2 != "None") list.add(oprRole2);
+		if (oprRole3 != "None") list.add(oprRole3);
+		if (oprRole4 != "None") list.add(oprRole4);
 
 		return list;
 	}

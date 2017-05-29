@@ -62,6 +62,7 @@ public class SQLAdminOperatorDAO implements IVAdminOperatorDAO {
 			do {
 				vAdminOperatorList.add(new VAdminOperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"), rs.getString("opr_rolle")));
 			} while (rs.next());
+			
 			return vAdminOperatorList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

@@ -38,32 +38,19 @@ public class RESTOperator {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean delUser(String oprId) {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-
 		int id = -1;
 
 		try {
 			id = Integer.parseInt(oprId);
 			oprDAO.deleteOperator(id);
-
-			if (utils.DEV_ENABLED) {
-				utils.logMessage(textHandler.devUserDeletedSuccessMessage(id));
-			}
-
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserDeletedSuccessMessage(id));
 			return true;
 		} catch (DALException e) {
 			e.printStackTrace();
-
-			if (utils.DEV_ENABLED) {
-				utils.logMessage(textHandler.devUserDeletedFailureMessage(id));
-			}
-
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserDeletedFailureMessage(id));
 			return false;
 		} catch (NumberFormatException e) {
-
-			if (utils.DEV_ENABLED) {
-				utils.logMessage(textHandler.devUserDeletedFailureMessage(id));
-			}
-
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserDeletedFailureMessage(id));
 			e.printStackTrace();
 			return false;
 		}
@@ -76,12 +63,9 @@ public class RESTOperator {
 	public String verify(LoginFormPOJO loginFormData) throws JsonParseException, JsonMappingException, IOException {
 		int oprId = loginFormData.getOprId();
 		String password = loginFormData.getPassword();
-
-		if (utils.DEV_ENABLED) {
-			utils.logMessage(textHandler.devUserLoginMessage(oprId, password));
-		}
-
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+
+		if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserLoginMessage(oprId, password));
 
 		OperatorDTO oprDTO = null;
 		try {
@@ -133,18 +117,13 @@ public class RESTOperator {
 
 		try {
 			oprDAO.createOperator(oprDTO);
-
-			if (utils.DEV_ENABLED) {
-				utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));
-			}
-
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));
 			return textHandler.succAddedUser(createUserFormData.getOprId());
 		} catch (DALException e) {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-
 		return textHandler.errFailure;
 	}
 
@@ -155,8 +134,8 @@ public class RESTOperator {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 
 		int id = Integer.parseInt(oprId);
-
 		List<OperatorDTO> oprList = null;
+
 		try {
 			oprList = oprDAO.getOperatorList();
 		} catch (DALException e) {
@@ -165,14 +144,14 @@ public class RESTOperator {
 
 		for (OperatorDTO oprDTO : oprList) {
 			if (oprDTO.getOprId() == id) {
-				CreateUserFormPOJO pojo = new CreateUserFormPOJO();
+				CreateUserFormPOJO createUserFormPOJO = new CreateUserFormPOJO();
 				try {
 					List<RoleDTO> roleList = new SQLRoleDAO(Connector.getInstance()).getOprRoles(id);
-					pojo.setOprId(oprDTO.getOprId());
-					pojo.setOprIni(oprDTO.getOprIni());
-					pojo.setOprCpr(oprDTO.getOprCpr());
-					pojo.setOprPassword(oprDTO.getOprPassword());
-					pojo.setOprRole1(roleList.get(0).getRoleName());
+					createUserFormPOJO.setOprId(oprDTO.getOprId());
+					createUserFormPOJO.setOprIni(oprDTO.getOprIni());
+					createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
+					createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
+					createUserFormPOJO.setOprRole1(roleList.get(0).getRoleName());
 				} catch (DALException e) {
 					e.printStackTrace();
 				}
@@ -187,7 +166,6 @@ public class RESTOperator {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<OperatorDTO> getopr() {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-
 		List<OperatorDTO> oprList = null;
 
 		try {
@@ -203,7 +181,6 @@ public class RESTOperator {
 	@Produces(MediaType.TEXT_HTML)
 	public String getOprRoleList(@PathParam("oprId") String oprId) {
 		SQLRoleDAO oprDAO = new SQLRoleDAO(Connector.getInstance());
-
 		StringBuilder returnString = new StringBuilder();
 		List<RoleDTO> oprRoleList = null;
 
@@ -213,18 +190,13 @@ public class RESTOperator {
 			e.printStackTrace();
 		}
 
-		if (oprRoleList == null) {
-			return "None.";
-		}
-		
+		if (oprRoleList == null) return "None.";
+
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
 			RoleDTO roleDTO = (RoleDTO) iterator.next();
-			if (iterator.hasNext())
-				returnString.append(roleDTO.getRoleName() + ", ");
-			else
-				returnString.append(roleDTO.getRoleName() + ".");
+			if (iterator.hasNext()) returnString.append(roleDTO.getRoleName() + ", ");
+			else returnString.append(roleDTO.getRoleName() + ".");
 		}
-
 		return returnString.toString();
 	}
 
@@ -233,23 +205,17 @@ public class RESTOperator {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<RoleDTO> getoprRoleListJSON(@PathParam("OprId") String OprId) {
 		SQLRoleDAO oprDAO = new SQLRoleDAO(Connector.getInstance());
-
 		List<RoleDTO> oprRoleList = null;
 
 		try {
 			oprRoleList = oprDAO.getOprRoles(Integer.parseInt(OprId));
-
-			if (utils.DEV_ENABLED) {
-				utils.logMessage("RoleList successfully created. Trying to return..");
-			}
-
+			if (utils.DEV_ENABLED) utils.logMessage("RoleList successfully created. Trying to return..");
 			return oprRoleList;
 		} catch (DALException e) {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 

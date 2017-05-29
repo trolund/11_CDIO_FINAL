@@ -56,10 +56,7 @@ public class Connector {
 			Class.forName(driverClass);
 			url = driver + "://" + host + ":" + port + "/" + database + "?verifyServerCertificate=false&useSSL=true";
 			connection = DriverManager.getConnection(url, username, password);
-
-			if (utils.DEV_ENABLED) {
-				utils.logMessage(textHandler.devConnectionMessage + url);
-			}
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devConnectionMessage + url);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			try {
@@ -75,18 +72,15 @@ public class Connector {
 	 * Method to close a desired PreparedStatement and ResultSet.
 	 */
 	public void cleanup(PreparedStatement stmt, ResultSet rs) throws SQLException {
-		if (stmt != null)
-			stmt.close();
-		if (rs != null)
-			rs.close();
+		if (stmt != null) stmt.close();
+		if (rs != null) rs.close();
 	}
 
 	/*
 	 * Method to close a desired PreparedStatement.
 	 */
 	public void cleanup(PreparedStatement stmt) throws SQLException {
-		if (stmt != null)
-			stmt.close();
+		if (stmt != null) stmt.close();
 	}
 
 	/*
@@ -101,9 +95,7 @@ public class Connector {
 	 */
 	public Connection getConnection() {
 		try {
-			if (!connection.isValid(1)) {
-				connection = createConnection();
-			}
+			if (!connection.isValid(1)) connection = createConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

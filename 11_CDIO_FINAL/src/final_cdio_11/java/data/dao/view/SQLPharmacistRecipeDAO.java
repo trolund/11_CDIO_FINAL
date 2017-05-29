@@ -37,6 +37,7 @@ public class SQLPharmacistRecipeDAO implements IVPharmacistRecipeDAO {
 			do {
 				vPharmacistRecipeList.add(new VPharmacistRecipeDTO(rs.getInt("raavare_id"), rs.getInt("recept_id"), rs.getString("raavare_navn"), rs.getString("recept_navn")));
 			} while (rs.next());
+
 			return vPharmacistRecipeList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -65,6 +66,7 @@ public class SQLPharmacistRecipeDAO implements IVPharmacistRecipeDAO {
 			do {
 				vPharmacistRecipeList.add(new VPharmacistRecipeDTO(rs.getInt("raavare_id"), rs.getInt("recept_id"), rs.getString("raavare_navn"), rs.getString("recept_navn")));
 			} while (rs.next());
+
 			return vPharmacistRecipeList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

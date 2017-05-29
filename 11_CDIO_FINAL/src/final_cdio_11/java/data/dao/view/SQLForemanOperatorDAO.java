@@ -62,6 +62,7 @@ public class SQLForemanOperatorDAO implements IVForemanOperatorDAO {
 			do {
 				vForemanOperatorList.add(new VForemanOperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("opr_roller")));
 			} while (rs.next());
+
 			return vForemanOperatorList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

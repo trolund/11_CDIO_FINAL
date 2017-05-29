@@ -38,8 +38,7 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			getRCStmt.setInt(2, raavareId);
 			rs = getRCStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("ReceptComponent with receptId [" + receptId + "] and raavareId [" + raavareId + "] does not exist!");
+			if (!rs.first()) throw new DALException("ReceptComponent with receptId [" + receptId + "] and raavareId [" + raavareId + "] does not exist!");
 
 			return new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getDouble("tolerance"), rs.getInt("status"));
 		} catch (SQLException e) {
@@ -68,12 +67,12 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			getRCListIdStmt.setInt(1, receptId);
 			rs = getRCListIdStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("No ReceptComponent's exist with receptId: " + receptId + "!");
+			if (!rs.first()) throw new DALException("No ReceptComponent's exist with receptId: " + receptId + "!");
 
 			do {
 				rcList.add(new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getInt("tolerance"), rs.getInt("status")));
 			} while (rs.next());
+
 			return rcList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -100,12 +99,12 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			getRCListStmt = connector.getConnection().prepareStatement(getRCListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getRCListStmt.executeQuery();
 
-			if (!rs.first())
-				throw new DALException("No ReceptComponent's exist!");
+			if (!rs.first()) throw new DALException("No ReceptComponent's exist!");
 
 			do {
 				rcList.add(new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getInt("tolerance"), rs.getInt("status")));
 			} while (rs.next());
+			
 			return rcList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
