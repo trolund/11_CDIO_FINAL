@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 // LogOut button menu  
 $(document).ready(function() {
-	$("#logOut_but").click(function() {    
+	$("#logOut_but").click(function() {
 		//var id = null;
 		//var user = null;
 		//var roles = null;
