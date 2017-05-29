@@ -92,12 +92,13 @@ $(document).ready(function() {
 // Hent liste af users og oversæt dem til tabel
 function loadUsers(){
     $('#table_con').empty();                         
-    $('#table_con').append('<tr><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
+    $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/opr/getOprList', function(data) {
 	    console.log('Users loaded.');
 	    
 	    var roles;
+        var status;
 	
         $.each(data, function(i, item) { 
              
@@ -113,11 +114,19 @@ function loadUsers(){
         			roles  = "Failed to load roles.";
         		}
         	})  
-             
+            
+            if(data[i].status == "0"){
+                status = "<td style='color: green;'>Active</td>";
+            }
+            else{
+                status = "<td style='color: red;'>Inactive</td>";
+            }
+            
+            
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	} else {
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
         });
         
