@@ -39,7 +39,7 @@ $(document).ready(function() {
       var Postdata = $('#login').serializeJSON();    
       
       jQuery.ajax({
-		url : "api/opr/verify", 
+		url : "api/opr/verify",
 		data : Postdata,
 		contentType: "application/json",
 		method: 'POST',
@@ -93,16 +93,32 @@ $(document).ready(function() {
 // hent liste af users og oversæt dem til tabel
 function loadUsers(){
     $('#table_con').empty();                         
-    $('#table_con').append('<tr><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Password</td><td>Delete</td><td>Edit</td></tr>');
+    $('#table_con').append('<tr><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Rols</td><td>Delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/opr/getOprList', function(data) {
 	    console.log('Users loaded');
 	
         $.each(data, function(i, item) {
+            
+            var Rols = "";
+            
+	            jQuery.ajax({
+		  url: "api/opr/getOprRoleList/" + data[i].oprId,
+		  type: "GET",
+		  contentType: 'text/plain',
+		  success: function(resultData) { 
+            Rols = resultData;
+		  },
+		  error : function(jqXHR, textStatus, errorThrown) { 
+            Rols  = "ingen roller.";
+		  }
+		})  
+                console.log(ItemRols); 
+            
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprPassword + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + Rols  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	} else {
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprPassword + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + Rols  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
         });
         
