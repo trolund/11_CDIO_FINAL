@@ -96,7 +96,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 		try {
 			createOprStmt = connector.getConnection().prepareStatement(createOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			createOprStmt.setInt(1, opr.getOprId());
-			createOprStmt.setString(2, opr.getOprName());
+			createOprStmt.setString(2, opr.getOprFirstName());
 			createOprStmt.setString(3, opr.getOprLastName());
 			createOprStmt.setString(4, opr.getOprIni());
 			createOprStmt.setString(5, opr.getOprEmail());
@@ -125,7 +125,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 		PreparedStatement updateOprStmt = null;
 		try {
 			updateOprStmt = connector.getConnection().prepareStatement(updateOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			updateOprStmt.setString(1, opr.getOprName());
+			updateOprStmt.setString(1, opr.getOprFirstName());
 			updateOprStmt.setString(2, opr.getOprLastName());
 			updateOprStmt.setString(2, opr.getOprIni());
 			updateOprStmt.setString(3, opr.getOprEmail());

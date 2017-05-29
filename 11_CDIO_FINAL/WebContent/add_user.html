@@ -2,80 +2,79 @@
 
 // Add user button
 $(document).ready(function() {
-    $("#Adduser_But").click(function(){
-        $("#AddUser_Box").show(400);
-    }); 
+	$("#Adduser_But").click(function() {
+    	$("#AddUser_Box").show(400);
+	}); 
 });
 
-// cancel icon create user box
+// Cancel icon create user box
 $(document).ready(function() {
-    $("#cancel_Icon").click(function(){
-        $("#AddUser_Box").hide(400);
+	$("#cancel_Icon").click(function() {
+		$("#AddUser_Box").hide(400);
     }); 
 });
     
-// post create user data
+// Post create user data
 $(document).ready(function() {
-  $("#Submit_CreateUser").click(function() {
+	$("#Submit_CreateUser").click(function() {
+		var data = $('#CreateUserForm').serializeJSON();    
       
-      var data = $('#CreateUserForm').serializeJSON();    
-      
-      jQuery.ajax({
-		url : "api/opr/addopr",
-		data : data,
-		contentType: "application/json",
-		method: 'POST',
-		success : function(data){
-            console.log(data);
-            $('#CreateMSG').html(data);
-            loadUsers(); // updata liste.
-		},
-		error: function(jqXHR, text, error){ 
-               console.log(data);
-            $('#CreateMSG').html(data).fadeToggle(500);
-             $("#AddUser_Box").show(400);
-            
-		}
-	});  
-});   
-  });
-    
-// create dummy user  
+      	jQuery.ajax({
+			url : "api/opr/addopr",
+			data : data,
+			contentType: "application/json",
+			method: 'POST',
+			success : function(data) {
+          		console.log(data);
+          	  	$('#CreateMSG').html(data);
+           	 	loadUsers();
+			},
+			error: function(jqXHR, text, error) { 
+            	console.log(data);
+            	$('#CreateMSG').html(data).fadeToggle(500);
+             	$("#AddUser_Box").show(400);
+			}
+		});  
+	});   
+});
+
+// Create dummy user  
 $(document).ready(function() {
-  $("#Submit_CreateUser_dummy").click(function() {
-      
-        $('#oprId').val(Math.floor((Math.random() * 900) + 100));
-        $('#oprName').val('Dum Dummy');
+	$("#Submit_CreateUser_dummy").click(function() {
+		
+		$('#oprId').val(Math.floor((Math.random() * 900) + 100));
+        $('#oprFirstName').val('Dum');
+        $('#oprLastName').val('Dummy');
         $('#oprIni').val('DD');
+        $('#oprEmail').val('dum@dummy.com');
         $('#oprCpr').val('oprCpr');
         $('#oprPassword').val('pass');
-        $('#oprRole1').val('admin'); 
-      
-      var data = $('#CreateUserForm').serializeJSON();    
-      
-      jQuery.ajax({
-		url : "api/opr/addopr",
-		data : data,
-		contentType: "application/json",
-		method: 'POST',
-		success : function(data){
-            console.log(data);
-            $('#CreateMSG').html(data);
-            loadUsers();
-		},
-		error: function(jqXHR, text, error){ 
-            console.log(data);
-            $('#CreateMSG').html(data).fadeToggle(500);
-            $("#AddUser_Box").show();
+        $('#oprRole1').val('Admin');
         
-		}
-	}); 
-  });   
+        var data = $('#CreateUserForm').serializeJSON();    
+      
+      	jQuery.ajax({
+			url : "api/opr/addopr",
+			data : data,
+			contentType: "application/json",
+			method: 'POST',
+			success : function(data) {
+            	console.log(data);
+            	$('#CreateMSG').html(data);
+           		loadUsers();
+			},
+			error: function(jqXHR, text, error){ 
+           		console.log(data);
+            	$('#CreateMSG').html(data).fadeToggle(500);
+            	$("#AddUser_Box").show();
+			}
+		}); 
+  	});   
 });
 
-//refresh button
+// Refresh button
 $(document).ready(function() {
-  $("#refresh_But").click(function() {       
+	$("#refresh_But").click(function() {       
     	console.log('Refreshing users.');
     	loadUsers();
 	});
@@ -120,7 +119,7 @@ $(document).ready(function() {
     <input type="text" name="oprId" id="oprId">
     <br>
   	First Name <br>
-    <input type="text" name="oprName" id="oprName">	
+    <input type="text" name="oprFirstName" id="oprFirstName">	
     <br>
     Last Name <br>
     <input type="text" name="oprLastName" id="oprLastName">	
@@ -193,7 +192,7 @@ $(document).ready(function() {
   <td>Initials</td>
   <td>E-mail</td>
   <td>Cpr</td>
-  <td>Password</td>
+  <td>Roles</td>
   <td>Delete</td>
   <td>Edit</td>
 </tr>

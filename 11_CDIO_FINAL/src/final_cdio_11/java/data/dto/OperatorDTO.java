@@ -7,7 +7,7 @@ package final_cdio_11.java.data.dto;
 public class OperatorDTO {
 
 	private int oprId;
-	private String oprName;
+	private String oprFirstName;
 	private String oprLastName;
 	private String oprIni;
 	private String oprEmail;
@@ -15,9 +15,9 @@ public class OperatorDTO {
 	private String oprPassword;
 	private int status;
 
-	public OperatorDTO(int oprId, String oprName, String oprLastName, String oprIni, String oprEmail, String oprCpr, String oprPassword, int status) {
+	public OperatorDTO(int oprId, String oprFirstName, String oprLastName, String oprIni, String oprEmail, String oprCpr, String oprPassword, int status) {
 		this.oprId = oprId;
-		this.oprName = oprName;
+		this.oprFirstName = oprFirstName;
 		this.oprLastName = oprLastName;
 		this.oprIni = oprIni;
 		this.oprEmail = oprEmail;
@@ -30,8 +30,8 @@ public class OperatorDTO {
 		return oprId;
 	}
 
-	public String getOprName() {
-		return oprName;
+	public String getOprFirstName() {
+		return oprFirstName;
 	}
 
 	public String getOprLastName() {
@@ -60,7 +60,7 @@ public class OperatorDTO {
 
 	@Override
 	public String toString() {
-		return "OperatorDTO [oprId=" + oprId + ", oprName=" + oprName + ", oprLastName=" + oprLastName + ", oprIni=" + oprIni + ", oprEmail=" + oprEmail + ", oprCpr=" + oprCpr + ", oprPassword=" + oprPassword + ", status=" + status + "]";
+		return "OperatorDTO [oprId=" + oprId + ", oprFirstName=" + oprFirstName + ", oprLastName=" + oprLastName + ", oprIni=" + oprIni + ", oprEmail=" + oprEmail + ", oprCpr=" + oprCpr + ", oprPassword=" + oprPassword + ", status=" + status + "]";
 	}
 
 }

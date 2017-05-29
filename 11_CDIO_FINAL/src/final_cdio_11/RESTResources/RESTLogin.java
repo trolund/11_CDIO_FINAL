@@ -71,7 +71,7 @@ public class RESTLogin {
 		Date exp = new Date(expMillis);
 
 		if (validate(password, oprDTO)) {
-			return Jwts.builder().setIssuer("Gruppe 11 web service").claim("Id", oprDTO.getOprId()).claim("Name", oprDTO.getOprName()).claim("Ini", oprDTO.getOprIni()).setExpiration(exp).signWith(SignatureAlgorithm.HS512, key).compact();
+			return Jwts.builder().setIssuer("Gruppe 11 web service").claim("Id", oprDTO.getOprId()).claim("Name", oprDTO.getOprFirstName()).claim("Ini", oprDTO.getOprIni()).setExpiration(exp).signWith(SignatureAlgorithm.HS512, key).compact();
 		} else {
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}

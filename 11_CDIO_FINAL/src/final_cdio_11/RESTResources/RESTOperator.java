@@ -199,22 +199,25 @@ public class RESTOperator {
 	}
 
 	@GET
-	@Path("/getOprRoleList/{OprId}")
+	@Path("/getOprRoleList/{oprId}")
 	@Produces(MediaType.TEXT_HTML)
-	public String getoprRoleList(@PathParam("OprId") String OprId) {
+	public String getOprRoleList(@PathParam("oprId") String oprId) {
 		SQLRoleDAO oprDAO = new SQLRoleDAO(Connector.getInstance());
 
 		StringBuilder returnString = new StringBuilder();
 		List<RoleDTO> oprRoleList = null;
 
 		try {
-			oprRoleList = oprDAO.getOprRoles(Integer.parseInt(OprId));
+			oprRoleList = oprDAO.getOprRoles(Integer.parseInt(oprId));
 		} catch (DALException e) {
-			e.printStackTrace();
-		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 
+		// Temp
+		if (oprRoleList == null) {
+			return "Ingen roller.";
+		}
+		
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
 			RoleDTO roleDTO = (RoleDTO) iterator.next();
 			if (iterator.hasNext())

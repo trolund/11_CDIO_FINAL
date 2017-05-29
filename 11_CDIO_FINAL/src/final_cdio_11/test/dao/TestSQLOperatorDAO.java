@@ -172,7 +172,7 @@ public class TestSQLOperatorDAO {
 			System.out.println("Updated: " + oprDAO.getOperator(oprId));
 
 			String expected = newName;
-			String actual = oprDAO.getOperator(oprId).getOprName();
+			String actual = oprDAO.getOperator(oprId).getOprFirstName();
 
 			assertEquals("Failed: The updated name does not match!", expected, actual);
 

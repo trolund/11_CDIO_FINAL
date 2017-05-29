@@ -54,12 +54,7 @@ public class Connector {
 
 		try {
 			Class.forName(driverClass);
-			url = driver + "://" + host + ":" + port + "/" + database;
-
-			if (utils.TEST_ENABLED) {
-				url = driver + "://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false";
-			}
-
+			url = driver + "://" + host + ":" + port + "/" + database + "?verifyServerCertificate=false&useSSL=true";
 			connection = DriverManager.getConnection(url, username, password);
 
 			if (utils.DEV_ENABLED) {
