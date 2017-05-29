@@ -62,7 +62,7 @@ $(document).ready(function() {
 			},
 			error: function(jqXHR, text, error) {  
 				$('#msg').css('color','red');
-                $('#msg').html('Server fail');
+                $('#msg').html('Connection to server failed.');
                 $('#loadingGif').hide(200);
                 
                 console.log('Failed to log in - ' + data)
