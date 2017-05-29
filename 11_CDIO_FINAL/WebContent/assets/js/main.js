@@ -115,10 +115,9 @@ function loadUsers(){
         		}
         	})  
             
-            if(data[i].status == "0"){
+            if (data[i].status == "0") {
                 status = "<td style='color: green;'>Active</td>";
-            }
-            else{
+            } else{
                 status = "<td style='color: red;'>Inactive</td>";
             }
             
