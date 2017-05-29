@@ -96,22 +96,24 @@ function loadUsers(){
     
     $.getJSON('api/opr/getOprList', function(data) {
 	    console.log('Users loaded');
+	    
+	    var roles;
 	
-        $.each(data, function(i, item) {
-        	roles = "";
-            
+        $.each(data, function(i, item) { 
+             
         	jQuery.ajax({
         		url: "api/opr/getOprRoleList/" + data[i].oprId,
         		type: "GET",
         		contentType: 'text/plain',
+                async: false,
         		success: function(resultData) { 
-        			roles = resultData;
+        			roles  = resultData;
         		},
         		error : function(jqXHR, textStatus, errorThrown) { 
         			roles  = "Ingen roller.";
         		}
         	})  
-            
+             
         	console.log("roller: " + roles); 
             
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
