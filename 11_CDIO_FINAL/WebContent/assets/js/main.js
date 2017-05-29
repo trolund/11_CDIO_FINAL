@@ -57,7 +57,7 @@ $(document).ready(function() {
 					$('#login_Bg').show();
 					$('#loadingGif').hide(200);
 					
-					console.log('Failed to logged in - ' + data)
+					console.log('Failed to log in - ' + data)
 				}
 			},
 			error: function(jqXHR, text, error) {  
@@ -65,7 +65,7 @@ $(document).ready(function() {
                 $('#msg').html('Server fail');
                 $('#loadingGif').hide(200);
                 
-                console.log('Failed to logged in - ' + data)
+                console.log('Failed to log in - ' + data)
 			}
 		}
 	)} 
@@ -95,7 +95,7 @@ function loadUsers(){
     $('#table_con').append('<tr><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/opr/getOprList', function(data) {
-	    console.log('Users loaded');
+	    console.log('Users loaded.');
 	    
 	    var roles;
 	
@@ -110,12 +110,10 @@ function loadUsers(){
         			roles  = resultData;
         		},
         		error : function(jqXHR, textStatus, errorThrown) { 
-        			roles  = "Ingen roller.";
+        			roles  = "Failed to load roles.";
         		}
         	})  
              
-        	console.log("roller: " + roles); 
-            
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
         		$('#table_con').append('<tr id="' + data[i].oprId + '">' + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	} else {
@@ -137,7 +135,7 @@ function loadUsers(){
         	console.log( "js load was performed." );
         });
         
-        console.log('tabel data done');
+        console.log('tabel data load done');
     }); 
 } 
 

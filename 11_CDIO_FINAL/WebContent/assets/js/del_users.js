@@ -1,6 +1,6 @@
 // Delete users 
 $(document).ready(function() {
-	$('.del_User').click(function() {
+	$('.del_user').click(function() {
 		
        var id = $(this).prop('name');
        console.log('Try to delete user with id: ' + id);  

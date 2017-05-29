@@ -1,6 +1,6 @@
 // Edit user button
 $(document).ready(function() {
-    $(".edit_User").click(function() {
+    $(".edit_user").click(function() {
     	var id = $(this).prop('name');
         console.log(id);
         

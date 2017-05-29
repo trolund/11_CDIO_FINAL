@@ -38,7 +38,15 @@ $(document).ready(function() {
 	});   
 });
 
-// Create dummy user  
+// Refresh button
+$(document).ready(function() {
+	$("#refresh_But").click(function() {       
+    	console.log('Refreshing users.');
+    	loadUsers();
+	});
+});
+
+//Create dummy user  
 $(document).ready(function() {
 	$("#Submit_CreateUser_dummy").click(function() {
 		
@@ -49,7 +57,7 @@ $(document).ready(function() {
         $('#oprEmail').val('dum@dummy.com');
         $('#oprCpr').val('oprCpr');
         $('#oprPassword').val('pass');
-        $('#oprRole1').val('Admin');
+        $('#oprRole1').val('None');
         
         var data = $('#CreateUserForm').serializeJSON();    
       
@@ -70,14 +78,6 @@ $(document).ready(function() {
 			}
 		}); 
   	});   
-});
-
-// Refresh button
-$(document).ready(function() {
-	$("#refresh_But").click(function() {       
-    	console.log('Refreshing users.');
-    	loadUsers();
-	});
 });
 
 //Delete users 
@@ -144,7 +144,7 @@ $(document).ready(function() {
       <option value="none">None</option>
       <option value="admin">Admin</option>
       <option value="farmaceut">Farmaceut</option>
-      <option value="produktansvarlig">Produktansvarlig</option>
+      <option value="værkfører">Værkfører</option>
       <option value="laborant">Laborant</option>
     </select>
     
@@ -153,7 +153,7 @@ $(document).ready(function() {
  	  <option value="none">None</option>
       <option value="admin">Admin</option>
       <option value="farmaceut">Farmaceut</option>
-      <option value="produktansvarlig">Produktansvarlig</option>
+      <option value="værkfører">Værkfører</option>
       <option value="laborant">Laborant</option>
     </select>
     
@@ -162,7 +162,7 @@ $(document).ready(function() {
       <option value="none">None</option>
       <option value="admin">Admin</option>
       <option value="farmaceut">Farmaceut</option>
-      <option value="produktansvarlig">Produktansvarlig</option>
+      <option value="værkfører">Værkfører</option>
       <option value="laborant">Laborant</option>
     </select>
     
@@ -171,7 +171,7 @@ $(document).ready(function() {
 	  <option value="none">None</option>
       <option value="admin">Admin</option>
       <option value="farmaceut">Farmaceut</option>
-      <option value="produktansvarlig">Produktansvarlig</option>
+      <option value="værkfører">Værkfører</option>
       <option value="laborant">Laborant</option>
     </select>
      

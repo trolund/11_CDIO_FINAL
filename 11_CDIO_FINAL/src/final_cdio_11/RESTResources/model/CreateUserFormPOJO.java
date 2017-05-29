@@ -6,7 +6,7 @@ import java.util.List;
 public class CreateUserFormPOJO {
 
 	private int oprId;
-	private String oprName;
+	private String oprFirstName;
 	private String oprLastName;
 	private String oprIni;
 	private String oprEmail;
@@ -23,12 +23,12 @@ public class CreateUserFormPOJO {
 		this.oprId = oprId;
 	}
 
-	public String getOprName() {
-		return oprName;
+	public String getOprFirstName() {
+		return oprFirstName;
 	}
 
-	public void setOprName(String oprName) {
-		this.oprName = oprName;
+	public void setOprFirstName(String oprName) {
+		this.oprFirstName = oprName;
 	}
 
 	public String getOprLastName() {

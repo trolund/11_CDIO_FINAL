@@ -109,7 +109,7 @@ public class RESTOperator {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
-		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
+		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
 
 		if (createUserFormData.getOprRole1().equals("None")) {
 			RoleDTO roleDTO1 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole1(), createUserFormData.getStatus());
@@ -213,9 +213,8 @@ public class RESTOperator {
 			e.printStackTrace();
 		}
 
-		// Temp
 		if (oprRoleList == null) {
-			return "Ingen roller.";
+			return "None.";
 		}
 		
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
@@ -223,7 +222,7 @@ public class RESTOperator {
 			if (iterator.hasNext())
 				returnString.append(roleDTO.getRoleName() + ", ");
 			else
-				returnString.append(roleDTO.getRoleName());
+				returnString.append(roleDTO.getRoleName() + ".");
 		}
 
 		return returnString.toString();
