@@ -1,5 +1,7 @@
 package final_cdio_11.RESTResources;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,7 +15,9 @@ import javax.ws.rs.core.Response;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
+import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ReceptDTO;
 
 @Path("/recept")
@@ -33,6 +37,22 @@ public class RESTRecept {
 		}
 		
 		return null;	
+	}
+	
+	@GET
+	@Path("/getReceptList")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ReceptDTO> getReceptList() {
+		SQLReceptDAO recDAO = new SQLReceptDAO(Connector.getInstance());
+
+		List<ReceptDTO> recList = null;
+
+		try {
+			recList = recDAO.getReceptList();
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+		return recList;
 	}
 	
 	@DELETE 

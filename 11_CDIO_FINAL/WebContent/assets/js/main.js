@@ -100,7 +100,7 @@ $(document).ready(function() {
 // hent liste af users og oversæt dem til tabel
 function loadUsers(){
     $('#table_con').empty();                         
-    $('#table_con').append('<tr><td>Id</td><td>Name</td><td>Initials</td><td>Cpr</td><td>Password</td><td>Delete</td><td>Edit</td></tr>');
+    $('#table_con').append('<tr><td>Id</td><td>Name</td><td>Initials</td><td>Cpr</td><td>Rols</td><td>Delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/opr/getOprList', function(data) {
 	    console.log('Users loaded');
