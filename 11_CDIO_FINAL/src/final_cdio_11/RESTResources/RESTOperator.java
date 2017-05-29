@@ -73,16 +73,15 @@ public class RESTOperator {
 	@Path("/verify")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String verify(LoginFormPOJO formData) throws JsonParseException, JsonMappingException, IOException {
-		int oprId = formData.getOprId();
-		String password = formData.getPassword();
+	public String verify(LoginFormPOJO loginFormData) throws JsonParseException, JsonMappingException, IOException {
+		int oprId = loginFormData.getOprId();
+		String password = loginFormData.getPassword();
 
 		if (utils.DEV_ENABLED) {
 			utils.logMessage(textHandler.devUserLoginMessage(oprId, password));
 		}
 
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-		Utils secUtil = Utils.getInstance();
 
 		OperatorDTO oprDTO = null;
 		try {
@@ -95,7 +94,7 @@ public class RESTOperator {
 			return textHandler.errIdInvalid;
 		}
 
-		if (secUtil.sha256(password).equals(oprDTO.getOprPassword())) {
+		if (utils.sha256(password).equals(oprDTO.getOprPassword())) {
 			return textHandler.succLoggedIn;
 		} else {
 			return textHandler.errInvalidCredentials;
@@ -106,29 +105,29 @@ public class RESTOperator {
 	@Path("/addopr")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String Addopr(CreateUserFormPOJO formData) throws DALException {
+	public String addOpr(CreateUserFormPOJO createUserFormData) throws DALException {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
-		OperatorDTO oprDTO = new OperatorDTO(formData.getOprId(), formData.getOprName(), formData.getOprLastName(), formData.getOprIni(), formData.getOprEmail(), formData.getOprCpr(), formData.getOprPassword(), formData.getStatus());
+		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
 
-		if (formData.getOprRole1().equals("None")) {
-			RoleDTO roleDTO1 = new RoleDTO(formData.getOprId(), formData.getOprRole1(), formData.getStatus());
+		if (createUserFormData.getOprRole1().equals("None")) {
+			RoleDTO roleDTO1 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole1(), createUserFormData.getStatus());
 			roleDAO.createRole(roleDTO1);
 		}
 
-		if (formData.getOprRole2().equals("None")) {
-			RoleDTO roleDTO2 = new RoleDTO(formData.getOprId(), formData.getOprRole2(), formData.getStatus());
+		if (createUserFormData.getOprRole2().equals("None")) {
+			RoleDTO roleDTO2 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole2(), createUserFormData.getStatus());
 			roleDAO.createRole(roleDTO2);
 		}
 
-		if (formData.getOprRole3().equals("None")) {
-			RoleDTO roleDTO3 = new RoleDTO(formData.getOprId(), formData.getOprRole3(), formData.getStatus());
+		if (createUserFormData.getOprRole3().equals("None")) {
+			RoleDTO roleDTO3 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole3(), createUserFormData.getStatus());
 			roleDAO.createRole(roleDTO3);
 		}
 
-		if (formData.getOprRole4().equals("None")) {
-			RoleDTO roleDTO4 = new RoleDTO(formData.getOprId(), formData.getOprRole4(), formData.getStatus());
+		if (createUserFormData.getOprRole4().equals("None")) {
+			RoleDTO roleDTO4 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole4(), createUserFormData.getStatus());
 			roleDAO.createRole(roleDTO4);
 		}
 
@@ -136,10 +135,10 @@ public class RESTOperator {
 			oprDAO.createOperator(oprDTO);
 
 			if (utils.DEV_ENABLED) {
-				utils.logMessage(textHandler.succAddedUser(formData.getOprId()));
+				utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));
 			}
 
-			return textHandler.succAddedUser(formData.getOprId());
+			return textHandler.succAddedUser(createUserFormData.getOprId());
 		} catch (DALException e) {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
@@ -237,6 +236,11 @@ public class RESTOperator {
 
 		try {
 			oprRoleList = oprDAO.getOprRoles(Integer.parseInt(OprId));
+
+			if (utils.DEV_ENABLED) {
+				utils.logMessage("RoleList successfully created. Trying to return..");
+			}
+
 			return oprRoleList;
 		} catch (DALException e) {
 			e.printStackTrace();
