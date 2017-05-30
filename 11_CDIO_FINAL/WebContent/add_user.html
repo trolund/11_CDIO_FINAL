@@ -138,11 +138,11 @@ $(document).ready(function() {
     <input type="text" name="oprPassword" id="oprPassword">
   
     <br>
-     <input type="checkbox" name="AdminRole" value="1"> Admin<br>
-     <input type="checkbox" name="FarRole" value="1"> Farmaceut<br>
-     <input type="checkbox" name="VeakRole" value="1"> Værkfører<br>
-     <input type="checkbox" name="LabRole" value="1"> Laborant <br>
-     
+     <input type="checkbox" name="AdminRole" id="AdminRole"> Admin<br>
+     <input type="checkbox" name="FarRole" id="FarRole"> Farmaceut<br>
+     <input type="checkbox" name="VeakRole" id="VeakRole"> Værkfører<br>
+     <input type="checkbox" name="LabRole" id="LabRole"> Laborant <br>  
+      
   <br><br>
   <input id="Submit_CreateUser" type="button" value="Add user">
       <input id="Submit_CreateUser_dummy" type="button" value="Add dummy user">
@@ -152,7 +152,7 @@ $(document).ready(function() {
 </div>
 <!--create user popup slut-->
 
-<button id="Adduser_But">Add User</button><button id="refresh_But">Refresh List</button>
+<button id="Adduser_But">Add User</button><button id="refresh_But">Refresh List</button><div id="activeCount"></div><div id="inActiveCount"></div><div id="totCount"></div>
 <table id="table_con">
 <tr>
   <td>Status</td>

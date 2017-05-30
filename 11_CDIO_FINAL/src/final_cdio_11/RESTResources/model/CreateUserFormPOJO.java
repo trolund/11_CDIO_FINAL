@@ -13,58 +13,58 @@ public class CreateUserFormPOJO {
 	private String oprCpr;
 	private String oprPassword;
 	private int status;
-	private String AdminRole;
-	private String FarRole;
-	private String VeakRole;
-	private String LabRole;
-	
-	public String getAdminRole() {
+	private boolean AdminRole; 
+	private boolean FarRole;
+	private boolean VeakRole; 
+	private boolean LabRole; 
+
+	public boolean isAdminRole() {
 		return AdminRole;
 	}
 
-	public void setAdminRole(String adminRole) {
+	public void setAdminRole(boolean adminRole) {
 		AdminRole = adminRole;
 	}
 
-	public String getFarRole() {
+	public boolean isFarRole() {
 		return FarRole;
 	}
 
-	public void setFarRole(String farRole) {
+	public void setFarRole(boolean farRole) {
 		FarRole = farRole;
 	}
 
-	public String getVeakRole() {
+	public boolean isVeakRole() {
 		return VeakRole;
 	}
 
-	public void setVeakRole(String veakRole) {
+	public void setVeakRole(boolean veakRole) {
 		VeakRole = veakRole;
 	}
 
-	public String getLabRole() {
+	public boolean isLabRole() {
 		return LabRole;
 	}
 
-	public void setLabRole(String labRole) {
+	public void setLabRole(boolean labRole) {
 		LabRole = labRole;
 	}
 
 	public List<String> getRoles(){
 		List<String> roles = new ArrayList<String>(); 
 		
-		if(AdminRole == "1"){
-			roles.add("Admin");
-		}
-		if(FarRole == "1"){
-			roles.add("Farmaceut");
-		}
-		if(VeakRole == "1"){
-			roles.add("Værkfører");
-		}
-		if(LabRole == "1"){
-			roles.add("Laborant");
-		}
+//		if(AdminRole == true){
+//			roles.add("Admin");
+//		}
+//		if(FarRole == "1"){
+//			roles.add("Farmaceut");
+//		}
+//		if(VeakRole == "1"){
+//			roles.add("Værkfører");
+//		}
+//		if(LabRole == "1"){
+//			roles.add("Laborant");
+//		}
 		return roles;
 	}
 

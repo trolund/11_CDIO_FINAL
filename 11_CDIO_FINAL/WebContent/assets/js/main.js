@@ -91,6 +91,11 @@ $(document).ready(function() {
 
 // Hent liste af users og oversæt dem til tabel
 function loadUsers(){
+    
+    var inActiveCount = 0;
+    var ActiveCount = 0;
+    var totCount = 0;
+    
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
@@ -107,7 +112,7 @@ function loadUsers(){
         		type: "GET",
         		contentType: 'text/plain',
                 async: false,
-        		success: function(resultData) { 
+        		success: function(resultData) {  
         			roles  = resultData;
         		},
         		error : function(jqXHR, textStatus, errorThrown) { 
@@ -117,8 +122,10 @@ function loadUsers(){
             
             if (data[i].status == "0") {
                 status = "<td style='color: green;'>Active</td>";
+                ActiveCount++;
             } else{
                 status = "<td style='color: red;'>Inactive</td>";
+                inActiveCount++;
             }
             
             
@@ -145,6 +152,12 @@ function loadUsers(){
         
         console.log('tabel data load done');
     }); 
+    
+    $('#inActiveCount').html(inActiveCount);
+    $('#ActiveCount').html(ActiveCount);
+    totCount = inActiveCount + ActiveCount;
+    $('#totCount').html(totCount);
+    console.log('total amuont of users: ' + totCount + 'Inactive: ' + inActiveCount + 'Active:' + ActiveCount);
 } 
 
 // view display

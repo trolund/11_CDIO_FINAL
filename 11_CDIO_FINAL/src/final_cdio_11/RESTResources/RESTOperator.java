@@ -105,22 +105,22 @@ public class RESTOperator {
 			e.printStackTrace();
 		}
 		
-		if(createUserFormData.getAdminRole().equals("Admin")){
-			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Admin", 0);
-			roleDAO.createRole(adminDTO);
-		}
-		if(createUserFormData.getFarRole().equals("Farmaceut")){
-			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Farmaceut", 0);
-			roleDAO.createRole(adminDTO);
-		}
-		if(createUserFormData.getVeakRole().equals("Værkfører")){
-			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Værkfører", 0);
-			roleDAO.createRole(adminDTO);
-		}
-		if(createUserFormData.getAdminRole().equals("Laborant")){
-			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Laborant", 0);
-			roleDAO.createRole(adminDTO);
-		}
+//		if(createUserFormData.getAdminRole().equals("Admin")){
+//			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Admin", 0);
+//			roleDAO.createRole(adminDTO);
+//		}
+//		if(createUserFormData.getFarRole().equals("Farmaceut")){
+//			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Farmaceut", 0);
+//			roleDAO.createRole(adminDTO);
+//		}
+//		if(createUserFormData.getVeakRole().equals("Værkfører")){
+//			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Værkfører", 0);
+//			roleDAO.createRole(adminDTO);
+//		}
+//		if(createUserFormData.getLabRole().equals("Laborant")){
+//			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Laborant", 0);
+//			roleDAO.createRole(adminDTO);
+//		}
 		
 		return textHandler.errFailure; // skulle vi ikke heller have en response her?
 	}
@@ -150,18 +150,18 @@ public class RESTOperator {
 					createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
 					createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
 					
-					if(roleList.contains("Admin")){
-						createUserFormPOJO.setAdminRole("Admin");
-					}
-					if(roleList.contains("Farmaceut")){
-						createUserFormPOJO.setFarRole("Farmaceut");
-					}
-					if(roleList.contains("Værkfører")){
-						createUserFormPOJO.setVeakRole("Værkfører");
-					}
-					if(roleList.contains("Laborant")){
-						createUserFormPOJO.setLabRole("Laborant");
-					}
+//					if(roleList.contains("Admin")){
+//						createUserFormPOJO.setAdminRole("Admin");
+//					}
+//					if(roleList.contains("Farmaceut")){
+//						createUserFormPOJO.setFarRole("Farmaceut");
+//					}
+//					if(roleList.contains("Værkfører")){
+//						createUserFormPOJO.setVeakRole("Værkfører");
+//					}
+//					if(roleList.contains("Laborant")){
+//						createUserFormPOJO.setLabRole("Laborant");
+//					}
 					
 				} catch (DALException e) {
 					e.printStackTrace();

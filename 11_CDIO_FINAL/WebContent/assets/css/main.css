@@ -12,11 +12,45 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.3; 
 }
 
 h2 {
     margin-top: 1.3em;
+}
+
+#inActiveCount {
+	color: red;
+    font-size: 3em;
+    font-family: monospace;
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 2px;
+    position: relative;
+    height: 30px; 
+    
+}
+
+#activeCount {
+    color: greenyellow;
+    font-size: 3em;
+    font-family: monospace;
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 2px;
+    position: relative;
+    height: 30px; 
+}
+
+#totCount {
+	color: grey; 
+    font-size: 3em;
+    font-family: monospace;
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 2px;
+    position: relative;
+    height: 30px; 
 }
 
 #sidepanel {
