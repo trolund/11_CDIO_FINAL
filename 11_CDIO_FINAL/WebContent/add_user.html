@@ -18,6 +18,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#Submit_CreateUser").click(function() {
 		var data = $('#CreateUserForm').serializeJSON();    
+    	  console.log(data);
       
       	jQuery.ajax({
 			url : "api/opr/addopr",
@@ -137,10 +138,10 @@ $(document).ready(function() {
     <input type="text" name="oprPassword" id="oprPassword">
   
     <br>
-     <input type="checkbox" name="roles" value="Admin"> Admin<br>
-     <input type="checkbox" name="roles" value="Farmaceut"> Farmaceut<br>
-     <input type="checkbox" name="roles" value="Værkfører"> Værkfører<br>
-     <input type="checkbox" name="roles" value="Laborant"> Laborant <br>
+     <input type="checkbox" name="AdminRole" value="1"> Admin<br>
+     <input type="checkbox" name="FarRole" value="1"> Farmaceut<br>
+     <input type="checkbox" name="VeakRole" value="1"> Værkfører<br>
+     <input type="checkbox" name="LabRole" value="1"> Laborant <br>
      
   <br><br>
   <input id="Submit_CreateUser" type="button" value="Add user">

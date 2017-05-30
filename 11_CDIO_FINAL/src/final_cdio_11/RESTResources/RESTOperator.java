@@ -94,27 +94,7 @@ public class RESTOperator {
 		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
 		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
-
-		if (createUserFormData.getOprRole1().equals("None")) {
-			RoleDTO roleDTO1 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole1(), createUserFormData.getStatus());
-			roleDAO.createRole(roleDTO1);
-		}
-
-		if (createUserFormData.getOprRole2().equals("None")) {
-			RoleDTO roleDTO2 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole2(), createUserFormData.getStatus());
-			roleDAO.createRole(roleDTO2);
-		}
-
-		if (createUserFormData.getOprRole3().equals("None")) {
-			RoleDTO roleDTO3 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole3(), createUserFormData.getStatus());
-			roleDAO.createRole(roleDTO3);
-		}
-
-		if (createUserFormData.getOprRole4().equals("None")) {
-			RoleDTO roleDTO4 = new RoleDTO(createUserFormData.getOprId(), createUserFormData.getOprRole4(), createUserFormData.getStatus());
-			roleDAO.createRole(roleDTO4);
-		}
-
+		
 		try {
 			oprDAO.createOperator(oprDTO);
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));
@@ -124,7 +104,25 @@ public class RESTOperator {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		return textHandler.errFailure;
+		
+		if(createUserFormData.getAdminRole().equals("Admin")){
+			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Admin", 0);
+			roleDAO.createRole(adminDTO);
+		}
+		if(createUserFormData.getFarRole().equals("Farmaceut")){
+			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Farmaceut", 0);
+			roleDAO.createRole(adminDTO);
+		}
+		if(createUserFormData.getVeakRole().equals("Værkfører")){
+			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Værkfører", 0);
+			roleDAO.createRole(adminDTO);
+		}
+		if(createUserFormData.getAdminRole().equals("Laborant")){
+			RoleDTO adminDTO = new RoleDTO(createUserFormData.getOprId(), "Laborant", 0);
+			roleDAO.createRole(adminDTO);
+		}
+		
+		return textHandler.errFailure; // skulle vi ikke heller have en response her?
 	}
 
 	@GET
@@ -151,7 +149,20 @@ public class RESTOperator {
 					createUserFormPOJO.setOprIni(oprDTO.getOprIni());
 					createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
 					createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
-					createUserFormPOJO.setOprRole1(roleList.get(0).getRoleName());
+					
+					if(roleList.contains("Admin")){
+						createUserFormPOJO.setAdminRole("Admin");
+					}
+					if(roleList.contains("Farmaceut")){
+						createUserFormPOJO.setFarRole("Farmaceut");
+					}
+					if(roleList.contains("Værkfører")){
+						createUserFormPOJO.setVeakRole("Værkfører");
+					}
+					if(roleList.contains("Laborant")){
+						createUserFormPOJO.setLabRole("Laborant");
+					}
+					
 				} catch (DALException e) {
 					e.printStackTrace();
 				}

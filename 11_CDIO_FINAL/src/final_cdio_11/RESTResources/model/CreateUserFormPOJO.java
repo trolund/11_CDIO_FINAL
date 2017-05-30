@@ -13,7 +13,60 @@ public class CreateUserFormPOJO {
 	private String oprCpr;
 	private String oprPassword;
 	private int status;
-	private String oprRole1, oprRole2, oprRole3, oprRole4;
+	private String AdminRole;
+	private String FarRole;
+	private String VeakRole;
+	private String LabRole;
+	
+	public String getAdminRole() {
+		return AdminRole;
+	}
+
+	public void setAdminRole(String adminRole) {
+		AdminRole = adminRole;
+	}
+
+	public String getFarRole() {
+		return FarRole;
+	}
+
+	public void setFarRole(String farRole) {
+		FarRole = farRole;
+	}
+
+	public String getVeakRole() {
+		return VeakRole;
+	}
+
+	public void setVeakRole(String veakRole) {
+		VeakRole = veakRole;
+	}
+
+	public String getLabRole() {
+		return LabRole;
+	}
+
+	public void setLabRole(String labRole) {
+		LabRole = labRole;
+	}
+
+	public List<String> getRoles(){
+		List<String> roles = new ArrayList<String>(); 
+		
+		if(AdminRole == "1"){
+			roles.add("Admin");
+		}
+		if(FarRole == "1"){
+			roles.add("Farmaceut");
+		}
+		if(VeakRole == "1"){
+			roles.add("Værkfører");
+		}
+		if(LabRole == "1"){
+			roles.add("Laborant");
+		}
+		return roles;
+	}
 
 	public int getOprId() {
 		return oprId;
@@ -79,47 +132,5 @@ public class CreateUserFormPOJO {
 		this.status = status;
 	}
 
-	public String getOprRole1() {
-		return oprRole1;
-	}
-
-	public void setOprRole1(String oprRole1) {
-		this.oprRole1 = oprRole1;
-	}
-
-	public String getOprRole2() {
-		return oprRole2;
-	}
-
-	public void setOprRole2(String oprRole2) {
-		this.oprRole2 = oprRole2;
-	}
-
-	public String getOprRole3() {
-		return oprRole3;
-	}
-
-	public void setOprRole3(String oprRole3) {
-		this.oprRole3 = oprRole3;
-	}
-
-	public String getOprRole4() {
-		return oprRole4;
-	}
-
-	public void setOprRole4(String oprRole4) {
-		this.oprRole4 = oprRole4;
-	}
-
-	public List<String> getOprRole() {
-		List<String> list = new ArrayList<>();
-
-		if (oprRole1 != "None") list.add(oprRole1);
-		if (oprRole2 != "None") list.add(oprRole2);
-		if (oprRole3 != "None") list.add(oprRole3);
-		if (oprRole4 != "None") list.add(oprRole4);
-
-		return list;
-	}
 
 }
