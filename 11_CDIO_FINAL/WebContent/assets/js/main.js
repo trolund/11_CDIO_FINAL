@@ -74,7 +74,7 @@ $(document).ready(function() {
 		$("#sidepanel").toggleClass("on_sidepanel");
 		$("#menu_but").toggleClass("rot");
 	});
-});
+}); 
 
 // User button menu 
 $(document).ready(function() { 
