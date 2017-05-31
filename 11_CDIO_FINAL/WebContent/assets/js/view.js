@@ -9,7 +9,7 @@
 //	    	if(item[i + 1] != null) {
 //	    		eachrow.append("<td>" + item[i] + "</td>");
 //	    	}
-//	    }
+//	    } 
 //	                 
 //	    eachrow.append("</tr>");
 //	    $('#table_con').append(eachrow);
@@ -37,7 +37,7 @@ function AdminForemanview(){
     $('#table_con').append('<tr><td>opr_id</td><td>opr_navn</td><td>pb_id</td><td>rb_id</td><td>tara</td><td>netto</td><td>status</td></tr>');
     
     
-    jQuery.ajax({
+    jQuery.ajax({ 
         		url: "api/View/getAdminForemanList",
         		type: "GET",
         		contentType: 'text/plain',
@@ -54,6 +54,8 @@ function AdminForemanview(){
         			 $('#table_con').append(ErrorMSG);
         		}
         	}) 
+    
+    console.log('AdminForeman view loaded');
 }
 
 
@@ -80,4 +82,5 @@ function operator_rb(){
         			 $('#table_con').append(ErrorMSG);
         		}
         	}) 
+    console.log('operator_rb view loaded');
 }

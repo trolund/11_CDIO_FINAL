@@ -77,20 +77,28 @@ $(document).ready(function() {
 });
 
 // User button menu 
-$(document).ready(function() {
+$(document).ready(function() { 
 	$("#user_but").click(function() {       
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
 		loadUsers();
-	});
+	}); 
 });
 
 
 // view button menu 
 $(document).ready(function() {
-	$("#view_but_but").click(function() {       
+	$("#view_but").click(function() {       
 		$("#content_box").load('view.html');
-	});
+		
+		$.getScript( "assets/js/view.js", function( data, textStatus, jqxhr ) {
+        	console.log( data ); // Data returned
+        	console.log( textStatus ); // Success
+        	console.log( jqxhr.status ); // 200
+        	console.log( "view.js was loaded." );
+        }); 
+		
+	}); 
 });
 
 // Hent liste af users og oversæt dem til tabel
