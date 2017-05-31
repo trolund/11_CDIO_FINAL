@@ -114,7 +114,7 @@ public class RESTOperator {
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_VAERK));
 			}
 
-			if (createUserFormData.isLabRole()) {
+			if (createUserFormData.isLaborantRole()) {
 				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_LABORANT, 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_LABORANT));
 			}
@@ -122,11 +122,12 @@ public class RESTOperator {
 			return textHandler.succAddedUser(createUserFormData.getOprId());
 		} catch (DALException e) {
 			e.printStackTrace();
+			return textHandler.errUserCreation;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 
-		return textHandler.errFailure; // skulle vi ikke heller have en response her?
+		return textHandler.errUnknownFailure; // skulle vi ikke heller have en response her?
 	}
 
 	@GET

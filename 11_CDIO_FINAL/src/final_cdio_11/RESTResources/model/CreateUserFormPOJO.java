@@ -13,7 +13,7 @@ public class CreateUserFormPOJO {
 	private String oprCpr;
 	private String oprPassword;
 	private int status;
-	private boolean adminRole, farmaceutRole, vaerkRole, labRole;
+	private boolean adminRole, farmaceutRole, vaerkRole, laborantRole;
 
 	public int getOprId() {
 		return oprId;
@@ -103,12 +103,12 @@ public class CreateUserFormPOJO {
 		this.vaerkRole = vaerkRole;
 	}
 
-	public boolean isLabRole() {
-		return labRole;
+	public boolean isLaborantRole() {
+		return laborantRole;
 	}
 
-	public void setLabRole(boolean labRole) {
-		this.labRole = labRole;
+	public void setLaborantRole(boolean labRole) {
+		this.laborantRole = labRole;
 	}
 
 	public List<String> getRoles() {
@@ -117,7 +117,7 @@ public class CreateUserFormPOJO {
 		if (adminRole) roles.add("Admin");
 		if (farmaceutRole) roles.add("Farmaceut");
 		if (vaerkRole) roles.add("Værkfører");
-		if (labRole) roles.add("Laborant");
+		if (laborantRole) roles.add("Laborant");
 
 		return roles;
 	}

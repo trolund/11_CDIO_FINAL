@@ -35,7 +35,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#Submit_CreateUser").click(function() {
 		var data = $('#CreateUserForm').serializeJSON();    
-    	  console.log(data);
+    	console.log(data);
       
       	jQuery.ajax({
 			url : "api/opr/addopr",
@@ -43,14 +43,15 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) {
-          		console.log(data);
+          		console.log('CreateUserFormData: ' + data);
           	  	$('#CreateMSG').html(data);
            	 	loadUsers();
 			},
 			error: function(jqXHR, text, error) { 
             	console.log(data);
-            	$('#CreateMSG').html(data).fadeToggle(500);
+            	$('#CreateMSG').html(data);
              	$("#AddUser_Box").show(400);
+                console.log("Failed creating user! Gør så denne funktion viser noget i AddUser box når den fejler.");
 			}
 		});  
 	});   
@@ -75,7 +76,13 @@ $(document).ready(function() {
         $('#oprEmail').val('dum@dummy.com');
         $('#oprCpr').val('oprCpr');
         $('#oprPassword').val('pass');
-        $('#oprRole1').val('None');
+        //$('#oprRole1').val('None');
+        
+        // Add roles to the dummy user.
+		$("#adminRole").prop("checked", true);
+        $("#farmaceutRole").prop("checked", true);
+		$("#vaerkRole").prop("checked", true);
+		$("#laborantRole").prop("checked", true);
         
         var data = $('#CreateUserForm').serializeJSON();    
       
