@@ -16,18 +16,19 @@
 //	});
 //}
 
-var ErrorMSG = "noget gik galt!"
+var ErrorMSG = "noget gik galt!"  
 
 
 
 $(document).ready(function(){
-    $("#viewSelector > option:nth-child(1)").click(function(){
+    $('#viewSelector').change(function() {
+    if ($(this).val() === '1') {
         AdminForemanview();
-    })
-    
-    $("#viewSelector > option:nth-child(2)").click(function(){
+    }
+    else if($(this).val() === '2'){  
         operator_rb();
-    })
+    }
+});
     
 });
 
@@ -36,9 +37,9 @@ function AdminForemanview(){
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>opr_id</td><td>opr_navn</td><td>pb_id</td><td>rb_id</td><td>tara</td><td>netto</td><td>status</td></tr>');
     
-    
+     
     jQuery.ajax({ 
-        		url: "api/View/getAdminForemanList",
+        		url: "api/View/AdminForemanList",
         		type: "GET",
         		contentType: 'text/plain',
         		success: function(data) {  
@@ -66,14 +67,16 @@ function operator_rb(){
     
     
     jQuery.ajax({
-        		url: "api/View/getAdminForemanList",
+        		url: "api/View/OperatorRBList",
         		type: "GET",
         		contentType: 'text/plain',
         		success: function(data) {  
                     
+                    console.log(data);
+                    
                      $.each(data, function(i, item) { 
                      
-                     $('#table_con').append('<tr><td>' + data[i].raavare_id + '</td><td>' + data[i].rb_id + '</td><td>' + data[i].maengde + '</td><td>' + data[i].raavare_navn + '</td><td>' + data[i].leverandoer + '</td></tr>');
+                     $('#table_con').append('<tr><td>' + data[i].raavareId + '</td><td>' + data[i].rbId + '</td><td>' + data[i].maengde + '</td><td>' + data[i].raavareName + '</td><td>' + data[i].supplier + '</td></tr>'); 
                      
                      })
         			
