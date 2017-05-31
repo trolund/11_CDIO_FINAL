@@ -60,7 +60,8 @@ public class TextHandler {
 	public final String errIdDoesNotExist = "Id does not exist.";
 	public final String errIdInvalid = "Invalid Id.";
 	public final String errInvalidCredentials = "Invalid credentials.";
-	public final String errFailure = "Failure.";
+	public final String errUnknownFailure = "Failure.";
+	public final String errUserCreation = "Failure. Perhaps the user already exists?";
 	
 	/*
 	 * Roles.
