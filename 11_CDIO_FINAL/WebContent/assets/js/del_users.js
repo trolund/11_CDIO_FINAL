@@ -14,7 +14,8 @@ $(document).ready(function() {
     	   success: function(resultData) {
     		   if (resultData == "true") {
     			   console.log('User successfully deleted.' + 'return:' + resultData);
-    			   //$('#' + id).hide(400);
+    			   $('#' + id + ':first-child').html("<td style='color: red;'>Inactive</td>").fadeIn(200);
+                   
     		   } else {
     			   console.log('User NOT deleted.' + 'return:' + resultData);
     			   $('#' + id).css('background-color', 'yellow').fadeIn(400); 

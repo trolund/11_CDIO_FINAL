@@ -10,17 +10,15 @@ $(document).ready(function() {
 // Cancel icon create user box
 $(document).ready(function() { 
 	$("#cancel_Icon").click(function() {
+        
         var action = $(this).prop('name');
-        if(action == "add"){
-		$("#AddUser_Box").hide(400);
+        
+        if(action == 'edit'){
+		  $("#editUser_Box").hide(400);
         }
-        else if(action == "edit"){ // unødventigt men virket ikke uden?
-        $("#editUser_Box").hide(400);
+        else{ // unødventigt men virket ikke uden?
+          $("#AddUser_Box").hide(400);
         } 
-        else{
-            $("#editUser_Box").hide();
-            $("#AddUser_Box").hide();
-        }
     }); 
 });
     
@@ -59,7 +57,7 @@ $(document).ready(function() {
 // Refresh button
 $(document).ready(function() {
 	$("#refresh_But").click(function() {       
-    	console.log('Refreshing users.');
+    	console.log('Refreshing users.'); 
     	loadUsers();
 	});
 });
@@ -150,11 +148,11 @@ $(document).ready(function() {
     <h1>Edit User</h1>
   <form id="editUserForm" method="POST">
   Status <br>
-      <select name="status">
+      <select id="statusEdit" name="status">
   <option value="0">Active</option>
   <option value="1">Inactive</option>
-      </select>
-    Id <br>
+      </select> <br><br>
+    Id:  
        <label name="oprIdLabel" id="oprIdEdit">id...</label>
     <br>
   	First Name <br>
@@ -175,6 +173,7 @@ $(document).ready(function() {
     Password <br>
     <input type="button" value="send ønske om nyt password">
     <br>
+      Privileges <br>
      <input type="checkbox" name="AdminRole" id="AdminRoleEdit"> Admin<br>
      <input type="checkbox" name="FarRole" id="FarRoleEdit"> Farmaceut<br>
      <input type="checkbox" name="VeakRole" id="VeakRoleEdit"> Værkfører<br>
