@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import final_cdio_11.RESTResources.model.CreateUserFormPOJO;
+import final_cdio_11.RESTResources.model.EditUserFormPOJO;
 import final_cdio_11.RESTResources.model.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
@@ -216,4 +217,48 @@ public class RESTOperator {
 		return null;
 	}
 
+	@POST
+	@Path("/updateopr")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateOpr(EditUserFormPOJO editUserFormData) throws DALException {
+		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
+		
+		OperatorDTO oprDTO = new OperatorDTO(editUserFormData.getOprId(), editUserFormData.getOprFirstName(), editUserFormData.getOprLastName(), editUserFormData.getOprIni(), editUserFormData.getOprEmail(), editUserFormData.getOprCpr(), oprDAO.getOperator(editUserFormData.getOprId()).getOprPassword(), editUserFormData.getStatus());
+
+		try {
+			oprDAO.updateOperator(oprDTO);
+//			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(editUserFormData.getOprId()));
+//
+//			if (editUserFormData.isAdminRole()) {
+//				roleDAO.createRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_ADMIN, 0));
+//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_ADMIN));
+//			}
+//
+//			if (createUserFormData.isFarmaceutRole()) {
+//				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_FARMACEUT, 0));
+//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_FARMACEUT));
+//			}
+//
+//			if (createUserFormData.isVaerkRole()) {
+//				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_VAERK, 0));
+//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_VAERK));
+//			}
+//
+//			if (createUserFormData.isLaborantRole()) {
+//				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_LABORANT, 0));
+//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_LABORANT));
+//			}
+
+			return textHandler.succAddedUser(editUserFormData.getOprId());
+		} catch (DALException e) {
+			e.printStackTrace();
+			return textHandler.errUserCreation;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		return textHandler.errUnknownFailure; // skulle vi ikke heller have en response her?
+	}
 }

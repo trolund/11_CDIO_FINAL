@@ -39,7 +39,6 @@ $(document).ready(function() {
         	$('#oprIniEdit').val(data.oprIni);
         	$('#oprEmailEdit').val(data.oprEmail);
         	$('#oprCprEdit').val(data.oprCpr);
-            console.log('Checkbox input' + data.adminRole)
             
             console.log(data + "added to form")
         }); 

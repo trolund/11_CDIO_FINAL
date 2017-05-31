@@ -9,25 +9,24 @@ $(document).ready(function() {
 
 // Cancel icon create user box
 $(document).ready(function() { 
-	$("#cancel_Icon").click(function() {
+	$(".cancel_Icon").click(function() {
         
         var action = $(this).prop('name');
+        
+        console.log(action);
         
         if(action == 'edit'){
 		  $("#editUser_Box").hide(400);
         }
-        else{ // unødventigt men virket ikke uden?
+        else{ 
           $("#AddUser_Box").hide(400);
         } 
     }); 
 });
     
-// Cancel icon create user box
-$(document).ready(function() { 
-	$("#cancel_Icon2").click(function() {
-		$("#editUser_Box").hide(400);
-    }); 
-});
+    
+
+    
     
 // Post create user data
 $(document).ready(function() {
@@ -100,7 +99,7 @@ $(document).ready(function() {
 
 <!--create user popup-->
 <div id="AddUser_Box" class="popup_box">
-  <img name="add" id="cancel_Icon" src="assets/img/cancel_icon.png"> 
+  <img name="add" class="cancel_Icon" src="assets/img/cancel_icon.png"> 
     <h1>Add User</h1>
   <form id="CreateUserForm" method="POST" action="api/opr/addopr">
   
@@ -144,7 +143,7 @@ $(document).ready(function() {
 
 <!--edit user popup-->
 <div id="editUser_Box" class="popup_box">
-  <img name="edit" id="cancel_Icon" src="assets/img/cancel_icon.png">  
+  <img name="edit" class="cancel_Icon" src="assets/img/cancel_icon.png">  
     <h1>Edit User</h1>
   <form id="editUserForm" method="POST">
   Status <br>

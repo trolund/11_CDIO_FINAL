@@ -86,7 +86,6 @@ $(document).ready(function() {
 	});   
 });
 
-
 // view button menu 
 $(document).ready(function() {
 	$("#view_but").click(function() {       
@@ -172,8 +171,6 @@ function loadUsers(){
         console.log('tabel data load done');
     }); 
 } 
-
-
 
 // load den user logget ind samt dens roller.
 function loadLoginUser(id) {
