@@ -58,6 +58,10 @@ h2 {
     user-select: none;
 }
 
+#viewSelector {
+	margin-bottom: 5px;
+}
+
 #sidepanel {
     margin: 0px;
     height: 100%;
@@ -204,6 +208,7 @@ h2 {
 #content_box table tr:first-child{
     background-color:antiquewhite;
     border-bottom: solid 1px #333;
+    padding: 5px;
 }
 
 #content_box table tr{

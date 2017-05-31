@@ -82,7 +82,7 @@ $(document).ready(function() {
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
 		loadUsers();
-	}); 
+	});  
 });
 
 

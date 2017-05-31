@@ -49,7 +49,7 @@ public class RESTView {
 	}
 	
 	@GET
-	@Path("/AdminOperatorList")
+	@Path("/AdminOperatorList") 
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<VAdminOperatorDTO> AdminOperatorList() {
 		IVAdminOperatorDAO view = new SQLAdminOperatorDAO(Connector.getInstance());
