@@ -13,60 +13,7 @@ public class CreateUserFormPOJO {
 	private String oprCpr;
 	private String oprPassword;
 	private int status;
-	private boolean AdminRole; 
-	private boolean FarRole;
-	private boolean VeakRole; 
-	private boolean LabRole; 
-
-	public boolean isAdminRole() {
-		return AdminRole;
-	}
-
-	public void setAdminRole(boolean adminRole) {
-		AdminRole = adminRole;
-	}
-
-	public boolean isFarRole() {
-		return FarRole;
-	}
-
-	public void setFarRole(boolean farRole) {
-		FarRole = farRole;
-	}
-
-	public boolean isVeakRole() {
-		return VeakRole;
-	}
-
-	public void setVeakRole(boolean veakRole) {
-		VeakRole = veakRole;
-	}
-
-	public boolean isLabRole() {
-		return LabRole;
-	}
-
-	public void setLabRole(boolean labRole) {
-		LabRole = labRole;
-	}
-
-	public List<String> getRoles(){
-		List<String> roles = new ArrayList<String>(); 
-		
-//		if(AdminRole == true){
-//			roles.add("Admin");
-//		}
-//		if(FarRole == "1"){
-//			roles.add("Farmaceut");
-//		}
-//		if(VeakRole == "1"){
-//			roles.add("VÃ¦rkfÃ¸rer");
-//		}
-//		if(LabRole == "1"){
-//			roles.add("Laborant");
-//		}
-		return roles;
-	}
+	private boolean adminRole, farmaceutRole, vaerkRole, labRole;
 
 	public int getOprId() {
 		return oprId;
@@ -80,8 +27,8 @@ public class CreateUserFormPOJO {
 		return oprFirstName;
 	}
 
-	public void setOprFirstName(String oprName) {
-		this.oprFirstName = oprName;
+	public void setOprFirstName(String oprFirstName) {
+		this.oprFirstName = oprFirstName;
 	}
 
 	public String getOprLastName() {
@@ -132,5 +79,47 @@ public class CreateUserFormPOJO {
 		this.status = status;
 	}
 
+	public boolean isAdminRole() {
+		return adminRole;
+	}
+
+	public void setAdminRole(boolean adminRole) {
+		this.adminRole = adminRole;
+	}
+
+	public boolean isFarmaceutRole() {
+		return farmaceutRole;
+	}
+
+	public void setFarmaceutRole(boolean farmaceutRole) {
+		this.farmaceutRole = farmaceutRole;
+	}
+
+	public boolean isVaerkRole() {
+		return vaerkRole;
+	}
+
+	public void setVaerkRole(boolean vaerkRole) {
+		this.vaerkRole = vaerkRole;
+	}
+
+	public boolean isLabRole() {
+		return labRole;
+	}
+
+	public void setLabRole(boolean labRole) {
+		this.labRole = labRole;
+	}
+
+	public List<String> getRoles() {
+		List<String> roles = new ArrayList<String>();
+		
+		if (adminRole) roles.add("Admin");
+		if (farmaceutRole) roles.add("Farmaceut");
+		if (vaerkRole) roles.add("Værkfører");
+		if (labRole) roles.add("Laborant");
+		
+		return roles;
+	}
 
 }
