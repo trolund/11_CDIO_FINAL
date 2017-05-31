@@ -9,25 +9,24 @@ $(document).ready(function() {
             
         	$.each(roleData, function(i, item) {
         			
-            if(item.roleName == "Admin"){
+            if(roleData[i].roleName == "Admin"){
                  $('#AdminRoleEdit').prop('Checked', true);
+                console.log('han er admin!!!!')
             }
-            else if(item.roleName == "Farmaceut"){
+            if(roleData[i].roleName == "Farmaceut"){
                 $('#FarRoleEdit').prop('Checked',true);
             }
-            else if(item.roleName == "Værkfører"){
+            if(roleData[i].roleName == "Værkfører"){
                 $('#VeakRoleEdit').prop('Checked',true);
             }
-            else if(item.roleName == "Laborant"){ 
+            if(roleData[i].roleName == "Laborant"){ 
             $('#laborantRoleEdit').prop('Checked',true);
             }
-            else{
-                $('#Editmsg').html('ingen roller fra fundet.')
-            }
-                     
-                
+                        
         	});
         });
+        
+        
         
         $.getJSON('api/opr/' + id, function(data) {
         	console.log('User with id: ' + id + "loaded for edit");
