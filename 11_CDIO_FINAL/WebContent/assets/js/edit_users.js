@@ -4,13 +4,28 @@ $(document).ready(function() {
     	var id = $(this).prop('name');
         console.log(id);
         
-        $.getJSON('RoleList/' + id, function(roleData) {            
+        $.getJSON('api/opr/RoleList/' + id, function(roleData) {            
+            console.log(roleData);
+            
         	$.each(roleData, function(i, item) {
-        		if (roleData != null) {
-        			var string = roleData[i].toString();
-        			$('#oprRole'+(i+1)).val(string.toLowerCase());
-                    console.log('DEBUG ROLE-LOOP: i: ' + (i+1) +', data: '+ roleData[i]);
-                }
+        			
+            if(item.roleName == "Admin"){
+                 $('#AdminRoleEdit').prop('Checked', true);
+            }
+            else if(item.roleName == "Farmaceut"){
+                $('#FarRoleEdit').prop('Checked',true);
+            }
+            else if(item.roleName == "Værkfører"){
+                $('#VeakRoleEdit').prop('Checked',true);
+            }
+            else if(item.roleName == "Laborant"){ 
+            $('#laborantRoleEdit').prop('Checked',true);
+            }
+            else{
+                $('#Editmsg').html('ingen roller fra fundet.')
+            }
+                     
+                
         	});
         });
         
@@ -18,17 +33,18 @@ $(document).ready(function() {
         	console.log('User with id: ' + id + "loaded for edit");
         	console.log(data);
         	
-        	$('#oprId').val(data.oprId);
-        	$('#oprName').val(data.oprName); 
-        	$('#oprLastName').val(data.oprLastName);
-        	$('#oprIni').val(data.oprIni);
-        	$('#oprEmail').val(data.oprEmail);
-        	$('#oprCpr').val(data.oprCpr);
-        	$('#oprPassword').val(data.oprPassword);
-        
+        	$('#oprIdEdit').val(data.oprId);
+        	$('#oprFirstNameEdit').val(data.oprName); 
+        	$('#oprLastNameEdit').val(data.oprLastName);
+        	$('#oprIniEdit').val(data.oprIni);
+        	$('#oprEmailEdit').val(data.oprEmail);
+        	$('#oprCprEdit').val(data.oprCpr);
+            console.log('Checkbox input' + data.adminRole)
+        	
+            
         	console.log(data + "added to form")
         }); 
         
-        $("#AddUser_Box").show(400);
+        $("#editUser_Box").show(400);
     });
 });

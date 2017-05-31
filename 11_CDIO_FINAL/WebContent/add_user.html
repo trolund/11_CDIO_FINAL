@@ -10,7 +10,24 @@ $(document).ready(function() {
 // Cancel icon create user box
 $(document).ready(function() { 
 	$("#cancel_Icon").click(function() {
+        var action = $(this).prop('name');
+        if(action == "add"){
 		$("#AddUser_Box").hide(400);
+        }
+        else if(action == "edit"){ // unødventigt men virket ikke uden?
+        $("#editUser_Box").hide(400);
+        } 
+        else{
+            $("#editUser_Box").hide();
+            $("#AddUser_Box").hide();
+        }
+    }); 
+});
+    
+// Cancel icon create user box
+$(document).ready(function() { 
+	$("#cancel_Icon2").click(function() {
+		$("#editUser_Box").hide(400);
     }); 
 });
     
@@ -84,8 +101,8 @@ $(document).ready(function() {
 </script>
 
 <!--create user popup-->
-<div id="AddUser_Box">
-  <img id="cancel_Icon" src="assets/img/cancel_icon.png"> 
+<div id="AddUser_Box" class="popup_box">
+  <img name="add" id="cancel_Icon" src="assets/img/cancel_icon.png"> 
     <h1>Add User</h1>
   <form id="CreateUserForm" method="POST" action="api/opr/addopr">
   
@@ -126,6 +143,49 @@ $(document).ready(function() {
 </form> 
 </div>
 <!--create user popup slut--> 
+
+<!--edit user popup-->
+<div id="editUser_Box" class="popup_box">
+  <img name="edit" id="cancel_Icon" src="assets/img/cancel_icon.png">  
+    <h1>Edit User</h1>
+  <form id="editUserForm" method="POST">
+  Status <br>
+      <select name="status">
+  <option value="0">Active</option>
+  <option value="1">Inactive</option>
+      </select>
+    Id <br>
+       <label name="oprIdLabel" id="oprIdEdit">id...</label>
+    <br>
+  	First Name <br>
+    <input type="text" name="oprFirstName" id="oprFirstNameEdit">	
+    <br>
+    Last Name <br>
+    <input type="text" name="oprLastName" id="oprLastNameEdit">	
+    <br>
+    Initials <br>
+    <input type="text" name="oprIni" id="oprIniEdit">
+    <br>
+    E-mail <br>
+    <input type="text" name="oprEmail" id="oprEmailEdit">	
+    <br>
+    Cpr <br>
+    <input type="text" name="oprCpr" id="oprCprEdit">
+    <br>
+    Password <br>
+    <input type="button" value="send ønske om nyt password">
+    <br>
+     <input type="checkbox" name="AdminRole" id="AdminRoleEdit"> Admin<br>
+     <input type="checkbox" name="FarRole" id="FarRoleEdit"> Farmaceut<br>
+     <input type="checkbox" name="VeakRole" id="VeakRoleEdit"> Værkfører<br>
+     <input type="checkbox" name="LabRole" id="LabRoleEdit"> Laborant <br>  
+      
+  <br><br>
+  <input id="Submit_EditUser" type="button" value="edit user">
+    <p id="Editmsg"></p>
+</form> 
+</div>
+<!--edit user slut-->
 
 <button id="Adduser_But">Add User</button><button id="refresh_But">Refresh List</button><div id="activeCount" class="countBox"></div><div id="inActiveCount" class="countBox"></div><div id="totCount" class="countBox"></div>
 <table id="table_con"> 

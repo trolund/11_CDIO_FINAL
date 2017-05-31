@@ -81,8 +81,9 @@ $(document).ready(function() {
 	$("#user_but").click(function() {       
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
+        $('#editUser_Box').hide();
 		loadUsers();
-	});  
+	});   
 });
 
 

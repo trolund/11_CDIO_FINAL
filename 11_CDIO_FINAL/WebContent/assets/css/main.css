@@ -8,7 +8,7 @@ body {
     margin: 0 auto;
     width: 100%;
     height: 100%;
-} 
+}  
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
@@ -82,7 +82,7 @@ h2 {
     -ms-user-select: none;
     user-select: none;
 }
-
+ 
 #sidepanel img {
     text-align: left;
 }
@@ -227,9 +227,8 @@ h2 {
     
 }
 
-
-#AddUser_Box{
-    text-align: center;
+.popup_box {
+     text-align: center;
     margin-top: 10px;
     background-color: #FFF;
     border-radius: 5px;
@@ -247,11 +246,15 @@ h2 {
     left: calc(50%);
 }
 
-#AddUser_Box select {
+#AddUser_Box{
+   
+}
+
+.popup_box select {
 	margin-top: 15px;
 }
 
-#AddUser_Box h1 {
+.popup_box h1 {
     margin-left: 20px;
     text-align: center;
     font-size: 2em;
