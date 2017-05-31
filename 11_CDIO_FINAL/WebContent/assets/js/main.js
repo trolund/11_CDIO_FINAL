@@ -85,6 +85,14 @@ $(document).ready(function() {
 	});
 });
 
+
+// view button menu 
+$(document).ready(function() {
+	$("#view_but_but").click(function() {       
+		$("#content_box").load('view.html');
+	});
+});
+
 // Hent liste af users og oversæt dem til tabel
 function loadUsers(){
     
@@ -156,23 +164,6 @@ function loadUsers(){
     }); 
 } 
 
-// view display
-function viewToHTML(data) {
-	$('#table_con').empty();
-	$.each(data, function (index, item) {
-		var eachrow = "<tr>";
-	    eachrow.append("<td>" + item[1] + "</td>");             
-        
-	    for (i = 1; i < item.length; i++) { 
-	    	if(item[i + 1] != null) {
-	    		eachrow.append("<td>" + item[i] + "</td>");
-	    	}
-	    }
-	                 
-	    eachrow.append("</tr>");
-	    $('#table_con').append(eachrow);
-	});
-}
 
 
 // load den user logget ind samt dens roller.
