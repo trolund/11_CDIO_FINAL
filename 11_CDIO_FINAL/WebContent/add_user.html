@@ -32,8 +32,9 @@ $(document).ready(function() {
 			},
 			error: function(jqXHR, text, error) { 
             	console.log(data);
-            	$('#CreateMSG').html(data).fadeToggle(500);
+            	$('#CreateMSG').html(data);
              	$("#AddUser_Box").show(400);
+                console.log("Failed creating user! Gør så denne funktion viser noget i AddUser box når den fejler.");
 			}
 		});  
 	});   

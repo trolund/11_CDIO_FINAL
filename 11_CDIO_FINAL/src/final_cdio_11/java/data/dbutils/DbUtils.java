@@ -1,10 +1,10 @@
-package final_cdio_11.java.utils;
+package final_cdio_11.java.data.dbutils;
 
 import java.sql.SQLException;
 
 import final_cdio_11.java.data.Connector;
 
-public class UtilsDriver {
+public class DbUtils {
 
 	private static final Connector connector = Connector.getInstance();
 
@@ -17,8 +17,10 @@ public class UtilsDriver {
 	}
 
 	private static void deleteAllUsers() throws SQLException {
+		System.err.println("Deleting all users....");
 		connector.getConnection().prepareStatement("DELETE FROM rolle WHERE opr_id != 10").executeUpdate();
 		connector.getConnection().prepareStatement("DELETE FROM operatoer WHERE opr_id != 10").executeUpdate();
+		System.err.println("Done.");
 	}
 
 }
