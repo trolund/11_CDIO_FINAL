@@ -132,6 +132,12 @@ function loadUsers(){
         	}
         });
         
+        $('#inActiveCount').html(inActiveCount).fadeIn(200);
+        $('#activeCount').html(ActiveCount).fadeIn(200);
+        totCount = inActiveCount + ActiveCount;
+        $('#totCount').html(totCount).fadeIn(200);
+        console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);
+        
         $.getScript( "assets/js/del_users.js", function( data, textStatus, jqxhr ) {
         	console.log( data ); // Data returned
         	console.log( textStatus ); // Success
@@ -148,12 +154,6 @@ function loadUsers(){
         
         console.log('tabel data load done');
     }); 
-    
-    $('#inActiveCount').html(inActiveCount);
-    $('#ActiveCount').html(ActiveCount);
-    totCount = inActiveCount + ActiveCount;
-    $('#totCount').html(totCount);
-    console.log('total amuont of users: ' + totCount + 'Inactive: ' + inActiveCount + 'Active:' + ActiveCount);
 } 
 
 // view display
