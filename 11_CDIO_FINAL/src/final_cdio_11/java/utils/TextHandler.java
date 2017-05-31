@@ -5,6 +5,22 @@ package final_cdio_11.java.utils;
  */
 public class TextHandler {
 
+	private static final TextHandler instance = new TextHandler();
+
+	/*
+	 * Private constructor. Can't be instantiated.
+	 */
+	private TextHandler() {
+
+	}
+
+	/*
+	 * Return method for the Singleton instance.
+	 */
+	public synchronized static TextHandler getInstance() {
+		return instance;
+	}
+
 	/* DEV_ENABLED messages. */
 	public final String devStartUpMessage = "Application started in [DEV_ENABLED] development mode.";
 	public final String devConnectionMessage = "Connected to database: ";
@@ -35,27 +51,23 @@ public class TextHandler {
 	public final String succAddedUser(int oprId) {
 		return "User [" + oprId + "] added successfully.";
 	}
+	
+	public final String succAddedRole(int oprId, String role) {
+		return "Added role '" + role + "' to user [" + oprId + "] successfully.";
+	}
 
 	/* Application error messages. */
 	public final String errIdDoesNotExist = "Id does not exist.";
 	public final String errIdInvalid = "Invalid Id.";
 	public final String errInvalidCredentials = "Invalid credentials.";
 	public final String errFailure = "Failure.";
-
-	private static final TextHandler instance = new TextHandler();
-
+	
 	/*
-	 * Private constructor. Can't be instantiated.
+	 * Roles.
 	 */
-	private TextHandler() {
-
-	}
-
-	/*
-	 * Return method for the Singleton instance.
-	 */
-	public synchronized static TextHandler getInstance() {
-		return instance;
-	}
+	public final String ROLE_ADMIN = "Admin";
+	public final String ROLE_FARMACEUT = "Farmaceut";
+	public final String ROLE_VAERK = "Værkfører";
+	public final String ROLE_LABORANT = "Laborant";
 
 }

@@ -113,12 +113,12 @@ public class CreateUserFormPOJO {
 
 	public List<String> getRoles() {
 		List<String> roles = new ArrayList<String>();
-		
+
 		if (adminRole) roles.add("Admin");
 		if (farmaceutRole) roles.add("Farmaceut");
 		if (vaerkRole) roles.add("Værkfører");
 		if (labRole) roles.add("Laborant");
-		
+
 		return roles;
 	}
 
