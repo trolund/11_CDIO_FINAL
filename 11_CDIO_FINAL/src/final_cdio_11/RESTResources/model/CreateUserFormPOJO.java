@@ -116,7 +116,7 @@ public class CreateUserFormPOJO {
 		
 		if (adminRole) roles.add("Admin");
 		if (farmaceutRole) roles.add("Farmaceut");
-		if (vaerkRole) roles.add("Værkfører");
+		if (vaerkRole) roles.add("VÃ¦rkfÃ¸rer");
 		if (labRole) roles.add("Laborant");
 		
 		return roles;
