@@ -6,7 +6,7 @@ $(document).ready(function() {
         
         $.getJSON('RoleList/' + id, function(roleData) {            
         	$.each(roleData, function(i, item) {
-        		if(roleData != null) {
+        		if (roleData != null) {
         			var string = roleData[i].toString();
         			$('#oprRole'+(i+1)).val(string.toLowerCase());
                     console.log('DEBUG ROLE-LOOP: i: ' + (i+1) +', data: '+ roleData[i]);
