@@ -34,6 +34,7 @@ $(document).ready(function() {
             
         	$('#statusEdit').val(data.status);
         	$('#oprIdEdit').html(data.oprId);
+            $('#oprIdEdit').val(data.oprId);
         	$('#oprFirstNameEdit').val(data.oprFirstName); 
         	$('#oprLastNameEdit').val(data.oprLastName);
         	$('#oprIniEdit').val(data.oprIni);
@@ -45,4 +46,19 @@ $(document).ready(function() {
         
         $("#editUser_Box").show(400);
     });
+});
+
+$(document).ready(function(){
+    $('#newPassword_But').click(function(){
+        
+        var id = $('#oprIdEdit').val();
+        
+        console.log(id);
+        
+        $.post("api/mail/newPass/" + id, function( data ) {
+                    console.log(data); 
+                    $('#Editmsg').html("Mail med nyt kodeord sent!");
+        });
+        
+    })
 });

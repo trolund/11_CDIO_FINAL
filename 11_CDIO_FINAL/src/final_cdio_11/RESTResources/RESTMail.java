@@ -40,13 +40,14 @@ public class RESTmail {
 	
 	@POST
 	@Path("/newPass/{oprId}")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response mail(@PathParam("oprId") String oprId) {
 		SendEmail mailobj = new SendEmail();
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		Utils passGen = Utils.getInstance();
 		
 		String newPass = passGen.generatePassword();
+		
+		System.out.println(oprId);
 	
 		try {
 			OperatorDTO oprDTO = oprDAO.getOperator(Integer.parseInt(oprId));
