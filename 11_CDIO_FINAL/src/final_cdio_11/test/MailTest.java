@@ -1,6 +1,4 @@
-package final_cdio_11.test.util;
-
-import static org.junit.Assert.*;
+package final_cdio_11.test;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -13,18 +11,14 @@ public class MailTest {
 
 	@Test
 	public void test() {
-		
 		SendEmail mailobj = new SendEmail();
-		
 		try {
 			mailobj.sendMail("trolund@gmail.com", "dette er en test", "Junit Test");
 		} catch (AddressException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+	
 }
