@@ -93,7 +93,7 @@ public class FileHandler {
 	}
 	
 	
-	public String mailSQL(String key) {
+	public String getMailProperty(String key) {
 		return mailHashMap.get(key);
 	}
 

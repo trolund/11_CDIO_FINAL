@@ -17,7 +17,7 @@ public class MailTest {
 		SendEmail mailobj = new SendEmail();
 		
 		try {
-			mailobj.mail("trolund@gmail.com", "dette er en test", "Junit Test");
+			mailobj.sendMail("trolund@gmail.com", "dette er en test", "Junit Test");
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
