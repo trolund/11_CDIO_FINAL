@@ -4,6 +4,8 @@ import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 /*
  * Singleton class for various utilities.
  */
@@ -13,6 +15,7 @@ public class Utils {
 	 * Singleton instance of this class.
 	 */
 	private static final Utils instance = new Utils();
+
 
 	/*
 	 * Application Flags
@@ -60,6 +63,14 @@ public class Utils {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	/*
+	 * Generate random password
+	 */
+	public String generatePassword() {
+		String pwd = RandomStringUtils.random(24, textHandler.PASS_CHARS);
+		return pwd;
 	}
 
 	/*

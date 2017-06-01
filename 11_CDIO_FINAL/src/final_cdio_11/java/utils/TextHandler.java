@@ -20,6 +20,9 @@ public class TextHandler {
 	public synchronized static TextHandler getInstance() {
 		return instance;
 	}
+	
+	/* password characters */
+	public final String PASS_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 	/* DEV_ENABLED messages. */
 	public final String devStartUpMessage = "Application started in [DEV_ENABLED] development mode.";
