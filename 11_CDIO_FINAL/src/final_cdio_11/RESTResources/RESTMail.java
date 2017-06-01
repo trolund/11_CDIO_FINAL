@@ -16,11 +16,11 @@ public class RESTMail {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response mail(MailPOJO maildata) {
+	public Response mail(MailPOJO mailData) {
 		SendEmail mailobj = new SendEmail();
 
 		try {
-			mailobj.sendMail(maildata.getTo(), maildata.getMsg(), maildata.getSub());
+			mailobj.sendMail(mailData.getTo(), mailData.getMsg(), mailData.getSub());
 			return Response.status(200).entity("Mail sent").build();
 		} catch (AddressException e) {
 			e.printStackTrace();
