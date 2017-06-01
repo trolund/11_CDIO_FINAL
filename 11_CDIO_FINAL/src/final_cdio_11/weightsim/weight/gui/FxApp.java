@@ -184,6 +184,7 @@ public class FxApp extends Application {
 	}
 
 	public FxApp() {
+		
 	}
 
 	public void setSim(WeightInterfaceControllerGUI l) {
