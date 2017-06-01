@@ -23,16 +23,12 @@ $(document).ready(function() {
         } 
     }); 
 });
-    
-    
 
-    
-    
 // Post create user data
 $(document).ready(function() {
 	$("#Submit_CreateUser").click(function() {
 		var data = $('#CreateUserForm').serializeJSON();    
-    	  console.log(data);
+    	console.log(data);
       
       	jQuery.ajax({
 			url : "api/opr/addopr",
@@ -73,6 +69,12 @@ $(document).ready(function() {
         $('#oprCpr').val('oprCpr');
         $('#oprPassword').val('pass');
         $('#oprRole1').val('None');
+        
+        // Adding roles to dummy user.
+        $('#adminRole').prop('checked', true);
+        $('#farmaceutRole').prop('checked', true);
+        $('#vaerkRole').prop('checked', true);
+        $('#laborantRole').prop('checked', true);
         
         var data = $('#CreateUserForm').serializeJSON();    
       
@@ -123,8 +125,9 @@ $(document).ready(function() {
     <br>
     Password <br>
     <input type="text" name="oprPassword" id="oprPassword">
-  
     <br>
+  
+    Privileges <br>
      <input type="checkbox" name="adminRole" id="adminRole"> Admin<br>
      <input type="checkbox" name="farmaceutRole" id="farmaceutRole"> Farmaceut<br>
      <input type="checkbox" name="vaerkRole" id="vaerkRole"> Værkfører<br>
@@ -133,7 +136,7 @@ $(document).ready(function() {
   	<br>
   	
   	<input id="Submit_CreateUser" type="button" value="Add user">
-    <input id="Submit_CreateUser_dummy" type="button" value="Add dummy user">
+    <input id="Submit_CreateUser_dummy" type="button" value="Add Dummy user">
     
     <p id="msg"></p>
     <p id="CreateMSG"></p>
@@ -170,16 +173,17 @@ $(document).ready(function() {
     <input type="text" name="oprCpr" id="oprCprEdit">
     <br>
     Password <br>
-    <input type="button" value="send ønske om nyt password">
+    <input type="button" value="New password">
     <br>
-      Privileges <br>
-     <input type="checkbox" name="AdminRole" id="AdminRoleEdit"> Admin<br>
-     <input type="checkbox" name="FarRole" id="FarRoleEdit"> Farmaceut<br>
-     <input type="checkbox" name="VeakRole" id="VeakRoleEdit"> Værkfører<br>
-     <input type="checkbox" name="LabRole" id="LabRoleEdit"> Laborant <br>  
+    
+    Privileges <br>
+    <input type="checkbox" name="AdminRole" id="AdminRoleEdit"> Admin<br>
+    <input type="checkbox" name="FarRole" id="FarRoleEdit"> Farmaceut<br>
+    <input type="checkbox" name="VeakRole" id="VeakRoleEdit"> Værkfører<br>
+    <input type="checkbox" name="LabRole" id="LabRoleEdit"> Laborant <br>  
       
   <br><br>
-  <input id="Submit_EditUser" type="button" value="edit user">
+  <input id="Submit_EditUser" type="button" value="Confirm Edit">
     <p id="Editmsg"></p>
 </form> 
 </div>
