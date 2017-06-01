@@ -115,6 +115,32 @@ public class SQLRoleDAO implements IRoleDAO {
 	}
 
 	/*
+	 * Method to update the status of a role.
+	 * i.e. set status from 1 to 0.
+	 */
+	@Override
+	public void updateRole(RoleDTO roleDTO) throws DALException {
+		String updateRoleSql = connector.getQuery("updateRoleSql");
+		PreparedStatement updateRoleStmt = null;
+		try {
+			updateRoleStmt = connector.getConnection().prepareStatement(updateRoleSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			updateRoleStmt.setInt(1, roleDTO.getStatus());
+			updateRoleStmt.setInt(2, roleDTO.getOprId());
+			updateRoleStmt.setString(3, roleDTO.getRoleName());
+			updateRoleStmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage(), e);
+		} finally {
+			try {
+				connector.cleanup(updateRoleStmt);
+				connector.closeConnection();
+			} catch (SQLException e) {
+				throw new DALException(e.getMessage(), e);
+			}
+		}
+	}
+
+	/*
 	 * Method to delete a Role stored in the database.
 	 */
 	@Override

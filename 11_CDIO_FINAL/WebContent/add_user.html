@@ -23,16 +23,12 @@ $(document).ready(function() {
         } 
     }); 
 });
-    
-    
 
-    
-    
 // Post create user data
 $(document).ready(function() {
 	$("#Submit_CreateUser").click(function() {
 		var data = $('#CreateUserForm').serializeJSON();    
-    	  console.log(data);
+    	console.log(data);
       
       	jQuery.ajax({
 			url : "api/opr/addopr",
@@ -73,6 +69,12 @@ $(document).ready(function() {
         $('#oprCpr').val('oprCpr');
         $('#oprPassword').val('pass');
         $('#oprRole1').val('None');
+        
+        // Adding roles to dummy user.
+        $('#adminRole').prop('checked', true);
+        $('#farmaceutRole').prop('checked', true);
+        $('#vaerkRole').prop('checked', true);
+        $('#laborantRole').prop('checked', true);
         
         var data = $('#CreateUserForm').serializeJSON();    
       

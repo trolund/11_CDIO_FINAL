@@ -143,12 +143,20 @@ public class TestSQLRoleDAO {
 			System.out.println(lspr);
 		}
 	}
+	
+	/*
+	 * Testing SQLRoleDAO.updateRole(RoleDTO) Positive atomic test
+	 */
+	@Test
+	public void testUpdateRolePositive() {
+		
+	}
 
 	/*
 	 * Testing SQLRoleDAO.deleteRole(RoleDTO) Positive atomic test
 	 */
 	@Test
-	public void testDeleteOperatorPositive() {
+	public void testDeleteRolePositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLRoleDAO.deleteRole(RoleDTO) Positive " + spr);
 			/* Creating RoleDTO to make sure that it exists. */
