@@ -62,3 +62,28 @@ $(document).ready(function(){
         
     })
 });
+
+//Post Update user data
+$(document).ready(function() {
+	$("#Submit_EditUser").click(function() {
+		var data = $('#editUserForm').serializeJSON();    
+    	console.log(data);
+      
+      	jQuery.ajax({
+			url : "api/opr/updateopr",
+			data : data,
+			contentType: "application/json",
+			method: 'POST',
+			success : function(data) {
+          		console.log(data);
+          	  	$('#Editmsg').html(data);
+           	 	loadUsers();
+			},
+			error: function(jqXHR, text, error) { 
+            	console.log(data);
+            	$('#Editmsg').html(data).fadeToggle(500);
+             	$("#editUser_Box").show(400);
+			}
+		});  
+	});   
+});

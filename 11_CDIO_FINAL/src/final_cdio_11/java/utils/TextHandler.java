@@ -60,11 +60,19 @@ public class TextHandler {
 	public final String succAddedRole(int oprId, String role) {
 		return "Added role '" + role + "' to user [" + oprId + "] successfully.";
 	}
+	
+	public final String succUpdateRole(int oprId, String role) {
+		return "Updated role '" + role + "' to user [" + oprId + "] successfully.";
+	}
+	
+	public final String succUpdateUser(int oprId) {
+		return "User [" + oprId + "] Updated successfully.";
+	}
 
 	public final String mailMessage(OperatorDTO oprDTO) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Hej " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName() + ".\n\n");
-		sb.append("Du har fået et nyt password til hjemmesiden.\n");
+		sb.append("Du har fï¿½et et nyt password til hjemmesiden.\n");
 		sb.append("Dine nye login oplysninger er: \n");
 		sb.append("Id: " + oprDTO.getOprId() + "\n");
 		sb.append("Password: " + oprDTO.getOprPassword() + "\n\n");
@@ -84,7 +92,7 @@ public class TextHandler {
 	 */
 	public final String ROLE_ADMIN = "Admin";
 	public final String ROLE_FARMACEUT = "Farmaceut";
-	public final String ROLE_VAERK = "Værkfører";
+	public final String ROLE_VAERK = "Vï¿½rkfï¿½rer";
 	public final String ROLE_LABORANT = "Laborant";
 
 }

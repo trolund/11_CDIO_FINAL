@@ -229,29 +229,29 @@ public class RESTOperator {
 
 		try {
 			oprDAO.updateOperator(oprDTO);
-			//			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(editUserFormData.getOprId()));
-			//
-			//			if (editUserFormData.isAdminRole()) {
-			//				roleDAO.createRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_ADMIN, 0));
-			//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_ADMIN));
-			//			}
-			//
-			//			if (createUserFormData.isFarmaceutRole()) {
-			//				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_FARMACEUT, 0));
-			//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_FARMACEUT));
-			//			}
-			//
-			//			if (createUserFormData.isVaerkRole()) {
-			//				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_VAERK, 0));
-			//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_VAERK));
-			//			}
-			//
-			//			if (createUserFormData.isLaborantRole()) {
-			//				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_LABORANT, 0));
-			//				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_LABORANT));
-			//			}
+						if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(editUserFormData.getOprId()));
+			
+						if (editUserFormData.isAdminRole()) {
+							roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_ADMIN, 0));
+							if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_ADMIN));
+						}
+			
+						if (editUserFormData.isFarRole()) {
+							roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_FARMACEUT, 0));
+							if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_FARMACEUT));
+						}
+			
+						if (editUserFormData.isVeakRole()) {
+							roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_VAERK, 0));
+							if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_VAERK));
+						}
+			
+						if (editUserFormData.isLabRole()) {
+							roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_LABORANT, 0));
+							if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_LABORANT));
+						}
 
-			return textHandler.succAddedUser(editUserFormData.getOprId());
+			return textHandler.succUpdateUser(oprDTO.getOprId());
 		} catch (DALException e) {
 			e.printStackTrace();
 			return textHandler.errUserCreation;
