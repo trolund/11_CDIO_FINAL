@@ -36,6 +36,16 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
+	public void closeConnection() throws WeightConnectionException {
+		try {
+			if (!weightSocket.isClosed()) weightSocket.close();
+			utils.logMessage("Socket connection closed successfully.");
+		} catch (IOException e) {
+			throw new WeightConnectionException("Failed to close socket connection.");
+		}
+	}
+
+	@Override
 	public int getId(String message) throws WeightException {
 		InputStreamReader in = null;
 		try {
@@ -66,7 +76,7 @@ public class WeightConnector implements IWeightConnector {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		int oprId = Integer.parseInt(data.substring(8, data.length() - 1));
 		System.out.println(oprId);
 
@@ -86,12 +96,12 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
-	public void confirmMessage(String message) {
+	public void taraWeight() {
 
 	}
 
 	@Override
-	public void tara() {
+	public void confirmMessage(String message) {
 
 	}
 

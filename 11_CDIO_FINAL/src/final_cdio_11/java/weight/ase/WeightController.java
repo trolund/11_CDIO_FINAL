@@ -14,20 +14,19 @@ public class WeightController implements IWeightController {
 	private IOperatorDAO oprDAO;
 	private IReceptDAO receptDAO;
 	private IProductBatchDAO pbDAO;
-	private IWeightConnector iWeightConnector;
+	private IWeightConnector weightConnector;
 
-	public WeightController(IOperatorDAO oprDAO, IReceptDAO receptDAO, IProductBatchDAO pbDAO, IWeightConnector iWeightConnector) {
+	public WeightController(IOperatorDAO oprDAO, IReceptDAO receptDAO, IProductBatchDAO pbDAO, IWeightConnector weightConnector) {
 		this.oprDAO = oprDAO;
 		this.receptDAO = receptDAO;
 		this.pbDAO = pbDAO;
-		this.iWeightConnector = iWeightConnector;
+		this.weightConnector = weightConnector;
 	}
 
 	@Override
 	public void weightProcedure() throws WeightException, DALException {
-
 		try {
-			iWeightConnector.initConnection();
+			weightConnector.initConnection();
 		} catch (WeightConnectionException e) {
 			e.printStackTrace();
 		}
@@ -35,7 +34,7 @@ public class WeightController implements IWeightController {
 		// step 3: Få laborant nummer
 		int id = -1;
 		try {
-			id = iWeightConnector.getId("Indtast nr");
+			id = weightConnector.getId("Indtast nr");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -44,7 +43,7 @@ public class WeightController implements IWeightController {
 
 		// Step 4: vægt svarer tilbage med laborant navn
 		try {
-			iWeightConnector.confirmMessage("Du er " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName());
+			weightConnector.confirmMessage("Du er " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName());
 		} catch (WeightException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,7 +52,7 @@ public class WeightController implements IWeightController {
 		// Step 5: Laboranten indtaster produktbatchnummer
 		int pbId = -1;
 		try {
-			pbId = iWeightConnector.getId("Indtast produktbatchID");
+			pbId = weightConnector.getId("Indtast produktbatchID");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -64,7 +63,7 @@ public class WeightController implements IWeightController {
 
 		// Step 7: Laborant tjekker vægt er nulstillet og trykker OK
 		try {
-			iWeightConnector.confirmMessage("Kontrollér at vægten er nulstillet og tryk OK");
+			weightConnector.confirmMessage("Kontrollér at vægten er nulstillet og tryk OK");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -75,28 +74,28 @@ public class WeightController implements IWeightController {
 
 		// Step 9: Tarér vægt
 		try {
-			iWeightConnector.tara();
+			weightConnector.taraWeight();
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
 
 		// Step 10 og 11: Laborant placerer beholder og trykker OK
 		try {
-			iWeightConnector.confirmMessage("Placér første tara beholder og tryk OK");
+			weightConnector.confirmMessage("Placér første tara beholder og tryk OK");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
 
 		// Step 12: Vægten af tarabeholder registreres
 		try {
-			iWeightConnector.getWeight();
+			weightConnector.getWeight();
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
 
 		// Step 13: Vægten Tareres igen
 		try {
-			iWeightConnector.tara();
+			weightConnector.taraWeight();
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -104,14 +103,14 @@ public class WeightController implements IWeightController {
 		// Step 14 og 15: Vægt beder om råvarebatchnummer på første råvare.
 		// Laborant afvejer og trykker OK
 		try {
-			int rbId = iWeightConnector.getId("Indtast raavarebatchID");
+			int rbId = weightConnector.getId("Indtast raavarebatchID");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
 
 		// Step 16: Spørg laborant om raavareafvejning er afsluttet
 		try {
-			iWeightConnector.confirmMessage("Tast 1 afvej næste raavare eller afslut batch");
+			weightConnector.confirmMessage("Tast 1 afvej næste raavare eller afslut batch");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -122,7 +121,7 @@ public class WeightController implements IWeightController {
 
 		// Step 18: Bed laboborant om enten at lave nyt batch eller afslutte
 		try {
-			iWeightConnector.confirmMessage("Tast 1 for ny afvejning eller tast 2 for at afslutte");
+			weightConnector.confirmMessage("Tast 1 for ny afvejning eller tast 2 for at afslutte");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}

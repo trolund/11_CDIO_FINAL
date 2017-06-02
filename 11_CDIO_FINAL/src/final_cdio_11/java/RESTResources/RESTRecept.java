@@ -14,7 +14,7 @@ public class RESTRecept {
 	//	@Path("/getById")
 	//	@Produces(MediaType.TEXT_PLAIN)
 	//	public ReceptDTO getReceptById(@QueryParam("receptId") String receptId) {
-	//		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+	//		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 	//
 	//		try {
 	//			return receptDAO.getRecept(Integer.parseInt(receptId));
@@ -28,7 +28,7 @@ public class RESTRecept {
 	//	@Path("/getReceptList")
 	//	@Produces(MediaType.APPLICATION_JSON)
 	//	public List<ReceptDTO> getReceptList() {
-	//		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+	//		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 	//		List<ReceptDTO> recList = null;
 	//
 	//		try {
@@ -43,7 +43,7 @@ public class RESTRecept {
 	//	@Path("/delReceptById")
 	//	@Produces(MediaType.TEXT_PLAIN)
 	//	public String delReceptById(@QueryParam("receptId") String receptId) {
-	//		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+	//		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 	//
 	//		try {
 	//			receptDAO.deleteRecept(Integer.parseInt(receptId));
@@ -59,7 +59,7 @@ public class RESTRecept {
 	//	@Produces(MediaType.TEXT_PLAIN)
 	//	@Consumes(MediaType.APPLICATION_JSON)
 	//	public ReceptDTO createRecept(ReceptDTO receptDTO) {
-	//		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+	//		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 	//
 	//		try {
 	//			receptDAO.createRecept(receptDTO);
@@ -73,7 +73,7 @@ public class RESTRecept {
 	//	@Path("/updateRecept")
 	//	@Consumes(MediaType.APPLICATION_JSON)
 	//	public Response updateRecept(ReceptDTO receptDTO) {
-	//		SQLReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+	//		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 	//
 	//		try {
 	//			receptDAO.updateRecept(receptDTO);

@@ -8,6 +8,8 @@ import final_cdio_11.java.RESTResources.pojo.EditUserFormPOJO;
 import final_cdio_11.java.RESTResources.pojo.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IOperatorDAO;
+import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
@@ -22,7 +24,7 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public List<OperatorDTO> getOperatorList() {
-		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		List<OperatorDTO> oprList = null;
 
 		try {
@@ -35,7 +37,7 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public String getOperatorRolesAsString(String oprId) {
-		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
+		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 		StringBuilder returnString = new StringBuilder();
 		List<RoleDTO> oprRoleList = null;
 
@@ -57,7 +59,7 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public List<RoleDTO> getOperatorRoleList(String OprId) {
-		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
+		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 		List<RoleDTO> oprRoleList = null;
 
 		try {
@@ -77,7 +79,7 @@ public class OperatorController implements IOperatorController {
 	public String verifyOperatorLogin(LoginFormPOJO loginFormData) {
 		int oprId = loginFormData.getOprId();
 		String password = loginFormData.getPassword();
-		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 
 		if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserLoginMessage(oprId, password));
 
@@ -101,8 +103,8 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public String createOperator(CreateUserFormPOJO createUserFormData) {
-		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
+		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
 		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
 
@@ -143,8 +145,8 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public String updateOperator(EditUserFormPOJO editUserFormData) {
-		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-		SQLRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
+		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
 		OperatorDTO oprDTO = null;
 		try {
@@ -190,7 +192,7 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public boolean deleteOperator(String oprId) {
-		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		int id = -1;
 
 		try {
@@ -211,7 +213,7 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public OperatorDTO createOperatorPOJO(String oprId) {
-		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 
 		int id = Integer.parseInt(oprId);
 		List<OperatorDTO> oprList = null;
