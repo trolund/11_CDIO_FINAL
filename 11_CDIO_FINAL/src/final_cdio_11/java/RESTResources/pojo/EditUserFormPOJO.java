@@ -1,4 +1,4 @@
-package final_cdio_11.java.RESTResources.model;
+package final_cdio_11.java.RESTResources.pojo;
 
 public class EditUserFormPOJO {
 	

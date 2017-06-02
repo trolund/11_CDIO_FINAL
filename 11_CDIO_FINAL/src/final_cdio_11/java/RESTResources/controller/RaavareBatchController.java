@@ -1,5 +1,5 @@
 package final_cdio_11.java.RESTResources.controller;
 
-public class RaavareBatchController {
+public class RaavareBatchController implements IRaavareBatchController {
 
 }

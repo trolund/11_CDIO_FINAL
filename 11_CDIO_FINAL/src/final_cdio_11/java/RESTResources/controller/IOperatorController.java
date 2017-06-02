@@ -2,9 +2,9 @@ package final_cdio_11.java.RESTResources.controller;
 
 import java.util.List;
 
-import final_cdio_11.java.RESTResources.model.CreateUserFormPOJO;
-import final_cdio_11.java.RESTResources.model.EditUserFormPOJO;
-import final_cdio_11.java.RESTResources.model.LoginFormPOJO;
+import final_cdio_11.java.RESTResources.pojo.CreateUserFormPOJO;
+import final_cdio_11.java.RESTResources.pojo.EditUserFormPOJO;
+import final_cdio_11.java.RESTResources.pojo.LoginFormPOJO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
 

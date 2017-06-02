@@ -3,9 +3,9 @@ package final_cdio_11.java.RESTResources.controller;
 import java.util.Iterator;
 import java.util.List;
 
-import final_cdio_11.java.RESTResources.model.CreateUserFormPOJO;
-import final_cdio_11.java.RESTResources.model.EditUserFormPOJO;
-import final_cdio_11.java.RESTResources.model.LoginFormPOJO;
+import final_cdio_11.java.RESTResources.pojo.CreateUserFormPOJO;
+import final_cdio_11.java.RESTResources.pojo.EditUserFormPOJO;
+import final_cdio_11.java.RESTResources.pojo.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;

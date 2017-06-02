@@ -7,6 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import final_cdio_11.java.RESTResources.controller.IViewController;
+import final_cdio_11.java.RESTResources.controller.ViewController;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.view.IVAdminForemanPBCDAO;
@@ -31,6 +33,7 @@ import final_cdio_11.java.data.dto.view.VPharmacistRecipeDTO;
 @Path("/View")
 public class RESTView {
 
+	private final IViewController viewController = new ViewController();
 
 	@GET
 	@Path("/AdminForemanList")
@@ -47,9 +50,9 @@ public class RESTView {
 		}
 		return viewList;
 	}
-	
+
 	@GET
-	@Path("/AdminOperatorList") 
+	@Path("/AdminOperatorList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<VAdminOperatorDTO> AdminOperatorList() {
 		IVAdminOperatorDAO view = new SQLAdminOperatorDAO(Connector.getInstance());
@@ -63,7 +66,7 @@ public class RESTView {
 		}
 		return viewList;
 	}
-	
+
 	@GET
 	@Path("/FormanOperatorList")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,7 +82,7 @@ public class RESTView {
 		}
 		return viewList;
 	}
-	
+
 	@GET
 	@Path("/OperatorRBList")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -95,7 +98,7 @@ public class RESTView {
 		}
 		return viewList;
 	}
-	
+
 	@GET
 	@Path("/OperatorRecipeList")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -111,7 +114,7 @@ public class RESTView {
 		}
 		return viewList;
 	}
-	
+
 	@GET
 	@Path("/PharmacistRecipeList")
 	@Produces(MediaType.APPLICATION_JSON)

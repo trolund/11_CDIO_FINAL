@@ -1,5 +1,5 @@
 package final_cdio_11.java.RESTResources.controller;
 
-public class RaavareController {
+public class RaavareController implements IRaavareController {
 
 }
