@@ -18,8 +18,6 @@
 
 var ErrorMSG = "noget gik galt!"  
 
-
-
 $(document).ready(function(){
     $('#viewSelector').change(function() {
     if ($(this).val() === '1') {

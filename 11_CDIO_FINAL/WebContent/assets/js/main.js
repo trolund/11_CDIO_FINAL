@@ -9,14 +9,11 @@ $(document).ready(function(){
 	$('#loadingGif').hide();
     $('#AddUser_Box').hide();
     
-    
-    
-$('#login').keydown(function(e) {
-    if (e.keyCode == 13) {
-        login();
-    }
-});
-    
+    $('#login').keydown(function(e) {
+    	if (e.keyCode == 13) {
+    		login();
+    	}
+    });  
 });
 
 // LogOut button menu  
@@ -39,44 +36,42 @@ $(document).ready(function() {
 )});
 
 function login() {  
-		id = $('#login_oprId').val();
-		$('#login_Bg').show();
-		$('#loadingGif').show(200);
+	id = $('#login_oprId').val();
+	$('#login_Bg').show();
+	$('#loadingGif').show(200);
       
-		var postData = $('#login').serializeJSON();    
+	var postData = $('#login').serializeJSON();    
       
-		jQuery.ajax({
-			url : "api/opr/verify",
-			data : postData,
-			contentType: "application/json",
-			method: 'POST',
-			success : function(data) {
-				if (data == 'Logged in successfully.') {
-					$('#msg').css('color','green');
-					$('#msg').html(data);
-					$('#login_Bg').hide(1000);     
-					$('#login_Bg').hide(200);
-					$('#loadingGif').hide(200);
+	jQuery.ajax({
+		url : "api/opr/verify",
+		data : postData,
+		contentType: "application/json",
+		method: 'POST',
+		success : function(data) {
+			if (data == 'Logged in successfully.') {
+				$('#msg').css('color','green');
+				$('#msg').html(data);
+				$('#login_Bg').hide(1000);     
+				$('#login_Bg').hide(200);
+				$('#loadingGif').hide(200);
  
-					loadLoginUser(id);
-				} else {
-					$('#msg').css('color','red');
-					$('#msg').html(data);
-					$('#login_Bg').show();
-					$('#loadingGif').hide(200);
-					
-					console.log('Failed to log in - ' + data)
-				}
-			},
-			error: function(jqXHR, text, error) {  
+				loadLoginUser(id);
+			} else {
 				$('#msg').css('color','red');
-                $('#msg').html('Connection to server failed.');
-                $('#loadingGif').hide(200);
-                
-                console.log('Failed to log in - ' + data)
+				$('#msg').html(data);
+				$('#login_Bg').show();
+				$('#loadingGif').hide(200);
+				console.log('Failed to log in - ' + data)
 			}
+		},
+		error: function(jqXHR, text, error) {  
+			$('#msg').css('color','red');
+            $('#msg').html('Connection to server failed.');
+            $('#loadingGif').hide(200);
+            console.log('Failed to log in - ' + data)
 		}
-	)}
+	}
+)};
 
 // Menu mobile button 
 $(document).ready(function() {
@@ -99,7 +94,6 @@ $(document).ready(function() {
         });
         
 		loadUsers();
-       
 	});   
 });
 
@@ -113,28 +107,25 @@ $(document).ready(function() {
         	console.log( jqxhr.status ); // 200
         	console.log( "view.js was loaded." );
         }); 
-		
 	}); 
 });
 
 // Hent liste af users og oversæt dem til tabel
-function loadUsers(){
-    
-    var inActiveCount = 0;
+function loadUsers() {
+	var inActiveCount = 0;
     var ActiveCount = 0;
     var totCount = 0;
     
-   $('#table_con').empty();                         
+    $('#table_con').empty();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/opr/getOprList', function(data) {
-	    console.log('Users loaded.');
+    	console.log('Users loaded.');
 	    
 	    var roles;
         var status;
 	
         $.each(data, function(i, item) { 
-             
         	jQuery.ajax({
         		url: "api/opr/getOprRoleList/" + data[i].oprId,
         		type: "GET",
@@ -151,11 +142,10 @@ function loadUsers(){
             if (data[i].status == "0") {
                 status = "<td style='color: green;'>Active</td>";
                 ActiveCount++;
-            } else{
+            } else {
                 status = "<td style='color: red;'>Inactive</td>";
                 inActiveCount++;
             }
-            
             
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
         		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');

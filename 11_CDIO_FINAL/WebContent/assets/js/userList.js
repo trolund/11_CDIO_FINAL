@@ -82,16 +82,12 @@ $(document).ready(function() {
 
 $(document).ready(function(){
     $('#newPassword_But').click(function(){
-        
         var id = $('#oprIdEdit').val();
-        
         console.log(id);
-        
         $.post("api/mail/newPass/" + id, function( data ) {
-                    console.log(data); 
-                    $('#Editmsg').html("Mail med nyt kodeord sent!");
+        	console.log(data); 
+            $('#Editmsg').html("Mail med nyt kodeord sent!");
         });
-        
     })
 });
 
