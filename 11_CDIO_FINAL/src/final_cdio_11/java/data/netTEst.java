@@ -11,6 +11,7 @@ import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLProductBatchDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
 import final_cdio_11.java.weight.IWeightConnector;
+import final_cdio_11.java.weight.IWeightConnector.WeightException;
 import final_cdio_11.java.weight.IWeightController;
 import final_cdio_11.java.weight.WeightConnector;
 import final_cdio_11.java.weight.WeightController;
@@ -27,12 +28,13 @@ public class netTEst {
 		
 		
 		IWeightController connector = new WeightController(oprDAO, rDAO, pbDAO, Iconnector);
-		try {
-			connector.weightProcedure();
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				connector.weightProcedure();
+			} catch (WeightException e) {
+				e.printStackTrace();
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
 		
 //		try {
 //			Socket socket = new Socket("169.254.2.3", 8000);

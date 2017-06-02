@@ -15,12 +15,12 @@ import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import final_cdio_11.Contoller.OprController;
 import final_cdio_11.RESTResources.model.CreateUserFormPOJO;
 import final_cdio_11.RESTResources.model.EditUserFormPOJO;
 import final_cdio_11.RESTResources.model.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.controller.OprController;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
