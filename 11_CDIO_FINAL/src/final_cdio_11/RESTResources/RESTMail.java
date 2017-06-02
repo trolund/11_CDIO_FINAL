@@ -15,11 +15,15 @@ import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.utils.SendEmail;
+import final_cdio_11.java.utils.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
 @Path("/mail")
-public class RESTmail {
-
+public class RESTMail {
+	
+	private final TextHandler textHandler = TextHandler.getInstance();
+	private final Utils utils = Utils.getInstance();
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response mail(MailPOJO mailData) {
@@ -35,19 +39,14 @@ public class RESTmail {
 		}
 		return Response.status(400).entity("Mail failed").build();
 	}
-	
-	
-	
+
 	@POST
 	@Path("/newPass/{oprId}")
 	public Response mail(@PathParam("oprId") String oprId) {
 		SendEmail mailobj = new SendEmail();
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-		Utils passGen = Utils.getInstance();
 		
-		String newPass = passGen.generatePassword();
-		
-		System.out.println(oprId);
+		String newPass = utils.generatePassword();
 	
 		try {
 			OperatorDTO oprDTO = oprDAO.getOperator(Integer.parseInt(oprId));
@@ -56,24 +55,18 @@ public class RESTmail {
 			
 			oprDAO.updateOperator(oprDTO);
 			
-			mailobj.sendMail(oprDTO.getOprEmail(), 
-					"Hej" + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName() + ", \n"
-					+ "Du har fået et nyt password. \n"
-					+ "Dine nye login oplysinger er: \n"
-					+ "id: " + oprDTO.getOprId() + "\n"
-					+ "Password: " + newPass + "\n"
-					+ "\n"
-					+ "//Din ynglings Webservice" , "New Password");
+			mailobj.sendMail(oprDTO.getOprEmail(), textHandler.mailMessage(oprDTO), "New Password");
+			
+			utils.logMessage("Mail message: '" + textHandler.mailMessage(oprDTO) + "'");
+			
 			return Response.status(200).entity("Mail sent").build();
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Response.status(400).entity("Mail failed").build();

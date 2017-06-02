@@ -1,5 +1,7 @@
 package final_cdio_11.java.utils;
 
+import final_cdio_11.java.data.dto.OperatorDTO;
+
 /*
  * Singleton TextHandler class.
  */
@@ -20,7 +22,7 @@ public class TextHandler {
 	public synchronized static TextHandler getInstance() {
 		return instance;
 	}
-	
+
 	/* password characters */
 	public final String PASS_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -54,9 +56,20 @@ public class TextHandler {
 	public final String succAddedUser(int oprId) {
 		return "User [" + oprId + "] added successfully.";
 	}
-	
+
 	public final String succAddedRole(int oprId, String role) {
 		return "Added role '" + role + "' to user [" + oprId + "] successfully.";
+	}
+
+	public final String mailMessage(OperatorDTO oprDTO) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Hej " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName() + ".\n\n");
+		sb.append("Du har fået et nyt password til hjemmesiden.\n");
+		sb.append("Dine nye login oplysninger er: \n");
+		sb.append("Id: " + oprDTO.getOprId() + "\n");
+		sb.append("Password: " + oprDTO.getOprPassword() + "\n\n");
+		sb.append("- Din yndlings Webservice gruppe 11\n");
+		return sb.toString();
 	}
 
 	/* Application error messages. */
@@ -65,7 +78,7 @@ public class TextHandler {
 	public final String errInvalidCredentials = "Invalid credentials.";
 	public final String errUnknownFailure = "Failure.";
 	public final String errUserCreation = "Failure. Perhaps the user already exists?";
-	
+
 	/*
 	 * Roles.
 	 */
