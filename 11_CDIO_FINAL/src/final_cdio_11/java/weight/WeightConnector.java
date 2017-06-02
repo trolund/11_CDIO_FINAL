@@ -4,18 +4,38 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import final_cdio_11.java.utils.TextHandler;
+
 public class WeightConnector implements IWeightConnector {
 
-	@Override
-	public void initConnection() {
+	private final TextHandler textHandler = TextHandler.getInstance();
+	private Socket weightSocket;
 
+	@Override
+	public void initConnection() throws weightconnectionexception {
+		for (String ip : textHandler.WEIGHT_IPS) {
+			try {
+				weightSocket = new Socket(ip, textHandler.WEIGHT_PORT);
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				throw new weightconnectionexception();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				throw new weightconnectionexception();
+			}
+			if (weightSocket != null && weightSocket.isConnected()) {
+				System.out.println("Socket er ikke null og forbundet til ip: " + ip + ":" + textHandler.WEIGHT_PORT);
+			} else {
+				System.out.println("You fucked up");
+			}
+		}
+		
 	}
 
 	@Override
 	public int getId(String message) throws IOException {
-
-		Socket socket = new Socket("169.254.2.3", 8000);
-
+		
+		
 		return 0;
 	}
 
