@@ -15,12 +15,13 @@ import final_cdio_11.java.data.FileHandler;
 
 public class SendEmail {
 
-	private FileHandler fileHandler = FileHandler.getInstance();
-
+	private final TextHandler textHandler = TextHandler.getInstance();
+	private final FileHandler fileHandler = FileHandler.getInstance();
+	
 	public void sendMail(String to, String msg, String sub) throws AddressException, MessagingException {
 
 		// Sender's email ID needs to be mentioned
-		String from = "DTUgruppe11@gmail.com";
+		String from = textHandler.ADMIN_EMAIL;
 		final String username = fileHandler.getMailProperty("MAIL_USERNAME");//change accordingly
 		final String password = fileHandler.getMailProperty("MAIL_PASSWORD");//change accordingly
 		final String port = fileHandler.getMailProperty("MAIL_PORT");

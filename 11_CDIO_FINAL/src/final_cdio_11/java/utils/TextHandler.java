@@ -34,6 +34,8 @@ public class TextHandler {
 	public final String devSavingSqlConfigMessage = "Saving sql.config file: ";
 	public final String devLoadingSqlConfigMessage = "Loading sql.config file: ";
 	public final String devLoadDatabaseConfigMessage = "Loading mysql.config file: ";
+	
+	public final String ADMIN_EMAIL = "webadmin@group11.com";
 
 	public final String[] WEIGHT_IPS = { "169.254.2.3" };
 	public final int WEIGHT_PORT = 8000;
