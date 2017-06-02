@@ -90,7 +90,9 @@ $(document).ready(function() {
 
 // User button menu 
 $(document).ready(function() { 
-	$("#user_but").click(function() {       
+	$("#user_but").click(function() {  
+        $('#user_but').attr("disabled", true);
+        $('#refresh_But').attr("disabled", true);
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
         $('#editUser_Box').hide();
@@ -180,6 +182,8 @@ function loadUsers(){
         	console.log( "js load was performed." );
         });
         
+        $('#user_but').attr("disabled", false);
+        $('#refresh_But').attr("disabled", false);
         console.log('tabel data load done');
     }); 
 } 
