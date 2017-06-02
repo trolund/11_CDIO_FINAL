@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import final_cdio_11.java.RESTResources.controller.OprController;
+import final_cdio_11.java.RESTResources.controller.OperatorController;
 import final_cdio_11.java.RESTResources.model.CreateUserFormPOJO;
 import final_cdio_11.java.RESTResources.model.EditUserFormPOJO;
 import final_cdio_11.java.RESTResources.model.LoginFormPOJO;
@@ -25,7 +25,7 @@ import final_cdio_11.java.data.dto.RoleDTO;
 @Path("/opr")
 public class RESTOperator {
 
-	private final OprController con = new OprController();
+	private final OperatorController con = new OperatorController();
 
 	@POST
 	@Path("/deleteOpr")

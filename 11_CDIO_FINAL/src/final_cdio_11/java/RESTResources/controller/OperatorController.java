@@ -15,7 +15,7 @@ import final_cdio_11.java.data.dto.RoleDTO;
 import final_cdio_11.java.utils.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
-public class OprController {
+public class OperatorController {
 	
 	private final Utils utils = Utils.getInstance();
 	private final TextHandler textHandler = TextHandler.getInstance();
