@@ -72,7 +72,7 @@ public class TextHandler {
 	public final String mailMessage(OperatorDTO oprDTO) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Hej " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName() + ".\n\n");
-		sb.append("Du har f�et et nyt password til hjemmesiden.\n");
+		sb.append("Du har fået et nyt password til hjemmesiden.\n");
 		sb.append("Dine nye login oplysninger er: \n");
 		sb.append("Id: " + oprDTO.getOprId() + "\n");
 		sb.append("Password: " + oprDTO.getOprPassword() + "\n\n");
@@ -85,14 +85,14 @@ public class TextHandler {
 	public final String errIdInvalid = "Invalid Id.";
 	public final String errInvalidCredentials = "Invalid credentials.";
 	public final String errUnknownFailure = "Failure.";
-	public final String errUserCreation = "Failure. Perhaps the user already exists?";
+	public final String errUserCreation = "Failure. Id already exists.";
 
 	/*
 	 * Roles.
 	 */
 	public final String ROLE_ADMIN = "Admin";
 	public final String ROLE_FARMACEUT = "Farmaceut";
-	public final String ROLE_VAERK = "V�rkf�rer";
+	public final String ROLE_VAERK = "Værkfører";
 	public final String ROLE_LABORANT = "Laborant";
 
 }

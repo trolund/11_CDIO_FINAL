@@ -1,3 +1,36 @@
+// Delete users 
+$(document).ready(function() {
+	$('.del_user').click(function() {
+		
+       var id = $(this).prop('name');
+       console.log('Try to delete user with id: ' + id);  
+       
+       jQuery.ajax({
+    	   url: "api/opr/deleteOpr",
+    	   type: "POST",
+    	   data : id,
+    	   contentType: "application/json",
+    	   
+    	   success: function(resultData) {
+    		   if (resultData == "true") {
+    			   console.log('User successfully deleted.' + 'return:' + resultData);
+    			   $('tr#' + id + ' td:first-child').html("<td style='color: red;'>Inactive</td>").fadeIn(200);
+                   
+    		   } else {
+    			   console.log('User NOT deleted.' + 'return:' + resultData);
+    			   $('#' + id).css('background-color', 'yellow').fadeIn(400); 
+    		   }
+    	   },
+    	   
+    	   error : function(jqXHR, textStatus, errorThrown) {
+    		   console.log("Id [" + id + "] does not exist.");
+    	   },
+    	   
+    	   timeout: 120000,
+       });
+    }); 
+});
+
 // Edit user button
 $(document).ready(function() {
 	$(".edit_user").click(function() {
@@ -129,8 +162,7 @@ $(document).ready(function() {
            	 	loadUsers();
 			},
 			error: function(jqXHR, text, error) { 
-            	console.log(data);
-            	$('#CreateMSG').html(data).fadeToggle(500);
+            	$('#CreateMSG').html(data);
              	$("#AddUser_Box").show(400);
 			}
 		});  
@@ -140,8 +172,6 @@ $(document).ready(function() {
 // Refresh button
 $(document).ready(function() {
 	$("#refresh_But").click(function() { 
-        $('#user_but').attr("disabled", true);
-        $('#refresh_But').attr("disabled", true);
     	console.log('Refreshing users.'); 
     	loadUsers();
 	});

@@ -124,9 +124,9 @@ public class SQLRoleDAO implements IRoleDAO {
 		PreparedStatement updateRoleStmt = null;
 		try {
 			updateRoleStmt = connector.getConnection().prepareStatement(updateRoleSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			updateRoleStmt.setInt(1, roleDTO.getStatus());
-			updateRoleStmt.setInt(2, roleDTO.getOprId());
-			updateRoleStmt.setString(3, roleDTO.getRoleName());
+			updateRoleStmt.setInt(1, roleDTO.getOprId());
+			updateRoleStmt.setString(2, roleDTO.getRoleName());
+			updateRoleStmt.setInt(3, roleDTO.getStatus());
 			updateRoleStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
