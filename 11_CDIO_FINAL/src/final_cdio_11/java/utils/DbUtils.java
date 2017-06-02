@@ -27,8 +27,8 @@ public class DbUtils {
 
 	private static void deleteAllUsers() throws SQLException {
 		System.err.println("Deleting all users....");
-		connector.getConnection().prepareStatement("DELETE FROM rolle WHERE opr_id != 10 AND opr_id != 1 AND opr_id != 2 AND opr_id != 3").executeUpdate();
-		connector.getConnection().prepareStatement("DELETE FROM operatoer WHERE opr_id != 10 AND opr_id != 1 AND opr_id != 2 AND opr_id != 3").executeUpdate();
+		connector.getConnection().prepareStatement("DELETE FROM rolle WHERE opr_id != 10 AND opr_id != 1 AND opr_id != 2 AND opr_id != 3 AND opr_id != 4").executeUpdate();
+		connector.getConnection().prepareStatement("DELETE FROM operatoer WHERE opr_id != 10 AND opr_id != 1 AND opr_id != 2 AND opr_id != 3 AND opr_id != 4").executeUpdate();
 		System.err.println("Done.");
 	}
 
