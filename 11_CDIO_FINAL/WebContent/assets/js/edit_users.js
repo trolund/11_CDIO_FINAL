@@ -33,7 +33,6 @@ $(document).ready(function() {
         	console.log(data);
             
         	$('#statusEdit').val(data.status);
-        	$('#oprIdEdit').html(data.oprId);
             $('#oprIdEdit').val(data.oprId);
         	$('#oprFirstNameEdit').val(data.oprFirstName); 
         	$('#oprLastNameEdit').val(data.oprLastName);
