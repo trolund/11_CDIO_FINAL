@@ -8,6 +8,15 @@ var authHeader = "Bearer " + localStorage.getItem("jwt");
 $(document).ready(function(){
 	$('#loadingGif').hide();
     $('#AddUser_Box').hide();
+    
+    
+    
+$('#login').keydown(function(e) {
+    if (e.keyCode == 13) {
+        login();
+    }
+});
+    
 });
 
 // LogOut button menu  
@@ -24,8 +33,12 @@ $(document).ready(function() {
 
 // Post login data
 $(document).ready(function() {
-	$("#login_but").click(function() {  
-		
+	$("#login_but").click(function() {
+        login();
+    } 
+)});
+
+function login() {  
 		id = $('#login_oprId').val();
 		$('#login_Bg').show();
 		$('#loadingGif').show(200);
@@ -64,8 +77,7 @@ $(document).ready(function() {
                 console.log('Failed to log in - ' + data)
 			}
 		}
-	)} 
-)});
+	)}
 
 // Menu mobile button 
 $(document).ready(function() {
