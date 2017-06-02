@@ -20,25 +20,42 @@ public class FileHandler {
 	 */
 	private final URL MYSQL_CONFIG_FILE = FileHandler.class.getResource("/mysql_oracle.config");
 	private final URL SQL_CONFIG_FILE = FileHandler.class.getResource("/sql.config");
-	private final URL Mail_CONFIG_FILE = FileHandler.class.getResource("/mail.config");
+	private final URL MAIL_CONFIG_FILE = FileHandler.class.getResource("/mail.config");
 
+	/*
+	 * Singleton instance of FileHandler.
+	 */
 	private static final FileHandler instance = new FileHandler();
 
-	private final Utils utils;
-	private final TextHandler textHandler;
+	/*
+	 * Singleton instance of helper classes.
+	 */
+	private final Utils utils = Utils.getInstance();
+	private final TextHandler textHandler = TextHandler.getInstance();
 
+	/*
+	 * HashMaps used to store SQL queries and mail properties.
+	 */
 	private Map<String, String> sqlHashMap;
 	private Map<String, String> mailHashMap;
 
+	/*
+	 * Class constructor loading configuration files.
+	 */
 	private FileHandler() {
-		utils = Utils.getInstance();
-		textHandler = TextHandler.getInstance();
 		sqlHashMap = new HashMap<>();
 		mailHashMap = new HashMap<>();
 
 		loadDatabaseProperties();
 		loadSQLProperties();
 		loadMailProperties();
+	}
+
+	/*
+	 * Method to return the Singleton instance of this class.
+	 */
+	public static synchronized FileHandler getInstance() {
+		return instance;
 	}
 
 	/*
@@ -86,27 +103,11 @@ public class FileHandler {
 	}
 
 	/*
-	 * Method to get the desired SQL query at the key.
+	 * Method to load the mail property configuration file and put all of the information into a HashMap.
 	 */
-	public String getSQL(String key) {
-		return sqlHashMap.get(key);
-	}
-	
-	
-	public String getMailProperty(String key) {
-		return mailHashMap.get(key);
-	}
-
-	/*
-	 * Method to return the Singleton instance of this class.
-	 */
-	public static synchronized FileHandler getInstance() {
-		return instance;
-	}
-	
 	private void loadMailProperties() {
 		Properties p = new Properties();
-		String path = Mail_CONFIG_FILE.getPath();
+		String path = MAIL_CONFIG_FILE.getPath();
 
 		if (utils.DEV_ENABLED) utils.logMessage("mail?" + path);
 
@@ -121,6 +122,20 @@ public class FileHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/*
+	 * Method to get the desired SQL query at the key.
+	 */
+	public String getQuery(String key) {
+		return sqlHashMap.get(key);
+	}
+
+	/*
+	 * Method to get the desired Mail setting at the key.
+	 */
+	public String getMailProperty(String key) {
+		return mailHashMap.get(key);
 	}
 
 }

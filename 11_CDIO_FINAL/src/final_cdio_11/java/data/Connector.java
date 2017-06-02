@@ -104,17 +104,17 @@ public class Connector {
 
 	// Temporary method
 	public String getQuery(String key) {
-		return fileHandler.getSQL(key);
+		return fileHandler.getQuery(key);
 	}
 
 	private void setupConnectionProperties() {
-		this.driverClass = fileHandler.getSQL("DRIVER_CLASS");
-		this.driver = fileHandler.getSQL("DRIVER");
-		this.host = fileHandler.getSQL("HOST");
-		this.port = Integer.parseInt(fileHandler.getSQL("PORT"));
-		this.database = fileHandler.getSQL("DATABASE");
-		this.username = fileHandler.getSQL("USERNAME");
-		this.password = fileHandler.getSQL("PASSWORD");
+		this.driverClass = fileHandler.getQuery("DRIVER_CLASS");
+		this.driver = fileHandler.getQuery("DRIVER");
+		this.host = fileHandler.getQuery("HOST");
+		this.port = Integer.parseInt(fileHandler.getQuery("PORT"));
+		this.database = fileHandler.getQuery("DATABASE");
+		this.username = fileHandler.getQuery("USERNAME");
+		this.password = fileHandler.getQuery("PASSWORD");
 	}
 
 	private Connection createConnection() throws SQLException {

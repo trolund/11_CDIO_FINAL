@@ -32,7 +32,7 @@ public class RESTOperator {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean delUser(String oprId) {
-		return con.delUser(oprId);
+		return con.deleteOperator(oprId);
 	}
 
 	@POST
@@ -40,7 +40,7 @@ public class RESTOperator {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String verify(LoginFormPOJO loginFormData) throws JsonParseException, JsonMappingException, IOException {
-		return con.VerifyLogin(loginFormData);
+		return con.verifyOperatorLogin(loginFormData);
 	}
 
 	@POST
@@ -48,35 +48,35 @@ public class RESTOperator {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String addOpr(CreateUserFormPOJO createUserFormData) throws DALException {
-		return con.CreatUser(createUserFormData);
+		return con.createOperator(createUserFormData);
 	}
 
 	@GET
 	@Path("/{oprId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public OperatorDTO getName(@PathParam("oprId") String oprId) {
-		return con.getName(oprId);
+		return con.createOperatorPOJO(oprId);
 	}
 
 	@GET
 	@Path("/getOprList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<OperatorDTO> getopr() {
-		return con.getopr();
+		return con.getOperatorList();
 	}
 
 	@GET
 	@Path("/getOprRoleList/{oprId}")
 	@Produces(MediaType.TEXT_HTML)
 	public String getOprRoleList(@PathParam("oprId") String oprId) {
-		return con.getoprRoleList(oprId);
+		return con.getOperatorRolesAsString(oprId);
 	}
 
 	@GET
 	@Path("/RoleList/{OprId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<RoleDTO> getoprRoleListJSON(@PathParam("OprId") String OprId) {
-		return con.getOprRoleList(OprId);
+		return con.getOperatorRoleList(OprId);
 	}
 
 	@POST
@@ -84,7 +84,7 @@ public class RESTOperator {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String updateOpr(EditUserFormPOJO editUserFormData) throws DALException {
-		return con.updateOpr(editUserFormData);
+		return con.updateOperator(editUserFormData);
 	}
 
 }
