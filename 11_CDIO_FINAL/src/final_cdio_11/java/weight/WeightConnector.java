@@ -33,7 +33,7 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
-	public int getId(String message) throws IOException {
+	public int getId(String message) {
 		
 		
 		return 0;
