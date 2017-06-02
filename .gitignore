@@ -1,11 +1,13 @@
 /11_CDIO_FINAL/bin
 
 /11_CDIO_FINAL/build
+
 /11_CDIO_FINAL/target
 
 \11_CDIO_FINAL\11_CDIO_FINAL\target
 11_CDIO_FINAL\11_CDIO_FINAL\target
 /11_CDIO_FINAL/11_CDIO_FINAL/target
+
 /11_CDIO_FINAL/mysql_mariadb.config
 
 /11_CDIO_FINAL/mysql_mariadb_local.config
@@ -13,6 +15,7 @@
 /11_CDIO_FINAL/mysql_oracle.config
 
 /11_CDIO_FINAL/mysql_oracle_local.config
+/11_CDIO_FINAL/mail.config
 
 
 /11_CDIO_FINAL/config/mysql_mariadb.config
@@ -22,9 +25,11 @@
 /11_CDIO_FINAL/config/mysql_oracle.config
 
 /11_CDIO_FINAL/config/mysql_oracle_local.config
+/11_CDIO_FINAL/config/mail.config
 
 
 /mysql_mariadb.config
+
 /mysql_mariadb_local.config
 
 /mysql_oracle.config
@@ -32,6 +37,8 @@
 /mysql_oracle_local.config
 
 
+/mail.config
 /.DS_Store
+
 
 /11_CDIO_FINAL/.DS_Store
