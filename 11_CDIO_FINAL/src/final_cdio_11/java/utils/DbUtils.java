@@ -1,4 +1,4 @@
-package final_cdio_11.java.data.dbutils;
+package final_cdio_11.java.utils;
 
 import java.sql.SQLException;
 

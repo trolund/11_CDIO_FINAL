@@ -1,15 +1,13 @@
-package final_cdio_11.java.data;
+package final_cdio_11.java.weight.ase;
 
+import final_cdio_11.java.data.Connector;
+import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLProductBatchDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
-import final_cdio_11.java.weight.IWeightConnector;
-import final_cdio_11.java.weight.IWeightConnector.WeightException;
-import final_cdio_11.java.weight.IWeightController;
-import final_cdio_11.java.weight.WeightConnector;
-import final_cdio_11.java.weight.WeightController;
+import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 
-public class netTEst {
+public class WeightTestDriver {
 
 	public static void main(String[] args) {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());

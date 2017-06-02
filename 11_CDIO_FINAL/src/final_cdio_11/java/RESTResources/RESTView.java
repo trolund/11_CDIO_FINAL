@@ -1,4 +1,4 @@
-package final_cdio_11.RESTResources;
+package final_cdio_11.java.RESTResources;
 
 import java.util.List;
 

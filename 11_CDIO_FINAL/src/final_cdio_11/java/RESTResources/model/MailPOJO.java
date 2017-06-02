@@ -1,4 +1,4 @@
-package final_cdio_11.RESTResources.model;
+package final_cdio_11.java.RESTResources.model;
 
 public class MailPOJO {
 

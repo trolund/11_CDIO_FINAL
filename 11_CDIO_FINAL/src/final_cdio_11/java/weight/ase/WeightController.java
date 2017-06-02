@@ -1,4 +1,4 @@
-package final_cdio_11.java.weight;
+package final_cdio_11.java.weight.ase;
 
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.IOperatorDAO;
@@ -6,8 +6,8 @@ import final_cdio_11.java.data.dao.IProductBatchDAO;
 import final_cdio_11.java.data.dao.IReceptDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
-import final_cdio_11.java.weight.IWeightConnector.WeightConnectionException;
-import final_cdio_11.java.weight.IWeightConnector.WeightException;
+import final_cdio_11.java.weight.ase.IWeightConnector.WeightConnectionException;
+import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 
 public class WeightController implements IWeightController {
 

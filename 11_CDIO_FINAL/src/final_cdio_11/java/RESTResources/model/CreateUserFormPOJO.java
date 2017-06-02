@@ -1,4 +1,4 @@
-package final_cdio_11.RESTResources.model;
+package final_cdio_11.java.RESTResources.model;
 
 import java.util.ArrayList;
 import java.util.List;

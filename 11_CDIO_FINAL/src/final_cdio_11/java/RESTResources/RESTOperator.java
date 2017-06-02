@@ -1,7 +1,6 @@
-package final_cdio_11.RESTResources;
+package final_cdio_11.java.RESTResources;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -15,22 +14,17 @@ import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import final_cdio_11.RESTResources.model.CreateUserFormPOJO;
-import final_cdio_11.RESTResources.model.EditUserFormPOJO;
-import final_cdio_11.RESTResources.model.LoginFormPOJO;
-import final_cdio_11.java.data.Connector;
+import final_cdio_11.java.RESTResources.controller.OprController;
+import final_cdio_11.java.RESTResources.model.CreateUserFormPOJO;
+import final_cdio_11.java.RESTResources.model.EditUserFormPOJO;
+import final_cdio_11.java.RESTResources.model.LoginFormPOJO;
 import final_cdio_11.java.data.DALException;
-import final_cdio_11.java.data.controller.OprController;
-import final_cdio_11.java.data.dao.SQLOperatorDAO;
-import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.utils.TextHandler;
-import final_cdio_11.java.utils.Utils;
 
 @Path("/opr")
 public class RESTOperator {
-	
+
 	private final OprController con = new OprController();
 
 	@POST
@@ -41,7 +35,6 @@ public class RESTOperator {
 		return con.delUser(oprId);
 	}
 
-
 	@POST
 	@Path("/verify")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -49,7 +42,6 @@ public class RESTOperator {
 	public String verify(LoginFormPOJO loginFormData) throws JsonParseException, JsonMappingException, IOException {
 		return con.VerifyLogin(loginFormData);
 	}
-
 
 	@POST
 	@Path("/addopr")
@@ -59,14 +51,12 @@ public class RESTOperator {
 		return con.CreatUser(createUserFormData);
 	}
 
-
 	@GET
 	@Path("/{oprId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public OperatorDTO getName(@PathParam("oprId") String oprId) {
 		return con.getName(oprId);
 	}
-
 
 	@GET
 	@Path("/getOprList")
@@ -75,16 +65,12 @@ public class RESTOperator {
 		return con.getopr();
 	}
 
-	
-
 	@GET
 	@Path("/getOprRoleList/{oprId}")
 	@Produces(MediaType.TEXT_HTML)
 	public String getOprRoleList(@PathParam("oprId") String oprId) {
 		return con.getoprRoleList(oprId);
 	}
-
-	
 
 	@GET
 	@Path("/RoleList/{OprId}")
@@ -93,7 +79,6 @@ public class RESTOperator {
 		return con.getOprRoleList(OprId);
 	}
 
-
 	@POST
 	@Path("/updateopr")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -101,6 +86,5 @@ public class RESTOperator {
 	public String updateOpr(EditUserFormPOJO editUserFormData) throws DALException {
 		return con.updateOpr(editUserFormData);
 	}
-
 
 }

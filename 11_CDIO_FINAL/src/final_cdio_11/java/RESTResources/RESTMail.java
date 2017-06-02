@@ -1,4 +1,4 @@
-package final_cdio_11.RESTResources;
+package final_cdio_11.java.RESTResources;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -9,7 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import final_cdio_11.RESTResources.model.MailPOJO;
+import final_cdio_11.java.RESTResources.model.MailPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;

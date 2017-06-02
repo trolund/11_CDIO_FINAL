@@ -1,11 +1,11 @@
-package final_cdio_11.Contoller;
+package final_cdio_11.java.RESTResources.controller;
 
 import java.util.Iterator;
 import java.util.List;
 
-import final_cdio_11.RESTResources.model.CreateUserFormPOJO;
-import final_cdio_11.RESTResources.model.EditUserFormPOJO;
-import final_cdio_11.RESTResources.model.LoginFormPOJO;
+import final_cdio_11.java.RESTResources.model.CreateUserFormPOJO;
+import final_cdio_11.java.RESTResources.model.EditUserFormPOJO;
+import final_cdio_11.java.RESTResources.model.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
@@ -194,7 +194,6 @@ public class OprController {
 						if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(editUserFormData.getOprId()));
 			
 						if (editUserFormData.isAdminRole()) {
-							
 							roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_ADMIN, 0));
 							if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_ADMIN));
 						}

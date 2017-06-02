@@ -1,4 +1,4 @@
-package final_cdio_11.RESTResources;
+package final_cdio_11.java.RESTResources;
 
 import java.security.Key;
 import java.util.Date;
@@ -8,7 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 
-import final_cdio_11.RESTResources.model.LoginFormPOJO;
+import final_cdio_11.java.RESTResources.model.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
