@@ -126,12 +126,12 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			updateOprStmt = connector.getConnection().prepareStatement(updateOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			updateOprStmt.setString(1, opr.getOprFirstName());
 			updateOprStmt.setString(2, opr.getOprLastName());
-			updateOprStmt.setString(2, opr.getOprIni());
-			updateOprStmt.setString(3, opr.getOprEmail());
-			updateOprStmt.setString(4, opr.getOprCpr());
-			updateOprStmt.setString(5, Utils.getInstance().sha256(opr.getOprPassword()));
-			updateOprStmt.setInt(6, opr.getStatus());
-			updateOprStmt.setInt(7, opr.getOprId());
+			updateOprStmt.setString(3, opr.getOprIni());
+			updateOprStmt.setString(4, opr.getOprEmail());
+			updateOprStmt.setString(5, opr.getOprCpr());
+			updateOprStmt.setString(6, Utils.getInstance().sha256(opr.getOprPassword()));
+			updateOprStmt.setInt(7, opr.getStatus());
+			updateOprStmt.setInt(8, opr.getOprId());
 			updateOprStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

@@ -20,6 +20,7 @@ public class FileHandler {
 	 */
 	private final URL MYSQL_CONFIG_FILE = FileHandler.class.getResource("/mysql_oracle.config");
 	private final URL SQL_CONFIG_FILE = FileHandler.class.getResource("/sql.config");
+	private final URL Mail_CONFIG_FILE = FileHandler.class.getResource("/mail.config");
 
 	private static final FileHandler instance = new FileHandler();
 
@@ -27,14 +28,17 @@ public class FileHandler {
 	private final TextHandler textHandler;
 
 	private Map<String, String> sqlHashMap;
+	private Map<String, String> mailHashMap;
 
 	private FileHandler() {
 		utils = Utils.getInstance();
 		textHandler = TextHandler.getInstance();
 		sqlHashMap = new HashMap<>();
+		mailHashMap = new HashMap<>();
 
 		loadDatabaseProperties();
 		loadSQLProperties();
+		loadMailProperties();
 	}
 
 	/*
@@ -87,12 +91,36 @@ public class FileHandler {
 	public String getSQL(String key) {
 		return sqlHashMap.get(key);
 	}
+	
+	
+	public String getMailProperty(String key) {
+		return mailHashMap.get(key);
+	}
 
 	/*
 	 * Method to return the Singleton instance of this class.
 	 */
 	public static synchronized FileHandler getInstance() {
 		return instance;
+	}
+	
+	private void loadMailProperties() {
+		Properties p = new Properties();
+		String path = Mail_CONFIG_FILE.getPath();
+
+		if (utils.DEV_ENABLED) utils.logMessage("mail?" + path);
+
+		try (InputStream is = new FileInputStream(path)) {
+			p.load(is);
+			for (String key : p.stringPropertyNames()) {
+				String value = p.getProperty(key);
+				mailHashMap.put(key, value);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
