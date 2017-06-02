@@ -35,6 +35,9 @@ public class TextHandler {
 	public final String devLoadingSqlConfigMessage = "Loading sql.config file: ";
 	public final String devLoadDatabaseConfigMessage = "Loading mysql.config file: ";
 
+	public final String[] WEIGHT_IPS = { "169.254.2.3" };
+	public final int WEIGHT_PORT = 8000;
+
 	public final String devUserDeletedSuccessMessage(int oprId) {
 		return "User [" + oprId + "] successfully deleted.";
 	}
@@ -60,11 +63,11 @@ public class TextHandler {
 	public final String succAddedRole(int oprId, String role) {
 		return "Added role '" + role + "' to user [" + oprId + "] successfully.";
 	}
-	
+
 	public final String succUpdateRole(int oprId, String role) {
 		return "Updated role '" + role + "' to user [" + oprId + "] successfully.";
 	}
-	
+
 	public final String succUpdateUser(int oprId) {
 		return "User [" + oprId + "] Updated successfully.";
 	}

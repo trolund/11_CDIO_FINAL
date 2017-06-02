@@ -1,5 +1,9 @@
 package final_cdio_11.java.weight;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.IOperatorDAO;
 import final_cdio_11.java.data.dao.IProductBatchDAO;
@@ -25,8 +29,24 @@ public class WeightController implements IWeightController {
 	@Override
 	public void weightProcedure() throws DALException {
 
+		try {
+			iWeightConnector.initConnection();
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		// step 3: Få laborant nummer
-		int id = iWeightConnector.getId("Indtast dit laborant nummer");
+		int id = -1;
+		try {
+			id = iWeightConnector.getId("Indtast dit laborant nummer");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		OperatorDTO oprDTO = oprDAO.getOperator(id);
 
@@ -34,44 +54,56 @@ public class WeightController implements IWeightController {
 		iWeightConnector.confirmMessage("Du er " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName());
 
 		// Step 5: Laboranten indtaster produktbatchnummer
-		int pbId = iWeightConnector.getId("Indtast produktbatchID");
+		int pbId=-1;
+		try {
+			pbId = iWeightConnector.getId("Indtast produktbatchID");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Step 6: Vægt svarer tilbage med navn på recept der skal produceres
 		int receptID = pbDAO.getProductBatch(pbId).getReceptId();
 		String receptName = receptDAO.getRecept(receptID).getReceptName();
-		
+
 		// Step 7: Laborant tjekker vægt er nulstillet og trykker OK
 		iWeightConnector.confirmMessage("Kontrollér at vægten er nulstillet og tryk OK");
 
 		// Step 8: Produktbatchnummerets status sættes til "under produktion"
 		ProductBatchDTO pbDTO = pbDAO.getProductBatch(pbId);
 		pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getpbId(), 1, pbDTO.getReceptId(), pbDTO.getStatus()));
-	
+
 		// Step 9: Tarér vægt
 		iWeightConnector.tara();
-		
-		//Step 10 og 11: Laborant placerer beholder og trykker OK
+
+		// Step 10 og 11: Laborant placerer beholder og trykker OK
 		iWeightConnector.confirmMessage("Placér første tara beholder og tryk OK");
-		
-		//Step 12: Vægten af tarabeholder registreres
+
+		// Step 12: Vægten af tarabeholder registreres
 		iWeightConnector.getWeight();
-		
-		//Step 13: Vægten Tareres igen
+
+		// Step 13: Vægten Tareres igen
 		iWeightConnector.tara();
-		
-		//Step 14 og 15: Vægt beder om råvarebatchnummer på første råvare. Laborant afvejer og trykker OK
-		int rbId = iWeightConnector.getId("Indtast raavarebatchID");
-		
-		//Step 16: Spørg laborant om raavareafvejning er afsluttet
+
+		// Step 14 og 15: Vægt beder om råvarebatchnummer på første råvare.
+		// Laborant afvejer og trykker OK
+		try {
+			int rbId = iWeightConnector.getId("Indtast raavarebatchID");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Step 16: Spørg laborant om raavareafvejning er afsluttet
 		iWeightConnector.confirmMessage("Tast 1 afvej næste raavare eller afslut batch");
-		
-		//Step 17: Produktbacthnummerets status sættes til afsluttet
+
+		// Step 17: Produktbacthnummerets status sættes til afsluttet
 		ProductBatchDTO pbDTO2 = pbDAO.getProductBatch(pbId);
 		pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO2.getpbId(), 2, pbDTO2.getReceptId(), pbDTO2.getStatus()));
-	
+
 		// Step 18: Bed laboborant om enten at lave nyt batch eller afslutte
 		iWeightConnector.confirmMessage("Tast 1 for ny afvejning eller tast 2 for at afslutte");
-	
+
 	}
 
 }
