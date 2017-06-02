@@ -8,6 +8,15 @@ var authHeader = "Bearer " + localStorage.getItem("jwt");
 $(document).ready(function(){
 	$('#loadingGif').hide();
     $('#AddUser_Box').hide();
+    
+    
+    
+$('#login').keydown(function(e) {
+    if (e.keyCode == 13) {
+        login();
+    }
+});
+    
 });
 
 // LogOut button menu  
@@ -24,8 +33,12 @@ $(document).ready(function() {
 
 // Post login data
 $(document).ready(function() {
-	$("#login_but").click(function() {  
-		
+	$("#login_but").click(function() {
+        login();
+    } 
+)});
+
+function login() {  
 		id = $('#login_oprId').val();
 		$('#login_Bg').show();
 		$('#loadingGif').show(200);
@@ -46,7 +59,6 @@ $(document).ready(function() {
 					$('#loadingGif').hide(200);
  
 					loadLoginUser(id);
-					roles.search("Admin");
 				} else {
 					$('#msg').css('color','red');
 					$('#msg').html(data);
@@ -64,8 +76,7 @@ $(document).ready(function() {
                 console.log('Failed to log in - ' + data)
 			}
 		}
-	)} 
-)});
+	)}
 
 // Menu mobile button 
 $(document).ready(function() {
@@ -78,11 +89,15 @@ $(document).ready(function() {
 
 // User button menu 
 $(document).ready(function() { 
-	$("#user_but").click(function() {       
+	$("#user_but").click(function() {
+       if(!$('#user_but').attr('disabled')){
+        $('#user_but').attr("disabled", true);
+        $('#refresh_But').attr("disabled", true);
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
         $('#editUser_Box').hide();
 		loadUsers();
+       }
 	});   
 });
 
@@ -92,7 +107,6 @@ $(document).ready(function() {
 		$("#content_box").load('view.html');
 		
 		$.getScript( "assets/js/view.js", function( data, textStatus, jqxhr ) {
-        	console.log( data ); // Data returned
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "view.js was loaded." );
@@ -108,7 +122,7 @@ function loadUsers(){
     var ActiveCount = 0;
     var totCount = 0;
     
-    $('#table_con').empty();                         
+   $('#table_con').remove();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/opr/getOprList', function(data) {
@@ -155,19 +169,19 @@ function loadUsers(){
         console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);
         
         $.getScript( "assets/js/del_users.js", function( data, textStatus, jqxhr ) {
-        	console.log( data ); // Data returned
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "js load was performed." );
         });
         
         $.getScript( "assets/js/edit_users.js", function( data, textStatus, jqxhr ) {
-        	console.log( data ); // Data returned
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "js load was performed." );
         });
         
+        $('#user_but').attr("disabled", false);
+        $('#refresh_But').attr("disabled", false);
         console.log('tabel data load done');
     }); 
 } 
