@@ -2,7 +2,7 @@ package final_cdio_11.java.weight;
 
 public interface IWeightConnector {
 	void initConnection() throws WeightConnectionException; // initalize connection
-	int getId(String message) throws WeightException; // beder om laborant nummer
+	int getId(String message) throws WeightException;
 	int getWeight() throws WeightException;
 	void confirmMessage(String message) throws WeightException;
 	void tara() throws WeightException;

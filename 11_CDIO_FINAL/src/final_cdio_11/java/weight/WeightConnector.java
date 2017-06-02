@@ -1,6 +1,9 @@
 package final_cdio_11.java.weight;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -33,7 +36,47 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
-	public int getId(String message) {
+	public int getId(String message) throws WeightException {
+		InputStreamReader in = null;
+		try {
+			in = new InputStreamReader(weightSocket.getInputStream());
+		} catch (IOException e) {
+			throw new WeightException(e.getMessage(), e);
+		}
+
+		BufferedReader br = new BufferedReader(in);
+
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(weightSocket.getOutputStream(), true);
+		} catch (IOException e) {
+			throw new WeightException(e.getMessage(), e);
+		}
+
+		pw.print("RM20 8 \"" + message + "\" \"\" \"&3\"\r\n");
+		pw.flush();
+
+		String data = null;
+
+		try {
+			data = br.readLine();
+			System.out.println("1: " + data);
+			data = br.readLine();
+			System.out.println("2: " + data);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		int oprId = Integer.parseInt(data.substring(8, data.length() - 1));
+		System.out.println(oprId);
+
+		pw.close();
+		try {
+			br.close();
+		} catch (IOException e) {
+			throw new WeightException(e.getMessage(), e);
+		}
+
 		return 0;
 	}
 

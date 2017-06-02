@@ -35,7 +35,7 @@ public class WeightController implements IWeightController {
 		// step 3: Få laborant nummer
 		int id = -1;
 		try {
-			id = iWeightConnector.getId("Indtast dit laborant nummer");
+			id = iWeightConnector.getId("Indtast nr");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
