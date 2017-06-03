@@ -5,13 +5,13 @@ import javax.mail.internet.AddressException;
 
 import org.junit.Test;
 
-import final_cdio_11.java.utils.SendEmail;
+import final_cdio_11.java.utils.MailHandler;
 
 public class MailTest {
 
 	@Test
 	public void test() {
-		SendEmail mailobj = new SendEmail();
+		MailHandler mailobj = new MailHandler();
 		try {
 			mailobj.sendMail("trolund@gmail.com", "dette er en test", "Junit Test");
 			mailobj.sendMail("iyyelsec@gmail.com", "dette er en test", "Junit Test");

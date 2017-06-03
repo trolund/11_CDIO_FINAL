@@ -9,7 +9,7 @@ import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
-import final_cdio_11.java.utils.SendEmail;
+import final_cdio_11.java.utils.MailHandler;
 import final_cdio_11.java.utils.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
@@ -19,7 +19,7 @@ public class MailController implements IMailController {
 	private final Utils utils = Utils.getInstance();
 
 	public Response sendMail(MailPOJO mailPOJO) {
-		SendEmail mailObj = new SendEmail();
+		MailHandler mailObj = new MailHandler();
 
 		try {
 			mailObj.sendMail(mailPOJO.getTo(), mailPOJO.getMsg(), mailPOJO.getSub());
@@ -33,7 +33,7 @@ public class MailController implements IMailController {
 	}
 
 	public Response sendNewPassword(String oprId) {
-		SendEmail mailobj = new SendEmail();
+		MailHandler mailobj = new MailHandler();
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 
 		String newPass = utils.generatePassword();
