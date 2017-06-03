@@ -3,6 +3,7 @@ package final_cdio_11.test.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.After;
@@ -45,18 +46,29 @@ public class TestSQLOperatorDAO {
 	@Test
 	public void testGetOperatorPositive() {
 		try {
-			int oprId = 1;
+			int oprId = 1010;
+			String deleteSql = "DELETE FROM operatoer WHERE opr_id = " + oprId;
+
+			/* Make sure that the operator doesn't already exist. */
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
+
+			OperatorDTO oprDTO = new OperatorDTO(oprId, "JUnit", "Test", "JT", "junit@unit.com", "junit-unit", "unit", 0);
+			oprDAO.createOperator(oprDTO);
+
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.getOperator(" + oprId + ") Positive " + spr);
 
 			System.out.println("Receiving OperatorDTO with oprId: " + oprId);
-			OperatorDTO oprDTO = oprDAO.getOperator(oprId);
-			System.out.println("Received: " + oprDTO);
+			OperatorDTO newOprDTO = oprDAO.getOperator(oprId);
+			System.out.println("Received: " + newOprDTO);
 
 			System.out.println(lspr);
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
 			fail("Failed: Failed to retrieve existing OperatorDTO!");
 			System.out.println(lspr);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -66,9 +78,11 @@ public class TestSQLOperatorDAO {
 	@Test
 	public void testGetOperatorNegative() {
 		try {
-			int oprId = 3433;
-			/* Make sure the OperatorDTO does not exist. */
-			oprDAO.deleteOperator(oprId);
+			int oprId = 5433;
+			String deleteSql = "DELETE FROM operatoer WHERE opr_id = " + oprId;
+
+			/* Make sure that the operator doesn't already exist. */
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
 
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.getOperator(" + oprId + ") Negative " + spr);
 
@@ -78,7 +92,7 @@ public class TestSQLOperatorDAO {
 
 			fail("Failed: Received non-existing OperatorDTO!");
 			System.out.println(lspr);
-		} catch (DALException e) {
+		} catch (DALException | SQLException e) {
 			System.out.println(e.getMessage());
 			System.out.println(lspr);
 		}
@@ -92,6 +106,9 @@ public class TestSQLOperatorDAO {
 		try {
 			List<OperatorDTO> oprList = oprDAO.getOperatorList();
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.getOperatorList() Positive " + spr);
+
+			if (oprList == null) fail("Failed: Failed to retrieve OperatorList!");
+
 			for (int i = 0; i < oprList.size(); i++) {
 				System.out.println(i + ": " + oprList.get(i));
 			}
@@ -109,18 +126,21 @@ public class TestSQLOperatorDAO {
 	@Test
 	public void testCreateOperatorPositive() {
 		try {
-			/* Make sure the OperatorDTO does not already exist. */
-			int oprId = 434;
-			oprDAO.deleteOperator(oprId);
+			int oprId = 2342;
+			String deleteSql = "DELETE FROM operatoer WHERE opr_id = " + oprId;
+
+			/* Make sure that the operator doesn't already exist. */
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
 
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.createOperator(oprDTO) Positive " + spr);
 
 			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jezzie", "Jazzak", "JZE", "j@j.jk", "32342-2343", "badpassword", 0);
 			oprDAO.createOperator(oprDTO);
-			System.out.println("Created: " + oprDTO);
+			System.out.println("Created: " + oprDAO.getOperator(oprId));
 
 			System.out.println(lspr);
-		} catch (DALException e) {
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
+		} catch (DALException | SQLException e) {
 			System.out.println(e.getMessage());
 			fail("Failed: Failed to create OperatorDTO!");
 			System.out.println(lspr);
@@ -133,12 +153,16 @@ public class TestSQLOperatorDAO {
 	@Test
 	public void testCreateOperatorNegative() {
 		try {
-			int oprId = 1;
+			int oprId = 4353;
+
+			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jezzie", "Jazzak", "JZE", "j@j.jk", "32342-2343", "badpassword", 0);
+			oprDAO.createOperator(oprDTO);
+
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.createOperator(oprDTO) Negative " + spr);
 
 			System.out.println("Attempting to create OperatorDTO with oprId: " + oprId);
-			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jezzie", "Jazzak", "JZE", "j@j.jk", "32342-2343", "badpassword", 0);
-			oprDAO.createOperator(oprDTO);
+			OperatorDTO newOprDTO = new OperatorDTO(oprId, "Jezzie", "Jazzak", "JZE", "j@j.jk", "32342-2343", "badpassword", 0);
+			oprDAO.createOperator(newOprDTO);
 			System.out.println("Created: " + oprDTO);
 
 			fail("Failed: Created already existing OperatorDTO!");
@@ -156,9 +180,14 @@ public class TestSQLOperatorDAO {
 	public void testUpdateOperatorPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.updateOperator(oprDTO) Positive " + spr);
-			/* Creating OperatorDTO to make sure that it exists. */
+
 			int oprId = 842;
-			oprDAO.deleteOperator(oprId);
+
+			/* Make sure that the operator doesn't already exist. */
+			String deleteSql = "DELETE FROM operatoer WHERE opr_id = " + oprId;
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
+
+			/* Creating OperatorDTO to make sure that it exists. */
 			OperatorDTO oprDTO = new OperatorDTO(oprId, "Jason", "Jackson", "JSN", "j@j.jk", "23234", "jason4lyfe", 0);
 			oprDAO.createOperator(oprDTO);
 
@@ -176,8 +205,9 @@ public class TestSQLOperatorDAO {
 
 			assertEquals("Failed: The updated name does not match!", expected, actual);
 
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
 			System.out.println(lspr);
-		} catch (DALException e) {
+		} catch (DALException | SQLException e) {
 			System.out.println(e.getMessage());
 			fail("Failed: Failed to update existing OperatorDTO!");
 			System.out.println(lspr);
@@ -191,9 +221,14 @@ public class TestSQLOperatorDAO {
 	public void testDeleteOperatorPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLOperatorDAO.deleteOperator(oprId) Positive " + spr);
-			/* Creating OperatorDTO to make sure that it exists. */
+
 			int oprId = 3234;
-			oprDAO.deleteOperator(oprId);
+
+			/* Make sure that the operator doesn't already exist. */
+			String deleteSql = "DELETE FROM operatoer WHERE opr_id = " + oprId;
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
+
+			/* Creating OperatorDTO to make sure that it exists. */
 			OperatorDTO oprDTO = new OperatorDTO(oprId, "Drake", "Drakenson", "DKE", "dk@dk.dk", "94432", "thuglyfe", 0);
 			oprDAO.createOperator(oprDTO);
 
@@ -201,8 +236,13 @@ public class TestSQLOperatorDAO {
 			oprDAO.deleteOperator(oprId);
 			System.out.println("Deleted.");
 
+			OperatorDTO newOprDTO = oprDAO.getOperator(oprId);
+			if (newOprDTO.getStatus() != 1) fail("Failed: Failed to delete existing OperatorDTO!");
+
+			Connector.getInstance().getConnection().prepareStatement(deleteSql).executeUpdate();
+
 			System.out.println(lspr);
-		} catch (DALException e) {
+		} catch (DALException | SQLException e) {
 			System.out.println(e.getMessage());
 			fail("Failed: Failed to delete existing OperatorDTO!");
 			System.out.println(lspr);
