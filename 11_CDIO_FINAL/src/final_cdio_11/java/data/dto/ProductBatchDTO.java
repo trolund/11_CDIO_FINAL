@@ -36,7 +36,7 @@ public class ProductBatchDTO {
 
 	@Override
 	public String toString() {
-		return "ProductBatchDTO [pbId=" + pbId + ", status=" + itemStatus + ", receptId=" + receptId + ", status=" + status + "]";
+		return "ProductBatchDTO [pbId=" + pbId + ", itemStatus=" + itemStatus + ", receptId=" + receptId + ", status=" + status + "]";
 	}
 
 }

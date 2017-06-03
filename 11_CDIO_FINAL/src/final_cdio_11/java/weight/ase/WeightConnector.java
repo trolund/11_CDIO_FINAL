@@ -43,8 +43,7 @@ public class WeightConnector implements IWeightConnector {
 	@Override
 	public void closeConnection() throws WeightConnectionException {
 		try {
-			if (!weightSocket.isClosed())
-				weightSocket.close();
+			if (!weightSocket.isClosed()) weightSocket.close();
 			utils.logMessage("Socket connection closed successfully.");
 		} catch (IOException e) {
 			throw new WeightConnectionException("Failed to close socket connection.");
@@ -53,7 +52,6 @@ public class WeightConnector implements IWeightConnector {
 
 	@Override
 	public int getId(String message) throws WeightException {
-
 		BufferedReader br = getSocketReader();
 		PrintWriter pw = getSocketWriter();
 
@@ -84,13 +82,41 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
-	public int getWeight() throws WeightException {
-		return 0;
+	public double getWeight() throws WeightException {
+		BufferedReader br = getSocketReader();
+		PrintWriter pw = getSocketWriter();
+
+		String socketMessage = "S \r\n";
+		sendSocketMessage(socketMessage, pw);
+
+		String data = null;
+		try {
+			data = br.readLine();
+			System.out.println("getWeight reply: " + data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		double weight = Double.parseDouble(data.substring(9, data.length() - 3));
+		System.out.println("weight: '" + weight + "'");
+
+		return weight;
 	}
 
 	@Override
 	public void tareWeight() throws WeightException {
+		BufferedReader br = getSocketReader();
+		PrintWriter pw = getSocketWriter();
 
+		String socketMessage = "T \r\n";
+		sendSocketMessage(socketMessage, pw);
+
+		try {
+			String data = br.readLine();
+			System.out.println("Tare reply: " + data);
+		} catch (IOException e) {
+			throw new WeightException(e.getMessage(), e);
+		}
 	}
 
 	@Override
@@ -130,18 +156,6 @@ public class WeightConnector implements IWeightConnector {
 		} catch (IOException e) {
 			throw new WeightException(e.getMessage(), e);
 		}
-	}
-
-	private void closeSocketReader(BufferedReader br) throws WeightException {
-		try {
-			br.close();
-		} catch (IOException e) {
-			throw new WeightException(e.getMessage(), e);
-		}
-	}
-
-	private void closeSocketWriter(PrintWriter pw) {
-		pw.close();
 	}
 
 	private void sendSocketMessage(String socketMessage, PrintWriter pw) {

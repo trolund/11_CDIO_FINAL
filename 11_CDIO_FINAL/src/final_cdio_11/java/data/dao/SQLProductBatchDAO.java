@@ -39,7 +39,7 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 
 			if (!rs.first()) throw new DALException("ProductBatch with pbId [" + pbId + "] does not exist!");
 
-			return new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id"), rs.getInt("status"));
+			return new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("item_status"), rs.getInt("recept_id"), rs.getInt("status"));
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
 		} finally {
