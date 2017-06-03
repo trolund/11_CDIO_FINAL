@@ -52,62 +52,97 @@ public class WeightConnector implements IWeightConnector {
 
 	@Override
 	public int getId(String message) throws WeightException {
-		InputStreamReader in = null;
-		try {
-			in = new InputStreamReader(weightSocket.getInputStream());
-		} catch (IOException e) {
-			throw new WeightException(e.getMessage(), e);
-		}
 
-		BufferedReader br = new BufferedReader(in);
+		BufferedReader br = getSocketReader();
+		PrintWriter pw = getSocketWriter();
 
-		PrintWriter pw = null;
-		try {
-			pw = new PrintWriter(weightSocket.getOutputStream(), true);
-		} catch (IOException e) {
-			throw new WeightException(e.getMessage(), e);
-		}
-
-		pw.print("RM20 8 \"" + message + "\" \"\" \"&3\"\r\n");
-		pw.flush();
-
+		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
+		sendSocketMessage(socketMessage, pw);
+		
 		String data = null;
 
 		try {
 			data = br.readLine();
-			System.out.println("1: " + data);
+			System.out.println("Confirm message: '" + data + "'");
 			data = br.readLine();
-			System.out.println("2: " + data);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			System.out.println("Message with id: '" + data + "'");
+		} catch (IOException e) {
+			throw new WeightException("Failed to read weight input.", e);
 		}
 
-		//int oprId = Integer.parseInt(data.substring(8, data.length() - 1));
-		//System.out.println(oprId);
+		System.out.println("substring: '" + data.substring(7, data.length()) + "'");
+		int oprId = -1;
+		try {
+			oprId = Integer.parseInt(data.substring(7, data.length()));
+			System.out.println("Extracted id: '" + oprId + "'");
+		} catch (NumberFormatException e) {
+			throw new WeightException("Failed to parse id.", e);
+		}
 
-		pw.close();
+		closeSocketReader(br);
+		closeSocketWriter(pw);
+
+		return oprId;
+	}
+
+	@Override
+	public int getWeight() throws WeightException {
+		return 0;
+	}
+
+	@Override
+	public void tareWeight() throws WeightException {
+
+	}
+
+	@Override
+	public void confirmMessage(String message) throws WeightException {
+
+		BufferedReader br = getSocketReader();
+		PrintWriter pw = getSocketWriter();
+
+		String socketMessage = "D \"" + message + "\\r\n";
+		sendSocketMessage(socketMessage, pw);
+
+		closeSocketReader(br);
+		closeSocketWriter(pw);
+	}
+
+	private BufferedReader getSocketReader() throws WeightException {
+		InputStreamReader in = null;
+		try {
+			in = new InputStreamReader(weightSocket.getInputStream());
+			return new BufferedReader(in);
+		} catch (IOException e) {
+			throw new WeightException(e.getMessage(), e);
+		}
+	}
+
+	private PrintWriter getSocketWriter() throws WeightException {
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(weightSocket.getOutputStream(), true);
+			return pw;
+		} catch (IOException e) {
+			throw new WeightException(e.getMessage(), e);
+		}
+	}
+
+	private void closeSocketReader(BufferedReader br) throws WeightException {
 		try {
 			br.close();
 		} catch (IOException e) {
 			throw new WeightException(e.getMessage(), e);
 		}
-
-		return 0;
 	}
 
-	@Override
-	public int getWeight() {
-		return 0;
+	private void closeSocketWriter(PrintWriter pw) {
+		pw.close();
 	}
 
-	@Override
-	public void tareWeight() {
-
-	}
-
-	@Override
-	public void confirmMessage(String message) {
-
+	private void sendSocketMessage(String socketMessage, PrintWriter pw) {
+		pw.print(socketMessage);
+		pw.flush();
 	}
 
 }

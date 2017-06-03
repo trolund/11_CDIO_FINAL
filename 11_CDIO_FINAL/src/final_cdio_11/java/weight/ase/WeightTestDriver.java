@@ -13,11 +13,11 @@ public class WeightTestDriver {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		SQLReceptDAO rDAO = new SQLReceptDAO(Connector.getInstance());
 		SQLProductBatchDAO pbDAO = new SQLProductBatchDAO(Connector.getInstance());
-		IWeightConnector Iconnector = new WeightConnector();
+		IWeightConnector connector = new WeightConnector();
 
-		IWeightController connector = new WeightController(oprDAO, rDAO, pbDAO, Iconnector);
+		IWeightController controller = new WeightController(oprDAO, rDAO, pbDAO, connector);
 		try {
-			connector.weightProcedure();
+			controller.weightProcedure();
 		} catch (WeightException e) {
 			e.printStackTrace();
 		} catch (DALException e) {
