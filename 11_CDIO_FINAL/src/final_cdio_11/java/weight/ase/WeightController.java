@@ -74,7 +74,7 @@ public class WeightController implements IWeightController {
 
 		// Step 9: Tarér vægt
 		try {
-			weightConnector.taraWeight();
+			weightConnector.tareWeight();
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +95,7 @@ public class WeightController implements IWeightController {
 
 		// Step 13: Vægten Tareres igen
 		try {
-			weightConnector.taraWeight();
+			weightConnector.tareWeight();
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}

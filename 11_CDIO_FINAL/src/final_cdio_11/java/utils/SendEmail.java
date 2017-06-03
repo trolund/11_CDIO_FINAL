@@ -11,8 +11,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import final_cdio_11.java.data.FileHandler;
-
 public class SendEmail {
 
 	private final TextHandler textHandler = TextHandler.getInstance();

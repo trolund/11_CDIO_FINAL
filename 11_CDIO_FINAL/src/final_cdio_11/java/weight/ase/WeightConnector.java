@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -20,18 +21,22 @@ public class WeightConnector implements IWeightConnector {
 	public void initConnection() throws WeightConnectionException {
 		for (String ip : textHandler.WEIGHT_IPS) {
 			try {
-				weightSocket = new Socket(ip, textHandler.WEIGHT_PORT);
+				if (InetAddress.getByName(ip).isReachable(100)) {
+					weightSocket = new Socket(ip, textHandler.WEIGHT_PORT);
+				} else {
+					utils.logMessage(ip + ":" + textHandler.WEIGHT_PORT + " not reachable. Trying again.");
+				}
 			} catch (UnknownHostException e) {
 				throw new WeightConnectionException(e.getMessage(), e);
 			} catch (IOException e) {
 				throw new WeightConnectionException(e.getMessage(), e);
 			}
+		}
 
-			if (weightSocket != null && weightSocket.isConnected()) {
-				utils.logMessage("Socket connection established: " + ip + ":" + textHandler.WEIGHT_PORT);
-			} else {
-				throw new WeightConnectionException("Socket connection failed.");
-			}
+		if (weightSocket != null && weightSocket.isConnected()) {
+			utils.logMessage("Socket connection established: " + weightSocket.getLocalSocketAddress() + ":" + textHandler.WEIGHT_PORT);
+		} else {
+			throw new WeightConnectionException("Socket connection failed.");
 		}
 	}
 
@@ -77,8 +82,8 @@ public class WeightConnector implements IWeightConnector {
 			e1.printStackTrace();
 		}
 
-		int oprId = Integer.parseInt(data.substring(8, data.length() - 1));
-		System.out.println(oprId);
+		//int oprId = Integer.parseInt(data.substring(8, data.length() - 1));
+		//System.out.println(oprId);
 
 		pw.close();
 		try {
@@ -96,7 +101,7 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
-	public void taraWeight() {
+	public void tareWeight() {
 
 	}
 

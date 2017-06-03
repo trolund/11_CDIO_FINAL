@@ -1,14 +1,10 @@
-package final_cdio_11.test;
+package final_cdio_11.java.weight.ase;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLProductBatchDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
-import final_cdio_11.java.weight.ase.IWeightConnector;
-import final_cdio_11.java.weight.ase.IWeightController;
-import final_cdio_11.java.weight.ase.WeightConnector;
-import final_cdio_11.java.weight.ase.WeightController;
 import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 
 public class WeightTestDriver {

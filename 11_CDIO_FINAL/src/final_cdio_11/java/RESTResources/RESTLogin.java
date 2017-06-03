@@ -47,7 +47,7 @@ public class RESTLogin {
 	private static Key key = MacProvider.generateKey(SignatureAlgorithm.HS512);
 
 	@POST
-	@Path("/verify")
+	@Path("/verifysss")
 	public String getLogin(LoginFormPOJO data) {
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 

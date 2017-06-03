@@ -1,4 +1,4 @@
-package final_cdio_11.java.data;
+package final_cdio_11.java.utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,9 +8,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import final_cdio_11.java.utils.TextHandler;
-import final_cdio_11.java.utils.Utils;
 
 public class FileHandler {
 

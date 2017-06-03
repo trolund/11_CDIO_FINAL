@@ -5,7 +5,7 @@ public interface IWeightConnector {
 	void closeConnection() throws WeightConnectionException;
 	int getId(String message) throws WeightException;
 	int getWeight() throws WeightException;
-	void taraWeight() throws WeightException;
+	void tareWeight() throws WeightException;
 	void confirmMessage(String message) throws WeightException;
 
 	public class WeightException extends Exception {

@@ -32,7 +32,7 @@ public class RESTOperator {
 	@Path("/deleteOpr")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean delUser(String oprId) {
+	public boolean deleteOperator(String oprId) {
 		return oprController.deleteOperator(oprId);
 	}
 
@@ -40,7 +40,7 @@ public class RESTOperator {
 	@Path("/verify")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String verify(LoginFormPOJO loginFormData) throws JsonParseException, JsonMappingException, IOException {
+	public String verifyOperatorLogin(LoginFormPOJO loginFormData) throws JsonParseException, JsonMappingException, IOException {
 		return oprController.verifyOperatorLogin(loginFormData);
 	}
 
@@ -48,43 +48,43 @@ public class RESTOperator {
 	@Path("/addopr")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addOpr(CreateUserFormPOJO createUserFormData) throws DALException {
+	public String createOperator(CreateUserFormPOJO createUserFormData) throws DALException {
 		return oprController.createOperator(createUserFormData);
 	}
 
 	@GET
 	@Path("/{oprId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public OperatorDTO getName(@PathParam("oprId") String oprId) {
+	public OperatorDTO createOperatorPOJO(@PathParam("oprId") String oprId) {
 		return oprController.createOperatorPOJO(oprId);
 	}
 
 	@GET
 	@Path("/getOprList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<OperatorDTO> getopr() {
+	public List<OperatorDTO> getOperatorList() {
 		return oprController.getOperatorList();
 	}
 
 	@GET
 	@Path("/getOprRoleList/{oprId}")
 	@Produces(MediaType.TEXT_HTML)
-	public String getOprRoleList(@PathParam("oprId") String oprId) {
+	public String getOperatorRolesAsString(@PathParam("oprId") String oprId) {
 		return oprController.getOperatorRolesAsString(oprId);
 	}
 
 	@GET
 	@Path("/RoleList/{OprId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<RoleDTO> getoprRoleListJSON(@PathParam("OprId") String OprId) {
-		return oprController.getOperatorRoleList(OprId);
+	public List<RoleDTO> getOperatorRoleListJSON(@PathParam("oprId") String oprId) {
+		return oprController.getOperatorRoleList(oprId);
 	}
 
 	@POST
 	@Path("/updateopr")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateOpr(EditUserFormPOJO editUserFormData) throws DALException {
+	public String updateOperator(EditUserFormPOJO editUserFormData) throws DALException {
 		return oprController.updateOperator(editUserFormData);
 	}
 
