@@ -43,7 +43,8 @@ public class WeightConnector implements IWeightConnector {
 	@Override
 	public void closeConnection() throws WeightConnectionException {
 		try {
-			if (!weightSocket.isClosed()) weightSocket.close();
+			if (!weightSocket.isClosed())
+				weightSocket.close();
 			utils.logMessage("Socket connection closed successfully.");
 		} catch (IOException e) {
 			throw new WeightConnectionException("Failed to close socket connection.");
@@ -58,7 +59,7 @@ public class WeightConnector implements IWeightConnector {
 
 		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
 		sendSocketMessage(socketMessage, pw);
-		
+
 		String data = null;
 
 		try {
@@ -79,9 +80,6 @@ public class WeightConnector implements IWeightConnector {
 			throw new WeightException("Failed to parse id.", e);
 		}
 
-		closeSocketReader(br);
-		closeSocketWriter(pw);
-
 		return oprId;
 	}
 
@@ -97,15 +95,21 @@ public class WeightConnector implements IWeightConnector {
 
 	@Override
 	public void confirmMessage(String message) throws WeightException {
-
 		BufferedReader br = getSocketReader();
 		PrintWriter pw = getSocketWriter();
 
-		String socketMessage = "D \"" + message + "\\r\n";
+		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
 		sendSocketMessage(socketMessage, pw);
 
-		closeSocketReader(br);
-		closeSocketWriter(pw);
+		String data = null;
+		try {
+			data = br.readLine();
+			System.out.println("Return message: '" + data + "'");
+			data = br.readLine();
+			System.out.println("Return message: '" + data + "'");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private BufferedReader getSocketReader() throws WeightException {

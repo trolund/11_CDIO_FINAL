@@ -33,30 +33,28 @@ public class WeightController implements IWeightController {
 		// step 3: Få laborant nummer
 		int id = -1;
 		try {
-			id = weightConnector.getId("Indtast nr");
+			id = weightConnector.getId("Indtast oprId");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
-		
+
 		OperatorDTO oprDTO = oprDAO.getOperator(id);
 
 		// Step 4: vægt svarer tilbage med laborant navn
 		try {
-			weightConnector.confirmMessage("Du er " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName());
+			weightConnector.confirmMessage(oprDTO.getOprFirstName());
 		} catch (WeightException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//
-		//		// Step 5: Laboranten indtaster produktbatchnummer
-		//		int pbId = -1;
-		//		try {
-		//			pbId = weightConnector.getId("Indtast produktbatchID");
-		//		} catch (WeightException e) {
-		//			e.printStackTrace();
-		//		}
-		//
+
+		// Step 5: Laboranten indtaster produktbatchnummer
+		int pbId = -1;
+		try {
+			pbId = weightConnector.getId("Indtast pbId");
+		} catch (WeightException e) {
+			e.printStackTrace();
+		}
+
 		//		// Step 6: Vægt svarer tilbage med navn på recept der skal produceres
 		//		int receptID = pbDAO.getProductBatch(pbId).getReceptId();
 		//		String receptName = receptDAO.getRecept(receptID).getReceptName();
