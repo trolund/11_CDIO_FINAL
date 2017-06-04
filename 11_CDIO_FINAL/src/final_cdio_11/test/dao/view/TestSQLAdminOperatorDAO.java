@@ -10,15 +10,15 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
-import final_cdio_11.java.data.dao.view.SQLAdminOperatorDAO;
-import final_cdio_11.java.data.dto.view.VAdminOperatorDTO;
+import final_cdio_11.java.data.dao.view.SQLVUserTableDAO;
+import final_cdio_11.java.data.dto.view.VUserTableDTO;
 
 public class TestSQLAdminOperatorDAO {
 
 	/*
 	 * Required objects.
 	 */
-	private SQLAdminOperatorDAO adminOprDAO;
+	private SQLVUserTableDAO adminOprDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -27,7 +27,7 @@ public class TestSQLAdminOperatorDAO {
 	 */
 	@Before
 	public void setUp() {
-		adminOprDAO = new SQLAdminOperatorDAO(Connector.getInstance());
+		adminOprDAO = new SQLVUserTableDAO(Connector.getInstance());
 	}
 
 	/*
@@ -47,7 +47,7 @@ public class TestSQLAdminOperatorDAO {
 		int oprId = 5;
 		try {
 			System.out.println("\n" + spr + " Testing SQLAdminOperatorDAO.getVAdminOperator(" + oprId + ") Positive " + spr);
-			VAdminOperatorDTO dto = adminOprDAO.getVAdminOperator(oprId);
+			VUserTableDTO dto = adminOprDAO.getVUserTable(oprId);
 
 			boolean expected = false;
 			boolean actual = false;
@@ -73,7 +73,7 @@ public class TestSQLAdminOperatorDAO {
 		int oprId = 5234;
 		try {
 			System.out.println("\n" + spr + " Testing SQLAdminOperatorDAO.getVAdminOperator(" + oprId + ") Negative " + spr);
-			VAdminOperatorDTO dto = adminOprDAO.getVAdminOperator(oprId);
+			VUserTableDTO dto = adminOprDAO.getVUserTable(oprId);
 
 			boolean expected = false;
 			boolean actual = false;
@@ -98,16 +98,16 @@ public class TestSQLAdminOperatorDAO {
 	public void testGetVAdminOperatorListPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLAdminOperatorDAO.getVAdminOperatorList() Positive " + spr);
-			List<VAdminOperatorDTO> dtoList = adminOprDAO.getVAdminOperatorList();
+			List<VUserTableDTO> dtoList = adminOprDAO.getVUserTableList();
 
 			boolean expected = false;
 			boolean actual = false;
 
-			for (VAdminOperatorDTO dto : dtoList) {
+			for (VUserTableDTO dto : dtoList) {
 				if (dto == null) actual = true;
 			}
 
-			for (VAdminOperatorDTO dto : dtoList) {
+			for (VUserTableDTO dto : dtoList) {
 				System.out.println(dto);
 			}
 
