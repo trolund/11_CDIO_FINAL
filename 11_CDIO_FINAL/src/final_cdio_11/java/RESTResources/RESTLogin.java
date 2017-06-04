@@ -13,7 +13,7 @@ import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
-import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

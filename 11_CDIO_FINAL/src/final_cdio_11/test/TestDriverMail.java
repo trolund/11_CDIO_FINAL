@@ -5,7 +5,7 @@ import javax.mail.internet.AddressException;
 
 import org.junit.Test;
 
-import final_cdio_11.java.utils.MailHandler;
+import final_cdio_11.java.handler.MailHandler;
 
 public class TestDriverMail {
 

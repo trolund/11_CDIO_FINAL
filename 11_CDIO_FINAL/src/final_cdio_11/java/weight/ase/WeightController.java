@@ -10,7 +10,7 @@ import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.weight.ase.IWeightConnector.WeightConnectionException;
 import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 

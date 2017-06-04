@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import final_cdio_11.java.utils.FileHandler;
-import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.handler.FileHandler;
+import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
 /*
@@ -30,13 +30,13 @@ public class Connector {
 	private String password;
 	private String url;
 
+	/* Class object fields. */
+	private Utils utils = Utils.getInstance();
+	private TextHandler textHandler = TextHandler.getInstance();
+	private FileHandler fileHandler = FileHandler.getInstance();
+
 	/* Singleton instance of this class. */
 	private static final Connector instance = new Connector();
-
-	/* Class object fields. */
-	private Utils utils;
-	private TextHandler textHandler;
-	private FileHandler fileHandler;
 
 	/*
 	 * Database connection object and HashMap object to store all SQL queries used by this application.
@@ -47,12 +47,7 @@ public class Connector {
 	 * Constructor that loads all of the configuration files at startup and creates a database connection immediately.
 	 */
 	private Connector() {
-		utils = Utils.getInstance();
-		textHandler = TextHandler.getInstance();
-		fileHandler = FileHandler.getInstance();
-
 		setupConnectionProperties();
-
 		try {
 			Class.forName(driverClass);
 			url = driver + "://" + host + ":" + port + "/" + database + "?verifyServerCertificate=false&useSSL=true";
@@ -70,6 +65,26 @@ public class Connector {
 	}
 
 	/*
+	 * Method to return the Singleton instance of this class.
+	 */
+	public static synchronized Connector getInstance() {
+		return instance;
+	}
+
+	/*
+	 * Setup the database connection properties.
+	 */
+	private void setupConnectionProperties() {
+		this.driverClass = fileHandler.getProperty("DRIVER_CLASS");
+		this.driver = fileHandler.getProperty("DRIVER");
+		this.host = fileHandler.getProperty("HOST");
+		this.port = Integer.parseInt(fileHandler.getProperty("PORT"));
+		this.database = fileHandler.getProperty("DATABASE");
+		this.username = fileHandler.getProperty("USERNAME");
+		this.password = fileHandler.getProperty("PASSWORD");
+	}
+
+	/*
 	 * Method to close a desired PreparedStatement and ResultSet.
 	 */
 	public void cleanup(PreparedStatement stmt, ResultSet rs) throws SQLException {
@@ -82,6 +97,14 @@ public class Connector {
 	 */
 	public void cleanup(PreparedStatement stmt) throws SQLException {
 		if (stmt != null) stmt.close();
+	}
+
+	/*
+	 * Create new database connection object and return it.
+	 */
+	private Connection createConnection() throws SQLException {
+		Connection newConnection = DriverManager.getConnection(url, username, password);
+		return newConnection;
 	}
 
 	/*
@@ -103,31 +126,11 @@ public class Connector {
 		return connection;
 	}
 
-	// Temporary method
-	public String getQuery(String key) {
-		return fileHandler.getQuery(key);
-	}
-
-	private void setupConnectionProperties() {
-		this.driverClass = fileHandler.getQuery("DRIVER_CLASS");
-		this.driver = fileHandler.getQuery("DRIVER");
-		this.host = fileHandler.getQuery("HOST");
-		this.port = Integer.parseInt(fileHandler.getQuery("PORT"));
-		this.database = fileHandler.getQuery("DATABASE");
-		this.username = fileHandler.getQuery("USERNAME");
-		this.password = fileHandler.getQuery("PASSWORD");
-	}
-
-	private Connection createConnection() throws SQLException {
-		Connection newConnection = DriverManager.getConnection(url, username, password);
-		return newConnection;
-	}
-
 	/*
-	 * Method to return the Singleton instance of this class.
+	 * Return loaded SQL query from FileHandler.
 	 */
-	public static synchronized Connector getInstance() {
-		return instance;
+	public String getQuery(String key) {
+		return fileHandler.getProperty(key);
 	}
 
 }

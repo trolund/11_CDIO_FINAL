@@ -13,7 +13,7 @@ import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.handler.TextHandler;
 
 public class TestSQLRoleDAO {
 

@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
 public class WeightConnector implements IWeightConnector {

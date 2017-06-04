@@ -14,7 +14,7 @@ import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
 public class OperatorController implements IOperatorController {
@@ -29,12 +29,19 @@ public class OperatorController implements IOperatorController {
 
 		try {
 			oprList = oprDAO.getOperatorList();
+			if (utils.DEV_ENABLED) utils.logMessage("Returning operator list.");
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 		return oprList;
 	}
 
+	/* 
+	 * Denne metode er grunden til, at loading går så langsomt på hjemmesiden. 
+	 * Den tager sindssyg lang tid. 
+	 * Det ville være en god ide, hvis vi kunne gemme alle rollerne som en String, 
+	 * i en operator DTO. Så ville det køre i konstant tid, og ikke linear tid. 
+	 */
 	@Override
 	public String getOperatorRolesAsString(String oprId) {
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
@@ -47,8 +54,12 @@ public class OperatorController implements IOperatorController {
 			e.printStackTrace();
 		}
 
-		if (oprRoleList == null) return "None.";
-
+		if (oprRoleList == null) {
+			if (utils.DEV_ENABLED) utils.logMessage("User [" + oprId + "] does not have any roles. Setting to 'None.'.");
+			return "None.";
+		}
+		
+		if (utils.DEV_ENABLED) utils.logMessage("Concatenating operator roles to String.");
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
 			RoleDTO roleDTO = (RoleDTO) iterator.next();
 			if (iterator.hasNext()) returnString.append(roleDTO.getRoleName() + ", ");
@@ -64,7 +75,7 @@ public class OperatorController implements IOperatorController {
 
 		try {
 			oprRoleList = roleDAO.getOprRoles(Integer.parseInt(OprId));
-			if (utils.DEV_ENABLED) utils.logMessage("RoleList successfully created. Trying to return..");
+			if (utils.DEV_ENABLED) utils.logMessage("RoleList successfully created. Trying to return.");
 			return oprRoleList;
 		} catch (DALException e) {
 			e.printStackTrace();
@@ -81,8 +92,6 @@ public class OperatorController implements IOperatorController {
 		String password = loginFormData.getPassword();
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 
-		if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserLoginMessage(oprId, password));
-
 		OperatorDTO oprDTO = null;
 		try {
 			oprDTO = oprDAO.getOperator(oprId);
@@ -95,8 +104,10 @@ public class OperatorController implements IOperatorController {
 		}
 
 		if (utils.sha256(password).equals(oprDTO.getOprPassword())) {
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserLoginMessage(oprId, password));
 			return textHandler.succLoggedIn;
 		} else {
+			if (utils.DEV_ENABLED) utils.logMessage("User [" + oprId + ":" + password + "] failed to log in.");
 			return textHandler.errInvalidCredentials;
 		}
 	}
@@ -157,7 +168,7 @@ public class OperatorController implements IOperatorController {
 
 		try {
 			oprDAO.updateOperator(oprDTO);
-			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(editUserFormData.getOprId()));
+			if (utils.DEV_ENABLED) utils.logMessage("Updating user: " + oprDTO);
 
 			if (editUserFormData.isAdminRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_ADMIN, 0));

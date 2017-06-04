@@ -3,7 +3,7 @@ package final_cdio_11.java.RESTResources.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-import final_cdio_11.java.utils.TextHandler;
+import final_cdio_11.java.handler.TextHandler;
 
 public class CreateUserFormPOJO {
 

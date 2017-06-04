@@ -71,7 +71,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			do {
 				oprList.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("opr_efternavn"), rs.getString("ini"), rs.getString("email"), rs.getString("cpr"), rs.getString("password"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return oprList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

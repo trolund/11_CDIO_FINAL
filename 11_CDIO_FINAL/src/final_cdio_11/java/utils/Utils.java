@@ -6,6 +6,8 @@ import java.util.Date;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import final_cdio_11.java.handler.TextHandler;
+
 /*
  * Singleton class for various utilities.
  */

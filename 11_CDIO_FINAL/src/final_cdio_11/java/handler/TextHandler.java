@@ -1,4 +1,4 @@
-package final_cdio_11.java.utils;
+package final_cdio_11.java.handler;
 
 import final_cdio_11.java.data.dto.OperatorDTO;
 
@@ -35,9 +35,18 @@ public class TextHandler {
 	public final String devConnectionMessage = "Connected to database: ";
 	public final String devConnectionClosedMessage = "Database connection closed.";
 	public final String devNewConnectionMessage = "New database connection established.";
-	public final String devSavingSqlConfigMessage = "Saving sql.config file: ";
-	public final String devLoadingSqlConfigMessage = "Loading sql.config file: ";
-	public final String devLoadDatabaseConfigMessage = "Loading mysql.config file: ";
+
+	public final String devLoadSqlConfigMessage(String filePath) {
+		return "Loaded sql.config file: " + filePath;
+	}
+
+	public final String devLoadDbConfigMessage(String filePath) {
+		return "Loaded mysql.config file: " + filePath;
+	}
+
+	public final String devLoadMailConfigMessage(String filePath) {
+		return "Loaded mail.config file: " + filePath;
+	}
 
 	public final String devUserDeletedSuccessMessage(int oprId) {
 		return "User [" + oprId + "] successfully deleted.";
@@ -49,6 +58,10 @@ public class TextHandler {
 
 	public final String devUserLoginMessage(int oprId, String password) {
 		return "User [" + oprId + ":" + password + "] successfully logged in.";
+	}
+
+	public final String devMailSentMessage(String to) {
+		return "E-mail message sent to '" + to + "'.";
 	}
 
 	/*
@@ -74,6 +87,7 @@ public class TextHandler {
 	 * Application success messages.
 	 */
 	public final String succLoggedIn = "Logged in successfully.";
+	public final String succMailSent = "Mail sent.";
 
 	public final String succAddedUser(int oprId) {
 		return "User [" + oprId + "] added successfully.";
@@ -99,6 +113,7 @@ public class TextHandler {
 	public final String errInvalidCredentials = "Invalid credentials.";
 	public final String errUnknownFailure = "Failure.";
 	public final String errUserCreation = "Failure. Id already exists.";
+	public final String errMailFailed = "Mail failed.";
 
 	/*
 	 * E-mail specific.
@@ -113,4 +128,5 @@ public class TextHandler {
 		sb.append("- Din yndlings Webservice gruppe 11\n");
 		return sb.toString();
 	}
+
 }
