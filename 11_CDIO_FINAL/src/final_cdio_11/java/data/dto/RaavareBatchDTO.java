@@ -6,20 +6,20 @@ package final_cdio_11.java.data.dto;
  */
 public class RaavareBatchDTO {
 
-	private int rBId;
+	private int rbId;
 	private int raavareId;
 	private double amount;
 	private int status;
 
-	public RaavareBatchDTO(int rBId, int raavareId, double amount, int status) {
-		this.rBId = rBId;
+	public RaavareBatchDTO(int rbId, int raavareId, double amount, int status) {
+		this.rbId = rbId;
 		this.raavareId = raavareId;
 		this.amount = amount;
 		this.status = status;
 	}
 
-	public int getrBId() {
-		return rBId;
+	public int getrbId() {
+		return rbId;
 	}
 
 	public int getRaavareId() {
@@ -36,7 +36,7 @@ public class RaavareBatchDTO {
 
 	@Override
 	public String toString() {
-		return "RaavareBatchDTO [rBId=" + rBId + ", raavareId=" + raavareId + ", amount=" + amount + ", status=" + status + "]";
+		return "RaavareBatchDTO [rbId=" + rbId + ", raavareId=" + raavareId + ", amount=" + amount + ", status=" + status + "]";
 	}
 
 }

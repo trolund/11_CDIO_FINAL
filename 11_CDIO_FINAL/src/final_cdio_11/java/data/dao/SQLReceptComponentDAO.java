@@ -104,7 +104,7 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			do {
 				rcList.add(new ReceptComponentDTO(rs.getInt("recept_id"), rs.getInt("raavare_id"), rs.getDouble("nom_netto"), rs.getInt("tolerance"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return rcList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -131,6 +131,7 @@ public class SQLReceptComponentDAO implements IReceptComponentDAO {
 			createRCStmt.setInt(2, rc.getRaavareId());
 			createRCStmt.setDouble(3, rc.getNomNetto());
 			createRCStmt.setDouble(4, rc.getTolerance());
+			createRCStmt.setInt(5, rc.getStatus());
 			createRCStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

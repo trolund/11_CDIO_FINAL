@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import final_cdio_11.java.utils.MailHandler;
 
-public class MailTest {
+public class TestDriverMail {
 
 	@Test
 	public void test() {

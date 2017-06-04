@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IProductBatchDAO;
 import final_cdio_11.java.data.dao.SQLProductBatchDAO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 
@@ -19,7 +20,7 @@ public class TestSQLProductBatchDAO {
 	/*
 	 * Required objects.
 	 */
-	private SQLProductBatchDAO pbDAO;
+	private IProductBatchDAO pbDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -49,8 +50,8 @@ public class TestSQLProductBatchDAO {
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.getProductBatch(" + pbId + ") Positive " + spr);
 
 			System.out.println("Receiving ProductBatchDTO with pbId: " + pbId + ".");
-			ProductBatchDTO pbDTO = pbDAO.getProductBatch(pbId);
-			System.out.println("Received: " + pbDTO);
+			ProductBatchDTO newPbDTO = pbDAO.getProductBatch(pbId);
+			System.out.println("Received: " + newPbDTO);
 
 			System.out.println(lspr);
 		} catch (DALException e) {
@@ -66,10 +67,7 @@ public class TestSQLProductBatchDAO {
 	@Test
 	public void testGetProductBatchNegative() {
 		try {
-			int pbId = 102;
-
-			/* Make sure that the ProductBatchDTO does not exist. */
-			pbDAO.deleteProductBatch(pbId);
+			int pbId = 10322;
 
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.getProductBatch(" + pbId + ") Negative " + spr);
 
@@ -93,9 +91,13 @@ public class TestSQLProductBatchDAO {
 		try {
 			List<ProductBatchDTO> pbList = pbDAO.getProductBatchList();
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.getProductBatchList() Positive " + spr);
+
+			if (pbList == null) fail("Failed: Failed to retrieve ProductBatchList!");
+
 			for (int i = 0; i < pbList.size(); i++) {
 				System.out.println(i + ": " + pbList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -110,9 +112,7 @@ public class TestSQLProductBatchDAO {
 	@Test
 	public void testCreateProductBatchPositive() {
 		try {
-			/* Make sure the ProductBatchDTO does not already exist. */
-			int pbId = 9;
-			pbDAO.deleteProductBatch(pbId);
+			int pbId = 7;
 
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.createProductBatch(pbDTO) Positive " + spr);
 			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 2223, 1, 0);
@@ -135,9 +135,10 @@ public class TestSQLProductBatchDAO {
 	public void testCreateProductBatchNegative() {
 		try {
 			int pbId = 1;
-			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.createProductBatch(pbDTO) Negative " + spr);
+
 			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 2223, 1, 0);
 
+			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.createProductBatch(pbDTO) Negative " + spr);
 			pbDAO.createProductBatch(pbDTO);
 			System.out.println("Created: " + pbDTO);
 
@@ -155,12 +156,9 @@ public class TestSQLProductBatchDAO {
 	@Test
 	public void testUpdateProductBatchPositive() {
 		try {
+			int pbId = 2;
+
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.updateProductBatch(pbDTO) Positive " + spr);
-			/* Creating pbDTO to make sure that it exists. */
-			int pbId = 43;
-			pbDAO.deleteProductBatch(pbId);
-			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 22235323, 1, 0);
-			pbDAO.createProductBatch(pbDTO);
 
 			int newStatus = 9393;
 
@@ -171,7 +169,7 @@ public class TestSQLProductBatchDAO {
 			System.out.println("Updated: " + pbDAO.getProductBatch(pbId));
 
 			int expected = newStatus;
-			int actual = pbDAO.getProductBatch(pbId).getStatus();
+			int actual = pbDAO.getProductBatch(pbId).getItemStatus();
 
 			assertEquals("Failed: The updated status does not match!", expected, actual);
 
@@ -190,15 +188,15 @@ public class TestSQLProductBatchDAO {
 	public void testDeleteProductBatchPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLProductBatchDAO.deleteProductBatch(pbId) Positive " + spr);
-			/* Creating ProductBatchDTO to make sure that it exists. */
-			int pbId = 81;
-			pbDAO.deleteProductBatch(pbId);
-			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 93459345, 1, 0);
-			pbDAO.createProductBatch(pbDTO);
+			int pbId = 3;
+
+			ProductBatchDTO pbDTO = new ProductBatchDTO(pbId, 2223, 1, 0);
 
 			System.out.println("Created: " + pbDTO);
 			pbDAO.deleteProductBatch(pbId);
 			System.out.println("Deleted.");
+
+			if (pbDAO.getProductBatch(pbId).getStatus() != 1) fail("Failed: Failed to delete existing ProductBatchDTO!");
 
 			System.out.println(lspr);
 		} catch (DALException e) {

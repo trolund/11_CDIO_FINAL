@@ -70,7 +70,7 @@ public class SQLReceptDAO implements IReceptDAO {
 			do {
 				receptList.add(new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return receptList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -119,8 +119,8 @@ public class SQLReceptDAO implements IReceptDAO {
 		try {
 			updateReceptStmt = connector.getConnection().prepareStatement(updateReceptSql);
 			updateReceptStmt.setString(1, recept.getReceptName());
-			updateReceptStmt.setInt(2, recept.getReceptId());
-			updateReceptStmt.setInt(3, recept.getStatus());
+			updateReceptStmt.setInt(2, recept.getStatus());
+			updateReceptStmt.setInt(3, recept.getReceptId());
 			updateReceptStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

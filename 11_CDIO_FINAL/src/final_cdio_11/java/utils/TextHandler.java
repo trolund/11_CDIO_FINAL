@@ -37,7 +37,7 @@ public class TextHandler {
 	
 	public final String ADMIN_EMAIL = "webadmin@group11.com";
 
-	public final String[] WEIGHT_IPS = { "169.254.2.3", "127.0.0.1" };
+	public final String[] WEIGHT_IPS = { "169.254.2.3", "localhost" };
 	public final int WEIGHT_PORT = 8000;
 
 	public final String devUserDeletedSuccessMessage(int oprId) {

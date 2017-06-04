@@ -30,7 +30,7 @@ public class ReceptDTO {
 
 	@Override
 	public String toString() {
-		return "ReceptDTO [receptId=" + receptId + ", receptName=" + receptName + ". status=" + status + "]";
+		return "ReceptDTO [receptId=" + receptId + ", receptName=" + receptName + ", status=" + status + "]";
 	}
 
 }
