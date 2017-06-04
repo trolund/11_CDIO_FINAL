@@ -13,12 +13,12 @@ import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.view.SQLVUserTableDAO;
 import final_cdio_11.java.data.dto.view.VUserTableDTO;
 
-public class TestSQLAdminOperatorDAO {
+public class TestSQLUserTableDAO {
 
 	/*
 	 * Required objects.
 	 */
-	private SQLVUserTableDAO adminOprDAO;
+	private SQLVUserTableDAO userTableDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -27,7 +27,7 @@ public class TestSQLAdminOperatorDAO {
 	 */
 	@Before
 	public void setUp() {
-		adminOprDAO = new SQLVUserTableDAO(Connector.getInstance());
+		userTableDAO = new SQLVUserTableDAO(Connector.getInstance());
 	}
 
 	/*
@@ -35,7 +35,7 @@ public class TestSQLAdminOperatorDAO {
 	 */
 	@After
 	public void tearDown() {
-		adminOprDAO = null;
+		userTableDAO = null;
 	}
 
 	/* 
@@ -46,15 +46,15 @@ public class TestSQLAdminOperatorDAO {
 	public void testGetVAdminOperatorPositive() {
 		int oprId = 5;
 		try {
-			System.out.println("\n" + spr + " Testing SQLAdminOperatorDAO.getVAdminOperator(" + oprId + ") Positive " + spr);
-			VUserTableDTO dto = adminOprDAO.getVUserTable(oprId);
+			System.out.println("\n" + spr + " Testing SQLVUserTableDAO.getVUserTable(" + oprId + ") Positive " + spr);
+			VUserTableDTO vUserTableDTO = userTableDAO.getVUserTable(oprId);
 
 			boolean expected = false;
 			boolean actual = false;
 
-			if (dto == null) actual = true;
+			if (vUserTableDTO == null) actual = true;
 
-			System.out.println(dto);
+			System.out.println(vUserTableDTO);
 
 			assertEquals("Failed: null object returned.", expected, actual);
 			System.out.println(lspr);
@@ -72,15 +72,15 @@ public class TestSQLAdminOperatorDAO {
 	public void testGetVAdminOperatorNegative() {
 		int oprId = 5234;
 		try {
-			System.out.println("\n" + spr + " Testing SQLAdminOperatorDAO.getVAdminOperator(" + oprId + ") Negative " + spr);
-			VUserTableDTO dto = adminOprDAO.getVUserTable(oprId);
+			System.out.println("\n" + spr + " Testing SQLVUserTableDAO.getVUserTable(" + oprId + ") Negative " + spr);
+			VUserTableDTO vUserTable = userTableDAO.getVUserTable(oprId);
 
 			boolean expected = false;
 			boolean actual = false;
 
-			if (dto == null) actual = true;
+			if (vUserTable == null) actual = true;
 
-			System.out.println(dto);
+			System.out.println(vUserTable);
 
 			assertEquals("Failed: null object returned.", expected, actual);
 			System.out.println(lspr);
@@ -97,8 +97,8 @@ public class TestSQLAdminOperatorDAO {
 	@Test
 	public void testGetVAdminOperatorListPositive() {
 		try {
-			System.out.println("\n" + spr + " Testing SQLAdminOperatorDAO.getVAdminOperatorList() Positive " + spr);
-			List<VUserTableDTO> dtoList = adminOprDAO.getVUserTableList();
+			System.out.println("\n" + spr + " Testing SQLVUserTableDAO.getVUserTableList() Positive " + spr);
+			List<VUserTableDTO> dtoList = userTableDAO.getVUserTableList();
 
 			boolean expected = false;
 			boolean actual = false;
