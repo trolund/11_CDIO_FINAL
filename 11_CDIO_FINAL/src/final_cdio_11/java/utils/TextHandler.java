@@ -23,10 +23,14 @@ public class TextHandler {
 		return instance;
 	}
 
-	/* password characters */
+	/* 
+	 * Password characters.
+	 */
 	public final String PASS_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-	/* DEV_ENABLED messages. */
+	/* 
+	 * DEV_ENABLED messages. 
+	 */
 	public final String devStartUpMessage = "Application started in [DEV_ENABLED] development mode.";
 	public final String devConnectionMessage = "Connected to database: ";
 	public final String devConnectionClosedMessage = "Database connection closed.";
@@ -34,11 +38,6 @@ public class TextHandler {
 	public final String devSavingSqlConfigMessage = "Saving sql.config file: ";
 	public final String devLoadingSqlConfigMessage = "Loading sql.config file: ";
 	public final String devLoadDatabaseConfigMessage = "Loading mysql.config file: ";
-	
-	public final String ADMIN_EMAIL = "webadmin@group11.com";
-
-	public final String[] WEIGHT_IPS = { "169.254.2.3", "localhost" };
-	public final int WEIGHT_PORT = 8000;
 
 	public final String devUserDeletedSuccessMessage(int oprId) {
 		return "User [" + oprId + "] successfully deleted.";
@@ -52,10 +51,28 @@ public class TextHandler {
 		return "User [" + oprId + ":" + password + "] successfully logged in.";
 	}
 
-	/* TEST_ENABLED messages. */
-	public final String testStartUpMessage = "Application started in [TEST_ENABLED] test mode.";
+	/*
+	 * Operator roles.
+	 */
+	public final String ROLE_ADMIN = "Admin";
+	public final String ROLE_FARMACEUT = "Farmaceut";
+	public final String ROLE_VAERK = "Værkfører";
+	public final String ROLE_LABORANT = "Laborant";
 
-	/* Application success messages. */
+	/* 
+	 * Admin role specific.
+	 */
+	public final String ADMIN_EMAIL = "webadmin@group11.com";
+
+	/* 
+	 * Weight specific. 
+	 */
+	public final String[] WEIGHT_IPS = { "169.254.2.3", "localhost" };
+	public final int WEIGHT_PORT = 8000;
+
+	/* 
+	 * Application success messages.
+	 */
 	public final String succLoggedIn = "Logged in successfully.";
 
 	public final String succAddedUser(int oprId) {
@@ -74,6 +91,18 @@ public class TextHandler {
 		return "User [" + oprId + "] Updated successfully.";
 	}
 
+	/* 
+	 * Application error messages. 
+	 */
+	public final String errIdDoesNotExist = "Id does not exist.";
+	public final String errIdInvalid = "Invalid Id.";
+	public final String errInvalidCredentials = "Invalid credentials.";
+	public final String errUnknownFailure = "Failure.";
+	public final String errUserCreation = "Failure. Id already exists.";
+
+	/*
+	 * E-mail specific.
+	 */
 	public final String mailMessage(OperatorDTO oprDTO) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Hej " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName() + ".\n\n");
@@ -84,20 +113,4 @@ public class TextHandler {
 		sb.append("- Din yndlings Webservice gruppe 11\n");
 		return sb.toString();
 	}
-
-	/* Application error messages. */
-	public final String errIdDoesNotExist = "Id does not exist.";
-	public final String errIdInvalid = "Invalid Id.";
-	public final String errInvalidCredentials = "Invalid credentials.";
-	public final String errUnknownFailure = "Failure.";
-	public final String errUserCreation = "Failure. Id already exists.";
-
-	/*
-	 * Roles.
-	 */
-	public final String ROLE_ADMIN = "Admin";
-	public final String ROLE_FARMACEUT = "Farmaceut";
-	public final String ROLE_VAERK = "Værkfører";
-	public final String ROLE_LABORANT = "Laborant";
-
 }

@@ -16,25 +16,28 @@ public class Utils {
 	 */
 	private static final Utils instance = new Utils();
 
-
 	/*
 	 * Application Flags
 	 */
 	public final boolean DEV_ENABLED = true;
-	public final boolean TEST_ENABLED = false;
 
 	/*
 	 * Class object fields.
 	 */
-	private final TextHandler textHandler;
+	private final TextHandler textHandler = TextHandler.getInstance();
 
 	/*
 	 * Private constructor. Can't be instantiated.
 	 */
 	private Utils() {
-		textHandler = TextHandler.getInstance();
 		if (DEV_ENABLED) logMessage(textHandler.devStartUpMessage);
-		else if (TEST_ENABLED) logMessage(textHandler.testStartUpMessage);
+	}
+
+	/*
+	 * Getter for the singleton instance.
+	 */
+	public static synchronized Utils getInstance() {
+		return instance;
 	}
 
 	/*
@@ -71,13 +74,6 @@ public class Utils {
 	public String generatePassword() {
 		String pwd = RandomStringUtils.random(24, textHandler.PASS_CHARS);
 		return pwd;
-	}
-
-	/*
-	 * Getter for the singleton instance.
-	 */
-	public static synchronized Utils getInstance() {
-		return instance;
 	}
 
 }

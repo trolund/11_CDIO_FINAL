@@ -3,6 +3,8 @@ package final_cdio_11.java.RESTResources.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import final_cdio_11.java.utils.TextHandler;
+
 public class CreateUserFormPOJO {
 
 	private int oprId;
@@ -14,6 +16,8 @@ public class CreateUserFormPOJO {
 	private String oprPassword;
 	private int status;
 	private boolean adminRole, farmaceutRole, vaerkRole, laborantRole;
+
+	private final TextHandler textHandler = TextHandler.getInstance();
 
 	public int getOprId() {
 		return oprId;
@@ -113,12 +117,10 @@ public class CreateUserFormPOJO {
 
 	public List<String> getRoles() {
 		List<String> roles = new ArrayList<String>();
-
-		if (adminRole) roles.add("Admin");
-		if (farmaceutRole) roles.add("Farmaceut");
-		if (vaerkRole) roles.add("Værkfører");
-		if (laborantRole) roles.add("Laborant");
-
+		if (adminRole) roles.add(textHandler.ROLE_ADMIN);
+		if (farmaceutRole) roles.add(textHandler.ROLE_FARMACEUT);
+		if (vaerkRole) roles.add(textHandler.ROLE_VAERK);
+		if (laborantRole) roles.add(textHandler.ROLE_LABORANT);
 		return roles;
 	}
 
