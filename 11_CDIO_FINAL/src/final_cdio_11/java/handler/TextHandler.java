@@ -64,14 +64,6 @@ public class TextHandler {
 		return "E-mail message sent to '" + to + "'.";
 	}
 
-	/*
-	 * Operator roles.
-	 */
-	public final String ROLE_ADMIN = "Admin";
-	public final String ROLE_FARMACEUT = "Farmaceut";
-	public final String ROLE_VAERK = "Værkfører";
-	public final String ROLE_LABORANT = "Laborant";
-
 	/* 
 	 * Admin role specific.
 	 */

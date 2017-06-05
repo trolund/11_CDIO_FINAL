@@ -193,7 +193,7 @@ $(document).ready(function() {
         // Adding roles to dummy user.
         $('#adminRole').prop('checked', true);
         $('#farmaceutRole').prop('checked', true);
-        $('#vaerkRole').prop('checked', true);
+        $('#værkførerRole').prop('checked', true);
         $('#laborantRole').prop('checked', true);
         
         var data = $('#CreateUserForm').serializeJSON();    

@@ -48,7 +48,7 @@ public class RESTView {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		
+
 		return viewList;
 	}
 

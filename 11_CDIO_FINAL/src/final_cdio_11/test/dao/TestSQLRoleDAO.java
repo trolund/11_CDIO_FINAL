@@ -10,10 +10,10 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.Role;
 import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.handler.TextHandler;
 
 public class TestSQLRoleDAO {
 
@@ -23,7 +23,6 @@ public class TestSQLRoleDAO {
 	private IRoleDAO roleDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
-	private final TextHandler textHandler = TextHandler.getInstance();
 
 	/*
 	 * Setting up the RoleDAO.
@@ -127,7 +126,7 @@ public class TestSQLRoleDAO {
 
 			System.out.println("\n" + spr + " Testing SQLRoleDAO.createRole(roleDTO) Positive " + spr);
 
-			RoleDTO roleDTO = new RoleDTO(oprId, textHandler.ROLE_ADMIN, 0);
+			RoleDTO roleDTO = new RoleDTO(oprId, Role.Admin.toString(), 0);
 			roleDAO.createRole(roleDTO);
 			System.out.println("Created: " + roleDTO);
 
@@ -148,7 +147,7 @@ public class TestSQLRoleDAO {
 			int oprId = 10;
 			System.out.println("\n" + spr + " Testing SQLRoleDAO.createRole(roleDTO) Negative " + spr);
 
-			RoleDTO roleDTO = new RoleDTO(oprId, textHandler.ROLE_ADMIN, 0);
+			RoleDTO roleDTO = new RoleDTO(oprId, Role.Admin.toString(), 0);
 			roleDAO.createRole(roleDTO);
 			System.out.println("Created: " + roleDTO);
 

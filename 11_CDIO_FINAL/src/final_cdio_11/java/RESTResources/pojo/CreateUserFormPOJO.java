@@ -3,7 +3,7 @@ package final_cdio_11.java.RESTResources.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-import final_cdio_11.java.handler.TextHandler;
+import final_cdio_11.java.data.Role;
 
 public class CreateUserFormPOJO {
 
@@ -15,9 +15,7 @@ public class CreateUserFormPOJO {
 	private String oprCpr;
 	private String oprPassword;
 	private int status;
-	private boolean adminRole, farmaceutRole, vaerkRole, laborantRole;
-
-	private final TextHandler textHandler = TextHandler.getInstance();
+	private boolean adminRole, farmaceutRole, værkførerRole, laborantRole;
 
 	public int getOprId() {
 		return oprId;
@@ -99,28 +97,28 @@ public class CreateUserFormPOJO {
 		this.farmaceutRole = farmaceutRole;
 	}
 
-	public boolean isVaerkRole() {
-		return vaerkRole;
+	public boolean isVærkførerRole() {
+		return værkførerRole;
 	}
 
-	public void setVaerkRole(boolean vaerkRole) {
-		this.vaerkRole = vaerkRole;
+	public void setVærkførerRole(boolean værkførerRole) {
+		this.værkførerRole = værkførerRole;
 	}
 
 	public boolean isLaborantRole() {
 		return laborantRole;
 	}
 
-	public void setLaborantRole(boolean labRole) {
-		this.laborantRole = labRole;
+	public void setLaborantRole(boolean laborantRole) {
+		this.laborantRole = laborantRole;
 	}
 
 	public List<String> getRoles() {
 		List<String> roles = new ArrayList<String>();
-		if (adminRole) roles.add(textHandler.ROLE_ADMIN);
-		if (farmaceutRole) roles.add(textHandler.ROLE_FARMACEUT);
-		if (vaerkRole) roles.add(textHandler.ROLE_VAERK);
-		if (laborantRole) roles.add(textHandler.ROLE_LABORANT);
+		if (adminRole) roles.add(Role.Admin.toString());
+		if (farmaceutRole) roles.add(Role.Farmaceut.toString());
+		if (værkførerRole) roles.add(Role.Værkfører.toString());
+		if (laborantRole) roles.add(Role.Laborant.toString());
 		return roles;
 	}
 
