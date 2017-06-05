@@ -3,8 +3,6 @@ var userName = null;
 var roles = null;
 var user = null;
 
-var authHeader = "Bearer " + localStorage.getItem("jwt");
-
 // Alt der skal køres ved opstart af application!
 $(document).ready(function(){
 	$('#loadingGif').hide();
@@ -86,15 +84,14 @@ $(document).ready(function() {
 // User button menu 
 $(document).ready(function() { 
 	$("#user_but").click(function() {
-		$("#content_box").load('add_user.html');
-		$('#AddUser_Box').hide();
-        $('#editUser_Box').hide();
-        
-        
         
         $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
         	console.log("userList.js:" +  jqxhr.status ); // 200
         });
+        
+		$("#content_box").load('add_user.html');
+		$('#AddUser_Box').hide();
+        $('#editUser_Box').hide();
         
 		loadUsers();
 	});   
@@ -138,9 +135,9 @@ function loadUsers() {
             }
             
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button data="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	} else { 
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<button data="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button data="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
         }); 
         

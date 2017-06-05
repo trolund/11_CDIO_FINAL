@@ -2,7 +2,7 @@
 $(document).ready(function() {
 	$('.del_user').click(function() {
 		
-       var id = $(this).prop('name');
+       var id = $(this).prop('data');
        console.log('Try to delete user with id: ' + id);  
        
        jQuery.ajax({
@@ -34,7 +34,8 @@ $(document).ready(function() {
 // Edit user button
 $(document).ready(function() {
 	$(".edit_user").click(function() {
-		var id = $(this).prop('name');
+        
+		var id = $(this).prop('data');
         
 		$.getJSON('api/opr/RoleList/' + id, function(roleData) { 
 			$('#AdminRoleEdit').prop('checked', false);
