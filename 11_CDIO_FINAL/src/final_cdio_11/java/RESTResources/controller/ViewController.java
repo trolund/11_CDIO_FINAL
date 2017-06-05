@@ -5,6 +5,7 @@ import java.util.List;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.view.IVPharmacistRecipeDAO;
+import final_cdio_11.java.data.dao.view.IVUserTableDAO;
 import final_cdio_11.java.data.dao.view.SQLPharmacistRecipeDAO;
 import final_cdio_11.java.data.dao.view.SQLVUserTableDAO;
 import final_cdio_11.java.data.dto.view.VPharmacistRecipeDTO;
@@ -14,7 +15,7 @@ public class ViewController implements IViewController {
 
 	@Override
 	public List<VUserTableDTO> VUserTableList() {
-		SQLVUserTableDAO view = new SQLVUserTableDAO(Connector.getInstance());
+		IVUserTableDAO view = new SQLVUserTableDAO(Connector.getInstance());
 
 			List<VUserTableDTO> viewList = null;
 

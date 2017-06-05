@@ -72,18 +72,18 @@ function login() {
 	}
 )};
 
-// Menu mobile button 
+// menu js
 $(document).ready(function() {
+     
+// Menu mobile button 
 	$("#menu_but").click(function() {
 		$("#sidepanel ul").toggleClass("on");
 		$("#sidepanel").toggleClass("on_sidepanel");
 		$("#menu_but").toggleClass("rot");
 	});
-}); 
-
-// User button menu 
-$(document).ready(function() { 
-	$("#user_but").click(function() {
+    
+// User button menu    
+    $("#user_but").click(function() {
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
         $('#editUser_Box').hide();
@@ -93,12 +93,10 @@ $(document).ready(function() {
          $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
         	console.log("userList.js:" +  jqxhr.status ); // 200
         });
-	});   
-});
-
-// view button menu 
-$(document).ready(function() {
-	$("#view_but").click(function() {       
+	});
+    
+// view button menu     
+    $("#view_but").click(function() {       
 		$("#content_box").load('view.html');
 		
 		$.getScript( "assets/js/view.js", function( data, textStatus, jqxhr ) {
@@ -106,8 +104,17 @@ $(document).ready(function() {
         	console.log( jqxhr.status ); // 200
         	console.log( "view.js was loaded." );
         }); 
-	}); 
-});
+	});
+    
+    
+// Menu mobile button 
+	$("#prodbatch_but").click(function() {
+		loadpb();
+	});    
+
+    
+}); 
+
 
 // Hent liste af users og oversæt dem til tabel 
 function loadUsers() {
@@ -184,3 +191,39 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 				}
     
 }
+
+
+
+
+// nyt med inter
+
+function loadpb() {
+    
+    $('#content_box').empty();        
+    
+    $('#content_box').append('<table id="table_con"></table>');
+    
+    $('#table_con').append('<tr><td>Status</td><td>Item status</td>pb Id<td></td><td>Recept Id</td></tr>');
+    
+    $.getJSON('api/pb/List', function(data) {
+    	console.log(data);
+    
+    // <input type="text" name="lname">
+	    
+        var status;
+
+        $.each(data, function(i, item) { 
+            
+            if (data[i].status == "0") {
+                status = "<td style='color: green;'>Active</td>";
+            } else {
+                status = "<td style='color: red;'>Inactive</td>";
+            }
+            
+        		$('#table_con').append('<tr id="' + data[i].pbId + '">' + '<td>' + status + '</td>' + '<td>' + data[i].itemStatus + '</td>' + '<td>' + data[i].pbId + '</td>' + '<td>' + data[i].receptId + '</td>' + '</tr>');
+        	
+        }); 
+        
+        console.log('tabel data load done');
+    })
+              };

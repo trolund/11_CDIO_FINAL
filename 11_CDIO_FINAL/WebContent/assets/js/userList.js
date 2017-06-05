@@ -121,7 +121,6 @@ $(document).ready(function() {
 	});   
 });
 
-
 // Add user button
 $(document).ready(function() {
 	$("#Adduser_But").click(function() {
