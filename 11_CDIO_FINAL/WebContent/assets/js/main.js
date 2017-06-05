@@ -1,6 +1,7 @@
 var id = null;
 var userName = null;
 var roles = null;
+var user = null;
 
 var authHeader = "Bearer " + localStorage.getItem("jwt");
 
@@ -89,6 +90,8 @@ $(document).ready(function() {
 		$('#AddUser_Box').hide();
         $('#editUser_Box').hide();
         
+        
+        
         $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
         	console.log("userList.js:" +  jqxhr.status ); // 200
         });
@@ -110,7 +113,7 @@ $(document).ready(function() {
 	}); 
 });
 
-// Hent liste af users og oversæt dem til tabel
+// Hent liste af users og oversæt dem til tabel 
 function loadUsers() {
 	var inActiveCount = 0;
     var ActiveCount = 0;
@@ -119,25 +122,12 @@ function loadUsers() {
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
-    $.getJSON('api/opr/getOprList', function(data) {
+    $.getJSON('api/View/VUserTableList', function(data) {
     	console.log('Users loaded.');
 	    
-	    var roles;
         var status;
-	
+
         $.each(data, function(i, item) { 
-        	jQuery.ajax({
-        		url: "api/opr/getOprRoleList/" + data[i].oprId,
-        		type: "GET",
-        		contentType: 'text/plain',
-                async: false,
-        		success: function(resultData) {  
-        			roles  = resultData;
-        		},
-        		error : function(jqXHR, textStatus, errorThrown) { 
-        			roles  = "Failed to load roles.";
-        		}
-        	})  
             
             if (data[i].status == "0") {
                 status = "<td style='color: green;'>Active</td>";
@@ -148,11 +138,11 @@ function loadUsers() {
             }
             
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
-        	} else {
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + roles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        	} else { 
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
-        });
+        }); 
         
         $('#inActiveCount').html(inActiveCount).fadeIn(200);
         $('#activeCount').html(ActiveCount).fadeIn(200);
@@ -161,17 +151,17 @@ function loadUsers() {
         console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);
         
         console.log('tabel data load done');
-    }); 
-} 
-
+    })
+              };
+              
 // load den user logget ind samt dens roller.
 function loadLoginUser(id) {
 	$.getJSON('api/opr/' + id, function(data) {
-		$('#label_oprName').html(data.oprFirstName).fadeIn(200);
-		userName = data.oprFirstName;
+        user = data;
+        userName = data.oprFirstName;
 		id = data.oprId;
-	
-		console.log('User ' + data.oprId + ' name:' + data.oprFirstName);
+        
+		$('#label_oprName').html(data.oprFirstName).fadeIn(200);
         
 		jQuery.ajax({
 			url: "api/opr/getOprRoleList/" + id,
@@ -180,15 +170,21 @@ function loadLoginUser(id) {
 			success: function(resultData) {
 				roles = resultData;
 				$('#oprRoles').html(resultData).fadeIn(1000); // skriver roller på label.
-				if (roles.indexOf("Admin") == -1) { // gem menu punkter som kun skal kunne bruges af admin
-					$('#user_but').hide();
-				}
+                
+				Roletjek();
 			},	
 			error : function(jqXHR, textStatus, errorThrown) {
 				
 			},
 			timeout: 120000,
 		});
-		console.log('user load done.')
+        console.log('User ' + data.oprId + ' name:' + data.oprFirstName);
 	}
 )};
+
+function Roletjek(){ // tjekker hvad der skal vises i web UI
+    if (roles.indexOf("Admin") == -1) { // gem menu punkter som kun skal kunne bruges af admin
+					$('#user_but').hide();
+				}
+    
+}
