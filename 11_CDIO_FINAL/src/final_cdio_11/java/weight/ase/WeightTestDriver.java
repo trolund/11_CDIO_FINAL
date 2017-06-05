@@ -24,36 +24,6 @@ public class WeightTestDriver {
 			e.printStackTrace();
 		}
 
-		// try {
-		// Socket socket = new Socket("169.254.2.3", 8000);
-		//
-		// if (socket.isConnected())
-		// System.out.println("Socket forbundet til vægten!");
-		//
-		// InputStreamReader in = new
-		// InputStreamReader(socket.getInputStream());
-		// BufferedReader br = new BufferedReader(in);
-		//
-		// PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
-		//
-		// pw.print("RM20 8 \"Indtast nr\" \"\" \"&3\"\r\n");
-		// pw.flush();
-		//
-		// String data = null;
-		//
-		// while ((data = br.readLine()) != null)
-		// System.out.println("Weight reply: " + data);
-		//
-		// br.close();
-		// pw.close();
-		// socket.close();
-		//
-		// } catch (UnknownHostException e) {
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-
 	}
 
 }

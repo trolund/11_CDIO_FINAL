@@ -41,16 +41,16 @@ public class WeightController implements IWeightController {
 		}
 
 		// step 3: Få laborant nummer
-		int id = -1;
+		int oprId = -1;
 		try {
-			id = weightConnector.getId("Weight idle. Enter operator id and press OK to confirm.");
+			oprId = weightConnector.getId("Enter oprId. Press OK");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
 
 		OperatorDTO oprDTO = null;
 		try {
-			oprDTO = oprDAO.getOperator(id);
+			oprDTO = oprDAO.getOperator(oprId);
 
 			ArrayList<RoleDTO> roleList = (ArrayList<RoleDTO>) roleDAO.getOprRoles(oprDTO.getOprId());
 
@@ -64,19 +64,19 @@ public class WeightController implements IWeightController {
 			}
 
 			if (!isAuthorized) {
-				String unauthMessage = "Operator id " + oprDTO.getOprId() + " is not authorized to use this terminal. Please contact appropriate personnel.";
+				String unauthMessage = "oprId " + oprDTO.getOprId() + " not authorized";
 				weightConnector.confirmMessage(unauthMessage);
 				throw new WeightException(unauthMessage);
 			}
 
 		} catch (DALException e) {
-			weightConnector.confirmMessage("Operator id " + id + " doesn't exist.");
+			weightConnector.confirmMessage("oprId " + oprId + " doesn't exist");
 			throw new WeightException(e.getMessage(), e);
 		}
 
 		// Step 4: vægt svarer tilbage med laborant navn
 		try {
-			String message = "Welcome " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName() + ". Press OK to confirm.";
+			String message = "Welcome " + oprId + ". Press OK";
 			weightConnector.confirmMessage(message);
 		} catch (WeightException e) {
 			e.printStackTrace();
@@ -85,9 +85,9 @@ public class WeightController implements IWeightController {
 		// Step 5: Laboranten indtaster produktbatchnummer
 		int pbId = -1;
 		try {
-			pbId = weightConnector.getId("Enter product batch id and press OK to confirm.");
+			pbId = weightConnector.getId("Enter pbId. Press OK");
 		} catch (WeightException e) {
-			weightConnector.confirmMessage("Product batch id " + pbId + " does not exist.");
+			weightConnector.confirmMessage("pbId " + pbId + " does not exist.");
 			throw new WeightException(e.getMessage(), e);
 		}
 
@@ -97,7 +97,7 @@ public class WeightController implements IWeightController {
 		try {
 			receptId = pbDAO.getProductBatch(pbId).getReceptId();
 		} catch (DALException e) {
-			weightConnector.confirmMessage("Receipt id " + receptId + " does not exist.");
+			weightConnector.confirmMessage("rId " + receptId + " does not exist.");
 			throw new WeightException(e.getMessage(), e);
 		}
 
@@ -110,7 +110,7 @@ public class WeightController implements IWeightController {
 		}
 
 		try {
-			weightConnector.confirmMessage("Receipt '" + receptName + "' from product batch id " + pbId + " was found. Make sure the weight is unloaded. Press OK to tare the weight.");
+			weightConnector.confirmMessage(receptName + ". Press OK.");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -120,7 +120,6 @@ public class WeightController implements IWeightController {
 			ProductBatchDTO pbDTO = pbDAO.getProductBatch(pbId);
 			pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getpbId(), 1, pbDTO.getReceptId(), pbDTO.getStatus()));
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -138,37 +137,37 @@ public class WeightController implements IWeightController {
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
-
-		// Step 12: Vægten af tarabeholder registreres
-		try {
-			weightConnector.getWeight();
-		} catch (WeightException e) {
-			e.printStackTrace();
-		}
 		//
-		//		// Step 13: Vægten Tareres igen
+		//		// Step 12: Vægten af tarabeholder registreres
 		//		try {
-		//			weightConnector.tareWeight();
+		//			weightConnector.getWeight();
 		//		} catch (WeightException e) {
 		//			e.printStackTrace();
 		//		}
-		//
-		//		// Step 14 og 15: Vægt beder om råvarebatchnummer på første råvare.
-		//		// Laborant afvejer og trykker OK
-		//		try {
-		//			int rbId = weightConnector.getId("Indtast raavarebatchID");
-		//		} catch (WeightException e) {
-		//			e.printStackTrace();
-		//		}
-		//
-		//		// Step 16: Spørg laborant om raavareafvejning er afsluttet
-		//		try {
-		//			weightConnector.confirmMessage("Tast 1 afvej næste raavare eller afslut batch");
-		//		} catch (WeightException e) {
-		//			e.printStackTrace();
-		//		}
-		//
-		//		// Step 17: Produktbacthnummerets status sættes til afsluttet
+		//		//
+		//		//		// Step 13: Vægten Tareres igen
+		//		//		try {
+		//		//			weightConnector.tareWeight();
+		//		//		} catch (WeightException e) {
+		//		//			e.printStackTrace();
+		//		//		}
+		//		//
+		//		//		// Step 14 og 15: Vægt beder om råvarebatchnummer på første råvare.
+		//		//		// Laborant afvejer og trykker OK
+		//		//		try {
+		//		//			int rbId = weightConnector.getId("Indtast raavarebatchID");
+		//		//		} catch (WeightException e) {
+		//		//			e.printStackTrace();
+		//		//		}
+		//		//
+		//		//		// Step 16: Spørg laborant om raavareafvejning er afsluttet
+		//		//		try {
+		//		//			weightConnector.confirmMessage("Tast 1 afvej næste raavare eller afslut batch");
+		//		//		} catch (WeightException e) {
+		//		//			e.printStackTrace();
+		//		//		}
+		//		//
+		//		//		// Step 17: Produktbacthnummerets status sættes til afsluttet
 		//		ProductBatchDTO pbDTO2 = pbDAO.getProductBatch(pbId);
 		//		pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO2.getpbId(), 2, pbDTO2.getReceptId(), pbDTO2.getStatus()));
 		//

@@ -23,6 +23,7 @@ public class WeightConnector implements IWeightConnector {
 			try {
 				if (InetAddress.getByName(ip).isReachable(100)) {
 					weightSocket = new Socket(ip, textHandler.WEIGHT_PORT);
+					break;
 				} else {
 					utils.logMessage(ip + ":" + textHandler.WEIGHT_PORT + " not reachable. Trying again.");
 				}
@@ -69,10 +70,10 @@ public class WeightConnector implements IWeightConnector {
 			throw new WeightException("Failed to read weight input.", e);
 		}
 
-		System.out.println("substring: '" + data.substring(7, data.length()) + "'");
+		System.out.println("substring: '" + data.substring(8, data.length() - 1) + "'");
 		int oprId = -1;
 		try {
-			oprId = Integer.parseInt(data.substring(7, data.length()));
+			oprId = Integer.parseInt(data.substring(8, data.length() - 1));
 			System.out.println("Extracted id: '" + oprId + "'");
 		} catch (NumberFormatException e) {
 			throw new WeightException("Failed to parse id.", e);
