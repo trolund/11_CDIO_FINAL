@@ -117,8 +117,6 @@ $(document).ready(function() {
         });
         
 	});    
-    
-    
 }); 
 
 
@@ -157,11 +155,10 @@ function loadUsers() {
         $('#activeCount').html(ActiveCount).fadeIn(200);
         totCount = inActiveCount + ActiveCount;
         $('#totCount').html(totCount).fadeIn(200);
-        console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);
-        
+        console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);        
         console.log('tabel data load done');
     })
-              };
+};
               
 // load den user logget ind samt dens roller. 
 function loadLoginUser(id) {
@@ -192,43 +189,26 @@ function loadLoginUser(id) {
 )};
 
 function Roletjek(){ // tjekker hvad der skal vises i web UI
-    if (roles.indexOf("Admin") == -1) { // gem menu punkter som kun skal kunne bruges af admin
-					$('#user_but').hide();
-				}
-    
+	if (roles.indexOf("Admin") == -1) { // gem menu punkter som kun skal kunne bruges af admin
+		$('#user_but').hide();
+	}
 }
-
-
-
 
 // nyt med inter
 
 function loadpb() {
-    
-    $('#content_box').empty(); 
-    
+	$('#content_box').empty(); 
     $.getJSON('api/pb/List', function(data) {
     	console.log(data);
-    
-    // <input type="text" name="lname">
-	    
-        var status;
-
-        $.each(data, function(i, item) {
-            
-            if (data[i].status == "0") {
-                status = "<td style='color: green;'>Active</td>";
-            } else {
-                status = "<td style='color: red;'>Inactive</td>";
-            }
-            
-$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input type="text" value="' + data[i].itemStatus + '"></td>' + '<td><input type="text" value="' + data[i].pbId + '"></td>' + '<td><input type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
-        	
-            
-            
-            
-        }); 
-        
+	    var status;
+	    $.each(data, function(i, item) {
+	    	if (data[i].status == "0") {
+	    		status = "<td style='color: green;'>Active</td>";
+	    	} else {
+	    		status = "<td style='color: red;'>Inactive</td>";
+	    	}
+	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input type="text" value="' + data[i].pbId + '"></td>' + '<td><input type="text" value="' + data[i].itemStatus + '"></td>' + '<td><input type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+       }); 
         console.log('tabel data load done');
     })
-              };
+};
