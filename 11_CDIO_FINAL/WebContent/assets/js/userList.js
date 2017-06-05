@@ -1,6 +1,6 @@
 // Delete users 
 $(document).ready(function() {
-	$('.del_user').click(function() {
+	$('button.del_user').click(function() {
 		
        var id = $(this).prop('data');
        console.log('Try to delete user with id: ' + id);  
@@ -33,9 +33,13 @@ $(document).ready(function() {
 
 // Edit user button
 $(document).ready(function() {
-	$(".edit_user").click(function() {
+	$("button.edit_user").click(function() {
+        
+        console.log("click:");
         
 		var id = $(this).prop('data');
+        
+        console.log("click:" + id);
         
 		$.getJSON('api/opr/RoleList/' + id, function(roleData) { 
 			$('#AdminRoleEdit').prop('checked', false);
@@ -48,15 +52,15 @@ $(document).ready(function() {
         			$('#AdminRoleEdit').prop('checked', true);
         		}
             
-        		if (roleData[i].roleName == "Farmaceut") {
+        		else if (roleData[i].roleName == "Farmaceut") {
         			$('#FarRoleEdit').prop('checked', true);
         		}
             
-        		if(roleData[i].roleName == "Værkfører") {
+        		else if(roleData[i].roleName == "Værkfører") {
         			$('#VeakRoleEdit').prop('checked', true);
         		}
             
-        		if (roleData[i].roleName == "Laborant") { 
+        		else if (roleData[i].roleName == "Laborant") { 
         			$('#LabRoleEdit').prop('checked', true);
         		}           
         	});

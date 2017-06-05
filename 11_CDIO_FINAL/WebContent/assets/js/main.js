@@ -84,16 +84,15 @@ $(document).ready(function() {
 // User button menu 
 $(document).ready(function() { 
 	$("#user_but").click(function() {
-        
-        $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
-        	console.log("userList.js:" +  jqxhr.status ); // 200
-        });
-        
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
         $('#editUser_Box').hide();
         
 		loadUsers();
+        
+         $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
+        	console.log("userList.js:" +  jqxhr.status ); // 200
+        });
 	});   
 });
 
