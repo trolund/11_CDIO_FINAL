@@ -157,7 +157,7 @@ function loadUsers() {
     })
               };
               
-// load den user logget ind samt dens roller.
+// load den user logget ind samt dens roller. 
 function loadLoginUser(id) {
 	$.getJSON('api/opr/' + id, function(data) {
         user = data;
@@ -199,11 +199,12 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 
 function loadpb() {
     
-    $('#content_box').empty();        
-    
+    $('#content_box').empty(); 
+    $('#content_box').append('<p>Can edit: </p><label class="switch"><input type="checkbox"><div class="slider round"></div></label>');
+    $('#content_box').append('<button>Delete</button>');
     $('#content_box').append('<table id="table_con"></table>');
-    
-    $('#table_con').append('<tr><td>Status</td><td>Item status</td>pb Id<td></td><td>Recept Id</td></tr>');
+     
+    $('#table_con').append('<tr><td>Status</td><td>Item status</td><td>pb Id</td></td><td>Recept Id</td><td>delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/pb/List', function(data) {
     	console.log(data);
@@ -212,7 +213,7 @@ function loadpb() {
 	    
         var status;
 
-        $.each(data, function(i, item) { 
+        $.each(data, function(i, item) {
             
             if (data[i].status == "0") {
                 status = "<td style='color: green;'>Active</td>";
@@ -220,8 +221,11 @@ function loadpb() {
                 status = "<td style='color: red;'>Inactive</td>";
             }
             
-        		$('#table_con').append('<tr id="' + data[i].pbId + '">' + '<td>' + status + '</td>' + '<td>' + data[i].itemStatus + '</td>' + '<td>' + data[i].pbId + '</td>' + '<td>' + data[i].receptId + '</td>' + '</tr>');
+$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input type="text" value="' + data[i].itemStatus + '"></td>' + '<td><input type="text" value="' + data[i].pbId + '"></td>' + '<td><input type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
         	
+            
+            
+            
         }); 
         
         console.log('tabel data load done');
