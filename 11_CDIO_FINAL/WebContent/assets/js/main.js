@@ -107,11 +107,17 @@ $(document).ready(function() {
 	});
     
     
-// Menu mobile button 
+// Menu pb button 
 	$("#prodbatch_but").click(function() {
+        $("#content_box").load('pb.html');
 		loadpb();
+        
+        $.getScript( "assets/js/pb.js", function( data, textStatus, jqxhr ) {
+        	console.log("pb.js:" +  jqxhr.status ); // 200
+        });
+        
 	});    
-
+    
     
 }); 
 
@@ -200,11 +206,6 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 function loadpb() {
     
     $('#content_box').empty(); 
-    $('#content_box').append('<p>Can edit: </p><label class="switch"><input type="checkbox"><div class="slider round"></div></label>');
-    $('#content_box').append('<button>Delete</button>');
-    $('#content_box').append('<table id="table_con"></table>');
-     
-    $('#table_con').append('<tr><td>Status</td><td>Item status</td><td>pb Id</td></td><td>Recept Id</td><td>delete</td><td>Edit</td></tr>');
     
     $.getJSON('api/pb/List', function(data) {
     	console.log(data);
