@@ -130,5 +130,13 @@ public class RESTView {
 		}
 		return viewList;
 	}
+	
+	
+	@GET
+	@Path("/VUserTableList")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<VUserTableDTO> VUserTableList() {
+		return viewController.VUserTableList();
+	}
 
 }
