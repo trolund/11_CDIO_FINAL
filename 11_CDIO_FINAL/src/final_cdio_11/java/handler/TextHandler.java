@@ -80,7 +80,7 @@ public class TextHandler {
 	/* 
 	 * Weight specific. 
 	 */
-	public final String[] WEIGHT_IPS = { "169.254.2.3", "localhost" };
+	public final String[] WEIGHT_IPS = { "169.254.2.2", "169.254.2.3", "localhost" };
 	public final int WEIGHT_PORT = 8000;
 
 	/* 
