@@ -1,11 +1,11 @@
-package final_cdio_11.java.weight.ase;
+package final_cdio_11.java.weight.ase.old;
 
 public interface IWeightConnector {
 	void initConnection() throws WeightConnectionException;
 	void closeConnection() throws WeightConnectionException;
-	int getId(String message) throws WeightException;
-	double getWeight() throws WeightException;
-	void tareWeight() throws WeightException;
+	int rm208Message(String message) throws WeightException;
+	double getCurrentWeight() throws WeightException;
+	double tareWeight() throws WeightException;
 	void confirmMessage(String message) throws WeightException;
 
 	public class WeightException extends Exception {

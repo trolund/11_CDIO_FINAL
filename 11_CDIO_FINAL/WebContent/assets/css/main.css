@@ -10,6 +10,7 @@ body {
     height: 100%; 
 }  
 
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.3; 
@@ -293,62 +294,62 @@ float: right;
 
 /* The switch - the box around the slider */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+  position: relative !important;
+  display: inline-block !important;
+  width: 60px !important;
+  height: 34px !important;
 }
 
 /* Hide default HTML checkbox */
-.switch input {display:none;}
+.switch input {display:none !important;}
 
 /* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
+  position: absolute !important;
+  cursor: pointer !important;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  background-color: #ccc !important;
+  -webkit-transition: .4s !important;
+  transition: .4s !important;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  position: absolute !important;
+  content: "" !important;
+  height: 26px !important;
+  width: 26px !important;
+  left: 4px !important;
+  bottom: 4px !important;
+  background-color: white !important;
+  -webkit-transition: .4s !important;
+  transition: .4s !important;
 }
 
 input:checked + .slider {
-  background-color: #3fb0ac;
+  background-color: #3fb0ac !important;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #3fb0ac;
+  box-shadow: 0 0 1px #3fb0ac !important;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(26px) !important;
+  -ms-transform: translateX(26px) !important;
+  transform: translateX(26px) !important;
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 34px !important;
 }
 
 .slider.round:before {
-  border-radius: 50%;
-}
+  border-radius: 50% !important;
+} 
 
 /*---- toggle css from https://www.w3schools.com/howto/howto_css_switch.asp slut --- */
 

@@ -12,23 +12,23 @@ import final_cdio_11.java.RESTResources.controller.ViewController;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.view.IVAdminForemanPBCDAO;
-import final_cdio_11.java.data.dao.view.IVUserTableDAO;
 import final_cdio_11.java.data.dao.view.IVForemanOperatorDAO;
 import final_cdio_11.java.data.dao.view.IVOperatorRBDAO;
 import final_cdio_11.java.data.dao.view.IVOperatorRecipeDAO;
 import final_cdio_11.java.data.dao.view.IVPharmacistRecipeDAO;
+import final_cdio_11.java.data.dao.view.IVUserTableDAO;
 import final_cdio_11.java.data.dao.view.SQLAdminForemanPBCDAO;
-import final_cdio_11.java.data.dao.view.SQLVUserTableDAO;
 import final_cdio_11.java.data.dao.view.SQLForemanOperatorDAO;
 import final_cdio_11.java.data.dao.view.SQLOperatorRBDAO;
 import final_cdio_11.java.data.dao.view.SQLOperatorRecipeDAO;
 import final_cdio_11.java.data.dao.view.SQLPharmacistRecipeDAO;
+import final_cdio_11.java.data.dao.view.SQLVUserTableDAO;
 import final_cdio_11.java.data.dto.view.VAdminForemanPBCDTO;
-import final_cdio_11.java.data.dto.view.VUserTableDTO;
 import final_cdio_11.java.data.dto.view.VForemanOperatorDTO;
 import final_cdio_11.java.data.dto.view.VOperatorRBDTO;
 import final_cdio_11.java.data.dto.view.VOperatorRecipeDTO;
 import final_cdio_11.java.data.dto.view.VPharmacistRecipeDTO;
+import final_cdio_11.java.data.dto.view.VUserTableDTO;
 
 @Path("/View")
 public class RESTView {
@@ -48,6 +48,7 @@ public class RESTView {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
+
 		return viewList;
 	}
 
@@ -130,8 +131,7 @@ public class RESTView {
 		}
 		return viewList;
 	}
-	
-	
+
 	@GET
 	@Path("/VUserTableList")
 	@Produces(MediaType.APPLICATION_JSON)

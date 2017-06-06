@@ -68,7 +68,7 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 			if (!rs.first()) throw new DALException("No ProductBatch's exist!");
 
 			do {
-				pbList.add(new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("status"), rs.getInt("recept_id"), rs.getInt("status")));
+				pbList.add(new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("item_status"), rs.getInt("recept_id"), rs.getInt("status")));
 			} while (rs.next());
 			
 			return pbList;

@@ -90,8 +90,13 @@ $(document).ready(function() {
         
 		loadUsers();
         
+        $.ajaxSetup({
+        async: false
+        });
+        
          $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
         	console.log("userList.js:" +  jqxhr.status ); // 200
+             
         });
 	});
     
@@ -107,12 +112,16 @@ $(document).ready(function() {
 	});
     
     
-// Menu mobile button 
+// Menu pb button 
 	$("#prodbatch_but").click(function() {
+        $("#content_box").load('pb.html');
 		loadpb();
+        
+        $.getScript( "assets/js/pb.js", function( data, textStatus, jqxhr ) {
+        	console.log("pb.js:" +  jqxhr.status ); // 200
+        });
+        
 	});    
-
-    
 }); 
 
 
@@ -124,6 +133,10 @@ function loadUsers() {
     
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
+    
+     $.ajaxSetup({
+        async: false
+        });
     
     $.getJSON('api/View/VUserTableList', function(data) {
     	console.log('Users loaded.');
@@ -151,11 +164,11 @@ function loadUsers() {
         $('#activeCount').html(ActiveCount).fadeIn(200);
         totCount = inActiveCount + ActiveCount;
         $('#totCount').html(totCount).fadeIn(200);
-        console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);
-        
+        console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);        
         console.log('tabel data load done');
+        
     })
-              };
+};
               
 // load den user logget ind samt dens roller. 
 function loadLoginUser(id) {
@@ -186,48 +199,33 @@ function loadLoginUser(id) {
 )};
 
 function Roletjek(){ // tjekker hvad der skal vises i web UI
-    if (roles.indexOf("Admin") == -1) { // gem menu punkter som kun skal kunne bruges af admin
-					$('#user_but').hide();
-				}
-    
+	if (roles.indexOf("Admin") == -1) { // gem menu punkter som kun skal kunne bruges af admin
+		$('#user_but').hide();
+	}
 }
-
-
-
 
 // nyt med inter
 
 function loadpb() {
-    
-    $('#content_box').empty(); 
-    $('#content_box').append('<p>Can edit: </p><label class="switch"><input type="checkbox"><div class="slider round"></div></label>');
-    $('#content_box').append('<button>Delete</button>');
-    $('#content_box').append('<table id="table_con"></table>');
-     
-    $('#table_con').append('<tr><td>Status</td><td>Item status</td><td>pb Id</td></td><td>Recept Id</td><td>delete</td><td>Edit</td></tr>');
-    
+	$('#content_box').empty(); 
     $.getJSON('api/pb/List', function(data) {
-    	console.log(data);
-    
-    // <input type="text" name="lname">
-	    
-        var status;
-
-        $.each(data, function(i, item) {
-            
-            if (data[i].status == "0") {
-                status = "<td style='color: green;'>Active</td>";
-            } else {
-                status = "<td style='color: red;'>Inactive</td>";
-            }
-            
-$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input type="text" value="' + data[i].itemStatus + '"></td>' + '<td><input type="text" value="' + data[i].pbId + '"></td>' + '<td><input type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
-        	
-            
-            
-            
-        }); 
         
+	    var status;
+        var itemStatus = "<select name='itemStatus' id='itemStatus_val'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
+        
+	    $.each(data, function(i, item) {
+            
+	    	if (data[i].status == "0") {
+	    		status = "<td name='status' style='color: green;'>Active</td>";
+	    	} else {
+	    		status = "<td name='status' style='color: red;'>Inactive</td>";
+	    	}
+            
+            
+	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input name="pbId" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input name="receptId" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            
+            $('#itemStatus_val').val(data[i].itemStatus);
+       }); 
         console.log('tabel data load done');
     })
-              };
+};

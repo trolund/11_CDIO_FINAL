@@ -3,44 +3,44 @@ package final_cdio_11.java.RESTResources.pojo;
 public class EditUserFormPOJO {
 
 	private int oprId;
-	private int status;
 	private String oprFirstName;
 	private String oprLastName;
 	private String oprIni;
 	private String oprEmail;
 	private String oprCpr;
-	private boolean AdminRole, FarRole, VeakRole, LabRole;
+	private int status;
+	private boolean adminRole, farmaceutRole, værkførerRole, laborantRole;
 
 	public boolean isAdminRole() {
-		return AdminRole;
+		return adminRole;
 	}
 
 	public void setAdminRole(boolean AdminRole) {
-		this.AdminRole = AdminRole;
+		this.adminRole = AdminRole;
 	}
 
-	public boolean isFarRole() {
-		return FarRole;
+	public boolean isFarmaceutRole() {
+		return farmaceutRole;
 	}
 
-	public void setFarRole(boolean farRole) {
-		FarRole = farRole;
+	public void setFarmaceutRole(boolean farmaceutRole) {
+		this.farmaceutRole = farmaceutRole;
 	}
 
-	public boolean isVeakRole() {
-		return VeakRole;
+	public boolean isVaerkforerRole() {
+		return værkførerRole;
 	}
 
-	public void setVeakRole(boolean veakRole) {
-		VeakRole = veakRole;
+	public void setVeakRole(boolean værkførerRole) {
+		this.værkførerRole = værkførerRole;
 	}
 
-	public boolean isLabRole() {
-		return LabRole;
+	public boolean isLaborantRole() {
+		return laborantRole;
 	}
 
-	public void setLabRole(boolean labRole) {
-		LabRole = labRole;
+	public void setLabRole(boolean laborantRole) {
+		this.laborantRole = laborantRole;
 	}
 
 	public int getOprId() {

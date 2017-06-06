@@ -8,6 +8,7 @@ import final_cdio_11.java.RESTResources.pojo.EditUserFormPOJO;
 import final_cdio_11.java.RESTResources.pojo.LoginFormPOJO;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.Role;
 import final_cdio_11.java.data.dao.IOperatorDAO;
 import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dao.SQLOperatorDAO;
@@ -58,7 +59,7 @@ public class OperatorController implements IOperatorController {
 			if (utils.DEV_ENABLED) utils.logMessage("User [" + oprId + "] does not have any roles. Setting to 'None.'.");
 			return "None.";
 		}
-		
+
 		if (utils.DEV_ENABLED) utils.logMessage("Concatenating operator roles to String.");
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
 			RoleDTO roleDTO = (RoleDTO) iterator.next();
@@ -124,23 +125,23 @@ public class OperatorController implements IOperatorController {
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));
 
 			if (createUserFormData.isAdminRole()) {
-				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_ADMIN, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_ADMIN));
+				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Admin.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Admin.toString()));
 			}
 
 			if (createUserFormData.isFarmaceutRole()) {
-				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_FARMACEUT, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_FARMACEUT));
+				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Farmaceut.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Farmaceut.toString()));
 			}
 
-			if (createUserFormData.isVaerkRole()) {
-				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_VAERK, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_VAERK));
+			if (createUserFormData.isVærkførerRole()) {
+				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Værkfører.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Værkfører.toString()));
 			}
 
 			if (createUserFormData.isLaborantRole()) {
-				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), textHandler.ROLE_LABORANT, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), textHandler.ROLE_LABORANT));
+				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Laborant.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Laborant.toString()));
 			}
 
 			return textHandler.succAddedUser(createUserFormData.getOprId());
@@ -171,23 +172,23 @@ public class OperatorController implements IOperatorController {
 			if (utils.DEV_ENABLED) utils.logMessage("Updating user: " + oprDTO);
 
 			if (editUserFormData.isAdminRole()) {
-				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_ADMIN, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_ADMIN));
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Admin.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Admin.toString()));
 			}
 
-			if (editUserFormData.isFarRole()) {
-				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_FARMACEUT, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_FARMACEUT));
+			if (editUserFormData.isFarmaceutRole()) {
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Farmaceut.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Farmaceut.toString()));
 			}
 
-			if (editUserFormData.isVeakRole()) {
-				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_VAERK, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_VAERK));
+			if (editUserFormData.isVaerkforerRole()) {
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Værkfører.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Værkfører.toString()));
 			}
 
-			if (editUserFormData.isLabRole()) {
-				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), textHandler.ROLE_LABORANT, 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), textHandler.ROLE_LABORANT));
+			if (editUserFormData.isLaborantRole()) {
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Laborant.toString(), 0));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Laborant.toString()));
 			}
 
 			return textHandler.succUpdateUser(oprDTO.getOprId());
