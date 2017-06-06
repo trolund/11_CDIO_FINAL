@@ -2,7 +2,7 @@
 $(document).ready(function() {
 	$('.del_user').click(function() {
 		
-       var id = $(this).prop('data');
+       var id = $(this).prop('name');
        console.log('Try to delete user with id: ' + id);  
        
        jQuery.ajax({
@@ -35,19 +35,24 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$(".edit_user").click(function() {
         
-        console.log("click:");
-        
-		var id = $(this).prop('data');
+		var id = $(this).prop('name');
         
         console.log("click:" + id);
         
-		$.getJSON('api/opr/RoleList/' + id, function(roleData) { 
+		$.getJSON('api/opr/RoleList/' + id, function(roleData) {
+            
 			$('#AdminRoleEdit').prop('checked', false);
             $('#FarRoleEdit').prop('checked', false);
             $('#VeakRoleEdit').prop('checked', false);
             $('#LabRoleEdit').prop('checked', false);
             
+            console.log('her:');
+            console.log(roleData);
+            
         	$.each(roleData, function(i, item) {	
+                
+                
+                
         		if (roleData[i].roleName == "Admin") {
         			$('#AdminRoleEdit').prop('checked', true);
         		}
@@ -64,6 +69,10 @@ $(document).ready(function() {
         			$('#LabRoleEdit').prop('checked', true);
         		}           
         	});
+        },function(){
+            
+            console.log("fejl");
+            
         });    
         
         $.getJSON('api/opr/' + id, function(data) {
