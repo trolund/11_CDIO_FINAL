@@ -14,7 +14,6 @@ $(document).ready(function() {
 	});
 });
 
-
 // Edit user button
 $(document).ready(function() {
 	$(".edit_pb").click(function() {
@@ -28,15 +27,15 @@ $(document).ready(function() {
     	console.log(data);
       
       	jQuery.ajax({
-			url : "api/pb/",
+			url : "api/pb/UpdatePB",
 			data : data,
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) {
-          		
+          		console.log(data);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+            	console.log(data);
 			}
 		});
         }); 
