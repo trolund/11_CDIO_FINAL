@@ -213,13 +213,13 @@ function loadpb() {
             var itemStatus = "<select name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
             
 	    	if (data[i].status == "0") {
-	    		status = "<td name='status' style='color: green;'>Active</td>";
+	    		status = "<td name='status_" + data[i].pbId + "' style='color: green;'>Active</td>";
 	    	} else {
-	    		status = "<td name='status' style='color: red;'>Inactive</td>";
+	    		status = "<td name='status_" + data[i].pbId + "' style='color: red;'>Inactive</td>";
 	    	}
             
             
-	    	$('#table_con').append('<form id="' + data[i].pbId + 'form"><tr id="' + data[i].pbId + '">' + status + '<td><input name="pbId" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input name="receptId" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr></form>');
+	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<form id="' + data[i].pbId + 'form"><td><input name="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input name="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td></form><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             
             console.log(data[i].itemStatus);
             

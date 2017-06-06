@@ -187,11 +187,12 @@ h2 {
 }
 
 #content_box button{
+    border border-radius: 5px;
     outline:none;
     padding: 5px;
     background-color: #3fb0ac;
     border: solid #173e43 1px;
-    margin-bottom: 10px;
+    transition: all 0.2;
 }
 
 #content_box button:hover{
@@ -224,6 +225,14 @@ h2 {
 #content_box table td{
     border-bottom: dashed 1px #333;
     
+}
+
+.top {
+	margin-bottom: 5px;
+}
+
+.top button {
+	top: -5px;
 }
 
 #menu_but {
@@ -345,6 +354,7 @@ input:checked + .slider:before {
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px !important;
+border: solid #173e43 1px;
 }
 
 .slider.round:before {

@@ -21,9 +21,12 @@ $(document).ready(function() {
         
 		var id = $(this).prop('name');
         
-        console.log("click:" + id);
-        
-		var data = $('#' + id + 'form').serializeJSON();
+		var data = {
+            itemStatus: $('#itemStatus_val_' + id).val(),
+            status: $('#status_' + id).val(),
+            pbId: $('#pbId_' + id).val(),
+            receptId: $('#receptId_' + id).val(),
+        }
       
         console.log(data);
         
@@ -39,5 +42,7 @@ $(document).ready(function() {
             	
 			}
 		});
+        
+        return false;
         }); 
     });

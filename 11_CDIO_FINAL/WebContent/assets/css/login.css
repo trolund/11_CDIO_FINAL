@@ -78,6 +78,8 @@
     border-top: solid #173e43 1px;
     border-bottom: solid #173e43 1px;
     position:relative;
+    transition: all 0.2;
+    border-radius: 5px;
 }
 
 #login_but:hover {
