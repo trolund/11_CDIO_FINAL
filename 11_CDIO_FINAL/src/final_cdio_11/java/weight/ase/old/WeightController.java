@@ -1,4 +1,4 @@
-package final_cdio_11.java.weight.ase;
+package final_cdio_11.java.weight.ase.old;
 
 import java.util.ArrayList;
 
@@ -11,10 +11,11 @@ import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.weight.ase.IWeightConnector.WeightConnectionException;
-import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
+import final_cdio_11.java.weight.ase.ISocketObserver;
+import final_cdio_11.java.weight.ase.old.IWeightConnector.WeightConnectionException;
+import final_cdio_11.java.weight.ase.old.IWeightConnector.WeightException;
 
-public class WeightController implements IWeightController {
+public class WeightController implements IWeightController, ISocketObserver {
 
 	private IOperatorDAO oprDAO;
 	private IRoleDAO roleDAO;
@@ -28,6 +29,11 @@ public class WeightController implements IWeightController {
 		this.receptDAO = receptDAO;
 		this.pbDAO = pbDAO;
 		this.weightConnector = weightConnector;
+	}
+
+	@Override
+	public void notify(String readLine) {
+
 	}
 
 	@Override
@@ -108,7 +114,7 @@ public class WeightController implements IWeightController {
 		}
 
 		try {
-			weightConnector.confirmMessage(receptName + ". Press OK.");
+			weightConnector.confirmMessage(receptName + ". Tare.");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -122,16 +128,19 @@ public class WeightController implements IWeightController {
 		}
 
 		// Step 9: Tarér vægt
+		double tareWeight = -1;
 		try {
-			weightConnector.tareWeight();
+			tareWeight = weightConnector.tareWeight();
 		} catch (WeightException e) {
 			weightConnector.confirmMessage("Tare weight failed.");
 			throw new WeightException(e.getMessage(), e);
 		}
 
+		System.out.println("Got tare: " + tareWeight);
+
 		// Step 10 og 11: Laborant placerer beholder og trykker OK
 		try {
-			weightConnector.confirmMessage("Put first container. Press OK.");
+			weightConnector.confirmMessage("Put first container.");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -142,39 +151,51 @@ public class WeightController implements IWeightController {
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
-		//
-		//		// Step 13: Vægten Tareres igen
-		//		try {
-		//			weightConnector.tareWeight();
-		//		} catch (WeightException e) {
-		//			e.printStackTrace();
-		//		}
-		//
-		//		// Step 14 og 15: Vægt beder om råvarebatchnummer på første råvare.
-		//		// Laborant afvejer og trykker OK
-		//		try {
-		//			int rbId = weightConnector.getId("Indtast raavarebatchID");
-		//		} catch (WeightException e) {
-		//			e.printStackTrace();
-		//		}
-		//
-		//		// Step 16: Spørg laborant om raavareafvejning er afsluttet
-		//		try {
-		//			weightConnector.confirmMessage("Tast 1 afvej næste raavare eller afslut batch");
-		//		} catch (WeightException e) {
-		//			e.printStackTrace();
-		//		}
-		//
-		//		// Step 17: Produktbacthnummerets status sættes til afsluttet
-		//ProductBatchDTO pbDTO2 = pbDAO.getProductBatch(pbId);
-		//pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO2.getpbId(), 2, pbDTO2.getReceptId(), pbDTO2.getStatus()));
-		//
-		//// Step 18: Bed laboborant om enten at lave nyt batch eller afslutte
-		//try {
-		//  weightConnector.confirmMessage("Tast 1 for ny afvejning eller tast 2 for at afslutte");
-		//} catch (WeightException e) {
-		//  e.printStackTrace();
-		// }
+
+		// Step 13: Vægten Tareres igen
+		try {
+			weightConnector.confirmMessage("Tare again. Press OK");
+		} catch (WeightException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			weightConnector.tareWeight();
+		} catch (WeightException e) {
+			e.printStackTrace();
+		}
+
+		// Step 14 og 15: Vægt beder om råvarebatchnummer på første råvare.
+		// Laborant afvejer og trykker OK
+		int rbId = -1;
+		try {
+			rbId = weightConnector.rm208Message("Enter rbId");
+		} catch (WeightException e) {
+			e.printStackTrace();
+		}
+
+		// Step 16: Spørg laborant om raavareafvejning er afsluttet
+		try {
+			weightConnector.confirmMessage("Press OK to finish.");
+		} catch (WeightException e) {
+			e.printStackTrace();
+		}
+
+		// Step 17: Produktbacthnummerets status sættes til afsluttet
+		try {
+			System.out.println("Setting productbatch status to 2, afsluttet.");
+			ProductBatchDTO pbDTO = pbDAO.getProductBatch(pbId);
+			pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getpbId(), 2, pbDTO.getReceptId(), pbDTO.getStatus()));
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+
+		//Step 18: Bed laboborant om enten at lave nyt batch eller afslutte
+		try {
+			weightConnector.confirmMessage("Finalized.");
+		} catch (WeightException e) {
+			e.printStackTrace();
+		}
 
 	}
 
