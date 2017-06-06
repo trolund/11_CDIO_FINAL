@@ -184,7 +184,7 @@ public class WeightController implements IWeightController {
 			e.printStackTrace();
 		}
 
-		//Step 18: Stop tråd så ny laborant kan komme til?
+		// Step 18: Stop tråd så ny laborant kan komme til?
 
 	}
 
