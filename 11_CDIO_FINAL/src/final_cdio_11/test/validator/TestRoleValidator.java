@@ -131,5 +131,69 @@ public class TestRoleValidator {
 		assertEquals("Failed: " + roleName+ " is supposed to be invalid.", expected, actual);
 	}
 
+	@Test
+	public void testIsRoleNameValidNegative01() {
+		
+		String roleName = "labo";
+		
+		boolean actual = roleValidator.isRoleNameValid(roleName);
+		boolean expected = false;
 
+		assertEquals("Failed: " + roleName+ " is supposed to be invalid.", expected, actual);
+	}
+	@Test
+	public void testIsRoleNameValidNegative02() {
+		
+		String roleName = "Værkfører,Laborant";
+		
+		boolean actual = roleValidator.isRoleNameValid(roleName);
+		boolean expected = false;
+
+		assertEquals("Failed: " + roleName+ " is supposed to be invalid.", expected, actual);
+	}
+	
+	/*
+	 * RoleStatusValid tests.
+	 */
+	@Test
+	public void testIsRoleStatusValidPositive00() {
+		int roleStatus = 0;
+		
+		boolean actual = roleValidator.isRoleStatusValid(roleStatus);
+		boolean expected = true;
+
+		assertEquals("Failed: " + roleStatus + " is supposed to be valid.", expected, actual);
+	}
+	
+	@Test
+	public void testIsRoleStatusValidPositive01() {
+		int roleStatus = 1;
+		
+		boolean actual = roleValidator.isRoleStatusValid(roleStatus);
+		boolean expected = true;
+
+		assertEquals("Failed: " + roleStatus + " is supposed to be valid.", expected, actual);
+	}
+	
+	@Test
+	public void testIsRoleStatusValidNegative00() {
+		
+		int roleStatus = 3;
+		
+		boolean actual = roleValidator.isRoleStatusValid(roleStatus);
+		boolean expected = false;
+
+		assertEquals("Failed: " + roleStatus+ " is supposed to be invalid.", expected, actual);
+	}
+	@Test
+	public void testIsRoleStatusValidNegative01() {
+		
+		int roleStatus = -1;
+		
+		boolean actual = roleValidator.isRoleStatusValid(roleStatus);
+		boolean expected = false;
+
+		assertEquals("Failed: " + roleStatus+ " is supposed to be invalid.", expected, actual);
+	}
+	
 }
