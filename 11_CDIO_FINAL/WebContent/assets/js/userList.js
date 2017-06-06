@@ -1,6 +1,6 @@
 // Delete users 
 $(document).ready(function() {
-	$('button.del_user').click(function() {
+	$('.del_user').click(function() {
 		
        var id = $(this).prop('data');
        console.log('Try to delete user with id: ' + id);  
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 // Edit user button
 $(document).ready(function() {
-	$("button.edit_user").click(function() {
+	$(".edit_user").click(function() {
         
         console.log("click:");
         

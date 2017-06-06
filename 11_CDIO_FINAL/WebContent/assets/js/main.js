@@ -90,8 +90,18 @@ $(document).ready(function() {
         
 		loadUsers();
         
+        $.ajaxSetup({
+        async: false
+        });
+        
          $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
         	console.log("userList.js:" +  jqxhr.status ); // 200
+             
+             
+        $.ajaxSetup({
+        async: true
+        }); 
+             
         });
 	});
     
@@ -129,6 +139,10 @@ function loadUsers() {
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
+     $.ajaxSetup({
+        async: false
+        });
+    
     $.getJSON('api/View/VUserTableList', function(data) {
     	console.log('Users loaded.');
 	    
@@ -157,6 +171,11 @@ function loadUsers() {
         $('#totCount').html(totCount).fadeIn(200);
         console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);        
         console.log('tabel data load done');
+        
+        $.ajaxSetup({
+        async: true
+        });
+        
     })
 };
               
@@ -199,15 +218,22 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 function loadpb() {
 	$('#content_box').empty(); 
     $.getJSON('api/pb/List', function(data) {
-    	console.log(data);
+        
 	    var status;
+        var itemStatus = "<select name='itemStatus' id='itemStatus_val'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
+        
 	    $.each(data, function(i, item) {
+            
 	    	if (data[i].status == "0") {
-	    		status = "<td style='color: green;'>Active</td>";
+	    		status = "<td name='status' style='color: green;'>Active</td>";
 	    	} else {
-	    		status = "<td style='color: red;'>Inactive</td>";
+	    		status = "<td name='status' style='color: red;'>Inactive</td>";
 	    	}
-	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input type="text" value="' + data[i].pbId + '"></td>' + '<td><input type="text" value="' + data[i].itemStatus + '"></td>' + '<td><input type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            
+            
+	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input name="pbId" type="text" value="' + data[i].pbId + '"></td>' + '<td><input type="text" value="' + itemStatus + '"></td>' + '<td><input name="receptId" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            
+            $('#itemStatus_val').val(data[i].itemStatus);
        }); 
         console.log('tabel data load done');
     })
