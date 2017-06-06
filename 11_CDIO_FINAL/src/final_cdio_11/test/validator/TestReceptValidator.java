@@ -1,6 +1,6 @@
 package final_cdio_11.test.validator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,16 +11,16 @@ import final_cdio_11.java.data.validator.ReceptValidator;
 
 public class TestReceptValidator {
 
-	private IReceptValidator  ReceptValidator;
-	
+	private IReceptValidator receptValidator;
+
 	@Before
 	public void setUp() throws Exception {
-		ReceptValidator = new ReceptValidator();
+		receptValidator = new ReceptValidator();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		ReceptValidator = null;
+		receptValidator = null;
 	}
 
 	/*
@@ -30,17 +30,17 @@ public class TestReceptValidator {
 	public void testIsReceptIdValidPositive00() {
 		int receptId = 23;
 
-		boolean actual = ReceptValidator.isReceptIdValid(receptId);
+		boolean actual = receptValidator.isReceptIdValid(receptId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptId + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsReceptIdValidPositive01() {
 		int receptId = 1;
 
-		boolean actual = ReceptValidator.isReceptIdValid(receptId);
+		boolean actual = receptValidator.isReceptIdValid(receptId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptId + " is supposed to be valid.", expected, actual);
@@ -50,17 +50,17 @@ public class TestReceptValidator {
 	public void testIsReceptIdValidPositive02() {
 		int receptId = 99999999;
 
-		boolean actual = ReceptValidator.isReceptIdValid(receptId);
+		boolean actual = receptValidator.isReceptIdValid(receptId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptId + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsReceptIdValidNegative00() {
 		int receptId = 842034029;
 
-		boolean actual = ReceptValidator.isReceptIdValid(receptId);
+		boolean actual = receptValidator.isReceptIdValid(receptId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + receptId + " is supposed to be invalid.", expected, actual);
@@ -70,7 +70,7 @@ public class TestReceptValidator {
 	public void testIsReceptIdValidNegative01() {
 		int receptId = 0;
 
-		boolean actual = ReceptValidator.isReceptIdValid(receptId);
+		boolean actual = receptValidator.isReceptIdValid(receptId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + receptId + " is supposed to be invalid.", expected, actual);
@@ -80,14 +80,12 @@ public class TestReceptValidator {
 	public void testIsReceptIdValidNegative02() {
 		int receptId = -1;
 
-		boolean actual = ReceptValidator.isReceptIdValid(receptId);
+		boolean actual = receptValidator.isReceptIdValid(receptId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + receptId + " is supposed to be invalid.", expected, actual);
 	}
 
-	
-	
 	/*
 	 * ReceptNameValidtor tests.
 	 */
@@ -95,7 +93,7 @@ public class TestReceptValidator {
 	public void testIsReceptNameValidPositive00() {
 		String receptName = "Is";
 
-		boolean actual = ReceptValidator.isReceptNameValid(receptName);
+		boolean actual = receptValidator.isReceptNameValid(receptName);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptName + " is supposed to be valid.", expected, actual);
@@ -105,7 +103,7 @@ public class TestReceptValidator {
 	public void testIsOprNameValidPositive01() {
 		String receptName = "Saltvand";
 
-		boolean actual = ReceptValidator.isReceptNameValid(receptName);
+		boolean actual = receptValidator.isReceptNameValid(receptName);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptName + " is supposed to be valid.", expected, actual);
@@ -115,72 +113,75 @@ public class TestReceptValidator {
 	public void testIsOprNameValidPositive02() {
 		String receptName = "de conffit de canard";
 
-		boolean actual = ReceptValidator.isReceptNameValid(receptName);
+		boolean actual = receptValidator.isReceptNameValid(receptName);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptName + " is supposed to be valid.", expected, actual);
 	}
+
 	@Test
 	public void testIsReceptNameValidNegative00() {
 		String receptName = "å";
 
-		boolean actual = ReceptValidator.isReceptNameValid(receptName);
+		boolean actual = receptValidator.isReceptNameValid(receptName);
 		boolean expected = false;
 
 		assertEquals("Failed: " + receptName + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsReceptNameValidNegative01() {
 		String receptName = "Mousse au de Chocolat ";
 
-		boolean actual = ReceptValidator.isReceptNameValid(receptName);
+		boolean actual = receptValidator.isReceptNameValid(receptName);
 		boolean expected = false;
 
 		assertEquals("Failed: " + receptName + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	/*
 	 * ReceptStatusValidtor tests.
 	 */
 	@Test
 	public void testIsReceptStatusValidPositive00() {
 		int receptStatus = 0;
-		
-		boolean actual = ReceptValidator.isReceptStatusValid(receptStatus);
+
+		boolean actual = receptValidator.isReceptStatusValid(receptStatus);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptStatus + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsReceptStatusValidPositive01() {
 		int receptStatus = 1;
-		
-		boolean actual = ReceptValidator.isReceptStatusValid(receptStatus);
+
+		boolean actual = receptValidator.isReceptStatusValid(receptStatus);
 		boolean expected = true;
 
 		assertEquals("Failed: " + receptStatus + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsReceptStatusValidNegative00() {
-		
+
 		int receptStatus = 3;
-		
-		boolean actual = ReceptValidator.isReceptStatusValid(receptStatus);
+
+		boolean actual = receptValidator.isReceptStatusValid(receptStatus);
 		boolean expected = false;
 
-		assertEquals("Failed: " + receptStatus+ " is supposed to be invalid.", expected, actual);
+		assertEquals("Failed: " + receptStatus + " is supposed to be invalid.", expected, actual);
 	}
+
 	@Test
 	public void testIsReceptStatusValidNegative01() {
-		
+
 		int receptStatus = -1;
-		
-		boolean actual = ReceptValidator.isReceptStatusValid(receptStatus);
+
+		boolean actual = receptValidator.isReceptStatusValid(receptStatus);
 		boolean expected = false;
 
-		assertEquals("Failed: " + receptStatus+ " is supposed to be invalid.", expected, actual);
+		assertEquals("Failed: " + receptStatus + " is supposed to be invalid.", expected, actual);
 	}
+
 }

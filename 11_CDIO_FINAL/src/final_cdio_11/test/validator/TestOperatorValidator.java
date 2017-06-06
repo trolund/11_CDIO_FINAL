@@ -161,7 +161,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprIni + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	public void testIsOprIniValidPositive01() {
 		String oprIni = "222";
 
@@ -170,7 +170,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprIni + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	public void testIsOprIniValidPositive02() {
 		String oprIni = "2222";
 
@@ -189,7 +189,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprIni + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprIniValidNegative01() {
 		String oprIni = "1111111111";
@@ -199,7 +199,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprIni + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprIniValidNegative02() {
 		String oprIni = "1111111111111111111111111";
@@ -209,8 +209,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprIni + " is supposed to be invalid.", expected, actual);
 	}
-	
-	
+
 	/*
 	 * isOprEmailValid test.
 	 */
@@ -233,7 +232,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprEmail + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprEmailValidPositive02() {
 		String oprEmail = "b.farazan@gmail.com";
@@ -243,7 +242,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprEmail + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprEmailValidNegative00() {
 		String oprEmail = "1111111111111111111111111@fail.aes";
@@ -253,7 +252,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprEmail + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprEmailValidNegative01() {
 		String oprEmail = "iRplebl0rd@haxor.1337";
@@ -263,7 +262,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprEmail + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprEmailValidNegative02() {
 		String oprEmail = "Zygsej0102@irzyg.0l123";
@@ -273,7 +272,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprEmail + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	/*
 	 * isOprCprValid test.
 	 */
@@ -286,7 +285,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprCpr + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprCprValidPositive01() {
 		String oprCpr = "0000000000";
@@ -296,7 +295,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprCpr + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprCprValidPositive02() {
 		String oprCpr = "9999999999";
@@ -306,7 +305,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprCpr + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprCprValidNegative00() {
 		String oprCpr = "";
@@ -336,7 +335,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprCpr + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	/*
 	 * isOprPasswordValid test.
 	 */
@@ -422,7 +421,7 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprStatus + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprStatusValidFalse00() {
 		int oprStatus = 3;
@@ -432,6 +431,5 @@ public class TestOperatorValidator {
 
 		assertEquals("Failed: " + oprStatus + " is supposed to be valid.", expected, actual);
 	}
-		
-	
+
 }
