@@ -353,6 +353,13 @@ input:checked + .slider:before {
 
 /*---- toggle css from https://www.w3schools.com/howto/howto_css_switch.asp slut --- */
 
+.pb_buts {
+	float: right;
+    height: 20px;
+    margin: 10px;
+    background-color: antiquewhite;
+}
+
 /* ----------- mobile ----------- */
 @media screen and (max-width: 400px) {
     #sidepanel {
