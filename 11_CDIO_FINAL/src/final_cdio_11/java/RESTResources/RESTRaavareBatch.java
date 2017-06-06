@@ -9,5 +9,7 @@ import final_cdio_11.java.RESTResources.controller.RaavareBatchController;
 public class RESTRaavareBatch {
 
 	private final IRaavareBatchController rbController = new RaavareBatchController();
+	
+	
 
 }

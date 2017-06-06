@@ -97,11 +97,6 @@ $(document).ready(function() {
          $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
         	console.log("userList.js:" +  jqxhr.status ); // 200
              
-             
-        $.ajaxSetup({
-        async: true
-        }); 
-             
         });
 	});
     
@@ -172,10 +167,6 @@ function loadUsers() {
         console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);        
         console.log('tabel data load done');
         
-        $.ajaxSetup({
-        async: true
-        });
-        
     })
 };
               
@@ -231,7 +222,7 @@ function loadpb() {
 	    	}
             
             
-	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input name="pbId" type="text" value="' + data[i].pbId + '"></td>' + '<td><input type="text" value="' + itemStatus + '"></td>' + '<td><input name="receptId" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input name="pbId" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input name="receptId" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             
             $('#itemStatus_val').val(data[i].itemStatus);
        }); 
