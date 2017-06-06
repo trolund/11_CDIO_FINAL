@@ -1,4 +1,4 @@
-package final_cdio_11.java.weight.ase.old;
+package final_cdio_11.java.weight.ase;
 
 import java.util.ArrayList;
 
@@ -11,11 +11,10 @@ import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.weight.ase.ISocketObserver;
-import final_cdio_11.java.weight.ase.old.IWeightConnector.WeightConnectionException;
-import final_cdio_11.java.weight.ase.old.IWeightConnector.WeightException;
+import final_cdio_11.java.weight.ase.IWeightConnector.WeightConnectionException;
+import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 
-public class WeightController implements IWeightController, ISocketObserver {
+public class WeightController implements IWeightController {
 
 	private IOperatorDAO oprDAO;
 	private IRoleDAO roleDAO;
@@ -29,11 +28,6 @@ public class WeightController implements IWeightController, ISocketObserver {
 		this.receptDAO = receptDAO;
 		this.pbDAO = pbDAO;
 		this.weightConnector = weightConnector;
-	}
-
-	@Override
-	public void notify(String readLine) {
-
 	}
 
 	@Override
@@ -176,7 +170,7 @@ public class WeightController implements IWeightController, ISocketObserver {
 
 		// Step 16: Spørg laborant om raavareafvejning er afsluttet
 		try {
-			weightConnector.confirmMessage("Press OK to finish.");
+			weightConnector.confirmMessage("Press OK to Finish.");
 		} catch (WeightException e) {
 			e.printStackTrace();
 		}
@@ -190,12 +184,7 @@ public class WeightController implements IWeightController, ISocketObserver {
 			e.printStackTrace();
 		}
 
-		//Step 18: Bed laboborant om enten at lave nyt batch eller afslutte
-		try {
-			weightConnector.confirmMessage("Finalized.");
-		} catch (WeightException e) {
-			e.printStackTrace();
-		}
+		//Step 18: Stop tråd så ny laborant kan komme til?
 
 	}
 

@@ -1,4 +1,4 @@
-package final_cdio_11.java.weight.ase.old;
+package final_cdio_11.java.weight.ase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +16,10 @@ public class WeightConnector implements IWeightConnector {
 	private final Utils utils = Utils.getInstance();
 	private final TextHandler textHandler = TextHandler.getInstance();
 	private Socket weightSocket;
+
+	/* I/O objects */
+	private BufferedReader in = null;
+	private PrintWriter out = null;
 
 	@Override
 	public void initConnection() throws WeightConnectionException {
@@ -37,8 +41,26 @@ public class WeightConnector implements IWeightConnector {
 
 		if (weightSocket != null && weightSocket.isConnected()) {
 			utils.logMessage("Socket connection established: " + weightSocket.getLocalSocketAddress() + ":" + textHandler.WEIGHT_PORT);
+			initIO();
+
+			String line = null;
+			try {
+				line = in.readLine();
+				if (line.startsWith("I4")) utils.logMessage("Got this: " + line);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
 			throw new WeightConnectionException("Socket connection failed.");
+		}
+	}
+
+	private void initIO() {
+		try {
+			in = getSocketReader();
+			out = getSocketWriter();
+		} catch (WeightException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -54,21 +76,18 @@ public class WeightConnector implements IWeightConnector {
 
 	@Override
 	public int rm208Message(String message) throws WeightException {
-		BufferedReader br = getSocketReader();
-		PrintWriter pw = getSocketWriter();
-
 		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
-		sendSocketMessage(socketMessage, pw);
+		sendSocketMessage(socketMessage);
 
 		String userMessage = null;
 
 		try {
-			String confirmMessage = br.readLine();
+			String confirmMessage = in.readLine();
 			if (!confirmMessage.equals("RM20 B")) {
 				throw new WeightException("Did not receive RM20 B. Got this: " + confirmMessage);
 			}
 
-			userMessage = br.readLine();
+			userMessage = in.readLine();
 			if (!userMessage.startsWith("RM20 A")) {
 				throw new WeightException("Did not receive RM20 A. Got this: " + userMessage);
 			}
@@ -95,15 +114,12 @@ public class WeightConnector implements IWeightConnector {
 
 	@Override
 	public double getCurrentWeight() throws WeightException {
-		BufferedReader br = getSocketReader();
-		PrintWriter pw = getSocketWriter();
-
 		String socketMessage = "S\r\n";
-		sendSocketMessage(socketMessage, pw);
+		sendSocketMessage(socketMessage);
 
 		String recMsg = null;
 		try {
-			recMsg = br.readLine();
+			recMsg = in.readLine();
 			System.out.println("getWeight reply: " + recMsg);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -117,14 +133,11 @@ public class WeightConnector implements IWeightConnector {
 
 	@Override
 	public double tareWeight() throws WeightException {
-		BufferedReader br = getSocketReader();
-		PrintWriter pw = getSocketWriter();
-
 		String socketMessage = "T\r\n";
-		sendSocketMessage(socketMessage, pw);
+		sendSocketMessage(socketMessage);
 		String tareReply = null;
 		try {
-			tareReply = br.readLine();
+			tareReply = in.readLine();
 			System.out.println("Tare reply: '" + tareReply + "'");
 			if (!tareReply.startsWith("T S")) {
 				throw new WeightConnectionException("Failed to tare the weight. Did not receive T S.");
@@ -140,17 +153,14 @@ public class WeightConnector implements IWeightConnector {
 
 	@Override
 	public void confirmMessage(String message) throws WeightException {
-		BufferedReader br = getSocketReader();
-		PrintWriter pw = getSocketWriter();
-
 		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
-		sendSocketMessage(socketMessage, pw);
+		sendSocketMessage(socketMessage);
 
 		String data = null;
 		try {
-			data = br.readLine();
+			data = in.readLine();
 			System.out.println("Return message: '" + data + "'");
-			data = br.readLine();
+			data = in.readLine();
 			System.out.println("Return message: '" + data + "'");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -158,39 +168,27 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	private BufferedReader getSocketReader() throws WeightException {
-		InputStreamReader in = null;
 		try {
-			in = new InputStreamReader(weightSocket.getInputStream());
-			return new BufferedReader(in);
+			if (in == null) in = new BufferedReader(new InputStreamReader(weightSocket.getInputStream()));
+			return in;
 		} catch (IOException e) {
 			throw new WeightException(e.getMessage(), e);
 		}
 	}
 
 	private PrintWriter getSocketWriter() throws WeightException {
-		PrintWriter pw = null;
 		try {
-			pw = new PrintWriter(weightSocket.getOutputStream(), true);
-			return pw;
+			if (out == null) out = new PrintWriter(weightSocket.getOutputStream(), true);
+			return out;
 		} catch (IOException e) {
 			throw new WeightException(e.getMessage(), e);
 		}
 	}
 
-	private void sendSocketMessage(String socketMessage, PrintWriter pw) {
-		pw.print(socketMessage);
-		pw.flush();
-	}
-
-	private String readLine() throws WeightException {
-		BufferedReader br = getSocketReader();
-		String line = null;
-		try {
-			line = br.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return line;
+	private void sendSocketMessage(String socketMessage) {
+		if (out == null) return;
+		out.print(socketMessage);
+		out.flush();
 	}
 
 }

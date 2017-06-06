@@ -1,4 +1,4 @@
-package final_cdio_11.java.weight.ase.old;
+package final_cdio_11.java.weight.ase;
 
 public interface IWeightConnector {
 	void initConnection() throws WeightConnectionException;
