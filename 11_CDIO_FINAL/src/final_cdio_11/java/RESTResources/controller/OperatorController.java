@@ -71,6 +71,7 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public List<RoleDTO> getOperatorRoleList(String OprId) {
+		System.out.println(OprId);
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 		List<RoleDTO> oprRoleList = null;
 

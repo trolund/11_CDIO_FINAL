@@ -3,6 +3,7 @@ package final_cdio_11.java.RESTResources;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -25,7 +26,7 @@ public class RESTProduktBatch {
 		return pbController.ProduktBatchList();
 	}
 		
-	@GET
+	@POST
 	@Path("/UpdatePB")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePB(PbPOJO data) {
