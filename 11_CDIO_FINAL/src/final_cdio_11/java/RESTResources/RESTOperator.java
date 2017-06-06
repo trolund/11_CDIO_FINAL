@@ -74,10 +74,13 @@ public class RESTOperator {
 	}
 
 	@GET
-	@Path("/RoleList/{OprId}")
+	@Path("/RoleList/{oprId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<RoleDTO> getOperatorRoleListJSON(@PathParam("oprId") String oprId) {
-		return oprController.getOperatorRoleList(oprId);
+		System.out.println(oprId);
+		List<RoleDTO> operatorRoleList = oprController.getOperatorRoleList(oprId);
+		System.out.println(operatorRoleList);
+		return operatorRoleList;
 	}
 
 	@POST

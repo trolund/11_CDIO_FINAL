@@ -90,14 +90,7 @@ $(document).ready(function() {
         
 		loadUsers();
         
-        $.ajaxSetup({
-        async: false
-        });
-        
-         $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
-        	console.log("userList.js:" +  jqxhr.status ); // 200
-             
-        });
+         
 	});
     
 // view button menu     
@@ -115,11 +108,8 @@ $(document).ready(function() {
 // Menu pb button 
 	$("#prodbatch_but").click(function() {
         $("#content_box").load('pb.html');
-		loadpb();
         
-        $.getScript( "assets/js/pb.js", function( data, textStatus, jqxhr ) {
-        	console.log("pb.js:" +  jqxhr.status ); // 200
-        });
+		loadpb();
         
 	});    
 }); 
@@ -156,7 +146,7 @@ function loadUsers() {
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
         		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button data="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	} else { 
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<button data="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button data="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
         }); 
         
@@ -166,6 +156,11 @@ function loadUsers() {
         $('#totCount').html(totCount).fadeIn(200);
         console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);        
         console.log('tabel data load done');
+        
+        $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
+        	console.log("userList.js:" +  jqxhr.status ); // 200
+             
+        });
         
     })
 };
@@ -211,9 +206,11 @@ function loadpb() {
     $.getJSON('api/pb/List', function(data) {
         
 	    var status;
-        var itemStatus = "<select name='itemStatus' id='itemStatus_val'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
+        
         
 	    $.each(data, function(i, item) {
+            
+            var itemStatus = "<select name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
             
 	    	if (data[i].status == "0") {
 	    		status = "<td name='status' style='color: green;'>Active</td>";
@@ -222,10 +219,18 @@ function loadpb() {
 	    	}
             
             
-	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<td><input name="pbId" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input name="receptId" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" data="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" data="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+	    	$('#table_con').append('<form id="' + data[i].pbId + 'form"><tr id="' + data[i].pbId + '">' + status + '<td><input name="pbId" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input name="receptId" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr></form>');
             
-            $('#itemStatus_val').val(data[i].itemStatus);
+            console.log(data[i].itemStatus);
+            
+            $('#itemStatus_val_' + data[i].pbId).val(data[i].itemStatus);
        }); 
+        
+        
+        $.getScript( "assets/js/pb.js", function( data, textStatus, jqxhr ) {
+        	console.log("pb.js:" +  jqxhr.status ); // 200
+        });
+        
         console.log('tabel data load done');
     })
 };
