@@ -50,6 +50,7 @@ public class WeightConnector implements IWeightConnector {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
 		} else {
 			throw new WeightConnectionException("Socket connection failed.");
 		}
@@ -68,6 +69,8 @@ public class WeightConnector implements IWeightConnector {
 	public void closeConnection() throws WeightConnectionException {
 		try {
 			if (!weightSocket.isClosed()) weightSocket.close();
+			in.close();
+			out.close();
 			utils.logMessage("Socket connection closed successfully.");
 		} catch (IOException e) {
 			throw new WeightConnectionException("Failed to close socket connection.");
@@ -83,14 +86,25 @@ public class WeightConnector implements IWeightConnector {
 
 		try {
 			String confirmMessage = in.readLine();
+
+			if (confirmMessage.equals("RM20 C")) {
+				throw new WeightException("Cancel was pressed.");
+			}
+
 			if (!confirmMessage.equals("RM20 B")) {
 				throw new WeightException("Did not receive RM20 B. Got this: " + confirmMessage);
 			}
 
 			userMessage = in.readLine();
+
+			if (userMessage.equals("RM20 C")) {
+				throw new WeightException("Cancel was pressed.");
+			}
+
 			if (!userMessage.startsWith("RM20 A")) {
 				throw new WeightException("Did not receive RM20 A. Got this: " + userMessage);
 			}
+
 		} catch (IOException e) {
 			throw new WeightException("Failed to execute RM20 8.", e);
 		}
@@ -162,6 +176,23 @@ public class WeightConnector implements IWeightConnector {
 			System.out.println("Return message: '" + data + "'");
 			data = in.readLine();
 			System.out.println("Return message: '" + data + "'");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void secondaryDisplayMessage(String message) throws WeightException {
+		String socketMessage = "P111 \"" + message + "\"\r\n";
+		sendSocketMessage(socketMessage);
+
+		try {
+			String recMsg = in.readLine();
+			System.out.println("secondaryDisplay: '" + recMsg + "'");
+
+			if (!recMsg.startsWith("P111")) {
+				throw new WeightException("Did not receive P111 A. Got this: " + recMsg);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

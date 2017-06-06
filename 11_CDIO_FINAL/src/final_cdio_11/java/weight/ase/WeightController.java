@@ -11,6 +11,7 @@ import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
+import final_cdio_11.java.utils.Utils;
 import final_cdio_11.java.weight.ase.IWeightConnector.WeightConnectionException;
 import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 
@@ -21,6 +22,8 @@ public class WeightController implements IWeightController {
 	private IReceptDAO receptDAO;
 	private IProductBatchDAO pbDAO;
 	private IWeightConnector weightConnector;
+
+	private final Utils utils = Utils.getInstance();
 
 	public WeightController(IOperatorDAO oprDAO, IRoleDAO roleDAO, IReceptDAO receptDAO, IProductBatchDAO pbDAO, IWeightConnector weightConnector) {
 		this.oprDAO = oprDAO;
@@ -74,7 +77,9 @@ public class WeightController implements IWeightController {
 
 		// Step 4: vægt svarer tilbage med laborant navn
 		try {
-			String message = "Welcome " + oprId + ". Press OK";
+			weightConnector.secondaryDisplayMessage("Welcome " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName());
+			String message = "Press OK to continue";
+			utils.sleep(3000);
 			weightConnector.confirmMessage(message);
 		} catch (WeightException e) {
 			e.printStackTrace();

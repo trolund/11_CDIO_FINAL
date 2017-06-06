@@ -15,18 +15,14 @@ public class TestRoleValidator {
 	private IRoleValidator roleValidator;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		roleValidator = new RoleValidator();
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		roleValidator = null;
 	}
-
-	/*
-	 * oprIdIsValid tests.
-	 */
 
 	@Test
 	public void testIsOprIdValidPositive00() {

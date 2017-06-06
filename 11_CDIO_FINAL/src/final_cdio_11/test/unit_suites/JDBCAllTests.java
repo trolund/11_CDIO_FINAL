@@ -5,10 +5,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /*
- * JUnit Test Suite used to run all unit tests at once.
+ * JUnit Test Suite used to run all validator tests at once.
  */
 @RunWith(Suite.class)
-@SuiteClasses({ JDBCTableTests.class, JDBCViewTests.class })
+@SuiteClasses({ JDBCTableTests.class, JDBCViewTests.class, DTOValidatorTests.class })
 public class JDBCAllTests {
 
 }

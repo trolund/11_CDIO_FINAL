@@ -10,6 +10,7 @@ import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 public class WeightTestDriver {
 
 	public static void main(String[] args) {
+		/* Running in own thread so it won't stall the Tomcat thread. */
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
