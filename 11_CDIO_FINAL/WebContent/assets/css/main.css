@@ -232,7 +232,8 @@ h2 {
 }
 
 .top button {
-	top: -5px;
+	top: -15px;
+    margin-top: -15px;
 }
 
 #menu_but {
@@ -368,6 +369,11 @@ border: solid #173e43 1px;
     height: 20px;
     margin: 10px;
     background-color: antiquewhite;
+    display: inline;
+}
+
+.pb_buts button {   
+    margin-top: -15px;
 }
 
 /* ----------- mobile ----------- */

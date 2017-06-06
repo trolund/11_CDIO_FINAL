@@ -202,7 +202,7 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 function loadpb() {
 	$('#content_box').empty(); 
     $.getJSON('api/pb/List', function(data) {
-        
+         
 	    var status;
         
 	    $.each(data, function(i, item) {
@@ -210,13 +210,13 @@ function loadpb() {
             var itemStatus = "<select name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
             
 	    	if (data[i].status == "0") {
-	    		status = "<td id='status_" + data[i].pbId + "' style='color: green;'>Active</td>";
+	    		status = "<td value='0' id='status_" + data[i].pbId + "' style='color: green;'>Active</td>";
 	    	} else {
-	    		status = "<td id='status_" + data[i].pbId + "' style='color: red;'>Inactive</td>";
+	    		status = "<td value='1' id='status_" + data[i].pbId + "' style='color: red;'>Inactive</td>";
 	    	}
             
             
-	    	$('#table_con').append('<tr id="' + data[i].pbId + '">' + status + '<form id="' + data[i].pbId + 'form"><td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td></form><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+	    	$('#table_con').append('<tr id="' + data[i].pbId + ' row">' + status + '<td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             
             console.log(data[i].itemStatus);
             

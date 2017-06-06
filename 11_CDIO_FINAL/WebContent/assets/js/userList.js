@@ -149,7 +149,7 @@ $(document).ready(function() {
 		  $("#editUser_Box").hide(400);
         }
         else{ 
-          $("#AddUser_Box").hide(400);
+          $("#AddUser_Box").hide(400); 
         } 
     }); 
 });

@@ -42,7 +42,38 @@ $(document).ready(function() {
             	
 			}
 		});
+
+        }); 
+    });
+
+
+//del user button
+$(document).ready(function() {
+	$("#pb_del_But").click(function() {
+    
+		var data;
         
-        return false;
+        $(".row").each(function(i, item) {
+          $this = $(this);
+          data.push($this.find("td:nth-child(5) > input[type='checkbox']").val());  
+        });
+        
+        var json = JSON.stringify(data, null, 2);
+      
+        console.log(data);
+        console.log(json);
+        
+      	jQuery.ajax({
+			url : "api/pb/DelPB",
+			data : json,
+			contentType: "application/json",
+			method: 'POST',
+			success : function(data) {
+          		
+			},
+			error: function(jqXHR, text, error) { 
+            	
+			}
+		});
         }); 
     });
