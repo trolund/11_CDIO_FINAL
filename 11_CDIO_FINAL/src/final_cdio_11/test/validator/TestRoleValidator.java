@@ -123,7 +123,7 @@ public class TestRoleValidator {
 	@Test
 	public void testIsRoleNameValidNegative00() {
 		
-		String roleName = "Jackson";
+		String roleName = "aAdmin";
 		
 		boolean actual = roleValidator.isRoleNameValid(roleName);
 		boolean expected = false;
