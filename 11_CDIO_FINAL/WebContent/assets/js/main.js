@@ -89,8 +89,6 @@ $(document).ready(function() {
         $('#editUser_Box').hide();
         
 		loadUsers();
-        
-         
 	});
     
 // view button menu     
@@ -124,9 +122,9 @@ function loadUsers() {
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
-     $.ajaxSetup({
-        async: false
-        });
+//     $.ajaxSetup({
+//        async: false
+//        });
     
     $.getJSON('api/View/VUserTableList', function(data) {
     	console.log('Users loaded.');
@@ -206,7 +204,6 @@ function loadpb() {
     $.getJSON('api/pb/List', function(data) {
         
 	    var status;
-        
         
 	    $.each(data, function(i, item) {
             
