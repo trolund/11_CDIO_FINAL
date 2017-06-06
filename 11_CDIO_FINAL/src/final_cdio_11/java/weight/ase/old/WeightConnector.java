@@ -1,4 +1,4 @@
-package final_cdio_11.java.weight.ase;
+package final_cdio_11.java.weight.ase.old;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -77,15 +77,15 @@ public class WeightConnector implements IWeightConnector {
 		}
 
 		// real weight
-		//System.out.println("substring userMessage: '" + userMessage.substring(8, userMessage.length() - 1) + "'");
+		System.out.println("substring userMessage: '" + userMessage.substring(8, userMessage.length() - 1) + "'");
 
 		// weight sim
-		System.out.println("substring userMessage: '" + userMessage.substring(7, userMessage.length()) + "'");
+		//System.out.println("substring userMessage: '" + userMessage.substring(7, userMessage.length()) + "'");
 
 		int oprId = -1;
 		try {
-			//oprId = Integer.parseInt(data.substring(8, data.length() - 1));
-			oprId = Integer.parseInt(userMessage.substring(7, userMessage.length()));
+			oprId = Integer.parseInt(userMessage.substring(8, userMessage.length() - 1));
+			//oprId = Integer.parseInt(userMessage.substring(7, userMessage.length()));
 		} catch (NumberFormatException e) {
 			throw new WeightException("Failed to parse id.", e);
 		}
@@ -98,7 +98,7 @@ public class WeightConnector implements IWeightConnector {
 		BufferedReader br = getSocketReader();
 		PrintWriter pw = getSocketWriter();
 
-		String socketMessage = "S \r\n";
+		String socketMessage = "S\r\n";
 		sendSocketMessage(socketMessage, pw);
 
 		String recMsg = null;
@@ -120,19 +120,22 @@ public class WeightConnector implements IWeightConnector {
 		BufferedReader br = getSocketReader();
 		PrintWriter pw = getSocketWriter();
 
-		String socketMessage = "T \r\n";
+		String socketMessage = "T\r\n";
 		sendSocketMessage(socketMessage, pw);
-
+		String tareReply = null;
 		try {
-			String data = br.readLine();
-			if (!data.startsWith("T S")) {
+			tareReply = br.readLine();
+			System.out.println("Tare reply: '" + tareReply + "'");
+			if (!tareReply.startsWith("T S")) {
 				throw new WeightConnectionException("Failed to tare the weight. Did not receive T S.");
 			}
-			System.out.println("Tare reply: " + data);
+			System.out.println("Tare reply: " + tareReply);
+			System.out.println("Tare substring: " + tareReply.substring(8, tareReply.length() - 3));
 		} catch (IOException e) {
 			throw new WeightException(e.getMessage(), e);
 		}
-		return 0;
+		double tareWeight = Double.parseDouble(tareReply.substring(8, tareReply.length() - 3));
+		return tareWeight;
 	}
 
 	@Override
@@ -177,6 +180,17 @@ public class WeightConnector implements IWeightConnector {
 	private void sendSocketMessage(String socketMessage, PrintWriter pw) {
 		pw.print(socketMessage);
 		pw.flush();
+	}
+
+	private String readLine() throws WeightException {
+		BufferedReader br = getSocketReader();
+		String line = null;
+		try {
+			line = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return line;
 	}
 
 }
