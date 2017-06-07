@@ -105,9 +105,10 @@ $(document).ready(function() {
     
 // Menu pb button 
 	$("#prodbatch_but").click(function() {
-        $("#content_box").load('pb.html');
         
-		loadpb();
+         $("#content_box").load('pb.html');
+        
+		loadpb(false);
         
 	});    
 }); 
@@ -199,8 +200,12 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 
 // nyt med inter
 
-function loadpb() {
-	$('#content_box').empty(); 
+function loadpb(bool) {
+    
+	$('#table_con').empty(); 
+    
+    $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Item status</td><td>Recept Id</td><td>Delete</td><td>Edit</td></tr>");
+    
     $.getJSON('api/pb/List', function(data) {
          
 	    var status;
@@ -215,10 +220,12 @@ function loadpb() {
 	    		status = "<td value='1' id='status_" + data[i].pbId + "' style='color: red;'>Inactive</td>";
 	    	}
             
-            
+            if(bool && data[i].status =="1"){
+                
+            }
+            else{
 	    	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
-            
-            console.log(data[i].itemStatus);
+            }
             
             $('#itemStatus_val_' + data[i].pbId).val(data[i].itemStatus);
        }); 

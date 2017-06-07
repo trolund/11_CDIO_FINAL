@@ -1,14 +1,17 @@
+var boolEdit = false;
+var boolAcOnly = false;
+
 $(document).ready(function() {
 	// toggle pb button 
 	$('#checkbox_val').click(function() {
 		
-        var bool = $('#checkbox_val').is(":checked");
+        boolEdit = $('#checkbox_val').is(":checked");
         
-		$('input').attr("readonly", bool);
+		$('input').attr("readonly", boolEdit);
         
-        console.log("edit check: " + bool);
+        console.log("edit check: " + boolEdit);
         
-        if (bool) {
+        if (boolEdit) {
             $("#table_con input").attr("disabled", true);
             $(".checkbox").attr("disabled", true);
             $(".selinput").attr("disabled", true);
@@ -21,7 +24,28 @@ $(document).ready(function() {
         }
         
 	});
+
 });
+
+
+$(document).ready(function() {
+  $('#checkbox_val_ac').click(function() {
+        
+        boolAcOnly = $('#checkbox_val_ac').is(":checked");
+        
+        loadpb(boolAcOnly);
+	});
+    
+});
+
+
+$(document).ready(function() {
+ $('#refresh_But').click(function() {
+		loadpb(boolAcOnly);
+	}); 
+});
+
+    
 
 // Edit pb button
 $(document).ready(function() {
@@ -77,6 +101,7 @@ $(document).ready(function() {
                         success : function(data) {
                                 console.log('id: ' + pbId  + ' value: ' + checkedValue + 'was deleted');
                                 console.log(data);
+                            
                         },
                         error: function(jqXHR, text, error) { 
                                 console.log('id: ' + pbId + ' value: ' + checkedValue + 'was delete failed');
@@ -88,8 +113,6 @@ $(document).ready(function() {
                 
             });
         });
-        
-        
-      	
+        loadpb(boolAcOnly);
         }); 
     });

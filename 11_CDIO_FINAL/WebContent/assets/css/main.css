@@ -230,7 +230,10 @@ h2 {
 
 .top {
 	margin-bottom: 5px;
+    width: 100%;
 }
+
+
 
 .top button {
 	top: -15px;
@@ -373,6 +376,10 @@ input:checked + .slider:before {
 }
 
 .pb_buts button {   
+}
+
+.pb_buts_L {
+	float: left;
 }
 
 /* ----------- mobile ----------- */
