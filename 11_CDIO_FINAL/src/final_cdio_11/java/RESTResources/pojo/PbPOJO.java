@@ -2,38 +2,39 @@ package final_cdio_11.java.RESTResources.pojo;
 
 public class PbPOJO {
 	
-	private int itemStatus, status, pbId, receptId;
+	private String itemStatus, status, pbId, receptId;
 
-	public int getItemStatus() {
+	public String getItemStatus() {
 		return itemStatus;
 	}
 
-	public void setItemStatus(int itemStatus) {
+	public void setItemStatus(String itemStatus) {
 		this.itemStatus = itemStatus;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public int getPbId() {
+	public String getPbId() {
 		return pbId;
 	}
 
-	public void setPbId(int pbId) {
+	public void setPbId(String pbId) {
 		this.pbId = pbId;
 	}
 
-	public int getReceptId() {
+	public String getReceptId() {
 		return receptId;
 	}
 
-	public void setReceptId(int receptId) {
+	public void setReceptId(String receptId) {
 		this.receptId = receptId;
 	}
 
+	
 }

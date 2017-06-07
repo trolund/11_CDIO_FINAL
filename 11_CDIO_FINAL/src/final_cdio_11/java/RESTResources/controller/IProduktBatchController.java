@@ -11,4 +11,6 @@ public interface IProduktBatchController {
 	List<ProductBatchDTO> ProduktBatchList();
 
 	Response UpdatePB(PbPOJO data);
+
+	Response delPB(int id);
 }

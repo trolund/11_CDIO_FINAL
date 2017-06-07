@@ -207,7 +207,7 @@ function loadpb() {
         
 	    $.each(data, function(i, item) {
             
-            var itemStatus = "<select name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
+            var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
             
 	    	if (data[i].status == "0") {
 	    		status = "<td value='0' id='status_" + data[i].pbId + "' style='color: green;'>Active</td>";
@@ -216,7 +216,7 @@ function loadpb() {
 	    	}
             
             
-	    	$('#table_con').append('<tr id="' + data[i].pbId + ' row">' + status + '<td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+	    	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             
             console.log(data[i].itemStatus);
             

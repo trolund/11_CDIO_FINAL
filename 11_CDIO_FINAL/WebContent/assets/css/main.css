@@ -192,7 +192,8 @@ h2 {
     padding: 5px;
     background-color: #3fb0ac;
     border: solid #173e43 1px;
-    transition: all 0.2;
+    -webkit-transition: all .2s; /* Safari */
+    transition: all .2s;
 }
 
 #content_box button:hover{
@@ -308,6 +309,7 @@ float: right;
   display: inline-block !important;
   width: 60px !important;
   height: 34px !important;
+    margin-top: -15px;
 }
 
 /* Hide default HTML checkbox */
@@ -355,7 +357,6 @@ input:checked + .slider:before {
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px !important;
-border: solid #173e43 1px;
 }
 
 .slider.round:before {
@@ -366,14 +367,12 @@ border: solid #173e43 1px;
 
 .pb_buts {
 	float: right;
-    height: 20px;
-    margin: 10px;
-    background-color: antiquewhite;
+    margin-left: 5px;
+    margin-top: 10px;
     display: inline;
 }
 
 .pb_buts button {   
-    margin-top: -15px;
 }
 
 /* ----------- mobile ----------- */
