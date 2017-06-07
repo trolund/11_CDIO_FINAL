@@ -92,6 +92,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 	public void createOperator(OperatorDTO opr) throws DALException {
 		String createOprSql = connector.getQuery("createOprSql");
 		PreparedStatement createOprStmt = null;
+
 		try {
 			createOprStmt = connector.getConnection().prepareStatement(createOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			createOprStmt.setInt(1, opr.getOprId());

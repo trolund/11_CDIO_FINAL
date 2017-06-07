@@ -112,9 +112,6 @@ public class WeightConnector implements IWeightConnector {
 		// real weight
 		System.out.println("substring userMessage: '" + userMessage.substring(8, userMessage.length() - 1) + "'");
 
-		// weight sim
-		//System.out.println("substring userMessage: '" + userMessage.substring(7, userMessage.length()) + "'");
-
 		int oprId = -1;
 		try {
 			oprId = Integer.parseInt(userMessage.substring(8, userMessage.length() - 1));
@@ -182,7 +179,7 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
-	public void secondaryDisplayMessage(String message) throws WeightException {
+	public void secondaryDisplayMessage(String message, int sleepMillis) throws WeightException {
 		String socketMessage = "P111 \"" + message + "\"\r\n";
 		sendSocketMessage(socketMessage);
 
@@ -192,6 +189,27 @@ public class WeightConnector implements IWeightConnector {
 
 			if (!recMsg.startsWith("P111")) {
 				throw new WeightException("Did not receive P111 A. Got this: " + recMsg);
+			}
+			utils.sleep(sleepMillis);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void clearSecondaryDisplay() throws WeightException {
+		secondaryDisplayMessage("", 0);
+	}
+
+	@Override
+	public void sendKMessage() throws WeightException {
+		String message = "K 3\r\n";
+		sendSocketMessage(message);
+		try {
+			String recMsg = in.readLine();
+
+			if (!recMsg.startsWith("K A")) {
+				throw new WeightException("Did not receive K A. Got this: " + recMsg);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -220,6 +238,34 @@ public class WeightConnector implements IWeightConnector {
 		if (out == null) return;
 		out.print(socketMessage);
 		out.flush();
+	}
+
+	@Override
+	public void sendConfirmMessage(String message) throws WeightException {
+		String socketMessage = "P111 \"" + message + "\"\r\n";
+		sendSocketMessage(socketMessage);
+
+		try {
+			String recMsg = in.readLine();
+			System.out.println("sendConfirmMessage: '" + recMsg + "'");
+
+			if (!recMsg.startsWith("P111")) {
+				throw new WeightException("Did not receive P111 A. Got this: " + recMsg);
+			}
+
+			System.out.println("Waiting for K C 4 to confirm.");
+
+			while (true) {
+				if ((recMsg = in.readLine()).startsWith("K C 4")) {
+					System.out.println("Got K C 4: " + recMsg);
+					break;
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

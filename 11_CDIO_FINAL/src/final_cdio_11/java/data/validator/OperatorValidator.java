@@ -61,7 +61,7 @@ public class OperatorValidator implements IOperatorValidator {
 	@Override
 	public boolean isOprPasswordValid(String oprPassword) {
 		if (oprPassword == null) return false;
-		return oprPassword.length() >= 5 && oprPassword.length() <= 30 && oprPassword.matches(".*\\d+.*");
+		return oprPassword.length() >= 5 && oprPassword.length() <= 30;
 	}
 
 	@Override
