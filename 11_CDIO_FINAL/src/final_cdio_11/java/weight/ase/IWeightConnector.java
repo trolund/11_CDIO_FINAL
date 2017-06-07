@@ -7,7 +7,10 @@ public interface IWeightConnector {
 	double getCurrentWeight() throws WeightException;
 	double tareWeight() throws WeightException;
 	void confirmMessage(String message) throws WeightException;
-	void secondaryDisplayMessage(String message) throws WeightException;
+	void secondaryDisplayMessage(String message, int sleepMillis) throws WeightException;
+	void clearSecondaryDisplay() throws WeightException;
+	void sendKMessage() throws WeightException;
+	void sendConfirmMessage(String message) throws WeightException;
 
 	public class WeightException extends Exception {
 		private static final long serialVersionUID = 1L;
