@@ -41,6 +41,13 @@ public class RESTProduktBatch {
 		return pbController.delPB(id);
 	}
 	
+	@POST
+	@Path("/insertPB")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response delPB(PbPOJO data) {
+		return pbController.insertPB(data);
+	}
+	
 	
 
 }

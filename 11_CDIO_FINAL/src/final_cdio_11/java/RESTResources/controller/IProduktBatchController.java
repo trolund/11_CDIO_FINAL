@@ -13,4 +13,6 @@ public interface IProduktBatchController {
 	Response UpdatePB(PbPOJO data);
 
 	Response delPB(int id);
+
+	Response insertPB(PbPOJO data);
 }
