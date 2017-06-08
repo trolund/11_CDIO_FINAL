@@ -235,8 +235,10 @@ function loadpb(bool){
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "pb_dy.js was loaded." );
+            
+            tjekEditLock();
         }); 
     
     })
-    tjekEditLock();
+    
 };
