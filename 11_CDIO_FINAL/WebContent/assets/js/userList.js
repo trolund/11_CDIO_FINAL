@@ -4,7 +4,7 @@ $(document).ready(function(){
         console.log(id);
         $.post("api/mail/newPass/" + id, function( data ) {
         	console.log(data); 
-            $('#Editmsg').html("Mail med nyt kodeord sent!");
+            $('#Editmsg').html("New password sent!!");
         });
     })
 });
@@ -44,16 +44,13 @@ $(document).ready(function() {
 // Cancel icon create user box
 $(document).ready(function() { 
 	$(".cancel_Icon").click(function() {
-        
         var action = $(this).prop('name');
-        
         console.log(action);
         
-        if(action == 'edit'){
-		  $("#editUser_Box").hide(400);
-        }
-        else{ 
-          $("#AddUser_Box").hide(400); 
+        if (action == 'edit') {
+        	$("#editUser_Box").hide(400);
+        } else { 
+        	$("#AddUser_Box").hide(400); 
         } 
     }); 
 });
@@ -121,7 +118,7 @@ $(document).ready(function() {
             	$('#CreateMSG').html(data);
            		loadUsers();
 			},
-			error: function(jqXHR, text, error){ 
+			error: function(jqXHR, text, error) { 
            		console.log(data);
             	$('#CreateMSG').html(data).fadeToggle(500);
             	$("#AddUser_Box").show();

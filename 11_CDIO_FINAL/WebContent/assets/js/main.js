@@ -90,7 +90,6 @@ $(document).ready(function() {
 		$("#content_box").load('add_user.html');
 		$('#AddUser_Box').hide();
         $('#editUser_Box').hide();
-        
 		loadUsers();
 	});
 }); 
@@ -111,11 +110,8 @@ $(document).ready(function() {
 $(document).ready(function() {
 // Menu pb button 
 	$("#prodbatch_but").click(function() {
-        
-         $("#content_box").load('pb.html');
-        
+        $("#content_box").load('pb.html');
 		loadpb(false);
-        
 	});    
 }); 
 
@@ -167,6 +163,7 @@ function loadUsers() {
         	console.log( jqxhr.status ); // 200
         	console.log( "userlist_dy.js was loaded." );
         }); 
+
     })
 };
               
@@ -186,7 +183,6 @@ function loadLoginUser(id) {
 			success: function(resultData) {
 				roles = resultData;
 				$('#oprRoles').html(resultData).fadeIn(1000); // skriver roller på label.
-                
 				Roletjek();
 			},	
 			error : function(jqXHR, textStatus, errorThrown) {
@@ -208,8 +204,8 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 
 function loadpb(bool){
     
-	$('#table_con').empty(); 
-    
+	$('#table_con').empty();
+	
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Item status</td><td>Recept Id</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/pb/List', function(data) {
@@ -226,11 +222,10 @@ function loadpb(bool){
 	    		status = "<td value='1' id='status_" + data[i].pbId + "' style='color: red;'>Inactive</td>";
 	    	}
             
-            if(bool && data[i].status =="1"){
+            if(bool && data[i].status == "1") {
                 
-            }
-            else{
-	    	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            } else {
+            	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#itemStatus_val_' + data[i].pbId).val(data[i].itemStatus);
