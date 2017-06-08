@@ -187,7 +187,7 @@ h2 {
 }
 
 #content_box button{
-    border border-radius: 5px;
+    border-radius: 5px !important;
     outline:none;
     padding: 5px;
     background-color: #3fb0ac;
@@ -197,6 +197,24 @@ h2 {
 }
 
 #content_box button:hover{
+    color: #fff;
+    background-color: #173e43;
+    -webkit-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+    box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+}
+
+button{
+    border-radius: 5px !important;
+    outline:none;
+    padding: 5px;
+    background-color: #3fb0ac;
+    border: solid #173e43 1px;
+    -webkit-transition: all .2s; /* Safari */
+    transition: all .2s;
+}
+
+button:hover{
     color: #fff;
     background-color: #173e43;
     -webkit-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
@@ -304,6 +322,16 @@ float: right;
     max-width: 60px;
 }
 
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+
+
 /*---- toggle css from https://www.w3schools.com/howto/howto_css_switch.asp --- */
 
 /* The switch - the box around the slider */
@@ -338,7 +366,7 @@ float: right;
   width: 26px !important;
   left: 4px !important;
   bottom: 4px !important;
-  background-color: white !important;
+  background-color: #173e43 !important;
   -webkit-transition: .4s !important;
   transition: .4s !important;
 }
@@ -371,11 +399,17 @@ input:checked + .slider:before {
 .pb_buts {
 	float: right;
     margin-left: 5px;
-    margin-top: 10px;
     display: inline;
+    margin-top: 9px;
 }
 
 .pb_buts button {   
+}
+
+.pb_buts p {  
+    margin-top: -9px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .pb_buts_L {

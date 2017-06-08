@@ -1,13 +1,21 @@
 var boolEdit = false;
 var boolAcOnly = false;
+var boolNewRow = false;
 
 $(document).ready(function() {
-	// toggle pb button 
-	$('#checkbox_val').click(function() {
-		
+	//edit toggle pb button 
+	$('#checkbox_val').click(function() {	
         boolEdit = $('#checkbox_val').is(":checked");
         
-		$('input').attr("readonly", boolEdit);
+        tjekEditLock();
+	});
+
+});
+
+
+function tjekEditLock(){
+    
+    $('input').attr("readonly", boolEdit);
         
         console.log("edit check: " + boolEdit);
         
@@ -22,15 +30,15 @@ $(document).ready(function() {
             $(".selinput").removeAttr("disabled");
             $(".edit_pb").removeAttr("disabled");
         }
-        
-	});
-
-});
+    
+} 
 
 
 $(document).ready(function() {
   $('#checkbox_val_ac').click(function() {
-        
+      
+      $('#table_con').empty(); 
+      
         boolAcOnly = $('#checkbox_val_ac').is(":checked");
         
         loadpb(boolAcOnly);
@@ -40,43 +48,20 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+  $('#Addpb_But').click(function() {
+      addpb();
+	});
+    
+});
+
+$(document).ready(function() {
  $('#refresh_But').click(function() {
+     
+     $('#table_con').empty(); 
+     
 		loadpb(boolAcOnly);
 	}); 
 });
-
-    
-
-// Edit pb button
-$(document).ready(function() {
-	$(".edit_pb").click(function() {
-        
-		var id = $(this).prop('name');
-        
-		var data = {
-            "itemStatus":$('#itemStatus_val_' + id).val(),
-            "status":$('#status_' + id).attr("value"),
-            "pbId":$('#pbId_' + id).val(), 
-            "receptId":$('#receptId_' + id).val(),
-            }; 
-      
-        console.log(data);
-        
-      	jQuery.ajax({
-			url : "api/pb/UpdatePB",
-			data : data,
-			contentType: "application/json",
-			method: 'POST',
-			success : function(data) {
-          		
-			},
-			error: function(jqXHR, text, error) { 
-            	
-			}
-		});
-
-        }); 
-    });
 
 
 //del pb button
@@ -114,5 +99,51 @@ $(document).ready(function() {
             });
         });
         loadpb(boolAcOnly);
+        }); 
+    });
+
+function addpb(){
+    
+    if(!boolNewRow){
+    var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
+    
+    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="pbId_" type="text" value=""></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_" type="text" value=""></td>' + '<td></td>' + '<td><button class="insert_pb" name="">insert</button></td>' + '</tr>');
+    }
+    else {
+        // fejl i popup
+    }
+     boolNewRow = true;
+}
+
+// insert new pb button
+$(document).ready(function() {
+	$(".insert_pb").click(function() {
+        
+      
+		var id = $(this).find('#pbId_');
+        
+		var data = {
+            "itemStatus":$('#itemStatus_val_').val(),
+            "status":$('#status_').attr("value"),
+            "pbId":$('#pbId_').val(), 
+            "receptId":$('#receptId_').val(),
+            }; 
+      
+        console.log(data);
+        
+      	jQuery.ajax({
+			url : "api/pb/insertPB",
+			data : data,
+			contentType: "application/json",
+			method: 'POST',
+			success : function(data) {
+          		 boolNewRow = false;
+                 loadpb(boolAcOnly);
+			},
+			error: function(jqXHR, text, error) { 
+            	
+			}
+		});
+
         }); 
     });

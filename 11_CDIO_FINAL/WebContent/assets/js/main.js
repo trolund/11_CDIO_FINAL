@@ -82,6 +82,9 @@ $(document).ready(function() {
 		$("#menu_but").toggleClass("rot");
 	});
     
+}); 
+
+$(document).ready(function() {
 // User button menu    
     $("#user_but").click(function() {
 		$("#content_box").load('add_user.html');
@@ -90,7 +93,9 @@ $(document).ready(function() {
         
 		loadUsers();
 	});
-    
+}); 
+
+$(document).ready(function() {
 // view button menu     
     $("#view_but").click(function() {       
 		$("#content_box").load('view.html');
@@ -101,8 +106,9 @@ $(document).ready(function() {
         	console.log( "view.js was loaded." );
         }); 
 	});
+}); 
     
-    
+$(document).ready(function() {
 // Menu pb button 
 	$("#prodbatch_but").click(function() {
         
@@ -154,13 +160,13 @@ function loadUsers() {
         totCount = inActiveCount + ActiveCount;
         $('#totCount').html(totCount).fadeIn(200);
         console.log('Total amuont of users: ' + totCount + ' Inactive: ' + inActiveCount + ' Active:' + ActiveCount);        
-        console.log('tabel data load done');
+        console.log('tabel data load done'); 
         
-        $.getScript( "assets/js/userList.js", function( data, textStatus, jqxhr ) {
-        	console.log("userList.js:" +  jqxhr.status ); // 200
-             
-        });
-        
+        $.getScript( "assets/js/userlist_dy.js", function( data, textStatus, jqxhr ) {
+        	console.log( textStatus ); // Success
+        	console.log( jqxhr.status ); // 200
+        	console.log( "userlist_dy.js was loaded." );
+        }); 
     })
 };
               
@@ -200,7 +206,7 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 
 // nyt med inter
 
-function loadpb(bool) {
+function loadpb(bool){
     
 	$('#table_con').empty(); 
     
@@ -230,11 +236,12 @@ function loadpb(bool) {
             $('#itemStatus_val_' + data[i].pbId).val(data[i].itemStatus);
        }); 
         
-        
-        $.getScript( "assets/js/pb.js", function( data, textStatus, jqxhr ) {
-        	console.log("pb.js:" +  jqxhr.status ); // 200
-        });
-        
-        console.log('tabel data load done');
+        $.getScript( "assets/js/pb_dy.js", function( data, textStatus, jqxhr ) {
+        	console.log( textStatus ); // Success
+        	console.log( jqxhr.status ); // 200
+        	console.log( "pb_dy.js was loaded." );
+        }); 
+    
     })
+    tjekEditLock();
 };
