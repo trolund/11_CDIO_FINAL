@@ -36,6 +36,7 @@ public class ProduktBatchController implements IProduktBatchController {
 
 		try {
 			view.updateProductBatch(dto);
+			System.out.println("update done!");
 			return Response.status(200).entity("pb updated").build();
 		} catch (DALException e) {
 			e.printStackTrace();
@@ -43,7 +44,6 @@ public class ProduktBatchController implements IProduktBatchController {
 
 		return Response.status(400).entity("fejl").build();
 	}
-	
 	
 	@Override
 	public Response delPB(int id) {
@@ -58,5 +58,21 @@ public class ProduktBatchController implements IProduktBatchController {
 
 		return Response.status(400).entity("fejl").build();
 	}
+	
+	public Response insertPB(PbPOJO data) {
+		SQLProductBatchDAO view = new SQLProductBatchDAO(Connector.getInstance());
+
+		ProductBatchDTO dto = new ProductBatchDTO(Integer.parseInt(data.getPbId()),Integer.parseInt(data.getItemStatus()), Integer.parseInt(data.getReceptId()), Integer.parseInt(data.getStatus()));
+		
+		try {
+			view.createProductBatch(dto);;
+			return Response.status(200).entity("pb created").build();
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(400).entity("fejl").build();
+	}
+	
 
 }

@@ -225,7 +225,7 @@ function loadpb(bool){
             if(bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td><input id="pbId_' + data[i].pbId + '" type="text" value="' + data[i].pbId + '"></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_' + data[i].pbId + '" type="text" value="' + data[i].receptId + '"></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td id="pbId_' + data[i].pbId + '">' + data[i].pbId + '</td>' + '<td>' + itemStatus + '</td>' + '<td id="receptId_' + data[i].pbId + '">' + data[i].receptId + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#itemStatus_val_' + data[i].pbId).val(data[i].itemStatus);

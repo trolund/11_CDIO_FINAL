@@ -7,22 +7,22 @@ $(document).ready(function() {
 		var data = {
             "itemStatus":$('#itemStatus_val_' + id).val(),
             "status":$('#status_' + id).attr("value"),
-            "pbId":$('#pbId_' + id).val(), 
-            "receptId":$('#receptId_' + id).val(),
+            "pbId":$('#pbId_' + id).html(), 
+            "receptId":$('#receptId_' + id).html(),
             }; 
       
-        console.log(data);
+         console.log(data);
         
       	jQuery.ajax({
 			url : "api/pb/UpdatePB",
-			data : data,
+			data : JSON.stringify(data),
 			contentType: "application/json",
 			method: 'POST',
-			success : function(data) {
-          		
+			success : function(data) { 
+          		JSON.stringify(data + 'virker!')
 			},
 			error: function(jqXHR, text, error) { 
-            	
+            	JSON.stringify(data)
 			}
 		});
 
@@ -30,38 +30,7 @@ $(document).ready(function() {
     });
 
 
-// insert new pb button
-$(document).ready(function() {
-	$(".insert_pb").click(function() {
-        
-      
-		var id = $(this).find('#pbId_');
-        
-		var data = {
-            "itemStatus":$('#itemStatus_val_').val(),
-            "status":$('#status_').attr("value"),
-            "pbId":$('#pbId_').val(), 
-            "receptId":$('#receptId_').val(),
-            }; 
-      
-        console.log(data);
-        
-      	jQuery.ajax({
-			url : "api/pb/insertPB",
-			data : data,
-			contentType: "application/json",
-			method: 'POST',
-			success : function(data) {
-          		 boolNewRow = false;
-                 loadpb(boolAcOnly);
-			},
-			error: function(jqXHR, text, error) { 
-            	
-			}
-		});
 
-        }); 
-    });
 
 
 function tjekEditLock(){
@@ -84,3 +53,42 @@ function tjekEditLock(){
         }
     
 } 
+
+// insert button
+$(document).ready(function() {
+  $('#Addpb_But').click(function() {
+      addpb();
+      insertsciped();
+	}); 
+});
+
+function insertsciped(){
+    // insert new pb button
+	$(".insert_pb").click(function() {
+        
+		var data = {
+            "itemStatus":$('#itemStatus_val_').val(),
+            "status":$('#status_').attr("value"),
+            "pbId":$('#pbId_').val(), 
+            "receptId":$('#receptId_').val(),
+            }; 
+    
+        console.log(data);
+        
+      	jQuery.ajax({
+			url : "api/pb/insertPB",
+			data : JSON.stringify(data),
+			contentType: "application/json",
+			method: 'POST',
+			success : function(data) {
+          		 boolNewRow = false;
+                 loadpb(boolAcOnly);
+			},
+			error: function(jqXHR, text, error) { 
+            	
+			}
+		});
+
+        }); 
+
+}
