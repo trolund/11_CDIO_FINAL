@@ -15,4 +15,6 @@ public interface IProduktBatchController {
 	Response delPB(int id);
 
 	Response insertPB(PbPOJO data);
+
+	List<String> ProduktBatchReceptidList();
 }
