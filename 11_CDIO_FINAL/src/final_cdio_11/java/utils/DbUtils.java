@@ -143,7 +143,7 @@ public class DbUtils {
 
 	private static void createSampleRaavare() throws SQLException {
 		if (utils.DEV_ENABLED) utils.logMessage("Creating sample raavare...");
-		connector.getConnection().prepareStatement("INSERT INTO raavare (raavare_id, raavare_navn, leverandoer, status) VALUES (1, 'dej', 'Wawelka', 0), (2, 'tomat', 'Knoor', 0), (3, 'tomat', 'Veaubais', 0), (4, 'tomat', 'Franz', 0), (5, 'ost', 'Ost og Skinke A/S', 0), (6, 'skinke', 'Ost og Skinke A/S', 0), (7, 'champignon', 'Igloo Frostvarer', 0)").executeUpdate();
+		connector.getConnection().prepareStatement("INSERT INTO raavare (raavare_id, raavare_navn, leverandoer, status) VALUES (1, 'Salt', 'SaltCO', 0), (2, 'Citron', 'Citraz', 0), (3, 'Vand', 'WaterCompany', 0), (4, 'Salt', 'Saltastic', 0), (5, 'Ingefær', 'MedHerbs', 0), (6, 'Eddike', 'Syre A/S', 0), (7, 'Klor', 'Syre A/S', 0)").executeUpdate();
 		if (utils.DEV_ENABLED) utils.logMessage("Done.");
 	}
 
@@ -167,7 +167,7 @@ public class DbUtils {
 
 	private static void createSampleRecept() throws SQLException {
 		if (utils.DEV_ENABLED) utils.logMessage("Creating sample recept...");
-		connector.getConnection().prepareStatement("INSERT INTO recept(recept_id, recept_navn, status) VALUES (1, 'margherita', 0), (2, 'prosciutto', 0), (3, 'capricciosa', 0);").executeUpdate();
+		connector.getConnection().prepareStatement("INSERT INTO recept(recept_id, recept_navn, status) VALUES (1, 'Adderall', 0), (2, 'Paracetamol', 0), (3, 'Prozac', 0);").executeUpdate();
 		if (utils.DEV_ENABLED) utils.logMessage("Done.");
 	}
 

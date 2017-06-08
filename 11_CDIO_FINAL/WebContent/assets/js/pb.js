@@ -6,9 +6,7 @@ $(document).ready(function() {
 	$('#checkbox_val').click(function() {
 		
         boolEdit = $('#checkbox_val').is(":checked");
-        
 		$('input').attr("readonly", boolEdit);
-        
         console.log("edit check: " + boolEdit);
         
         if (boolEdit) {
@@ -21,31 +19,22 @@ $(document).ready(function() {
             $(".checkbox").removeAttr("disabled");
             $(".selinput").removeAttr("disabled");
             $(".edit_pb").removeAttr("disabled");
-        }
-        
+        } 
 	});
-
 });
-
 
 $(document).ready(function() {
   $('#checkbox_val_ac').click(function() {
-        
         boolAcOnly = $('#checkbox_val_ac').is(":checked");
-        
         loadpb(boolAcOnly);
 	});
-    
 });
-
 
 $(document).ready(function() {
  $('#refresh_But').click(function() {
 		loadpb(boolAcOnly);
 	}); 
 });
-
-    
 
 // Edit pb button
 $(document).ready(function() {
@@ -74,45 +63,36 @@ $(document).ready(function() {
             	
 			}
 		});
-
-        }); 
-    });
-
+	}); 
+});
 
 //del pb button
 $(document).ready(function() {
-	$("#pb_del_But").click(function() {
-    
+	$("#pb_del_But").click(function() {    
 		var data;
-        
-        $('#table_con tr').each(function(){
-            $(this).find('td input[type="checkbox"]').each(function(){
-                
-            var checkedValue = $(this).is(":checked");
-            var pbId = $(this).prop('name');
+        $('#table_con tr').each(function() {
+            $(this).find('td input[type="checkbox"]').each(function() {
+            	var checkedValue = $(this).is(":checked");
+            	var pbId = $(this).prop('name');
                 
                 console.log('id: ' + pbId + ' value: ' + checkedValue);
                 
-                if(checkedValue){
-                    
+                if (checkedValue) {
                     jQuery.ajax({
                         url : "api/pb/delPB/" + pbId,
                         method: 'POST',
                         success : function(data) {
-                                console.log('id: ' + pbId  + ' value: ' + checkedValue + 'was deleted');
-                                console.log(data);
-                            
+                        	console.log('id: ' + pbId  + ' value: ' + checkedValue + 'was deleted');
+                            console.log(data);
                         },
                         error: function(jqXHR, text, error) { 
-                                console.log('id: ' + pbId + ' value: ' + checkedValue + 'was delete failed');
-                                console.log(data);
+                        	console.log('id: ' + pbId + ' value: ' + checkedValue + 'was delete failed');
+                            console.log(data);
                         }
-		});         
+                    });         
                 }
-                
-                
             });
         });
         loadpb(boolAcOnly);
-        }); 
-    });
+    }); 
+});

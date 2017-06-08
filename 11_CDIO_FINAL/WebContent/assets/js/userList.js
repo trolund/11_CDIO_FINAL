@@ -3,29 +3,25 @@ $(document).ready(function() {
 	$('.del_user').click(function() {
 		
        var id = $(this).prop('name');
-       console.log('Try to delete user with id: ' + id);  
+       console.log('Trying to delete user with id: ' + id);  
        
        jQuery.ajax({
     	   url: "api/opr/deleteOpr",
     	   type: "POST",
     	   data : id,
     	   contentType: "application/json",
-    	   
     	   success: function(resultData) {
     		   if (resultData == "true") {
     			   console.log('User successfully deleted.' + 'return:' + resultData);
     			   $('tr#' + id + ' td:first-child').html("<td style='color: red;'>Inactive</td>").fadeIn(200);
-                   
     		   } else {
     			   console.log('User NOT deleted.' + 'return:' + resultData);
     			   $('#' + id).css('background-color', 'yellow').fadeIn(400); 
     		   }
     	   },
-    	   
     	   error : function(jqXHR, textStatus, errorThrown) {
     		   console.log("Id [" + id + "] does not exist.");
     	   },
-    	   
     	   timeout: 120000,
        });
     }); 
@@ -50,29 +46,18 @@ $(document).ready(function() {
             console.log(roleData);
             
         	$.each(roleData, function(i, item) {	
-                
-                
-                
         		if (roleData[i].roleName == "Admin") {
         			$('#AdminRoleEdit').prop('checked', true);
-        		}
-            
-        		else if (roleData[i].roleName == "Farmaceut") {
+        		} else if (roleData[i].roleName == "Farmaceut") {
         			$('#FarRoleEdit').prop('checked', true);
-        		}
-            
-        		else if(roleData[i].roleName == "Værkfører") {
+        		} else if (roleData[i].roleName == "Værkfører") {
         			$('#VeakRoleEdit').prop('checked', true);
-        		}
-            
-        		else if (roleData[i].roleName == "Laborant") { 
+        		} else if (roleData[i].roleName == "Laborant") { 
         			$('#LabRoleEdit').prop('checked', true);
         		}           
         	});
         },function(){
-            
             console.log("fejl");
-            
         });    
         
         $.getJSON('api/opr/' + id, function(data) {
@@ -100,7 +85,7 @@ $(document).ready(function(){
         console.log(id);
         $.post("api/mail/newPass/" + id, function( data ) {
         	console.log(data); 
-            $('#Editmsg').html("Mail med nyt kodeord sent!");
+            $('#Editmsg').html("New password sent!!");
         });
     })
 });
@@ -140,16 +125,13 @@ $(document).ready(function() {
 // Cancel icon create user box
 $(document).ready(function() { 
 	$(".cancel_Icon").click(function() {
-        
         var action = $(this).prop('name');
-        
         console.log(action);
         
-        if(action == 'edit'){
-		  $("#editUser_Box").hide(400);
-        }
-        else{ 
-          $("#AddUser_Box").hide(400); 
+        if (action == 'edit') {
+        	$("#editUser_Box").hide(400);
+        } else { 
+        	$("#AddUser_Box").hide(400); 
         } 
     }); 
 });
@@ -217,7 +199,7 @@ $(document).ready(function() {
             	$('#CreateMSG').html(data);
            		loadUsers();
 			},
-			error: function(jqXHR, text, error){ 
+			error: function(jqXHR, text, error) { 
            		console.log(data);
             	$('#CreateMSG').html(data).fadeToggle(500);
             	$("#AddUser_Box").show();

@@ -22,20 +22,15 @@ $(document).ready(function(){
     $('#viewSelector').change(function() {
     if ($(this).val() === '1') {
         AdminForemanview();
-    }
-    else if($(this).val() === '2'){  
+    } else if ($(this).val() === '2') {  
         operator_rb();
-    }
-    else if($(this).val() === '3'){  
+    } else if ($(this).val() === '3') {  
         AdminOperator();
-    } 
-    else if($(this).val() === '4'){   
+    } else if ($(this).val() === '4') {   
         ForemanOprator();
-    }
-    else if($(this).val() === '5'){  
+    } else if ($(this).val() === '5') {  
         AdminOperator();
-    }
-    else{
+    } else {
         $('#table_con').empty();
         $('#table_con').append("intet view")
     }
@@ -48,25 +43,20 @@ function AdminForemanview(){
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>opr_id</td><td>opr_navn</td><td>pb_id</td><td>rb_id</td><td>tara</td><td>netto</td><td>status</td></tr>');
     
-     
     jQuery.ajax({ 
-        		url: "api/View/AdminForemanList",
-        		type: "GET",
-        		contentType: 'text/plain',
-        		success: function(data) {  
-                    
-                     $.each(data, function(i, item) { 
-                     
-                     $('#table_con').append('<tr><td>' + data[i].opr_id + '</td><td>' + data[i].opr_navn + '</td><td>' + data[i].pb_id + '</td><td>' + data[i].rb_id + '</td><td>' + data[i].tara + '</td><td>' + data[i].netto + '</td><td>' + data[i].status + '</td></tr>');
-                     
-                     })
+    	url: "api/View/AdminForemanList",
+        type: "GET",
+        contentType: 'text/plain',
+        success: function(data) {  
+        	$.each(data, function(i, item) { 
+        		$('#table_con').append('<tr><td>' + data[i].opr_id + '</td><td>' + data[i].opr_navn + '</td><td>' + data[i].pb_id + '</td><td>' + data[i].rb_id + '</td><td>' + data[i].tara + '</td><td>' + data[i].netto + '</td><td>' + data[i].status + '</td></tr>');
+            })
         			
-        		},
-        		error : function(jqXHR, textStatus, errorThrown) { 
-        			 $('#table_con').append(ErrorMSG);
-        		}
-        	}) 
-    
+        },
+        error : function(jqXHR, textStatus, errorThrown) { 
+        	$('#table_con').append(ErrorMSG);
+        }
+    }) 
     console.log('AdminForeman view loaded');
 }
 
@@ -75,34 +65,27 @@ function operator_rb(){
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>raavare_id</td><td>rb_id</td><td>mængde</td><td>raavare_navn</td><td>leverandør</td></tr>');
     
-    
     jQuery.ajax({
-        		url: "api/View/OperatorRBList",
-        		type: "GET",
-        		contentType: 'text/plain',
-        		success: function(data) {  
-                    
-                    console.log(data);
-                    
-                     $.each(data, function(i, item) { 
-                     
-                     $('#table_con').append('<tr><td>' + data[i].raavareId + '</td><td>' + data[i].rbId + '</td><td>' + data[i].maengde + '</td><td>' + data[i].raavareName + '</td><td>' + data[i].supplier + '</td></tr>'); 
-                     
-                     })
+    	url: "api/View/OperatorRBList",
+        type: "GET",
+        contentType: 'text/plain',
+        success: function(data) {  
+        	console.log(data);
+            $.each(data, function(i, item) { 
+            	$('#table_con').append('<tr><td>' + data[i].raavareId + '</td><td>' + data[i].rbId + '</td><td>' + data[i].maengde + '</td><td>' + data[i].raavareName + '</td><td>' + data[i].supplier + '</td></tr>'); 
+            })
         			
-        		},
-        		error : function(jqXHR, textStatus, errorThrown) { 
-        			 $('#table_con').append(ErrorMSG);
-        		}
-        	}) 
+        },
+        error : function(jqXHR, textStatus, errorThrown) { 
+        		$('#table_con').append(ErrorMSG);
+        }
+    }) 
     console.log('operator_rb view loaded');
 }
 
 function AdminOperator(){ 
-    
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>oprCpr</td><td>oprid</td><td>oprIni</td><td>oprName</td><td>OprPasword</td><td>oprRoles</td></tr>');
-    
     
     jQuery.ajax({
         		url: "api/View/AdminOperatorList",
