@@ -1,40 +1,44 @@
 var boolEdit = false;
 var boolAcOnly = false;
+var boolNewRow = false;
 
 $(document).ready(function() {
-	// toggle pb button 
-	$('#checkbox_val').click(function() {
-		
+	//edit toggle pb button 
+	$('#checkbox_val').click(function() {	
         boolEdit = $('#checkbox_val').is(":checked");
-		$('input').attr("readonly", boolEdit);
-        console.log("edit check: " + boolEdit);
         
-        if (boolEdit) {
-            $("#table_con input").attr("disabled", true);
-            $(".checkbox").attr("disabled", true);
-            $(".selinput").attr("disabled", true);
-            $(".edit_pb").attr("disabled", true);
-        } else {
-            $("#table_con input").removeAttr("disabled");
-            $(".checkbox").removeAttr("disabled");
-            $(".selinput").removeAttr("disabled");
-            $(".edit_pb").removeAttr("disabled");
-        } 
+        tjekEditLock();
 	});
+
 });
+
 
 $(document).ready(function() {
   $('#checkbox_val_ac').click(function() {
+      
+      $('#table_con').empty(); 
+      
         boolAcOnly = $('#checkbox_val_ac').is(":checked");
         loadpb(boolAcOnly);
 	});
 });
 
 $(document).ready(function() {
+  $('#Addpb_But').click(function() {
+      addpb();
+	});
+    
+});
+
+$(document).ready(function() {
  $('#refresh_But').click(function() {
+     
+     $('#table_con').empty(); 
+     
 		loadpb(boolAcOnly);
 	}); 
 });
+
 
 // Edit pb button
 $(document).ready(function() {
@@ -94,5 +98,21 @@ $(document).ready(function() {
             });
         });
         loadpb(boolAcOnly);
-    }); 
-});
+        }); 
+    });
+
+function addpb(){
+    
+    if(!boolNewRow){
+    var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
+    
+    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="pbId_" type="text" value=""></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_" type="text" value=""></td>' + '<td></td>' + '<td><button class="insert_pb" name="">insert</button></td>' + '</tr>');
+    }
+    else {
+        // fejl i popup
+    }
+     boolNewRow = true;
+}
+
+
+
