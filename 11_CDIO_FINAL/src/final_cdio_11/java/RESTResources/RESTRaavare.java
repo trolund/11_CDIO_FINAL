@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 import final_cdio_11.java.RESTResources.controller.IRaavareController;
 import final_cdio_11.java.RESTResources.controller.RaavareController;
 import final_cdio_11.java.data.dto.RaavareDTO;
-import final_cdio_11.java.data.dto.ReceptDTO;
 
 @Path("/material")
 public class RESTRaavare {

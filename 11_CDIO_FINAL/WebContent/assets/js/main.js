@@ -128,13 +128,20 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+// Menu material batch button 
+	$("#matbatch_but").click(function() {
+        $("#content_box").load('mb.html');
+		loadmb(false);
+	});    
+});
+
+$(document).ready(function() {
 // Menu material button 
 	$("#mat_but").click(function() {
         $("#content_box").load('material.html');
 		loadmaterial(false);
 	});    
 });
-
 
 $(document).ready(function() {
 // Menu Setings --> User button 
@@ -360,7 +367,7 @@ function loadmaterial(bool){
             if(bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].raavareId + '" id="row">' + status + '<td id="raavareId_' + data[i].raavareId + '">' + data[i].raavareId + '</td>' + '<td><input id="receptNavn" value="' + data[i].raavareName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].leverandoer + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].raavareId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].raavareId + '" id="row">' + status + '<td id="raavareId_' + data[i].raavareId + '">' + data[i].raavareId + '</td>' + '<td><input id="receptNavn" value="' + data[i].raavareName + '">' + '</td>' + '<td><input id="receptNavn" value="' + data[i].leverandoer + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].raavareId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].raavareId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#Status_val_' + data[i].raavareId).val(data[i].status);
@@ -370,6 +377,42 @@ function loadmaterial(bool){
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "recept_dy.js was loaded." );
+            
+            tjekEditLock();
+        }); 
+    
+    })
+    
+};
+
+function loadmb(bool){
+    
+	$('#table_con').empty();
+	
+    $('#table_con').append("<tr><td>Status</td><td>Rb Id</td><td>Råvare Id</td><td>Mængde</td><td>Delete</td><td>Edit</td></tr>");
+    
+    $.getJSON('api/mb/List', function(data) {
+        
+	    $.each(data, function(i, item) {
+            
+            console.log(data);
+            
+            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
+            
+            
+            if(bool && data[i].status == "1") {
+                
+            } else {
+            	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="raavareId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '">' + data[i].raavareId + '</td>' + '<td><input id="maengde_" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
+            }
+            
+            $('#Status_val_' + data[i].raavareId).val(data[i].status);
+       }); 
+        
+        $.getScript( "assets/js/mb_dy.js", function( data, textStatus, jqxhr ) {
+        	console.log( textStatus ); // Success
+        	console.log( jqxhr.status ); // 200
+        	console.log( "mb_dy.js was loaded." );
             
             tjekEditLock();
         }); 

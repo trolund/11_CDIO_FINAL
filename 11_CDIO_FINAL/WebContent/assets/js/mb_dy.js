@@ -14,7 +14,7 @@ $(document).ready(function() {
          console.log(data);
         
       	jQuery.ajax({
-			url : "api/material/Update",
+			url : "api/mb/Update",
 			data : JSON.stringify(data),
 			contentType: "application/json",
 			method: 'POST',
@@ -67,7 +67,7 @@ function insertsciped(){
         console.log(data);
         
       	jQuery.ajax({
-			url : "api/recept/insert",
+			url : "api/mb/insert",
 			data : JSON.stringify(data),
 			contentType: "application/json",
 			method: 'POST',
