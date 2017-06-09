@@ -447,6 +447,10 @@ input:checked + .slider:before {
         margin-top: 95px;
     }
     
+    #content_box h1 {
+        margin-bottom: 25px !important;
+    }
+    
     #menu_but {
         display: block;
         position: fixed;

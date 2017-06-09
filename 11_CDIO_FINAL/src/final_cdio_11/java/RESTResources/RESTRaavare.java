@@ -15,7 +15,7 @@ import final_cdio_11.java.RESTResources.controller.RaavareController;
 import final_cdio_11.java.data.dto.RaavareDTO;
 import final_cdio_11.java.data.dto.ReceptDTO;
 
-@Path("/raavare")
+@Path("/material")
 public class RESTRaavare {
 
 	private final IRaavareController raavareController = new RaavareController();
