@@ -128,6 +128,15 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+// Menu material button 
+	$("#mat_but").click(function() {
+        $("#content_box").load('material.html');
+		loadmaterial(false);
+	});    
+});
+
+
+$(document).ready(function() {
 // Menu Setings --> User button 
 	$("#settings_but").click(function() {
         $("#content_box").empty();
@@ -334,21 +343,10 @@ function loadmaterial(bool){
     
 	$('#table_con').empty();
 	
-    $('#table_con').append("<tr><td>Status</td><td>Recept Id</td><td>Recept navn</td><td>Delete</td><td>Edit</td></tr>");
-    
-    options = null;
+    $('#table_con').append("<tr><td>Status</td><td>Råvare Id</td><td>Råvare navn</td><td>Leverandør</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/material/List', function(data) {
-        
-        var receptOptions = "";
-        
-        
-        $.each(data, function(i, item) {
-            if(receptOptions.indexOf(data[i].receptId) == -1){
-            receptOptions += data[i].receptId + ",";
-            options += "<option value='" + data[i].receptId + "'>" + data[i].receptId + "</option>";
-            }
-             });
+
         
         console.log(options);
         
@@ -362,10 +360,10 @@ function loadmaterial(bool){
             if(bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].receptId + '" id="row">' + status + '<td id="receptId_' + data[i].receptId + '">' + data[i].receptId + '</td>' + '<td><input id="receptNavn" value="' + data[i].receptName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].raavareId + '" id="row">' + status + '<td id="raavareId_' + data[i].raavareId + '">' + data[i].raavareId + '</td>' + '<td><input id="receptNavn" value="' + data[i].raavareName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].leverandoer + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].raavareId + '">Edit</button></td>' + '</tr>');
             }
             
-            $('#Status_val_' + data[i].pbId).val(data[i].status);
+            $('#Status_val_' + data[i].raavareId).val(data[i].status);
        }); 
         
         $.getScript( "assets/js/material_dy.js", function( data, textStatus, jqxhr ) {
