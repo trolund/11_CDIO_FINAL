@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 import final_cdio_11.java.data.dto.RaavareDTO;
-import final_cdio_11.java.data.dto.ReceptDTO;
 
 public interface IRaavareController {
 

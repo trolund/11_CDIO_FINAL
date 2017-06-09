@@ -6,33 +6,25 @@ $(document).ready(function() {
 	//edit toggle material button 
 	$('#checkbox_val').click(function() {	
         boolEdit = $('#checkbox_val').is(":checked");
-        
         tjekEditLock();
 	});
-
 });
 
 
 $(document).ready(function() {
   $('#checkbox_val_ac').click(function() {
-      
       $('#table_con').empty(); 
-      
         boolAcOnly = $('#checkbox_val_ac').is(":checked");
         loadmaterial(boolAcOnly);
 	});
 });
 
-
 $(document).ready(function() {
  $('#refresh_But').click(function() {
-     
      $('#table_con').empty(); 
-     
 		loadmaterial(boolAcOnly);
 	}); 
 });
-
 
 //del material button
 $(document).ready(function() {
@@ -66,10 +58,7 @@ $(document).ready(function() {
     });
 
 function addre(){
-    
     $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="materialId_" type="text" value=""></td>' + '<td><input id="materialName_"></td>' + '<td><input id="levenradoer_">' + '</td>' + '<td></td>' + '<td><button class="insert_material" name="">insert</button></td>' + '</tr>');
-
-     
 }
 
 // add material button

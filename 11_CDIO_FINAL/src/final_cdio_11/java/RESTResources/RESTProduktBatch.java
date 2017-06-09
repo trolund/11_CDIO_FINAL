@@ -1,6 +1,5 @@
 package final_cdio_11.java.RESTResources;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -49,14 +48,11 @@ public class RESTProduktBatch {
 		return pbController.insertPB(data);
 	}
 
-	
 	@GET
 	@Path("/repIdList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<String> repIdList() {
 		return pbController.ProduktBatchReceptidList();
 	}
-	
-	
 
 }

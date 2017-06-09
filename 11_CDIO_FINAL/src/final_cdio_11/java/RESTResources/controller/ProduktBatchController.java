@@ -1,7 +1,6 @@
 package final_cdio_11.java.RESTResources.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.core.Response;
@@ -76,23 +75,23 @@ public class ProduktBatchController implements IProduktBatchController {
 
 		return Response.status(400).entity("fejl").build();
 	}
-	
+
 	@Override
 	public List<String> ProduktBatchReceptidList() {
 		SQLProductBatchDAO view = new SQLProductBatchDAO(Connector.getInstance());
 
-
 		List<ProductBatchDTO> List = null;
-		List<String> ListString = new ArrayList<String>();;
-		
+		List<String> ListString = new ArrayList<String>();
+		;
+
 		try {
 			List = view.getProductBatchList();
-			
+
 			for (int i = 0; i < List.size(); i++) {
 				String x = "" + List.get(i).getReceptId();
 				ListString.add(x);
 			}
-			
+
 		} catch (DALException e) {
 			e.printStackTrace();
 		}

@@ -248,7 +248,7 @@ function loadpb(bool){
     
 	$('#table_con').empty();
 	
-    $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Item status</td><td>Recept Id</td><td>Delete</td><td>Edit</td></tr>");
+    $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Item Status</td><td>Receipt Id</td><td>Delete</td><td>Edit</td></tr>");
     
     options = null;
     
@@ -300,7 +300,7 @@ function loadrecept(bool){
     
 	$('#table_con').empty();
 	
-    $('#table_con').append("<tr><td>Status</td><td>Recept Id</td><td>Recept navn</td><td>Delete</td><td>Edit</td></tr>");
+    $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Name</td><td>Delete</td><td>Edit</td></tr>");
     
     options = null;
     
@@ -350,7 +350,7 @@ function loadmaterial(bool){
     
 	$('#table_con').empty();
 	
-    $('#table_con').append("<tr><td>Status</td><td>Råvare Id</td><td>Råvare navn</td><td>Leverandør</td><td>Delete</td><td>Edit</td></tr>");
+    $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Name</td><td>Supplier</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/material/List', function(data) {
 
@@ -389,7 +389,7 @@ function loadmb(bool){
     
 	$('#table_con').empty();
 	
-    $('#table_con').append("<tr><td>Status</td><td>Rb Id</td><td>Råvare Id</td><td>Mængde</td><td>Delete</td><td>Edit</td></tr>");
+    $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Material Id</td><td>Amount</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/mb/List', function(data) {
         

@@ -25,33 +25,24 @@ $(document).ready(function() {
             	JSON.stringify(data)
 			}
 		});
+    }); 
+});
 
-        }); 
-    });
-
-
-
-
-
-function tjekEditLock(){
-    
+function tjekEditLock() {
     $('input').attr("readonly", boolEdit);
-    
-        console.log("edit check: " + boolEdit);
-        
-        if (boolEdit) {
-            $("#table_con input").attr("disabled", true);
-            $(".checkbox").attr("disabled", true);
-            $(".selinput").attr("disabled", true);
-            $(".edit_recept").attr("disabled", true);
-        } else {
-            $("#table_con input").removeAttr("disabled");
-            $(".checkbox").removeAttr("disabled");
-            $(".selinput").removeAttr("disabled");
-            $(".edit_recept").removeAttr("disabled");
-
-        }
-    
+    console.log("edit check: " + boolEdit);
+  
+    if (boolEdit) {
+    	$("#table_con input").attr("disabled", true);
+    	$(".checkbox").attr("disabled", true);
+    	$(".selinput").attr("disabled", true);
+    	$(".edit_recept").attr("disabled", true);
+    } else {
+        $("#table_con input").removeAttr("disabled");
+        $(".checkbox").removeAttr("disabled");
+        $(".selinput").removeAttr("disabled");
+        $(".edit_recept").removeAttr("disabled");
+    }
 } 
 
 function insertsciped(){
@@ -78,8 +69,5 @@ function insertsciped(){
             	
 			}
 		});
-
-        }); 
-
+	}); 
 }
-

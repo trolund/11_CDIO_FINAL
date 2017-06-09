@@ -8,10 +8,9 @@ import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.SQLRaavareDAO;
 import final_cdio_11.java.data.dto.RaavareDTO;
-import final_cdio_11.java.data.dto.ReceptDTO;
 
 public class RaavareController implements IRaavareController {
-	
+
 	@Override
 	public List<RaavareDTO> List() {
 		SQLRaavareDAO DAO = new SQLRaavareDAO(Connector.getInstance());
@@ -69,6 +68,5 @@ public class RaavareController implements IRaavareController {
 
 		return Response.status(400).entity("fejl").build();
 	}
-	
 
 }
