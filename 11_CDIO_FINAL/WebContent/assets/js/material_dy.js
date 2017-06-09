@@ -1,6 +1,6 @@
-// Edit recept button
+// Edit material button
 $(document).ready(function() {
-	$(".edit_recept").click(function() {
+	$(".edit_material").click(function() {
         
 		var id = $(this).prop('name');
         
@@ -14,7 +14,7 @@ $(document).ready(function() {
          console.log(data);
         
       	jQuery.ajax({
-			url : "api/recept/Update",
+			url : "api/material/Update",
 			data : JSON.stringify(data),
 			contentType: "application/json",
 			method: 'POST',
@@ -55,8 +55,8 @@ function tjekEditLock(){
 } 
 
 function insertsciped(){
-    // insert new recept button
-	$(".insert_recept").click(function() {
+    // insert new material button
+	$(".insert_material").click(function() {
         
 		var data = {
             "receptName":$('#receptName_').val(),
@@ -72,7 +72,7 @@ function insertsciped(){
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) {
-                 loadrecept(boolAcOnly);
+                 loadmaterial(boolAcOnly);
 			},
 			error: function(jqXHR, text, error) { 
             	
