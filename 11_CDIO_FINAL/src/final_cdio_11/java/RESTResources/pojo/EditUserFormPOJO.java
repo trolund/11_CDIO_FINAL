@@ -31,7 +31,7 @@ public class EditUserFormPOJO {
 		return værkførerRole;
 	}
 
-	public void setVeakRole(boolean værkførerRole) {
+	public void setVaerkforerRole(boolean værkførerRole) {
 		this.værkførerRole = værkførerRole;
 	}
 
@@ -39,7 +39,7 @@ public class EditUserFormPOJO {
 		return laborantRole;
 	}
 
-	public void setLabRole(boolean laborantRole) {
+	public void setLaborantRole(boolean laborantRole) {
 		this.laborantRole = laborantRole;
 	}
 

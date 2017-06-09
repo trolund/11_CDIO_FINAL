@@ -35,7 +35,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 		ResultSet rs = null;
 		
 		// Sleep for debugging
-		Utils.getInstance().sleep(1000);
+		Utils.getInstance().sleep(100);
 		//
 		
 		try {
