@@ -1,5 +1,7 @@
 package final_cdio_11.java.data.validator;
 
+import final_cdio_11.java.data.dto.RaavareDTO;
+
 public class RaavareValidator implements IRaavareValidator {
 
 	@Override
@@ -22,6 +24,11 @@ public class RaavareValidator implements IRaavareValidator {
 	@Override
 	public boolean isRaavareStatusValid(int status) {
 		return status == 0 || status == 1;
+	}
+
+	@Override
+	public boolean isRaavareValid(RaavareDTO raavareDTO) {
+		return false;
 	}
 
 }

@@ -1,5 +1,7 @@
 package final_cdio_11.java.data.validator;
 
+import final_cdio_11.java.data.dto.ProductBatchComponentDTO;
+
 public class ProductBatchCompValidator implements IProductBatchCompValidator {
 
 	@Override
@@ -30,6 +32,11 @@ public class ProductBatchCompValidator implements IProductBatchCompValidator {
 	@Override
 	public boolean isPbcStatusValid(int status) {
 		return status == 0 | status == 1;
+	}
+
+	@Override
+	public boolean isPBCValid(ProductBatchComponentDTO pbcDTO) {
+		return false;
 	}
 
 }

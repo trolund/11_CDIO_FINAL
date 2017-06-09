@@ -121,6 +121,8 @@ public class OperatorController implements IOperatorController {
 
 		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
 
+		// VALIDATE HER :)
+		
 		try {
 			oprDAO.createOperator(oprDTO);
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));

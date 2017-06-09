@@ -1,5 +1,7 @@
 package final_cdio_11.java.data.validator;
 
+import final_cdio_11.java.data.dto.ProductBatchDTO;
+
 public class ProductBatchValidator implements IProductBatchValidator {
 
 	@Override
@@ -20,6 +22,11 @@ public class ProductBatchValidator implements IProductBatchValidator {
 	@Override
 	public boolean isPbStatusValid(int status) {
 		return status == 0 || status == 1;
+	}
+
+	@Override
+	public boolean isPbValid(ProductBatchDTO pbDTO) {
+		return false;
 	}
 
 }

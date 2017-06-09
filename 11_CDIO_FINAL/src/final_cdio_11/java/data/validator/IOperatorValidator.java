@@ -1,5 +1,7 @@
 package final_cdio_11.java.data.validator;
 
+import final_cdio_11.java.data.dto.OperatorDTO;
+
 public interface IOperatorValidator {
 	boolean isOprIdValid(int oprId);
 	boolean isOprNameValid(String oprName);
@@ -8,4 +10,5 @@ public interface IOperatorValidator {
 	boolean isOprCprValid(String oprCpr);
 	boolean isOprPasswordValid(String oprPassword);
 	boolean isOprStatusValid(int status);
+	boolean isOprValid(OperatorDTO oprDTO);
 }

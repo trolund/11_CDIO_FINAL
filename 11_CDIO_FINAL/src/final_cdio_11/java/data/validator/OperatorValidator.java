@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+import final_cdio_11.java.data.dto.OperatorDTO;
+
 public class OperatorValidator implements IOperatorValidator {
 
 	@Override
@@ -67,6 +69,11 @@ public class OperatorValidator implements IOperatorValidator {
 	@Override
 	public boolean isOprStatusValid(int status) {
 		return status == 0 || status == 1;
+	}
+
+	@Override
+	public boolean isOprValid(OperatorDTO oprDTO) {
+		return false;
 	}
 
 }

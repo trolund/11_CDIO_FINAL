@@ -1,5 +1,7 @@
 package final_cdio_11.java.data.validator;
 
+import final_cdio_11.java.data.dto.ReceptDTO;
+
 public class ReceptValidator implements IReceptValidator {
 
 	@Override
@@ -16,6 +18,11 @@ public class ReceptValidator implements IReceptValidator {
 	@Override
 	public boolean isReceptStatusValid(int status) {
 		return status == 0 || status == 1;
+	}
+
+	@Override
+	public boolean isReceptValid(ReceptDTO receptDTO) {
+		return false;
 	}
 
 }

@@ -87,9 +87,7 @@ public class WeightConnector implements IWeightConnector {
 		try {
 			String confirmMessage = in.readLine();
 
-			if (confirmMessage.equals("RM20 C")) {
-				promptQuit();
-			}
+			if (confirmMessage.equals("RM20 C")) promptQuit();
 
 			if (!confirmMessage.equals("RM20 B")) {
 				throw new WeightException("Did not receive RM20 B. Got this: " + confirmMessage);
@@ -97,9 +95,7 @@ public class WeightConnector implements IWeightConnector {
 
 			userMessage = in.readLine();
 
-			if (userMessage.equals("RM20 C")) {
-				promptQuit();
-			}
+			if (userMessage.equals("RM20 C")) promptQuit();
 
 			if (!userMessage.startsWith("RM20 A")) {
 				throw new WeightException("Did not receive RM20 A. Got this: " + userMessage);
@@ -202,7 +198,7 @@ public class WeightConnector implements IWeightConnector {
 			String recMsg = in.readLine();
 			System.out.println("secondaryDisplay: '" + recMsg + "'");
 
-			if (!recMsg.startsWith("P111")) {
+			if (!recMsg.startsWith("P111 A")) {
 				throw new WeightException("Did not receive P111 A. Got this: " + recMsg);
 			}
 			utils.sleep(sleepMillis);
