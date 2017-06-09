@@ -226,28 +226,49 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public OperatorDTO createOperatorPOJO(String oprId) {
+		
+		System.out.println("createOprPojo ID String: " + oprId);
+		
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-
 		int id = Integer.parseInt(oprId);
-		List<OperatorDTO> oprList = null;
 
+		OperatorDTO oprDTO = null;
 		try {
-			oprList = oprDAO.getOperatorList();
+			oprDTO = oprDAO.getOperator(id);
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		for (OperatorDTO oprDTO : oprList) {
-			if (oprDTO.getOprId() == id) {
-				CreateUserFormPOJO createUserFormPOJO = new CreateUserFormPOJO();
-				createUserFormPOJO.setOprId(oprDTO.getOprId());
-				createUserFormPOJO.setOprIni(oprDTO.getOprIni());
-				createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
-				createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
-				return oprDTO;
-			}
-		}
-		return null;
+		CreateUserFormPOJO createUserFormPOJO = new CreateUserFormPOJO();
+		createUserFormPOJO.setOprId(oprDTO.getOprId());
+		createUserFormPOJO.setOprIni(oprDTO.getOprIni());
+		createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
+		createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
+		return oprDTO;
+		
+		
+//		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+//
+//		int id = Integer.parseInt(oprId);
+//		List<OperatorDTO> oprList = null;
+//
+//		try {
+//			oprList = oprDAO.getOperatorList();
+//		} catch (DALException e) {
+//			e.printStackTrace();
+//		}
+//
+//		for (OperatorDTO oprDTO : oprList) {
+//			if (oprDTO.getOprId() == id) {
+//				CreateUserFormPOJO createUserFormPOJO = new CreateUserFormPOJO();
+//				createUserFormPOJO.setOprId(oprDTO.getOprId());
+//				createUserFormPOJO.setOprIni(oprDTO.getOprIni());
+//				createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
+//				createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
+//				return oprDTO;
+//			}
+//		}
+////		return null;
 	}
 
 }

@@ -88,7 +88,7 @@ public class WeightConnector implements IWeightConnector {
 			String confirmMessage = in.readLine();
 
 			if (confirmMessage.equals("RM20 C")) {
-				throw new WeightException("Cancel was pressed.");
+				promptQuit();
 			}
 
 			if (!confirmMessage.equals("RM20 B")) {
@@ -98,7 +98,7 @@ public class WeightConnector implements IWeightConnector {
 			userMessage = in.readLine();
 
 			if (userMessage.equals("RM20 C")) {
-				throw new WeightException("Cancel was pressed.");
+				promptQuit();
 			}
 
 			if (!userMessage.startsWith("RM20 A")) {
@@ -167,12 +167,27 @@ public class WeightConnector implements IWeightConnector {
 		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
 		sendSocketMessage(socketMessage);
 
-		String data = null;
 		try {
-			data = in.readLine();
-			System.out.println("Return message: '" + data + "'");
-			data = in.readLine();
-			System.out.println("Return message: '" + data + "'");
+			String confirmMessage = in.readLine();
+
+			if (confirmMessage.equals("RM20 C")) {
+				promptQuit();
+			}
+
+			if (!confirmMessage.equals("RM20 B")) {
+				throw new WeightException("Did not receive RM20 B. Got this: " + confirmMessage);
+			}
+
+			String userMessage = in.readLine();
+
+			if (userMessage.equals("RM20 C")) {
+				promptQuit();
+			}
+
+			if (!userMessage.startsWith("RM20 A")) {
+				throw new WeightException("Did not receive RM20 A. Got this: " + userMessage);
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -202,7 +217,7 @@ public class WeightConnector implements IWeightConnector {
 	}
 
 	@Override
-	public void sendKMessage() throws WeightException {
+	public void sendK3Message() throws WeightException {
 		String message = "K 3\r\n";
 		sendSocketMessage(message);
 		try {
@@ -214,6 +229,62 @@ public class WeightConnector implements IWeightConnector {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void sendConfirmMessage(String message) throws WeightException {
+		String socketMessage = "P111 \"" + message + "\"\r\n";
+		sendSocketMessage(socketMessage);
+
+		try {
+			String recMsg = in.readLine();
+			System.out.println("sendConfirmMessage: '" + recMsg + "'");
+
+			if (!recMsg.startsWith("P111 A")) {
+				throw new WeightException("Did not receive P111 A. Got this: " + recMsg);
+			}
+
+			System.out.println("Waiting for K C 4 to confirm.");
+
+			String kc4Msg = null;
+			while (true) {
+				if ((kc4Msg = in.readLine()).startsWith("K C 4")) {
+					System.out.println("Got K C 4: " + kc4Msg);
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void sendK1Message() throws WeightException {
+		String message = "K 1\r\n";
+		sendSocketMessage(message);
+		try {
+			String recMsg = in.readLine();
+
+			if (!recMsg.startsWith("K A")) {
+				throw new WeightException("Did not receive K A. Got this: " + recMsg);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String shortString(String message, int maxLength) {
+		if (message.length() > maxLength) {
+			message = message.substring(message.length() - maxLength, message.length());
+		}
+		return message;
+	}
+
+	@Override
+	public void promptQuit() throws WeightException {
+		sendK1Message();
+		sendConfirmMessage("Proceed to quit");
 	}
 
 	private BufferedReader getSocketReader() throws WeightException {
@@ -238,34 +309,6 @@ public class WeightConnector implements IWeightConnector {
 		if (out == null) return;
 		out.print(socketMessage);
 		out.flush();
-	}
-
-	@Override
-	public void sendConfirmMessage(String message) throws WeightException {
-		String socketMessage = "P111 \"" + message + "\"\r\n";
-		sendSocketMessage(socketMessage);
-
-		try {
-			String recMsg = in.readLine();
-			System.out.println("sendConfirmMessage: '" + recMsg + "'");
-
-			if (!recMsg.startsWith("P111")) {
-				throw new WeightException("Did not receive P111 A. Got this: " + recMsg);
-			}
-
-			System.out.println("Waiting for K C 4 to confirm.");
-
-			while (true) {
-				if ((recMsg = in.readLine()).startsWith("K C 4")) {
-					System.out.println("Got K C 4: " + recMsg);
-					break;
-				}
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 }
