@@ -163,10 +163,17 @@ function loadUsers() {
                 inActiveCount++;
             }
             
+            var oprRoles;
+            if (data[i].oprRoles === null) {
+            	oprRoles = "None.";
+            } else {
+            	oprRoles = data[i].oprRoles;
+            }
+            
         	if (id == data[i].oprId) { // gør man ikke kan slette sig selv.
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + oprRoles  + '</td>' + '<td>' + '<p></p>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	} else { 
-        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + data[i].oprRoles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
+        		$('#table_con').append('<tr id="' + data[i].oprId + '">' + status + '<td>' + data[i].oprId + '</td>' + '<td>' + data[i].oprFirstName + '</td>' + '<td>' + data[i].oprLastName + '</td>' + '<td>' + data[i].oprIni + '</td>' + '<td>' + data[i].oprEmail + '</td>' + '<td>' + data[i].oprCpr + '</td>' + '<td id="pass_td">' + oprRoles  + '</td>' + '<td>' + '<button name="' + data[i].oprId + '" class="del_user">Delete</button>' + '</td>' + '<td>' + '<button name="'+ data[i].oprId +'" class="edit_user">Edit</button>' + '</td>' + '</tr>');
         	}
         }); 
         
