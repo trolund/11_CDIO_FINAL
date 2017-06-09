@@ -168,7 +168,7 @@ public class TestSQLRaavareDAO {
 			System.out.println("Updated: " + raavareDAO.getRaavare(raavareId));
 
 			String expected = newName;
-			String actual = raavareDAO.getRaavare(raavareId).getraavareName();
+			String actual = raavareDAO.getRaavare(raavareId).getRaavareName();
 
 			assertEquals("Failed: The updated name does not match!", expected, actual);
 

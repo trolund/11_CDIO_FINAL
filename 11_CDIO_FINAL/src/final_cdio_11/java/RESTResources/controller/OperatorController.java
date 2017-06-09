@@ -15,6 +15,8 @@ import final_cdio_11.java.data.dao.SQLOperatorDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
+import final_cdio_11.java.data.validator.IOperatorValidator;
+import final_cdio_11.java.data.validator.OperatorValidator;
 import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
@@ -22,6 +24,7 @@ public class OperatorController implements IOperatorController {
 
 	private final Utils utils = Utils.getInstance();
 	private final TextHandler textHandler = TextHandler.getInstance();
+	private IOperatorValidator oprValidator = new OperatorValidator();
 
 	@Override
 	public List<OperatorDTO> getOperatorList() {
@@ -121,8 +124,8 @@ public class OperatorController implements IOperatorController {
 
 		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
 
-		// VALIDATE HER :)
-		
+		if (!oprValidator.isOprValid(oprDTO)) return "Invalid operator fields.";
+
 		try {
 			oprDAO.createOperator(oprDTO);
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));
@@ -228,9 +231,9 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public OperatorDTO createOperatorPOJO(String oprId) {
-		
+
 		System.out.println("createOprPojo ID String: " + oprId);
-		
+
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		int id = Integer.parseInt(oprId);
 
@@ -247,30 +250,29 @@ public class OperatorController implements IOperatorController {
 		createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
 		createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
 		return oprDTO;
-		
-		
-//		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-//
-//		int id = Integer.parseInt(oprId);
-//		List<OperatorDTO> oprList = null;
-//
-//		try {
-//			oprList = oprDAO.getOperatorList();
-//		} catch (DALException e) {
-//			e.printStackTrace();
-//		}
-//
-//		for (OperatorDTO oprDTO : oprList) {
-//			if (oprDTO.getOprId() == id) {
-//				CreateUserFormPOJO createUserFormPOJO = new CreateUserFormPOJO();
-//				createUserFormPOJO.setOprId(oprDTO.getOprId());
-//				createUserFormPOJO.setOprIni(oprDTO.getOprIni());
-//				createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
-//				createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
-//				return oprDTO;
-//			}
-//		}
-////		return null;
+
+		//		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+		//
+		//		int id = Integer.parseInt(oprId);
+		//		List<OperatorDTO> oprList = null;
+		//
+		//		try {
+		//			oprList = oprDAO.getOperatorList();
+		//		} catch (DALException e) {
+		//			e.printStackTrace();
+		//		}
+		//
+		//		for (OperatorDTO oprDTO : oprList) {
+		//			if (oprDTO.getOprId() == id) {
+		//				CreateUserFormPOJO createUserFormPOJO = new CreateUserFormPOJO();
+		//				createUserFormPOJO.setOprId(oprDTO.getOprId());
+		//				createUserFormPOJO.setOprIni(oprDTO.getOprIni());
+		//				createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
+		//				createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
+		//				return oprDTO;
+		//			}
+		//		}
+		////		return null;
 	}
 
 }

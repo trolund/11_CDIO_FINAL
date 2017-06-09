@@ -22,7 +22,7 @@ public class RoleValidator implements IRoleValidator {
 
 	@Override
 	public boolean isRoleValid(RoleDTO roleDTO) {
-		return false;
+		return isOprIdValid(roleDTO.getOprId()) && isRoleNameValid(roleDTO.getRoleName()) && isRoleStatusValid(roleDTO.getStatus());
 	}
 
 }

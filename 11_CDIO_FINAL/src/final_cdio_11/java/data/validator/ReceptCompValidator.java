@@ -31,7 +31,7 @@ public class ReceptCompValidator implements IReceptCompValidator {
 
 	@Override
 	public boolean isRcValid(ReceptComponentDTO rcDTO) {
-		return false;
+		return isValidReceptId(rcDTO.getReceptId()) && isValidRaavareId(rcDTO.getRaavareId()) && isValidNomNetto(rcDTO.getNomNetto()) && isValidTolerance(rcDTO.getTolerance()) && isValidStatus(rcDTO.getStatus());
 	}
 
 }

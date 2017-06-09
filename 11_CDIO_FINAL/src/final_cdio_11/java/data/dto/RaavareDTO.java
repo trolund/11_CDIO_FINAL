@@ -22,7 +22,7 @@ public class RaavareDTO {
 		return raavareId;
 	}
 
-	public String getraavareName() {
+	public String getRaavareName() {
 		return raavareName;
 	}
 

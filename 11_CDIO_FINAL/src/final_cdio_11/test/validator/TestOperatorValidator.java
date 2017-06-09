@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.validator.IOperatorValidator;
 import final_cdio_11.java.data.validator.OperatorValidator;
 
@@ -430,6 +431,46 @@ public class TestOperatorValidator {
 		boolean expected = false;
 
 		assertEquals("Failed: " + oprStatus + " is supposed to be valid.", expected, actual);
+	}
+
+	@Test
+	public void testIsOprValidPositive() {
+		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "0911985463", "whatisthisjackensang", 0);
+		
+		boolean actual = oprValidator.isOprValid(oprDTO);
+		boolean expected = true;
+		
+		assertEquals("Failed: " + oprDTO + " is supposed to be valid.", expected, actual);
+	}
+	
+	@Test
+	public void testIsOprValidNegativeEmail() {
+		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjsjjs.com", "0911985463", "whatisthisjackensang", 0);
+		
+		boolean actual = oprValidator.isOprValid(oprDTO);
+		boolean expected = false;
+		
+		assertEquals("Failed: " + oprDTO + " is supposed to be invalid.", expected, actual);
+	}
+	
+	@Test
+	public void testIsOprValidNegativeCpr() {
+		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "09119-85463", "whatisthisjackensang", 0);
+		
+		boolean actual = oprValidator.isOprValid(oprDTO);
+		boolean expected = false;
+		
+		assertEquals("Failed: " + oprDTO + " is supposed to be invalid.", expected, actual);
+	}
+	
+	@Test
+	public void testIsOprValidNegativePassword() {
+		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "0911985463", "bad", 0);
+		
+		boolean actual = oprValidator.isOprValid(oprDTO);
+		boolean expected = false;
+		
+		assertEquals("Failed: " + oprDTO + " is supposed to be invalid.", expected, actual);
 	}
 
 }

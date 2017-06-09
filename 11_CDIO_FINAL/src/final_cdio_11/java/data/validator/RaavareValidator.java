@@ -28,7 +28,7 @@ public class RaavareValidator implements IRaavareValidator {
 
 	@Override
 	public boolean isRaavareValid(RaavareDTO raavareDTO) {
-		return false;
+		return isRaavareIdValid(raavareDTO.getRaavareId()) && isRaavareNameValid(raavareDTO.getRaavareName()) && isSupplierValid(raavareDTO.getSupplier()) && isRaavareStatusValid(raavareDTO.getStatus());
 	}
 
 }

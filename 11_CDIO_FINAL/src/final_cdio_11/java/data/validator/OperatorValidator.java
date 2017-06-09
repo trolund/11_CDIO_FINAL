@@ -43,7 +43,6 @@ public class OperatorValidator implements IOperatorValidator {
 	private boolean isDateValid(String date) {
 		if (date == null) return false;
 		SimpleDateFormat df = new SimpleDateFormat("ddMMyy");
-		//df.setLenient(false);
 		try {
 			df.parse(date);
 			return true;

@@ -93,7 +93,7 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 		PreparedStatement createPBStmt = null;
 		try {
 			createPBStmt = connector.getConnection().prepareStatement(createPBSql);
-			createPBStmt.setInt(1, pbDTO.getpbId());
+			createPBStmt.setInt(1, pbDTO.getPbId());
 			createPBStmt.setInt(2, pbDTO.getItemStatus());
 			createPBStmt.setInt(3, pbDTO.getReceptId());
 			createPBStmt.setInt(4, pbDTO.getStatus());
@@ -121,7 +121,7 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 			updatePBStmt = connector.getConnection().prepareStatement(updatePBSql);
 			updatePBStmt.setInt(1, pbDTO.getItemStatus());
 			updatePBStmt.setInt(2, pbDTO.getStatus());
-			updatePBStmt.setInt(3, pbDTO.getpbId());
+			updatePBStmt.setInt(3, pbDTO.getPbId());
 			updatePBStmt.setInt(4, pbDTO.getReceptId());
 			updatePBStmt.executeUpdate();
 		} catch (SQLException e) {

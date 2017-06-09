@@ -15,7 +15,7 @@ public class RaavareBatchValidator implements IRaavareBatchValidator {
 	}
 
 	@Override
-	public boolean isAmountValid(int amount) {
+	public boolean isAmountValid(double amount) {
 		return amount >= 0 && amount <= 99999999;
 	}
 
@@ -26,7 +26,7 @@ public class RaavareBatchValidator implements IRaavareBatchValidator {
 
 	@Override
 	public boolean isRbValid(RaavareBatchDTO rbDTO) {
-		return false;
+		return isRbIdValid(rbDTO.getRbId()) && isRaavareIdValid(rbDTO.getRaavareId()) && isAmountValid(rbDTO.getAmount()) && isRbStatusValid(rbDTO.getStatus());
 	}
 
 }

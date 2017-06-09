@@ -26,7 +26,7 @@ public class ProductBatchValidator implements IProductBatchValidator {
 
 	@Override
 	public boolean isPbValid(ProductBatchDTO pbDTO) {
-		return false;
+		return isPbIdValid(pbDTO.getPbId()) && isItemStatusValid(pbDTO.getItemStatus()) && isReceptIdValid(pbDTO.getReceptId()) && isPbStatusValid(pbDTO.getStatus());
 	}
 
 }

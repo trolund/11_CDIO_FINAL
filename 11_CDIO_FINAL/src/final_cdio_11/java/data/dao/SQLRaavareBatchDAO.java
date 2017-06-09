@@ -125,7 +125,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 		PreparedStatement createRBStmt = null;
 		try {
 			createRBStmt = connector.getConnection().prepareStatement(createRBSql);
-			createRBStmt.setInt(1, rbDTO.getrbId());
+			createRBStmt.setInt(1, rbDTO.getRbId());
 			createRBStmt.setInt(2, rbDTO.getRaavareId());
 			createRBStmt.setDouble(3, rbDTO.getAmount());
 			createRBStmt.setInt(4, rbDTO.getStatus());
@@ -153,7 +153,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			updateRBStmt = connector.getConnection().prepareStatement(updateRBCSql);
 			updateRBStmt.setDouble(1, rbDTO.getAmount());
 			updateRBStmt.setInt(2, rbDTO.getStatus());
-			updateRBStmt.setInt(3, rbDTO.getrbId());
+			updateRBStmt.setInt(3, rbDTO.getRbId());
 			updateRBStmt.setInt(4, rbDTO.getRaavareId());
 			updateRBStmt.executeUpdate();
 		} catch (SQLException e) {

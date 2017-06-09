@@ -176,7 +176,7 @@ public class WeightController implements IWeightController {
 		/* Step 8: Produktbatchnummerets status sættes til "under produktion". */
 		try {
 			ProductBatchDTO pbDTO = pbDAO.getProductBatch(pbId);
-			pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getpbId(), 1, pbDTO.getReceptId(), pbDTO.getStatus()));
+			pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getPbId(), 1, pbDTO.getReceptId(), pbDTO.getStatus()));
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
@@ -188,7 +188,7 @@ public class WeightController implements IWeightController {
 
 			String raavareName = null;
 			try {
-				raavareName = raavareDAO.getRaavare(rcDTO.getRaavareId()).getraavareName();
+				raavareName = raavareDAO.getRaavare(rcDTO.getRaavareId()).getRaavareName();
 			} catch (DALException e1) {
 				e1.printStackTrace();
 			}
@@ -249,7 +249,7 @@ public class WeightController implements IWeightController {
 		try {
 			System.out.println("Setting productbatch status to 2, afsluttet.");
 			ProductBatchDTO pbDTO = pbDAO.getProductBatch(pbId);
-			pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getpbId(), 2, pbDTO.getReceptId(), pbDTO.getStatus()));
+			pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getPbId(), 2, pbDTO.getReceptId(), pbDTO.getStatus()));
 		} catch (DALException e) {
 			e.printStackTrace();
 		}

@@ -22,7 +22,7 @@ public class ReceptValidator implements IReceptValidator {
 
 	@Override
 	public boolean isReceptValid(ReceptDTO receptDTO) {
-		return false;
+		return isReceptIdValid(receptDTO.getReceptId()) && isReceptNameValid(receptDTO.getReceptName()) && isReceptStatusValid(receptDTO.getStatus());
 	}
 
 }
