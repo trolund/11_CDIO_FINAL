@@ -322,3 +322,53 @@ function loadrecept(bool){
     })
     
 };
+
+function loadmaterial(bool){
+    
+	$('#table_con').empty();
+	
+    $('#table_con').append("<tr><td>Status</td><td>Recept Id</td><td>Recept navn</td><td>Delete</td><td>Edit</td></tr>");
+    
+    options = null;
+    
+    $.getJSON('api/material/List', function(data) {
+        
+        var receptOptions = "";
+        
+        
+        $.each(data, function(i, item) {
+            if(receptOptions.indexOf(data[i].receptId) == -1){
+            receptOptions += data[i].receptId + ",";
+            options += "<option value='" + data[i].receptId + "'>" + data[i].receptId + "</option>";
+            }
+             });
+        
+        console.log(options);
+        
+	    $.each(data, function(i, item) {
+            
+            console.log(data);
+            
+            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
+            
+            
+            if(bool && data[i].status == "1") {
+                
+            } else {
+            	$('#table_con').append('<tr name="' + data[i].receptId + '" id="row">' + status + '<td id="receptId_' + data[i].receptId + '">' + data[i].receptId + '</td>' + '<td><input id="receptNavn" value="' + data[i].receptName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            }
+            
+            $('#Status_val_' + data[i].pbId).val(data[i].status);
+       }); 
+        
+        $.getScript( "assets/js/material_dy.js", function( data, textStatus, jqxhr ) {
+        	console.log( textStatus ); // Success
+        	console.log( jqxhr.status ); // 200
+        	console.log( "recept_dy.js was loaded." );
+            
+            tjekEditLock();
+        }); 
+    
+    })
+    
+};
