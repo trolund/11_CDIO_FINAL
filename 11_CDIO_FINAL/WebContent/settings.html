@@ -1,0 +1,44 @@
+    <h1>Settings</h1>
+
+
+
+
+<h2>Profil:</h2>
+  <form id="profilForm" method="POST">
+  Status <br>
+      <select id="statusEdit" name="status">
+  <option value="0">Active</option>
+  <option value="1">Inactive</option>
+      </select> <br><br>
+    Id<br> 
+    <input type="text" name="oprId" id="oprIdEdit" readonly>
+    <br>
+  	First Name <br>
+    <input type="text" name="oprFirstName" id="oprFirstNameEdit">	
+    <br>
+    Last Name <br>
+    <input type="text" name="oprLastName" id="oprLastNameEdit">	
+    <br>
+    Initials <br>
+    <input type="text" name="oprIni" id="oprIniEdit">
+    <br>
+    E-mail <br>
+    <input type="text" name="oprEmail" id="oprEmailEdit">	
+    <br>
+    Cpr <br>
+    <input type="text" name="oprCpr" id="oprCprEdit">
+    <br>
+    Password <br>
+    <input type="button" id="newPassword_But" value="New password">
+    <br>
+    
+    Privileges <br>  
+    <input type="checkbox" name="adminRole" id="AdminRoleEdit"> Admin<br>
+    <input type="checkbox" name="farmaceutRole" id="FarRoleEdit"> Farmaceut<br>
+    <input type="checkbox" name="vaerkforerRole" id="VeakRoleEdit"> Værkfører<br>
+    <input type="checkbox" name="laborantRole" id="LabRoleEdit"> Laborant <br>    
+      
+  <br><br>
+  <input id="Submit_profil_settings" type="button" value="Confirm Edit">
+    <p id="Editmsg"></p>
+</form> 
