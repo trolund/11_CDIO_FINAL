@@ -54,14 +54,6 @@ function tjekEditLock(){
     
 } 
 
-// insert button
-$(document).ready(function() {
-  $('#Addpb_But').click(function() {
-      addpb();
-      insertsciped();
-	}); 
-});
-
 function insertsciped(){
     // insert new pb button
 	$(".insert_pb").click(function() {
@@ -81,7 +73,6 @@ function insertsciped(){
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) {
-          		 boolNewRow = false;
                  loadpb(boolAcOnly);
 			},
 			error: function(jqXHR, text, error) { 
@@ -92,3 +83,4 @@ function insertsciped(){
         }); 
 
 }
+

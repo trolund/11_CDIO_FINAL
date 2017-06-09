@@ -65,7 +65,7 @@ $(document).ready(function() {
         }); 
     });
 
-function addpb(){
+function addre(){
     
     var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
     
@@ -77,7 +77,7 @@ function addpb(){
 // add pb button
 $(document).ready(function() {
   $('#Addpb_But').click(function() {
-      addpb();
+      addre();
       insertsciped();
 	}); 
 });
