@@ -41,11 +41,7 @@ public class SQLRoleDAO implements IRoleDAO {
 			if (!rs.first()) throw new DALException("Operator id [" + oprId + "] has no roles or doesn't exist!");
 
 			do {
-				System.out.println(this.getClass().getSimpleName() + " : " + rs.getInt("opr_id") + " : " + rs.getString("rolle_navn") + " : " + rs.getInt("status"));
-				int oprId1 = rs.getInt("opr_id");
-				String role = rs.getString("rolle_navn");
-				int status = rs.getInt("status");
-				roleList.add(new RoleDTO(oprId1, role, status));
+				roleList.add(new RoleDTO(rs.getInt("opr_id"), rs.getString("rolle_navn"), rs.getInt("status")));
 			} while (rs.next());
 
 			return roleList;
