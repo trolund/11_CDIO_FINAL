@@ -3,7 +3,7 @@ var boolAcOnly = false;
 var boolNewRow = false;
 
 $(document).ready(function() {
-	//edit toggle pb button 
+	//edit toggle recept button 
 	$('#checkbox_val').click(function() {	
         boolEdit = $('#checkbox_val').is(":checked");
         
@@ -19,7 +19,7 @@ $(document).ready(function() {
       $('#table_con').empty(); 
       
         boolAcOnly = $('#checkbox_val_ac').is(":checked");
-        loadpb(boolAcOnly);
+        loadrecept(boolAcOnly);
 	});
 });
 
@@ -29,32 +29,32 @@ $(document).ready(function() {
      
      $('#table_con').empty(); 
      
-		loadpb(boolAcOnly);
+		loadrecept(boolAcOnly);
 	}); 
 });
 
 
-//del pb button
+//del recept button
 $(document).ready(function() {
 	$("#pb_del_But").click(function() {    
 		var data;
         $('#table_con tr').each(function() {
             $(this).find('td input[type="checkbox"]').each(function() {
             	var checkedValue = $(this).is(":checked");
-            	var pbId = $(this).prop('name');
+            	var Id = $(this).prop('name');
                 
-                console.log('id: ' + pbId + ' value: ' + checkedValue);
+                console.log('id: ' + Id + ' value: ' + checkedValue);
                 
                 if (checkedValue) {
                     jQuery.ajax({
-                        url : "api/pb/delPB/" + pbId,
+                        url : "api/recept/del/" + Id,
                         method: 'POST',
                         success : function(data) {
-                        	console.log('id: ' + pbId  + ' value: ' + checkedValue + 'was deleted');
+                        	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
                             console.log(data);
                         },
                         error: function(jqXHR, text, error) { 
-                        	console.log('id: ' + pbId + ' value: ' + checkedValue + 'was delete failed');
+                        	console.log('id: ' + Id + ' value: ' + checkedValue + 'was delete failed');
                             console.log(data);
                         }
                     });         

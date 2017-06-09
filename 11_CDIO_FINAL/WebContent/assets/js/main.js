@@ -118,6 +118,23 @@ $(document).ready(function() {
 }); 
 
 
+$(document).ready(function() {
+// Menu recept button 
+	$("#receipt_but").click(function() {
+        $("#content_box").load('recept.html');
+		loadrecept(false);
+	});    
+});
+
+
+$(document).ready(function() {
+// Menu Setings --> User button 
+	$("#settings_but").click(function() {
+        $("#content_box").empty();
+        $("#content_box").load('user_settings.html');
+	});    
+}); 
+
 // Hent liste af users og oversæt dem til tabel 
 function loadUsers() {
 	var inActiveCount = 0;
@@ -260,7 +277,7 @@ function loadrecept(bool){
     
 	$('#table_con').empty();
 	
-    $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Item status</td><td>Recept Id</td><td>Delete</td><td>Edit</td></tr>");
+    $('#table_con').append("<tr><td>Status</td><td>Recept Id</td><td>Recept navn</td><td>Delete</td><td>Edit</td></tr>");
     
     options = null;
     
@@ -280,26 +297,24 @@ function loadrecept(bool){
         
 	    $.each(data, function(i, item) {
             
-            var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
+            console.log(data);
             
-            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].pbId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
+            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
             
             
             if(bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td id="pbId_' + data[i].pbId + '">' + data[i].pbId + '</td>' + '<td>' + itemStatus + '</td>' + '<td><select class="selinput" id="receptId_' + data[i].pbId + '">' + options + '<select></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].receptId + '" id="row">' + status + '<td id="receptId_' + data[i].receptId + '">' + data[i].receptId + '</td>' + '<td><input id="receptNavn" value="' + data[i].receptName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#Status_val_' + data[i].pbId).val(data[i].status);
-            $('#receptId_' + data[i].pbId).val(data[i].receptId);
-            $('#itemStatus_val_' + data[i].pbId).val(data[i].itemStatus);
        }); 
         
-        $.getScript( "assets/js/pb_dy.js", function( data, textStatus, jqxhr ) {
+        $.getScript( "assets/js/recept_dy.js", function( data, textStatus, jqxhr ) {
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
-        	console.log( "pb_dy.js was loaded." );
+        	console.log( "recept_dy.js was loaded." );
             
             tjekEditLock();
         }); 

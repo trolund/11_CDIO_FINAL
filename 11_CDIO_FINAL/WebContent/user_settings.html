@@ -1,15 +1,9 @@
-    <h1>Settings</h1>
 
-
-
-
+<script src="assets/js/user_settings.js"></script>  
+<h1>User settings</h1>
+<center>
 <h2>Profil:</h2>
   <form id="profilForm" method="POST">
-  Status <br>
-      <select id="statusEdit" name="status">
-  <option value="0">Active</option>
-  <option value="1">Inactive</option>
-      </select> <br><br>
     Id<br> 
     <input type="text" name="oprId" id="oprIdEdit" readonly>
     <br>
@@ -29,16 +23,10 @@
     <input type="text" name="oprCpr" id="oprCprEdit">
     <br>
     Password <br>
-    <input type="button" id="newPassword_But" value="New password">
-    <br>
-    
-    Privileges <br>  
-    <input type="checkbox" name="adminRole" id="AdminRoleEdit"> Admin<br>
-    <input type="checkbox" name="farmaceutRole" id="FarRoleEdit"> Farmaceut<br>
-    <input type="checkbox" name="vaerkforerRole" id="VeakRoleEdit"> Værkfører<br>
-    <input type="checkbox" name="laborantRole" id="LabRoleEdit"> Laborant <br>    
+    <input type="button" id="newPassword_But" value="Get new password">    
       
   <br><br>
   <input id="Submit_profil_settings" type="button" value="Confirm Edit">
     <p id="Editmsg"></p>
 </form> 
+</center>
