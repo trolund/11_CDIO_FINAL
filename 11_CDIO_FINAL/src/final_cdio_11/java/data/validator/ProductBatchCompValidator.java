@@ -36,7 +36,7 @@ public class ProductBatchCompValidator implements IProductBatchCompValidator {
 
 	@Override
 	public boolean isPBCValid(ProductBatchComponentDTO pbcDTO) {
-		return false;
+		return isPbIdValid(pbcDTO.getpbId()) && isRbIdValid(pbcDTO.getrbId()) && isTareValid(pbcDTO.getTara()) && isNettoValid(pbcDTO.getNetto()) && isOprIdValid(pbcDTO.getOprId()) && isPbcStatusValid(pbcDTO.getStatus());
 	}
 
 }

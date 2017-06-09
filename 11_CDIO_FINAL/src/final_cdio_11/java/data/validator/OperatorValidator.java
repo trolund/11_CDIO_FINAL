@@ -73,7 +73,7 @@ public class OperatorValidator implements IOperatorValidator {
 
 	@Override
 	public boolean isOprValid(OperatorDTO oprDTO) {
-		return false;
+		return isOprIdValid(oprDTO.getOprId()) && isOprNameValid(oprDTO.getOprFirstName()) && isOprNameValid(oprDTO.getOprLastName()) && isOprIniValid(oprDTO.getOprIni()) && isOprEmailValid(oprDTO.getOprEmail()) && isOprCprValid(oprDTO.getOprCpr()) && isOprPasswordValid(oprDTO.getOprPassword()) && isOprStatusValid(oprDTO.getStatus());
 	}
 
 }
