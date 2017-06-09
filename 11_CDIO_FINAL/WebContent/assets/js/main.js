@@ -2,6 +2,8 @@ var id = null;
 var userName = null;
 var roles = null;
 var user = null;
+// recept options.
+var options ="";
 
 // Alt der skal køres ved opstart af application!
 $(document).ready(function(){
@@ -126,7 +128,7 @@ function loadUsers() {
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
 //     $.ajaxSetup({
-//        async: false
+//        async: false    repIdList
 //        });
     
     $.getJSON('api/View/VUserTableList', function(data) {
@@ -209,26 +211,33 @@ function loadpb(bool){
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Item status</td><td>Recept Id</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/pb/List', function(data) {
-         
-	    var status;
+        
+        var receptOptions = "";
+        
+        $.each(data, function(i, item) {
+            if(receptOptions.indexOf(data[i].receptId) == -1){
+            receptOptions += data[i].receptId + ",";
+            options += "<option value='" + data[i].receptId + "'>" + data[i].receptId + "</option>";
+            }
+             });
+        
+        console.log(options);
         
 	    $.each(data, function(i, item) {
             
             var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
             
-	    	if (data[i].status == "0") {
-	    		status = "<td value='0' id='status_" + data[i].pbId + "' style='color: green;'>Active</td>";
-	    	} else {
-	    		status = "<td value='1' id='status_" + data[i].pbId + "' style='color: red;'>Inactive</td>";
-	    	}
+            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].pbId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
+            
             
             if(bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td id="pbId_' + data[i].pbId + '">' + data[i].pbId + '</td>' + '<td>' + itemStatus + '</td>' + '<td id="receptId_' + data[i].pbId + '">' + data[i].receptId + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td id="pbId_' + data[i].pbId + '">' + data[i].pbId + '</td>' + '<td>' + itemStatus + '</td>' + '<td><select class="selinput" id="receptId_' + data[i].pbId + '">' + options + '<select></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
             }
             
-            $('#itemStatus_val_' + data[i].pbId).val(data[i].itemStatus);
+            $('#Status_val_' + data[i].pbId).val(data[i].status);
+            $('#receptId_' + data[i].pbId).val(data[i].receptId);
        }); 
         
         $.getScript( "assets/js/pb_dy.js", function( data, textStatus, jqxhr ) {

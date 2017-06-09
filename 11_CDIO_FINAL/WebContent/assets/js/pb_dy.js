@@ -6,9 +6,9 @@ $(document).ready(function() {
         
 		var data = {
             "itemStatus":$('#itemStatus_val_' + id).val(),
-            "status":$('#status_' + id).attr("value"),
+            "status":$('#Status_val_' + id).val(),
             "pbId":$('#pbId_' + id).html(), 
-            "receptId":$('#receptId_' + id).html(),
+            "receptId":$('#receptId_' + id).val(),
             }; 
       
          console.log(data);

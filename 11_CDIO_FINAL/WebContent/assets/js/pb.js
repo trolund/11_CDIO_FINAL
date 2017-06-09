@@ -70,7 +70,7 @@ function addpb(){
     if(!boolNewRow){
     var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
     
-    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="pbId_" type="text" value=""></td>' + '<td>' + itemStatus + '</td>' + '<td><input id="receptId_" type="text" value=""></td>' + '<td></td>' + '<td><button class="insert_pb" name="">insert</button></td>' + '</tr>');
+    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="pbId_" type="text" value=""></td>' + '<td>' + itemStatus + '</td>' + '<td>'+ '<select class="selinput" id="receptId_">' + options + '</select></td>' + '<td></td>' + '<td><button class="insert_pb" name="">insert</button></td>' + '</tr>');
     }
     else {
         // fejl i popup
