@@ -1,12 +1,14 @@
 package final_cdio_11.java.handler;
 
 import final_cdio_11.java.data.dto.OperatorDTO;
+import final_cdio_11.java.utils.Utils;
 
 /*
  * Singleton TextHandler class.
  */
 public class TextHandler {
 
+	private static final Utils utils = Utils.getInstance();
 	private static final TextHandler instance = new TextHandler();
 
 	/*
@@ -116,7 +118,7 @@ public class TextHandler {
 		sb.append("Du har fået et nyt password til hjemmesiden.\n");
 		sb.append("Dine nye login oplysninger er: \n");
 		sb.append("Id: " + oprDTO.getOprId() + "\n");
-		sb.append("Password: " + oprDTO.getOprPassword() + "\n\n");
+		sb.append("Password: " + utils.sha256(oprDTO.getOprPassword()) + "\n\n");
 		sb.append("- Din yndlings Webservice gruppe 11\n");
 		return sb.toString();
 	}
