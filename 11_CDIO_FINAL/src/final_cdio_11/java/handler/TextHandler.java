@@ -1,14 +1,12 @@
 package final_cdio_11.java.handler;
 
 import final_cdio_11.java.data.dto.OperatorDTO;
-import final_cdio_11.java.utils.Utils;
 
 /*
  * Singleton TextHandler class.
  */
 public class TextHandler {
 
-	private static final Utils utils = Utils.getInstance();
 	private static final TextHandler instance = new TextHandler();
 
 	/*
@@ -99,6 +97,26 @@ public class TextHandler {
 		return "User [" + oprId + "] Updated successfully.";
 	}
 
+	/* Product Batch success messages */
+	public final String succPbCreate = "Success: Product Batch create.";
+	public final String succPbUpdate = "Success: Product Batch update.";
+	public final String succPbDelete = "Success: Product Batch delete.";
+
+	/* Raavare Batch success messages */
+	public final String succRbCreate = "Success: Material Batch create.";
+	public final String succRbUpdate = "Success: Material Batch update.";
+	public final String succRbDelete = "Success: Material Batch delete.";
+
+	/* Raavare success messages */
+	public final String succRaavareCreate = "Success: Material create.";
+	public final String succRaavareUpdate = "Success: Material update.";
+	public final String succRaavareDelete = "Success: Material delete.";
+
+	/* Receipt success messages */
+	public final String succReceiptCreate = "Success: Receipt create.";
+	public final String succReceiptUpdate = "Success: Receipt update.";
+	public final String succReceiptDelete = "Success: Receipt delete.";
+
 	/* 
 	 * Application error messages. 
 	 */
@@ -108,6 +126,30 @@ public class TextHandler {
 	public final String errUnknownFailure = "Failure.";
 	public final String errUserCreation = "Failure. Id already exists.";
 	public final String errMailFailed = "Mail failed.";
+
+	/* Product Batch error messages */
+	public final String errPbCreate = "Failed: Product batch create.";
+	public final String errPbUpdate = "Failed: Product Batch update.";
+	public final String errPbDelete = "Failed: Product Batch delete.";
+	public final String errPbInvalid = "Failed: Product batch contains invalid fields.";
+
+	/* Raavare Batch error messages */
+	public final String errRbCreate = "Failed: Material Batch create.";
+	public final String errRbUpdate = "Failed: Material Batch update.";
+	public final String errRbDelete = "Failed: Material Batch delete.";
+	public final String errRbInvalid = "Failed: Material Batch contains invalid fields.";
+
+	/* Raavare error messages */
+	public final String errRaavareCreate = "Failed: Material create.";
+	public final String errRaavareUpdate = "Failed: Material update.";
+	public final String errRaavareDelete = "Failed: Material delete.";
+	public final String errRaavareInvalid = "Failed: Material contains invalid fields.";
+
+	/* Receipt error messages */
+	public final String errReceiptCreate = "Failure: Receipt create.";
+	public final String errReceiptUpdate = "Failure: Receipt update.";
+	public final String errReceiptDelete = "Failure: Receipt delete.";
+	public final String errReceiptInvalid = "Failure: Receipt contains invalid fields.";
 
 	/*
 	 * E-mail specific.

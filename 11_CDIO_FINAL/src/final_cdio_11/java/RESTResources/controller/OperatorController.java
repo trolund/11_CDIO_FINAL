@@ -167,6 +167,8 @@ public class OperatorController implements IOperatorController {
 			e.printStackTrace();
 		}
 
+		if (!oprValidator.isOprValid(oprDTO)) return "Invalid operator fields.";
+
 		try {
 			oprDAO.updateOperator(oprDTO);
 			if (utils.DEV_ENABLED) utils.logMessage("Updating user: " + oprDTO);

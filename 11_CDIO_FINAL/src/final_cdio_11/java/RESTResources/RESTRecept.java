@@ -37,7 +37,7 @@ public class RESTRecept {
 	@Path("/del/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(@PathParam("pbId") int id) {
-		return receptController.delRecept(id);
+		return receptController.deleteRecept(id);
 	}
 
 	@POST

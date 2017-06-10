@@ -9,8 +9,14 @@ import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dao.IReceptDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
 import final_cdio_11.java.data.dto.ReceptDTO;
+import final_cdio_11.java.data.validator.IReceptValidator;
+import final_cdio_11.java.data.validator.ReceptValidator;
+import final_cdio_11.java.handler.TextHandler;
 
 public class ReceptController implements IReceptController {
+
+	private final TextHandler textHandler = TextHandler.getInstance();
+	private IReceptValidator receptValidator = new ReceptValidator();
 
 	@Override
 	public List<ReceptDTO> getReceptList() {
@@ -28,47 +34,49 @@ public class ReceptController implements IReceptController {
 	}
 
 	@Override
-	public Response updateRecept(ReceptDTO receptDTO) {
-
+	public Response createRecept(ReceptDTO receptDTO) {
 		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 
+		if (!receptValidator.isReceptValid(receptDTO)) return Response.status(400).entity(textHandler.errReceiptInvalid).build();
+
 		try {
-			receptDAO.updateRecept(receptDTO);
-			System.out.println("update done!");
-			return Response.status(200).entity("Recept updated").build();
+			receptDAO.createRecept(receptDTO);
+			return Response.status(200).entity(textHandler.succReceiptCreate).build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity("fejl").build();
+		return Response.status(400).entity(textHandler.errReceiptCreate).build();
 	}
 
 	@Override
-	public Response delRecept(int receptId) {
+	public Response updateRecept(ReceptDTO receptDTO) {
+		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
+
+		if (!receptValidator.isReceptValid(receptDTO)) return Response.status(400).entity(textHandler.errReceiptInvalid).build();
+
+		try {
+			receptDAO.updateRecept(receptDTO);
+			return Response.status(200).entity(textHandler.succReceiptUpdate).build();
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(400).entity(textHandler.errReceiptUpdate).build();
+	}
+
+	@Override
+	public Response deleteRecept(int receptId) {
 		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
 
 		try {
 			receptDAO.deleteRecept(receptId);
-			return Response.status(200).entity("Recept deleted").build();
+			return Response.status(200).entity(textHandler.succReceiptDelete).build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity("fejl").build();
-	}
-
-	@Override
-	public Response createRecept(ReceptDTO receptDTO) {
-		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
-
-		try {
-			receptDAO.createRecept(receptDTO);
-			return Response.status(200).entity("pb created").build();
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
-
-		return Response.status(400).entity("fejl").build();
+		return Response.status(400).entity(textHandler.errReceiptDelete).build();
 	}
 
 }

@@ -7,13 +7,8 @@ import javax.ws.rs.core.Response;
 import final_cdio_11.java.data.dto.RaavareBatchDTO;
 
 public interface IRaavareBatchController {
-
-	Response updateRB(RaavareBatchDTO data);
-
-	List<RaavareBatchDTO> getRbList();
-
-	Response delRB(int id);
-
-	Response createRB(RaavareBatchDTO data);
-
+	List<RaavareBatchDTO> getRaavareBatchList();
+	Response createRaavareBatch(RaavareBatchDTO rbDTO);
+	Response updateRaavareBatch(RaavareBatchDTO rbDTO);
+	Response deleteRaavareBatch(int rbId);
 }

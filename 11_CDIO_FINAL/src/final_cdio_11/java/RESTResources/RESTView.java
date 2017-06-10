@@ -20,7 +20,7 @@ public class RESTView {
 	@Path("/VUserTableList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<VUserTableDTO> VUserTableList() {
-		return viewController.VUserTableList();
+		return viewController.getVUserTableList();
 	}
 
 }

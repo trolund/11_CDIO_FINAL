@@ -18,9 +18,7 @@ import final_cdio_11.java.data.dto.RaavareDTO;
 public class RESTRaavare {
 
 	private final IRaavareController raavareController = new RaavareController();
-	
-	
-	
+
 	@GET
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -39,7 +37,7 @@ public class RESTRaavare {
 	@Path("/del/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(@PathParam("pbId") int id) {
-		return raavareController.delRaavare(id);
+		return raavareController.deleteRaavare(id);
 	}
 
 	@POST
@@ -48,6 +46,5 @@ public class RESTRaavare {
 	public Response delPB(RaavareDTO data) {
 		return raavareController.createRaavare(data);
 	}
-
 
 }

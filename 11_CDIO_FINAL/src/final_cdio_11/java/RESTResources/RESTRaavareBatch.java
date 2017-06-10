@@ -18,34 +18,33 @@ import final_cdio_11.java.data.dto.RaavareBatchDTO;
 public class RESTRaavareBatch {
 
 	private final IRaavareBatchController rbController = new RaavareBatchController();
-	
+
 	@GET
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<RaavareBatchDTO> RaavareBatchList() {
-		return rbController.getRbList();
+		return rbController.getRaavareBatchList();
 	}
 
 	@POST
 	@Path("/Update")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePB(RaavareBatchDTO data) {
-		return rbController.updateRB(data);
+		return rbController.updateRaavareBatch(data);
 	}
 
 	@POST
 	@Path("/del/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(@PathParam("pbId") int id) {
-		return rbController.delRB(id);
+		return rbController.deleteRaavareBatch(id);
 	}
 
 	@POST
 	@Path("/insert")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(RaavareBatchDTO data) {
-		return rbController.createRB(data);
+		return rbController.createRaavareBatch(data);
 	}
-
 
 }

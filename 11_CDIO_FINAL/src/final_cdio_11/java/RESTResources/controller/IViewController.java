@@ -5,5 +5,5 @@ import java.util.List;
 import final_cdio_11.java.data.dto.view.VUserTableDTO;
 
 public interface IViewController {
-	List<VUserTableDTO> VUserTableList();
+	List<VUserTableDTO> getVUserTableList();
 }

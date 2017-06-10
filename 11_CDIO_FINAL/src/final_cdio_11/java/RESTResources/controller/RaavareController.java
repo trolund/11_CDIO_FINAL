@@ -6,68 +6,76 @@ import javax.ws.rs.core.Response;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IRaavareDAO;
 import final_cdio_11.java.data.dao.SQLRaavareDAO;
 import final_cdio_11.java.data.dto.RaavareDTO;
+import final_cdio_11.java.data.validator.RaavareValidator;
+import final_cdio_11.java.handler.TextHandler;
 
 public class RaavareController implements IRaavareController {
 
+	private final TextHandler textHandler = TextHandler.getInstance();
+	private RaavareValidator raavareValidator = new RaavareValidator();
+
 	@Override
 	public List<RaavareDTO> getRaavareList() {
-		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
+		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
 
-		List<RaavareDTO> rList = null;
+		List<RaavareDTO> raavareList = null;
 
 		try {
-			rList = rDAO.getRaavareList();
+			raavareList = raavareDAO.getRaavareList();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return rList;
+		return raavareList;
 	}
 
 	@Override
-	public Response updateRaavare(RaavareDTO rDTO) {
+	public Response createRaavare(RaavareDTO raavareDTO) {
+		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
 
-		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
+		if (!raavareValidator.isRaavareValid(raavareDTO)) return Response.status(400).entity(textHandler.errRaavareInvalid).build();
 
 		try {
-			rDAO.updateRaavare(rDTO);
-			System.out.println("update done!");
-			return Response.status(200).entity("Raavare updated").build();
+			raavareDAO.createRaavare(raavareDTO);
+			return Response.status(200).entity(textHandler.succRaavareCreate).build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity("fejl").build();
+		return Response.status(400).entity(textHandler.errRaavareCreate).build();
 	}
 
 	@Override
-	public Response delRaavare(int rId) {
-		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
+	public Response updateRaavare(RaavareDTO raavareDTO) {
+		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
+
+		if (!raavareValidator.isRaavareValid(raavareDTO)) return Response.status(400).entity(textHandler.errRaavareInvalid).build();
 
 		try {
-			rDAO.deleteRaavare(rId);
-			return Response.status(200).entity("Raavare deleted").build();
+			raavareDAO.updateRaavare(raavareDTO);
+			return Response.status(200).entity(textHandler.succRaavareUpdate).build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity("fejl").build();
+		return Response.status(400).entity(textHandler.errRaavareUpdate).build();
 	}
 
 	@Override
-	public Response createRaavare(RaavareDTO rDTO) {
-		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
+	public Response deleteRaavare(int raavareId) {
+		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
 
 		try {
-			rDAO.createRaavare(rDTO);
-			return Response.status(200).entity("pb created").build();
+			raavareDAO.deleteRaavare(raavareId);
+			return Response.status(200).entity(textHandler.succRaavareDelete).build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity("fejl").build();
+		return Response.status(400).entity(textHandler.errRaavareDelete).build();
 	}
 
 }
