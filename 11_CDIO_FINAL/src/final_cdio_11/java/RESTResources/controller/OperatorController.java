@@ -40,12 +40,6 @@ public class OperatorController implements IOperatorController {
 		return oprList;
 	}
 
-	/* 
-	 * Denne metode er grunden til, at loading går så langsomt på hjemmesiden. 
-	 * Den tager sindssyg lang tid. 
-	 * Det ville være en god ide, hvis vi kunne gemme alle rollerne som en String, 
-	 * i en operator DTO. Så ville det køre i konstant tid, og ikke linear tid. 
-	 */
 	@Override
 	public String getOperatorRolesAsString(String oprId) {
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
@@ -250,29 +244,6 @@ public class OperatorController implements IOperatorController {
 		createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
 		createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
 		return oprDTO;
-
-		//		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
-		//
-		//		int id = Integer.parseInt(oprId);
-		//		List<OperatorDTO> oprList = null;
-		//
-		//		try {
-		//			oprList = oprDAO.getOperatorList();
-		//		} catch (DALException e) {
-		//			e.printStackTrace();
-		//		}
-		//
-		//		for (OperatorDTO oprDTO : oprList) {
-		//			if (oprDTO.getOprId() == id) {
-		//				CreateUserFormPOJO createUserFormPOJO = new CreateUserFormPOJO();
-		//				createUserFormPOJO.setOprId(oprDTO.getOprId());
-		//				createUserFormPOJO.setOprIni(oprDTO.getOprIni());
-		//				createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
-		//				createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
-		//				return oprDTO;
-		//			}
-		//		}
-		////		return null;
 	}
 
 }

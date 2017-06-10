@@ -23,28 +23,28 @@ public class RESTRaavareBatch {
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<RaavareBatchDTO> RaavareBatchList() {
-		return rbController.List();
+		return rbController.getRbList();
 	}
 
 	@POST
 	@Path("/Update")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePB(RaavareBatchDTO data) {
-		return rbController.Update(data);
+		return rbController.updateRB(data);
 	}
 
 	@POST
 	@Path("/del/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(@PathParam("pbId") int id) {
-		return rbController.del(id);
+		return rbController.delRB(id);
 	}
 
 	@POST
 	@Path("/insert")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(RaavareBatchDTO data) {
-		return rbController.insert(data);
+		return rbController.createRB(data);
 	}
 
 

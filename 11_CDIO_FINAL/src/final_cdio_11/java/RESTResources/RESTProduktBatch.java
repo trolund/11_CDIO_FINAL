@@ -24,14 +24,14 @@ public class RESTProduktBatch {
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ProductBatchDTO> RaavareBatchList() {
-		return pbController.ProduktBatchList();
+		return pbController.getProduktBatchList();
 	}
 
 	@POST
 	@Path("/UpdatePB")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePB(PbPOJO data) {
-		return pbController.UpdatePB(data);
+		return pbController.updatePB(data);
 	}
 
 	@POST
@@ -45,14 +45,14 @@ public class RESTProduktBatch {
 	@Path("/insertPB")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(PbPOJO data) {
-		return pbController.insertPB(data);
+		return pbController.createPB(data);
 	}
 
 	@GET
 	@Path("/repIdList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<String> repIdList() {
-		return pbController.ProduktBatchReceptidList();
+		return pbController.getProduktBatchReceptIdList();
 	}
 
 }

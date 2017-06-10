@@ -8,12 +8,12 @@ import final_cdio_11.java.data.dto.RaavareDTO;
 
 public interface IRaavareController {
 
-	List<RaavareDTO> List();
+	List<RaavareDTO> getRaavareList();
 
-	Response Update(RaavareDTO data);
+	Response updateRaavare(RaavareDTO data);
 
-	Response del(int id);
+	Response delRaavare(int id);
 
-	Response insert(RaavareDTO data);
+	Response createRaavare(RaavareDTO data);
 
 }

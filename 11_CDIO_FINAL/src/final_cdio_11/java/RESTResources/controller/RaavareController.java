@@ -12,29 +12,29 @@ import final_cdio_11.java.data.dto.RaavareDTO;
 public class RaavareController implements IRaavareController {
 
 	@Override
-	public List<RaavareDTO> List() {
-		SQLRaavareDAO DAO = new SQLRaavareDAO(Connector.getInstance());
+	public List<RaavareDTO> getRaavareList() {
+		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
 
-		List<RaavareDTO> list = null;
+		List<RaavareDTO> rList = null;
 
 		try {
-			list = DAO.getRaavareList();
+			rList = rDAO.getRaavareList();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return list;
+		return rList;
 	}
 
 	@Override
-	public Response Update(RaavareDTO data) {
+	public Response updateRaavare(RaavareDTO rDTO) {
 
-		SQLRaavareDAO DAO = new SQLRaavareDAO(Connector.getInstance());
+		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
 
 		try {
-			DAO.updateRaavare(data);
+			rDAO.updateRaavare(rDTO);
 			System.out.println("update done!");
-			return Response.status(200).entity("Recept updated").build();
+			return Response.status(200).entity("Raavare updated").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
@@ -43,12 +43,12 @@ public class RaavareController implements IRaavareController {
 	}
 
 	@Override
-	public Response del(int id) {
-		SQLRaavareDAO RaavareDAO = new SQLRaavareDAO(Connector.getInstance());
+	public Response delRaavare(int rId) {
+		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
 
 		try {
-			RaavareDAO.deleteRaavare(id);
-			return Response.status(200).entity("Recept deleted").build();
+			rDAO.deleteRaavare(rId);
+			return Response.status(200).entity("Raavare deleted").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
@@ -56,11 +56,12 @@ public class RaavareController implements IRaavareController {
 		return Response.status(400).entity("fejl").build();
 	}
 
-	public Response insert(RaavareDTO data) {
-		SQLRaavareDAO RaavareDAO = new SQLRaavareDAO(Connector.getInstance());
+	@Override
+	public Response createRaavare(RaavareDTO rDTO) {
+		SQLRaavareDAO rDAO = new SQLRaavareDAO(Connector.getInstance());
 
 		try {
-			RaavareDAO.createRaavare(data);
+			rDAO.createRaavare(rDTO);
 			return Response.status(200).entity("pb created").build();
 		} catch (DALException e) {
 			e.printStackTrace();

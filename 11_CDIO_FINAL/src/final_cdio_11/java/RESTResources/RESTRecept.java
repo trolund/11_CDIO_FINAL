@@ -23,28 +23,28 @@ public class RESTRecept {
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ReceptDTO> RaavareBatchList() {
-		return receptController.List();
+		return receptController.getReceptList();
 	}
 
 	@POST
 	@Path("/Update")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePB(ReceptDTO data) {
-		return receptController.Update(data);
+		return receptController.updateRecept(data);
 	}
 
 	@POST
 	@Path("/del/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(@PathParam("pbId") int id) {
-		return receptController.del(id);
+		return receptController.delRecept(id);
 	}
 
 	@POST
 	@Path("/insert")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delPB(ReceptDTO data) {
-		return receptController.insert(data);
+		return receptController.createRecept(data);
 	}
 
 }

@@ -8,13 +8,13 @@ import final_cdio_11.java.RESTResources.pojo.PbPOJO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 
 public interface IProduktBatchController {
-	List<ProductBatchDTO> ProduktBatchList();
+	List<ProductBatchDTO> getProduktBatchList();
 
-	Response UpdatePB(PbPOJO data);
+	Response updatePB(PbPOJO data);
 
 	Response delPB(int id);
 
-	Response insertPB(PbPOJO data);
+	Response createPB(PbPOJO data);
 
-	List<String> ProduktBatchReceptidList();
+	List<String> getProduktBatchReceptIdList();
 }

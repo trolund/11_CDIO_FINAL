@@ -8,12 +8,12 @@ import final_cdio_11.java.data.dto.ReceptDTO;
 
 public interface IReceptController {
 
-	List<ReceptDTO> List();
+	List<ReceptDTO> getReceptList();
 
-	Response Update(ReceptDTO data);
+	Response updateRecept(ReceptDTO data);
 
-	Response del(int id);
+	Response delRecept(int id);
 
-	Response insert(ReceptDTO data);
+	Response createRecept(ReceptDTO data);
 
 }

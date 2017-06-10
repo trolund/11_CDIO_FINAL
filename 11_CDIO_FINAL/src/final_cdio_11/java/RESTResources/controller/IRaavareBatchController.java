@@ -8,12 +8,12 @@ import final_cdio_11.java.data.dto.RaavareBatchDTO;
 
 public interface IRaavareBatchController {
 
-	Response Update(RaavareBatchDTO data);
+	Response updateRB(RaavareBatchDTO data);
 
-	List<RaavareBatchDTO> List();
+	List<RaavareBatchDTO> getRbList();
 
-	Response del(int id);
+	Response delRB(int id);
 
-	Response insert(RaavareBatchDTO data);
+	Response createRB(RaavareBatchDTO data);
 
 }

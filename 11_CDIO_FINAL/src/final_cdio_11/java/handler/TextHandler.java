@@ -112,14 +112,14 @@ public class TextHandler {
 	/*
 	 * E-mail specific.
 	 */
-	public final String mailMessage(OperatorDTO oprDTO) {
+	public final String mailMessage(OperatorDTO oprDTO, String newPass) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Hej " + oprDTO.getOprFirstName() + " " + oprDTO.getOprLastName() + ".\n\n");
-		sb.append("Du har fået et nyt password til hjemmesiden.\n");
-		sb.append("Dine nye login oplysninger er: \n");
+		sb.append("Du har fået et nyt password til hjemmesiden.\n\n");
+		sb.append("Dine nye login oplysninger er: \n\n");
 		sb.append("Id: " + oprDTO.getOprId() + "\n");
-		sb.append("Password: " + utils.sha256(oprDTO.getOprPassword()) + "\n\n");
-		sb.append("- Din yndlings Webservice gruppe 11\n");
+		sb.append("Password: " + newPass + "\n\n");
+		sb.append("- Din yndlings Webservice gruppe 11");
 		return sb.toString();
 	}
 
