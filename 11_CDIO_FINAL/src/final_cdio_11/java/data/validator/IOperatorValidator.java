@@ -8,7 +8,7 @@ public interface IOperatorValidator {
 	boolean isOprIniValid(String oprIni);
 	boolean isOprEmailValid(String oprEmail);
 	boolean isOprCprValid(String oprCpr);
-	boolean isOprPasswordValid(String oprPassword);
+	boolean isOprPasswordHashValid(String oprPassword);
 	boolean isOprStatusValid(int status);
 	boolean isOprValid(OperatorDTO oprDTO);
 }

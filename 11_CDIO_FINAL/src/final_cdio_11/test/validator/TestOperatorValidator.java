@@ -9,6 +9,7 @@ import org.junit.Test;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.validator.IOperatorValidator;
 import final_cdio_11.java.data.validator.OperatorValidator;
+import final_cdio_11.java.utils.Utils;
 
 public class TestOperatorValidator {
 
@@ -341,60 +342,41 @@ public class TestOperatorValidator {
 	 * isOprPasswordValid test.
 	 */
 	@Test
-	public void testIsOprPasswordValidPositive00() {
-		String oprPassword = "11111";
+	public void testIsOprPasswordHashValidPositive00() {
+		String oprPassword = "111123421";
+		oprPassword = Utils.getInstance().sha256(oprPassword);
 
-		boolean actual = oprValidator.isOprPasswordValid(oprPassword);
+		boolean actual = oprValidator.isOprPasswordHashValid(oprPassword);
 		boolean expected = true;
 
 		assertEquals("Failed: " + oprPassword + " is supposed to be valid.", expected, actual);
 	}
 
 	@Test
-	public void testIsOprPasswordValidPositive01() {
-		String oprPassword = "111111111111111111111111111111";
-
-		boolean actual = oprValidator.isOprPasswordValid(oprPassword);
-		boolean expected = true;
-
-		assertEquals("Failed: " + oprPassword + " is supposed to be valid.", expected, actual);
-	}
-
-	@Test
-	public void testIsOprPasswordValidPositive02() {
-		String oprPassword = "111ojsfdgpojdfg11";
-
-		boolean actual = oprValidator.isOprPasswordValid(oprPassword);
-		boolean expected = true;
-
-		assertEquals("Failed: " + oprPassword + " is supposed to be valid.", expected, actual);
-	}
-
-	@Test
-	public void testIsOprPasswordValidNegative00() {
+	public void testIsOprPasswordHashValidNegative00() {
 		String oprPassword = "";
 
-		boolean actual = oprValidator.isOprPasswordValid(oprPassword);
+		boolean actual = oprValidator.isOprPasswordHashValid(oprPassword);
 		boolean expected = false;
 
 		assertEquals("Failed: " + oprPassword + " is supposed to be invalid.", expected, actual);
 	}
 
 	@Test
-	public void testIsOprPasswordValidNegative01() {
+	public void testIsOprPasswordHashValidNegative01() {
 		String oprPassword = "jjjjjjjjjjttttttttttggggggggggqqqqqqqqqq";
 
-		boolean actual = oprValidator.isOprPasswordValid(oprPassword);
+		boolean actual = oprValidator.isOprPasswordHashValid(oprPassword);
 		boolean expected = false;
 
 		assertEquals("Failed: " + oprPassword + " is supposed to be invalid.", expected, actual);
 	}
 
 	@Test
-	public void testIsOprPasswordValidNegative02() {
+	public void testIsOprPasswordHashValidNegative02() {
 		String oprPassword = "keklordpelbalmightymaster007-kekplebimba1337";
 
-		boolean actual = oprValidator.isOprPasswordValid(oprPassword);
+		boolean actual = oprValidator.isOprPasswordHashValid(oprPassword);
 		boolean expected = false;
 
 		assertEquals("Failed: " + oprPassword + " is supposed to be invalid.", expected, actual);
@@ -435,41 +417,41 @@ public class TestOperatorValidator {
 
 	@Test
 	public void testIsOprValidPositive() {
-		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "0911985463", "whatisthisjackensang", 0);
-		
+		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "0911985463", Utils.getInstance().sha256("whatisthisjackensang"), 0);
+
 		boolean actual = oprValidator.isOprValid(oprDTO);
 		boolean expected = true;
-		
+
 		assertEquals("Failed: " + oprDTO + " is supposed to be valid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprValidNegativeEmail() {
-		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjsjjs.com", "0911985463", "whatisthisjackensang", 0);
-		
+		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjsjjs.com", "0911985463", Utils.getInstance().sha256("whatisthisjackensang"), 0);
+
 		boolean actual = oprValidator.isOprValid(oprDTO);
 		boolean expected = false;
-		
+
 		assertEquals("Failed: " + oprDTO + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprValidNegativeCpr() {
-		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "09119-85463", "whatisthisjackensang", 0);
-		
+		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "09119-85463", Utils.getInstance().sha256("whatisthisjackensang"), 0);
+
 		boolean actual = oprValidator.isOprValid(oprDTO);
 		boolean expected = false;
-		
+
 		assertEquals("Failed: " + oprDTO + " is supposed to be invalid.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsOprValidNegativePassword() {
 		OperatorDTO oprDTO = new OperatorDTO(932, "Jack", "Jackensang", "JJS", "jjs@jjs.com", "0911985463", "bad", 0);
-		
+
 		boolean actual = oprValidator.isOprValid(oprDTO);
 		boolean expected = false;
-		
+
 		assertEquals("Failed: " + oprDTO + " is supposed to be invalid.", expected, actual);
 	}
 

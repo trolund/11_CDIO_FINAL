@@ -33,7 +33,6 @@ public class OperatorController implements IOperatorController {
 
 		try {
 			oprList = oprDAO.getOperatorList();
-			if (utils.DEV_ENABLED) utils.logMessage("Returning operator list.");
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
@@ -53,11 +52,9 @@ public class OperatorController implements IOperatorController {
 		}
 
 		if (oprRoleList == null) {
-			if (utils.DEV_ENABLED) utils.logMessage("User [" + oprId + "] does not have any roles. Setting to 'None.'.");
 			return "None.";
 		}
 
-		if (utils.DEV_ENABLED) utils.logMessage("Concatenating operator roles to String.");
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
 			RoleDTO roleDTO = (RoleDTO) iterator.next();
 			if (iterator.hasNext()) returnString.append(roleDTO.getRoleName() + ", ");
@@ -74,7 +71,6 @@ public class OperatorController implements IOperatorController {
 
 		try {
 			oprRoleList = roleDAO.getOprRoles(Integer.parseInt(OprId));
-			if (utils.DEV_ENABLED) utils.logMessage("RoleList successfully created. Trying to return.");
 			return oprRoleList;
 		} catch (DALException e) {
 			e.printStackTrace();
@@ -103,10 +99,10 @@ public class OperatorController implements IOperatorController {
 		}
 
 		if (utils.sha256(password).equals(oprDTO.getOprPassword())) {
-			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserLoginMessage(oprId, password));
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succLoginMessage(oprId, password));
 			return textHandler.succLoggedIn;
 		} else {
-			if (utils.DEV_ENABLED) utils.logMessage("User [" + oprId + ":" + password + "] failed to log in.");
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.errLoginFailed(oprId));
 			return textHandler.errInvalidCredentials;
 		}
 	}
@@ -118,41 +114,41 @@ public class OperatorController implements IOperatorController {
 
 		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
 
-		if (!oprValidator.isOprValid(oprDTO)) return "Invalid operator fields.";
+		if (!oprValidator.isOprValid(oprDTO)) return textHandler.errOprInvalid;
 
 		try {
 			oprDAO.createOperator(oprDTO);
-			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedUser(createUserFormData.getOprId()));
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succOprAdd(createUserFormData.getOprId()));
 
 			if (createUserFormData.isAdminRole()) {
 				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Admin.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Admin.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(createUserFormData.getOprId(), Role.Admin.toString()));
 			}
 
 			if (createUserFormData.isFarmaceutRole()) {
 				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Farmaceut.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Farmaceut.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(createUserFormData.getOprId(), Role.Farmaceut.toString()));
 			}
 
 			if (createUserFormData.isVærkførerRole()) {
 				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Værkfører.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Værkfører.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(createUserFormData.getOprId(), Role.Værkfører.toString()));
 			}
 
 			if (createUserFormData.isLaborantRole()) {
 				roleDAO.createRole(new RoleDTO(createUserFormData.getOprId(), Role.Laborant.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(createUserFormData.getOprId(), Role.Laborant.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(createUserFormData.getOprId(), Role.Laborant.toString()));
 			}
 
-			return textHandler.succAddedUser(createUserFormData.getOprId());
+			return textHandler.succOprAdd(createUserFormData.getOprId());
 		} catch (DALException e) {
 			e.printStackTrace();
-			return textHandler.errUserCreation;
+			return textHandler.errOprCreation;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 
-		return textHandler.errUnknownFailure; // skulle vi ikke heller have en response her?
+		return textHandler.errOprCreate; // skulle vi ikke heller have en response her?
 	}
 
 	@Override
@@ -167,41 +163,42 @@ public class OperatorController implements IOperatorController {
 			e.printStackTrace();
 		}
 
-		if (!oprValidator.isOprValid(oprDTO)) return "Invalid operator fields.";
+		System.out.println(oprDTO);
+		if (!oprValidator.isOprValid(oprDTO)) return textHandler.errOprInvalid;
 
 		try {
 			oprDAO.updateOperator(oprDTO);
-			if (utils.DEV_ENABLED) utils.logMessage("Updating user: " + oprDTO);
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succOprUpdate(oprDTO.getOprId()));
 
 			if (editUserFormData.isAdminRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Admin.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Admin.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Admin.toString()));
 			}
 
 			if (editUserFormData.isFarmaceutRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Farmaceut.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Farmaceut.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Farmaceut.toString()));
 			}
 
 			if (editUserFormData.isVaerkforerRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Værkfører.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Værkfører.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Værkfører.toString()));
 			}
 
 			if (editUserFormData.isLaborantRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Laborant.toString(), 0));
-				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succAddedRole(editUserFormData.getOprId(), Role.Laborant.toString()));
+				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Laborant.toString()));
 			}
 
-			return textHandler.succUpdateUser(oprDTO.getOprId());
+			return textHandler.succOprUpdate(oprDTO.getOprId());
 		} catch (DALException e) {
 			e.printStackTrace();
-			return textHandler.errUserCreation;
+			return textHandler.errOprCreation;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 
-		return textHandler.errUnknownFailure; // skulle vi ikke heller have en response her?
+		return textHandler.errOprUpdate; // skulle vi ikke heller have en response her?
 	}
 
 	@Override
@@ -212,14 +209,14 @@ public class OperatorController implements IOperatorController {
 		try {
 			id = Integer.parseInt(oprId);
 			oprDAO.deleteOperator(id);
-			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserDeletedSuccessMessage(id));
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devOprDeletedSuccessMessage(id));
 			return true;
 		} catch (DALException e) {
 			e.printStackTrace();
-			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserDeletedFailureMessage(id));
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devOprDeletedFailureMessage(id));
 			return false;
 		} catch (NumberFormatException e) {
-			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devUserDeletedFailureMessage(id));
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.devOprDeletedFailureMessage(id));
 			e.printStackTrace();
 			return false;
 		}
@@ -227,8 +224,6 @@ public class OperatorController implements IOperatorController {
 
 	@Override
 	public OperatorDTO createOperatorPOJO(String oprId) {
-
-		System.out.println("createOprPojo ID String: " + oprId);
 
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		int id = Integer.parseInt(oprId);

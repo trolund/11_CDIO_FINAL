@@ -1,27 +1,38 @@
 package final_cdio_11.java.data.validator;
 
 import final_cdio_11.java.data.dto.ProductBatchDTO;
+import final_cdio_11.java.utils.Utils;
 
 public class ProductBatchValidator implements IProductBatchValidator {
 
+	private final Utils utils = Utils.getInstance();
+
 	@Override
 	public boolean isPbIdValid(int pbId) {
-		return pbId >= 1 && pbId <= 99999999;
+		boolean isPbIdValid = pbId >= 1 && pbId <= 99999999;
+		if (!isPbIdValid && utils.DEV_ENABLED) utils.logMessage("[" + getClass().getSimpleName() + "] Invalid: isPbIdValid");
+		return isPbIdValid;
 	}
 
 	@Override
 	public boolean isItemStatusValid(int itemStatus) {
-		return itemStatus == 0 || itemStatus == 1 || itemStatus == 2;
+		boolean isItemStatusValid = itemStatus == 0 || itemStatus == 1 || itemStatus == 2;
+		if (!isItemStatusValid && utils.DEV_ENABLED) utils.logMessage("[" + getClass().getSimpleName() + "] Invalid: isItemStatusValid");
+		return isItemStatusValid;
 	}
 
 	@Override
 	public boolean isReceptIdValid(int receptId) {
-		return receptId >= 1 && receptId <= 99999999;
+		boolean isReceptIdValid = receptId >= 1 && receptId <= 99999999;
+		if (!isReceptIdValid && utils.DEV_ENABLED) utils.logMessage("[" + getClass().getSimpleName() + "] Invalid: isReceptIdValid");
+		return isReceptIdValid;
 	}
 
 	@Override
 	public boolean isPbStatusValid(int status) {
-		return status == 0 || status == 1;
+		boolean isPbStatusValid = status == 0 || status == 1;
+		if (!isPbStatusValid && utils.DEV_ENABLED) utils.logMessage("[" + getClass().getSimpleName() + "] Invalid: isPbStatusValid");
+		return isPbStatusValid;
 	}
 
 	@Override

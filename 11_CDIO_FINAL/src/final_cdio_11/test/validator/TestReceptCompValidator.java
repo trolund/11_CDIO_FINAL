@@ -31,7 +31,7 @@ public class TestReceptCompValidator {
 	public void testIsValidReceptIdValidPositive00() {
 		int recId = 1;
 
-		boolean actual = recComValidator.isValidReceptId(recId);
+		boolean actual = recComValidator.isReceptIdValid(recId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + recId + " is supposed to be valid.", expected, actual);
@@ -41,7 +41,7 @@ public class TestReceptCompValidator {
 	public void testIsValidReceptIdValidPositive01() {
 		int recId = 99999999;
 
-		boolean actual = recComValidator.isValidReceptId(recId);
+		boolean actual = recComValidator.isReceptIdValid(recId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + recId + " is supposed to be valid.", expected, actual);
@@ -51,7 +51,7 @@ public class TestReceptCompValidator {
 	public void testIsValidReceptIdValidPositive02() {
 		int recId = 123;
 
-		boolean actual = recComValidator.isValidReceptId(recId);
+		boolean actual = recComValidator.isReceptIdValid(recId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + recId + " is supposed to be valid.", expected, actual);
@@ -61,7 +61,7 @@ public class TestReceptCompValidator {
 	public void testIsValidReceptIdValidNegative00() {
 		int recId = 0;
 
-		boolean actual = recComValidator.isValidReceptId(recId);
+		boolean actual = recComValidator.isReceptIdValid(recId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + recId + " is supposed to be invalid.", expected, actual);
@@ -71,7 +71,7 @@ public class TestReceptCompValidator {
 	public void testIsValidReceptIdValidNegative01() {
 		int recId = 942034029;
 
-		boolean actual = recComValidator.isValidReceptId(recId);
+		boolean actual = recComValidator.isReceptIdValid(recId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + recId + " is supposed to be invalid.", expected, actual);
@@ -81,7 +81,7 @@ public class TestReceptCompValidator {
 	public void testIsValidReceptIdValidNegative02() {
 		int recId = -1;
 
-		boolean actual = recComValidator.isValidReceptId(recId);
+		boolean actual = recComValidator.isReceptIdValid(recId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + recId + " is supposed to be invalid.", expected, actual);
@@ -94,7 +94,7 @@ public class TestReceptCompValidator {
 	public void testIsValidRaavareIdValidPositive00() {
 		int raaId = 1;
 
-		boolean actual = recComValidator.isValidRaavareId(raaId);
+		boolean actual = recComValidator.isRaavareIdValid(raaId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + raaId + " is supposed to be valid.", expected, actual);
@@ -104,7 +104,7 @@ public class TestReceptCompValidator {
 	public void testIsValidRaavareIdValidPositive01() {
 		int raaId = 99999999;
 
-		boolean actual = recComValidator.isValidRaavareId(raaId);
+		boolean actual = recComValidator.isRaavareIdValid(raaId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + raaId + " is supposed to be valid.", expected, actual);
@@ -114,7 +114,7 @@ public class TestReceptCompValidator {
 	public void testIsValidRaavareIdValidPositive02() {
 		int raaId = 123;
 
-		boolean actual = recComValidator.isValidRaavareId(raaId);
+		boolean actual = recComValidator.isRaavareIdValid(raaId);
 		boolean expected = true;
 
 		assertEquals("Failed: " + raaId + " is supposed to be valid.", expected, actual);
@@ -124,7 +124,7 @@ public class TestReceptCompValidator {
 	public void testIsValidRaavareIdValidNegative00() {
 		int raaId = 0;
 
-		boolean actual = recComValidator.isValidRaavareId(raaId);
+		boolean actual = recComValidator.isRaavareIdValid(raaId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + raaId + " is supposed to be invalid.", expected, actual);
@@ -134,7 +134,7 @@ public class TestReceptCompValidator {
 	public void testIsValidRaavareIdValidNegative01() {
 		int raaId = 942034029;
 
-		boolean actual = recComValidator.isValidRaavareId(raaId);
+		boolean actual = recComValidator.isRaavareIdValid(raaId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + raaId + " is supposed to be invalid.", expected, actual);
@@ -144,7 +144,7 @@ public class TestReceptCompValidator {
 	public void testIsValidRaavareIdValidNegative02() {
 		int raaId = -1;
 
-		boolean actual = recComValidator.isValidRaavareId(raaId);
+		boolean actual = recComValidator.isRaavareIdValid(raaId);
 		boolean expected = false;
 
 		assertEquals("Failed: " + raaId + " is supposed to be invalid.", expected, actual);
@@ -157,7 +157,7 @@ public class TestReceptCompValidator {
 	public void testIsNomNettoValidPositive00() {
 		double isTare = 0.05;
 
-		boolean actual = recComValidator.isValidNomNetto(isTare);
+		boolean actual = recComValidator.isNomNettoValid(isTare);
 		boolean expected = true;
 
 		assertEquals("Failed: " + isTare + " is supposed to be valid.", expected, actual);
@@ -167,7 +167,7 @@ public class TestReceptCompValidator {
 	public void testIsNomNettoValidPositive01() {
 		int isTare = 1;
 
-		boolean actual = recComValidator.isValidNomNetto(isTare);
+		boolean actual = recComValidator.isNomNettoValid(isTare);
 		boolean expected = true;
 
 		assertEquals("Failed: " + isTare + " is supposed to be valid.", expected, actual);
@@ -177,7 +177,7 @@ public class TestReceptCompValidator {
 	public void testIsNomNettoValidPositive02() {
 		double isTare = 20.0;
 
-		boolean actual = recComValidator.isValidNomNetto(isTare);
+		boolean actual = recComValidator.isNomNettoValid(isTare);
 		boolean expected = true;
 
 		assertEquals("Failed: " + isTare + " is supposed to be valid.", expected, actual);
@@ -187,7 +187,7 @@ public class TestReceptCompValidator {
 	public void testIsNomNettoValidNegative00() {
 		double isTare = 0;
 
-		boolean actual = recComValidator.isValidNomNetto(isTare);
+		boolean actual = recComValidator.isNomNettoValid(isTare);
 		boolean expected = false;
 
 		assertEquals("Failed: " + isTare + " is supposed to be invalid.", expected, actual);
@@ -197,7 +197,7 @@ public class TestReceptCompValidator {
 	public void testIsNomNettoValidNegative01() {
 		double isTare = 21;
 
-		boolean actual = recComValidator.isValidNomNetto(isTare);
+		boolean actual = recComValidator.isNomNettoValid(isTare);
 		boolean expected = false;
 
 		assertEquals("Failed: " + isTare + " is supposed to be invalid.", expected, actual);
@@ -207,7 +207,7 @@ public class TestReceptCompValidator {
 	public void testIsNomNettoValidNegative03() {
 		double isTare = 330;
 
-		boolean actual = recComValidator.isValidNomNetto(isTare);
+		boolean actual = recComValidator.isNomNettoValid(isTare);
 		boolean expected = false;
 
 		assertEquals("Failed: " + isTare + " is supposed to be invalid.", expected, actual);
@@ -220,7 +220,7 @@ public class TestReceptCompValidator {
 	public void testIsToleranceValidPositive00() {
 		double isTol = 0.1;
 
-		boolean actual = recComValidator.isValidTolerance(isTol);
+		boolean actual = recComValidator.isToleranceValid(isTol);
 		boolean expected = true;
 
 		assertEquals("Failed: " + isTol + " is supposed to be valid.", expected, actual);
@@ -230,7 +230,7 @@ public class TestReceptCompValidator {
 	public void testIsToleranceValidPositive01() {
 		int isTol = 1;
 
-		boolean actual = recComValidator.isValidTolerance(isTol);
+		boolean actual = recComValidator.isToleranceValid(isTol);
 		boolean expected = true;
 
 		assertEquals("Failed: " + isTol + " is supposed to be valid.", expected, actual);
@@ -240,7 +240,7 @@ public class TestReceptCompValidator {
 	public void testIsToleranceValidPositive02() {
 		double isTol = 10.0;
 
-		boolean actual = recComValidator.isValidTolerance(isTol);
+		boolean actual = recComValidator.isToleranceValid(isTol);
 		boolean expected = true;
 
 		assertEquals("Failed: " + isTol + " is supposed to be valid.", expected, actual);
@@ -250,7 +250,7 @@ public class TestReceptCompValidator {
 	public void testIsToleranceValidNegative00() {
 		double isTol = 0;
 
-		boolean actual = recComValidator.isValidTolerance(isTol);
+		boolean actual = recComValidator.isToleranceValid(isTol);
 		boolean expected = false;
 
 		assertEquals("Failed: " + isTol + " is supposed to be invalid.", expected, actual);
@@ -260,7 +260,7 @@ public class TestReceptCompValidator {
 	public void testIsToleranceValidNegative01() {
 		double isTol = 11.0;
 
-		boolean actual = recComValidator.isValidTolerance(isTol);
+		boolean actual = recComValidator.isToleranceValid(isTol);
 		boolean expected = false;
 
 		assertEquals("Failed: " + isTol + " is supposed to be invalid.", expected, actual);
@@ -270,7 +270,7 @@ public class TestReceptCompValidator {
 	public void testIsToleranceValidNegative02() {
 		double isTol = 330;
 
-		boolean actual = recComValidator.isValidNomNetto(isTol);
+		boolean actual = recComValidator.isNomNettoValid(isTol);
 		boolean expected = false;
 
 		assertEquals("Failed: " + isTol + " is supposed to be invalid.", expected, actual);
@@ -283,7 +283,7 @@ public class TestReceptCompValidator {
 	public void testIsStatusValidPositive00() {
 		int validStatus = 0;
 
-		boolean actual = recComValidator.isValidStatus(validStatus);
+		boolean actual = recComValidator.isRcStatusValid(validStatus);
 		boolean expected = true;
 
 		assertEquals("Failed: " + validStatus + " is supposed to be valid.", expected, actual);
@@ -293,7 +293,7 @@ public class TestReceptCompValidator {
 	public void testIsStatusValidPositive01() {
 		int validStatus = 1;
 
-		boolean actual = recComValidator.isValidStatus(validStatus);
+		boolean actual = recComValidator.isRcStatusValid(validStatus);
 		boolean expected = true;
 
 		assertEquals("Failed: " + validStatus + " is supposed to be valid.", expected, actual);
@@ -303,7 +303,7 @@ public class TestReceptCompValidator {
 	public void testIsStatusValidNegative00() {
 		int validStatus = 2;
 
-		boolean actual = recComValidator.isValidStatus(validStatus);
+		boolean actual = recComValidator.isRcStatusValid(validStatus);
 		boolean expected = false;
 
 		assertEquals("Failed: " + validStatus + " is supposed to be valid.", expected, actual);
