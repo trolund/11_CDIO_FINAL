@@ -25,7 +25,6 @@ $(document).ready(function() {
 		$('#oprFirstName').html('Username').delay(1000);
 		$('#oprRoles').html('Rolle, rolle').delay(1000);
 		$('#content_box').html('').delay(1000); 
-		// window.location.reload(); måske skal den bruges....
 	});
 });
 
@@ -160,10 +159,6 @@ function loadUsers() {
     $('#table_con').empty();                         
     $('#table_con').append('<tr><td>Status</td><td>Id</td><td>First Name</td><td>Last Name</td><td>Initials</td><td>E-mail</td><td>Cpr</td><td>Roles</td><td>Delete</td><td>Edit</td></tr>');
     
-//     $.ajaxSetup({
-//        async: false    repIdList
-//        });
-    
     $.getJSON('api/View/VUserTableList', function(data) {
     	console.log('Users loaded.');
 	    
@@ -242,38 +237,29 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 	}
 }
 
-// nyt med inter
-
 function loadpb(bool){
-    
 	$('#table_con').empty();
-	
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Item Status</td><td>Receipt Id</td><td>Delete</td><td>Edit</td></tr>");
-    
     options = null;
     
     $.getJSON('api/pb/List', function(data) {
-        
         var receptOptions = "";
         
-        
         $.each(data, function(i, item) {
-            if(receptOptions.indexOf(data[i].receptId) == -1){
-            receptOptions += data[i].receptId + ",";
-            options += "<option value='" + data[i].receptId + "'>" + data[i].receptId + "</option>";
+            if (receptOptions.indexOf(data[i].receptId) == -1){
+            	receptOptions += data[i].receptId + ",";
+            	options += "<option value='" + data[i].receptId + "'>" + data[i].receptId + "</option>";
             }
-             });
+        });
         
         console.log(options);
         
 	    $.each(data, function(i, item) {
-            
             var itemStatus = "<select class='selinput' name='itemStatus' id='itemStatus_val_" + data[i].pbId + "'><option value='0'>Ikke påbegyndt</option><option value='1'>Under produktion</option><option value='2'>Afsluttet</option></select>"
             
             var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].pbId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
             
-            
-            if(bool && data[i].status == "1") {
+            if (bool && data[i].status == "1") {
                 
             } else {
             	$('#table_con').append('<tr name="' + data[i].pbId + '" id="row">' + status + '<td id="pbId_' + data[i].pbId + '">' + data[i].pbId + '</td>' + '<td>' + itemStatus + '</td>' + '<td><select class="selinput" id="receptId_' + data[i].pbId + '">' + options + '<select></td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
@@ -288,44 +274,34 @@ function loadpb(bool){
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "pb_dy.js was loaded." );
-            
             tjekEditLock();
         }); 
-    
     })
-    
 };
 
 function loadrecept(bool){
-    
 	$('#table_con').empty();
-	
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Name</td><td>Delete</td><td>Edit</td></tr>");
-    
     options = null;
     
     $.getJSON('api/recept/List', function(data) {
-        
         var receptOptions = "";
         
-        
         $.each(data, function(i, item) {
-            if(receptOptions.indexOf(data[i].receptId) == -1){
-            receptOptions += data[i].receptId + ",";
-            options += "<option value='" + data[i].receptId + "'>" + data[i].receptId + "</option>";
+            if (receptOptions.indexOf(data[i].receptId) == -1){
+            	receptOptions += data[i].receptId + ",";
+            	options += "<option value='" + data[i].receptId + "'>" + data[i].receptId + "</option>";
             }
-             });
+        });
         
         console.log(options);
         
 	    $.each(data, function(i, item) {
-            
             console.log(data);
             
             var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
             
-            
-            if(bool && data[i].status == "1") {
+            if (bool && data[i].status == "1") {
                 
             } else {
             	$('#table_con').append('<tr name="' + data[i].receptId + '" id="row">' + status + '<td id="receptId_' + data[i].receptId + '">' + data[i].receptId + '</td>' + '<td><input id="receptNavn" value="' + data[i].receptName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
@@ -338,36 +314,26 @@ function loadrecept(bool){
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "recept_dy.js was loaded." );
-            
             tjekEditLock();
         }); 
-    
     })
-    
 };
 
 function loadmaterial(bool){
-    
 	$('#table_con').empty();
-	
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Name</td><td>Supplier</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/material/List', function(data) {
-
-        
         console.log(options);
         
 	    $.each(data, function(i, item) {
-            
             console.log(data);
-            
             var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
             
-            
-            if(bool && data[i].status == "1") {
+            if (bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].raavareId + '" id="row">' + status + '<td id="raavareId_' + data[i].raavareId + '">' + data[i].raavareId + '</td>' + '<td><input id="receptNavn" value="' + data[i].raavareName + '">' + '</td>' + '<td><input id="receptNavn" value="' + data[i].leverandoer + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].raavareId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].raavareId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].raavareId + '" id="row">' + status + '<td id="raavareId_' + data[i].raavareId + '">' + data[i].raavareId + '</td>' + '<td><input id="receptNavn" value="' + data[i].raavareName + '">' + '</td>' + '<td><input id="receptNavn" value="' + data[i].supplier + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].raavareId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].raavareId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#Status_val_' + data[i].raavareId).val(data[i].status);
@@ -377,30 +343,23 @@ function loadmaterial(bool){
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "recept_dy.js was loaded." );
-            
             tjekEditLock();
         }); 
-    
     })
-    
 };
 
 function loadmb(bool){
-    
 	$('#table_con').empty();
-	
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Material Id</td><td>Amount</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/mb/List', function(data) {
-        
 	    $.each(data, function(i, item) {
-            
+          
             console.log(data);
             
             var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
             
-            
-            if(bool && data[i].status == "1") {
+            if (bool && data[i].status == "1") {
                 
             } else {
             	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="raavareId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '">' + data[i].raavareId + '</td>' + '<td><input id="maengde_" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
@@ -409,14 +368,11 @@ function loadmb(bool){
             $('#Status_val_' + data[i].raavareId).val(data[i].status);
        }); 
         
-        $.getScript( "assets/js/mb_dy.js", function( data, textStatus, jqxhr ) {
+        $.getScript("assets/js/mb_dy.js", function( data, textStatus, jqxhr ) {
         	console.log( textStatus ); // Success
         	console.log( jqxhr.status ); // 200
         	console.log( "mb_dy.js was loaded." );
-            
             tjekEditLock();
         }); 
-    
     })
-    
 };
