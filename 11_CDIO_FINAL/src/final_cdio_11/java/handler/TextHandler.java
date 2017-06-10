@@ -183,7 +183,7 @@ public class TextHandler {
 		sb.append("Id: " + oprDTO.getOprId() + "\n");
 		sb.append("Password: " + newPass + "\n\n");
 		sb.append("Sincerely,\n");
-		sb.append("Your favorite web service provider, group 11\n");
+		sb.append("Your favorite web service provider, group 11.\n");
 		return sb.toString();
 	}
 

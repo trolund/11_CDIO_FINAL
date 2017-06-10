@@ -64,13 +64,12 @@ public class OperatorController implements IOperatorController {
 	}
 
 	@Override
-	public List<RoleDTO> getOperatorRoleList(String OprId) {
-		System.out.println(OprId);
+	public List<RoleDTO> getOperatorRoleList(String oprId) {
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 		List<RoleDTO> oprRoleList = null;
 
 		try {
-			oprRoleList = roleDAO.getOprRoles(Integer.parseInt(OprId));
+			oprRoleList = roleDAO.getOprRoles(Integer.parseInt(oprId));
 			return oprRoleList;
 		} catch (DALException e) {
 			e.printStackTrace();
@@ -163,7 +162,6 @@ public class OperatorController implements IOperatorController {
 			e.printStackTrace();
 		}
 
-		System.out.println(oprDTO);
 		if (!oprValidator.isOprValid(oprDTO)) return textHandler.errOprInvalid;
 
 		try {
