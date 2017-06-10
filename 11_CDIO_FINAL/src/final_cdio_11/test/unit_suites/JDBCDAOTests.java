@@ -18,6 +18,6 @@ import final_cdio_11.test.dao.TestSQLRoleDAO;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ TestSQLOperatorDAO.class, TestSQLProductBatchComponentDAO.class, TestSQLProductBatchDAO.class, TestSQLRaavareBatchDAO.class, TestSQLRaavareDAO.class, TestSQLReceptComponentDAO.class, TestSQLReceptDAO.class, TestSQLRoleDAO.class })
-public class JDBCTableTests {
+public class JDBCDAOTests {
 
 }

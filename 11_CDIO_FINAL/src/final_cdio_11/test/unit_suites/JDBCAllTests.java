@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * JUnit Test Suite used to run all validator tests at once.
  */
 @RunWith(Suite.class)
-@SuiteClasses({ JDBCTableTests.class, JDBCViewTests.class, DTOValidatorTests.class })
+@SuiteClasses({ JDBCDAOTests.class, JDBCViewTests.class, DTOValidatorTests.class })
 public class JDBCAllTests {
 
 }
