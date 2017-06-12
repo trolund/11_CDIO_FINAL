@@ -4,9 +4,10 @@ $(document).ready(function() {
 		var id = $(this).prop('name');
         
 		var data = {
-            "Supplier":$('#Supplier_' + id).val(),
+            "supplier":$('#Supplier_' + id).val(),
             "status":$('#Status_val_' + id).val(),
             "raavareId":$('#raavareId_' + id).html(), 
+            "raavareName":$('#materialName_' + id).val()
             }; 
       
         console.log(data);
@@ -48,15 +49,16 @@ function insertsciped(){
 	// insert new material button
 	$(".insert_material").click(function() {
 		var data = {
-				"receptName":$('#levenradoer_').val(),
+				"supplier":$('#levenradoer_').val(),
             	"status": "0",
-            	"receptId":$('#materialName_').val(), 
+            	"raavareName":$('#materialName_').val(), 
+                "raavareId":$('#materialId_').val()
             }; 
    
         console.log(data);
         
       	jQuery.ajax({
-			url : "api/recept/insert",
+			url : "api/material/insert",
 			data : JSON.stringify(data),
 			contentType: "application/json",
 			method: 'POST',
