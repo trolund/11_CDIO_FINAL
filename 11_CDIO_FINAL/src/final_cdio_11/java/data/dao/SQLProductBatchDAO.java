@@ -9,6 +9,7 @@ import java.util.List;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
+import final_cdio_11.java.utils.Utils;
 
 /*
  * ProductBatch data access object implementation.
@@ -67,6 +68,8 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 
 			if (!rs.first()) throw new DALException("No ProductBatch's exist!");
 
+			Utils.getInstance().sleep(100);
+			
 			do {
 				pbList.add(new ProductBatchDTO(rs.getInt("pb_id"), rs.getInt("item_status"), rs.getInt("recept_id"), rs.getInt("status")));
 			} while (rs.next());
@@ -121,8 +124,8 @@ public class SQLProductBatchDAO implements IProductBatchDAO {
 			updatePBStmt = connector.getConnection().prepareStatement(updatePBSql);
 			updatePBStmt.setInt(1, pbDTO.getItemStatus());
 			updatePBStmt.setInt(2, pbDTO.getStatus());
-			updatePBStmt.setInt(3, pbDTO.getPbId());
-			updatePBStmt.setInt(4, pbDTO.getReceptId());
+			updatePBStmt.setInt(3, pbDTO.getReceptId());
+			updatePBStmt.setInt(4, pbDTO.getPbId());
 			updatePBStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

@@ -324,16 +324,17 @@ function loadmaterial(bool){
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Name</td><td>Supplier</td><td>Delete</td><td>Edit</td></tr>");
     
     $.getJSON('api/material/List', function(data) {
-        console.log(options);
+        console.log(data);
+        
         
 	    $.each(data, function(i, item) {
             console.log(data);
-            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
+            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].raavareId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
             
             if (bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].raavareId + '" id="row">' + status + '<td id="raavareId_' + data[i].raavareId + '">' + data[i].raavareId + '</td>' + '<td><input id="receptNavn" value="' + data[i].raavareName + '">' + '</td>' + '<td><input id="receptNavn" value="' + data[i].supplier + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].raavareId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].raavareId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].raavareId + '" id="row">' + status + '<td id="raavareId_' + data[i].raavareId + '">' + data[i].raavareId + '</td>' + '<td><input id="receptNavn_' + data[i].raavareId + '" value="' + data[i].raavareName + '">' + '</td>' + '<td><input id="Supplier_' + data[i].raavareId +'" value="' + data[i].supplier + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].raavareId + '" name="del"></td>' + '<td><button class="edit_material" name="' + data[i].raavareId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#Status_val_' + data[i].raavareId).val(data[i].status);
