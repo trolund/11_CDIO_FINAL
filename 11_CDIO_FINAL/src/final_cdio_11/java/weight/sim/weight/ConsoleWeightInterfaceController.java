@@ -131,5 +131,4 @@ public class ConsoleWeightInterfaceController implements IWeightInterfaceControl
 	public void setLoad(double loadinkg) {
 		// Ignored
 	}
-
 }
