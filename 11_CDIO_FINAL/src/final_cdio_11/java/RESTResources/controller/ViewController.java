@@ -11,7 +11,7 @@ import final_cdio_11.java.data.dto.view.VUserTableDTO;
 public class ViewController implements IViewController {
 
 	@Override
-	public List<VUserTableDTO> VUserTableList() {
+	public List<VUserTableDTO> getVUserTableList() {
 		IVUserTableDAO view = new SQLVUserTableDAO(Connector.getInstance());
 
 		List<VUserTableDTO> viewList = null;

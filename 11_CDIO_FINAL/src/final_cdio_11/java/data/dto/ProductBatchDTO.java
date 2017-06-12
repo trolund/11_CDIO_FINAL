@@ -18,7 +18,7 @@ public class ProductBatchDTO {
 		this.status = status;
 	}
 
-	public int getpbId() {
+	public int getPbId() {
 		return pbId;
 	}
 

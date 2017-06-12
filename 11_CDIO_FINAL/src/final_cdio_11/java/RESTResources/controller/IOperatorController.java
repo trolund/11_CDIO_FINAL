@@ -11,7 +11,7 @@ import final_cdio_11.java.data.dto.RoleDTO;
 public interface IOperatorController {
 	List<OperatorDTO> getOperatorList();
 	String getOperatorRolesAsString(String oprId);
-	List<RoleDTO> getOperatorRoleList(String OprId);
+	List<RoleDTO> getOperatorRoleList(String oprId);
 	String verifyOperatorLogin(LoginFormPOJO loginFormData);
 	String createOperator(CreateUserFormPOJO createUserFormData);
 	String updateOperator(EditUserFormPOJO editUserFormData);

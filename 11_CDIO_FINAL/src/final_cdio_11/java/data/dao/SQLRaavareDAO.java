@@ -94,7 +94,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 		try {
 			createRaavareStmt = connector.getConnection().prepareStatement(createRaavareSql);
 			createRaavareStmt.setInt(1, raavare.getRaavareId());
-			createRaavareStmt.setString(2, raavare.getraavareName());
+			createRaavareStmt.setString(2, raavare.getRaavareName());
 			createRaavareStmt.setString(3, raavare.getSupplier());
 			createRaavareStmt.setInt(4, raavare.getStatus());
 			createRaavareStmt.executeUpdate();
@@ -119,7 +119,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 		PreparedStatement updateRaavareStmt = null;
 		try {
 			updateRaavareStmt = connector.getConnection().prepareStatement(updateRaavareSql);
-			updateRaavareStmt.setString(1, raavare.getraavareName());
+			updateRaavareStmt.setString(1, raavare.getRaavareName());
 			updateRaavareStmt.setString(2, raavare.getSupplier());
 			updateRaavareStmt.setInt(3, raavare.getStatus());
 			updateRaavareStmt.setInt(4, raavare.getRaavareId());

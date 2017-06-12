@@ -249,6 +249,7 @@ button:hover{
 .top {
 	margin-bottom: 5px;
     width: 100%;
+    margin-top: 25px;
 }
 
 
@@ -396,23 +397,23 @@ input:checked + .slider:before {
 
 /*---- toggle css from https://www.w3schools.com/howto/howto_css_switch.asp slut --- */
 
-.pb_buts {
+.view_buts {
 	float: right;
     margin-left: 5px;
     display: inline;
     margin-top: 9px;
 }
 
-.pb_buts button {   
+.view_buts button {   
 }
 
-.pb_buts p {  
+.view_buts p {  
     margin-top: -9px;
     margin-right: 5px;
     margin-left: 5px;
 }
 
-.pb_buts_L {
+.view_buts_L {
 	float: left;
 }
 
@@ -445,6 +446,10 @@ input:checked + .slider:before {
 
     #content_box {
         margin-top: 95px;
+    }
+    
+    #content_box h1 {
+        margin-bottom: 25px !important;
     }
     
     #menu_but {

@@ -18,7 +18,7 @@ public class RaavareBatchDTO {
 		this.status = status;
 	}
 
-	public int getrbId() {
+	public int getRbId() {
 		return rbId;
 	}
 

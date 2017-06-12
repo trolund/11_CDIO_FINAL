@@ -4,7 +4,7 @@ $(document).ready(function(){
         console.log(id);
         $.post("api/mail/newPass/" + id, function( data ) {
         	console.log(data); 
-            $('#Editmsg').html("New password sent!!");
+            $('#Editmsg').html("E-mail sent successfully.");
         });
     })
 });
@@ -96,8 +96,8 @@ $(document).ready(function() {
         $('#oprLastName').val('Dummy');
         $('#oprIni').val('DD');
         $('#oprEmail').val('dum@dummy.com');
-        $('#oprCpr').val('oprCpr');
-        $('#oprPassword').val('pass');
+        $('#oprCpr').val('1234567890');
+        $('#oprPassword').val('password');
         $('#oprRole1').val('None');
         
         // Adding roles to dummy user.

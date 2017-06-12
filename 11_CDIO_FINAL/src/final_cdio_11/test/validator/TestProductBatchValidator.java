@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import final_cdio_11.java.data.dto.ProductBatchDTO;
 import final_cdio_11.java.data.validator.IProductBatchValidator;
 import final_cdio_11.java.data.validator.ProductBatchValidator;
 
@@ -244,5 +245,36 @@ public class TestProductBatchValidator {
 
 		assertEquals("Failed: " + pbStatus + " is supposed to be valid.", expected, actual);
 	}
+	
+	@Test
+	public void testIsPbValidPositive() {
+		ProductBatchDTO pbDTO = new ProductBatchDTO(1, 1, 2, 0);
+
+		boolean actual = pbValidator.isPbValid(pbDTO);
+		boolean expected = true;
+
+		assertEquals("Failed: " + pbDTO + " is supposed to be valid.", expected, actual);
+	}
+	
+	@Test
+	public void testIsPbValidNegativeStatus() {
+		ProductBatchDTO pbDTO = new ProductBatchDTO(1, 1, 2, 4);
+
+		boolean actual = pbValidator.isPbValid(pbDTO);
+		boolean expected = false;
+
+		assertEquals("Failed: " + pbDTO + " is supposed to be invalid.", expected, actual);
+	}
+	
+	@Test
+	public void testIsPbValidNegativeId() {
+		ProductBatchDTO pbDTO = new ProductBatchDTO(0, 1, 2, 4);
+
+		boolean actual = pbValidator.isPbValid(pbDTO);
+		boolean expected = false;
+
+		assertEquals("Failed: " + pbDTO + " is supposed to be invalid.", expected, actual);
+	}
+	
 
 }
