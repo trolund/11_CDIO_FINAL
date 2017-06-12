@@ -304,7 +304,7 @@ function loadrecept(bool){
             if (bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].receptId + '" id="row">' + status + '<td id="receptId_' + data[i].receptId + '">' + data[i].receptId + '</td>' + '<td><input id="receptNavn" value="' + data[i].receptName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].pbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].pbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].receptId + '" id="row">' + status + '<td id="receptId_' + data[i].receptId + '">' + data[i].receptId + '</td>' + '<td><input id="receptNavn_' + data[i].receptId + '" value="' + data[i].receptName + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].receptId + '" name="del"></td>' + '<td><button class="edit_recept" name="' + data[i].receptId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#Status_val_' + data[i].pbId).val(data[i].status);
@@ -358,12 +358,12 @@ function loadmb(bool){
           
             console.log(data);
             
-            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].receptId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
+            var status = "<td><select class='statusinput selinput' name='Status' id='Status_val_" + data[i].rbId + "'><option value='0'>Active</option><option value='1'>Inactive</option></select></td>"
             
             if (bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="raavareId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '">' + data[i].raavareId + '</td>' + '<td><input id="maengde_" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_pb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="rbId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '">' + data[i].raavareId + '</td>' + '<td><input id="maengde_' + data[i].rbId + '" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_materialb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
             }
             
             $('#Status_val_' + data[i].raavareId).val(data[i].status);

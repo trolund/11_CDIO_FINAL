@@ -5,12 +5,12 @@ $(document).ready(function() {
 		var id = $(this).prop('name');
         
 		var data = {
-            "itemStatus":$('#itemStatus_val_' + id).val(),
+            "receptName":$('#receptNavn_' + id).val(),
             "status":$('#Status_val_' + id).val(),
             "receptId":$('#receptId_' + id).html(), 
-            "receptId":$('#receptId_' + id).val(),
             }; 
       
+        console.log(id);
          console.log(data);
         
       	jQuery.ajax({
