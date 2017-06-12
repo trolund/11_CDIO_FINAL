@@ -17,6 +17,10 @@ public class RaavareDTO {
 		this.supplier = supplier;
 		this.status = status;
 	}
+	
+	public RaavareDTO(){
+		
+	}
 
 	public int getRaavareId() {
 		return raavareId;
