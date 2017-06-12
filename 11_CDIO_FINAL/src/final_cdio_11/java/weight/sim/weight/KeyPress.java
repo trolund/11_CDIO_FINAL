@@ -59,5 +59,4 @@ public class KeyPress {
 	public enum KeyPressType {
 		SOFTBUTTON, TEXT, EXIT, ZERO, TARA, SEND, CANCEL
 	}
-
 }

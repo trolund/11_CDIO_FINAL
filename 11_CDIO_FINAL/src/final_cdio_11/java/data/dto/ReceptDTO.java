@@ -15,6 +15,10 @@ public class ReceptDTO {
 		this.receptName = receptName;
 		this.status = status;
 	}
+	
+	public ReceptDTO(){ // til rest json mapping
+		
+	}
 
 	public int getReceptId() {
 		return receptId;

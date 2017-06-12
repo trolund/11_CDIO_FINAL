@@ -145,5 +145,4 @@ public class WeightInterfaceControllerGUI implements IWeightInterfaceController 
 	public void setLoad(double load) {
 		fxApp.setLoad(load);
 	}
-
 }

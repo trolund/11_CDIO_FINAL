@@ -17,6 +17,10 @@ public class RaavareBatchDTO {
 		this.amount = amount;
 		this.status = status;
 	}
+	
+	public RaavareBatchDTO(){
+		
+	}
 
 	public int getRbId() {
 		return rbId;

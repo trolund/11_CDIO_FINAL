@@ -1,14 +1,14 @@
 // Edit material button
 $(document).ready(function() {
-	$(".edit_material").click(function() {
+	$(".edit_materialb").click(function() {
         
 		var id = $(this).prop('name');
         
 		var data = {
-            "itemStatus":$('#itemStatus_val_' + id).val(),
+            "rbId":$('#rbId_' + id).html(),
             "status":$('#Status_val_' + id).val(),
-            "receptId":$('#receptId_' + id).html(), 
-            "receptId":$('#receptId_' + id).val(),
+            "raavareId":$('#raavareId_' + id).html(), 
+            "amount":$('#maengde_' + id).val(),
             }; 
       
          console.log(data);
@@ -47,12 +47,13 @@ function tjekEditLock() {
 
 function insertsciped(){
     // insert new material button
-	$(".insert_material").click(function() {
+	$(".insert_materialb").click(function() {
         
 		var data = {
-            "receptName":$('#levenradoer_').val(),
-            "status": "0",
-            "receptId":$('#materialName_').val(), 
+            "rbId":$('#rbId_' + id).html(),
+            "status":$('#Status_val_' + id).val(),
+            "raavareId":$('#raavareId_' + id).html(), 
+            "amount":$('#maengde_' + id).val(),
             }; 
     
         console.log(data);

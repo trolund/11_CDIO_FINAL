@@ -19,7 +19,7 @@ $(document).ready(function() {
       $('#table_con').empty(); 
       
         boolAcOnly = $('#checkbox_val_ac').is(":checked");
-        loadmaterial(boolAcOnly);
+        loadmb(boolAcOnly);
 	});
 });
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
      
      $('#table_con').empty(); 
      
-		loadmaterial(boolAcOnly);
+		loadmb(boolAcOnly);
 	}); 
 });
 
@@ -61,20 +61,20 @@ $(document).ready(function() {
                 }
             });
         });
-        loadmaterial(boolAcOnly);
+        loadmb(boolAcOnly);
         }); 
     });
 
 function addre(){
     
-    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="materialId_" type="text" value=""></td>' + '<td><input id="materialName_"></td>' + '<td><input id="levenradoer_">' + '</td>' + '<td></td>' + '<td><button class="insert_material" name="">insert</button></td>' + '</tr>');
+    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="materialId_" type="text" value=""></td>' + '<td><input id="materialName_"></td>' + '<td><input id="levenradoer_">' + '</td>' + '<td></td>' + '<td><button class="insert_materialb" name="">insert</button></td>' + '</tr>');
 
      
 }
 
 // add material button
 $(document).ready(function() {
-  $('#Addmaterial_But').click(function() {
+  $('#Addmaterialb_But').click(function() {
       addre();
       insertsciped();
 	}); 
