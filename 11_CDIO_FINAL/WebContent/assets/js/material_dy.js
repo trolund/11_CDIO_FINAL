@@ -4,10 +4,9 @@ $(document).ready(function() {
 		var id = $(this).prop('name');
         
 		var data = {
-            "itemStatus":$('#itemStatus_val_' + id).val(),
+            "Supplier":$('#Supplier_' + id).val(),
             "status":$('#Status_val_' + id).val(),
-            "receptId":$('#receptId_' + id).html(), 
-            "receptId":$('#receptId_' + id).val(),
+            "raavareId":$('#raavareId_' + id).html(), 
             }; 
       
         console.log(data);
