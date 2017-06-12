@@ -12,5 +12,4 @@ public class SocketOutMessage {
 	public String getMessage() {
 		return message;
 	}
-
 }

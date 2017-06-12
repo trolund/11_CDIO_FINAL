@@ -48,7 +48,7 @@ public class FxApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("local.fxml"));
 			StackPane root = (StackPane) loader.load();
-			
+
 			Scene scene = new Scene(root, 974, 420);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setX(0);
@@ -421,5 +421,4 @@ public class FxApp extends Application {
 			btnValue = '_';
 		}
 	}
-
 }

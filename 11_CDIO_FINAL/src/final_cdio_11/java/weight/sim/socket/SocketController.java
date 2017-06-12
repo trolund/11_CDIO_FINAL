@@ -185,5 +185,4 @@ public class SocketController implements ISocketController {
 			System.out.println(r);
 		System.out.println("------------------------------");
 	}
-	
 }

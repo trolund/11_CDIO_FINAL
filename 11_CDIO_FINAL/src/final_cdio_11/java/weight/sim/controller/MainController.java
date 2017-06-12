@@ -14,7 +14,7 @@ import final_cdio_11.java.weight.sim.weight.KeyPress;
 /**
  * MainController - integrating input from socket and ui. Implements ISocketObserver and IUIObserver to handle this.
  * @author Christian Budtz
- * @version 0.1 2017-01-24
+ * @version 0.1 2017-01	-24
  *
  */
 public class MainController implements IMainController, ISocketObserver, IWeightInterfaceObserver {
@@ -233,5 +233,4 @@ public class MainController implements IMainController, ISocketObserver, IWeight
 		String str = String.format(Locale.US, "%.4f", (load - tare) / 1000) + " kg";
 		weightController.showMessagePrimaryDisplay(str);
 	}
-	
 }
