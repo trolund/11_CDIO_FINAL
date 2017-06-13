@@ -3,8 +3,6 @@ package final_cdio_11.java.weight.ase;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.midi.Soundbank;
-
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.Role;
 import final_cdio_11.java.data.dao.IOperatorDAO;
@@ -19,7 +17,6 @@ import final_cdio_11.java.data.dto.ProductBatchComponentDTO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 import final_cdio_11.java.data.dto.ReceptComponentDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
-import final_cdio_11.java.weight.ase.IWeightConnector.WeightConnectionException;
 import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 
 public class WeightController implements IWeightController {
@@ -33,7 +30,9 @@ public class WeightController implements IWeightController {
 	private IRaavareDAO raavareDAO;
 	private IWeightConnector weightConnector;
 
-	public WeightController(IOperatorDAO oprDAO, IRoleDAO roleDAO, IReceptDAO receptDAO, IProductBatchDAO pbDAO, IProductBatchComponentDAO pbcDAO, IRaavareDAO raavareDAO, IReceptComponentDAO rcDAO, IWeightConnector weightConnector) {
+	public WeightController(IOperatorDAO oprDAO, IRoleDAO roleDAO, IReceptDAO receptDAO, IProductBatchDAO pbDAO,
+			IProductBatchComponentDAO pbcDAO, IRaavareDAO raavareDAO, IReceptComponentDAO rcDAO,
+			IWeightConnector weightConnector) {
 		this.oprDAO = oprDAO;
 		this.roleDAO = roleDAO;
 		this.receptDAO = receptDAO;
@@ -51,12 +50,8 @@ public class WeightController implements IWeightController {
 	public void weightProcedure() throws WeightException {
 
 		/* Initialize connection */
-		try {
-			weightConnector.initConnection();
-			weightConnector.sendK3Message();
-		} catch (WeightConnectionException e) {
-			e.printStackTrace();
-		}
+		weightConnector.initConnection();
+		weightConnector.sendK3Message();
 
 		/* Step 3: Få laborant nummer */
 		int oprId = -1;
@@ -127,7 +122,10 @@ public class WeightController implements IWeightController {
 				}
 			} while (!isPbIdValid);
 
-			/* Step 6: Vægt svarer tilbage med navn på recept der skal produceres */
+			/*
+			 * Step 6: Vægt svarer tilbage med navn på recept der skal
+			 * produceres
+			 */
 			try {
 				receptId = pbDAO.getProductBatch(pbId).getReceptId();
 				isReceptIdValid = true;
@@ -178,7 +176,9 @@ public class WeightController implements IWeightController {
 			e.printStackTrace();
 		}
 
-		/* Step 8: Produktbatchnummerets status sættes til "under produktion". */
+		/*
+		 * Step 8: Produktbatchnummerets status sættes til "under produktion".
+		 */
 		try {
 			ProductBatchDTO pbDTO = pbDAO.getProductBatch(pbId);
 			pbDAO.updateProductBatch(new ProductBatchDTO(pbDTO.getPbId(), 1, pbDTO.getReceptId(), pbDTO.getStatus()));
@@ -219,18 +219,21 @@ public class WeightController implements IWeightController {
 			double tolerance = -1;
 			double nomNetto = -1;
 			double nomBruttoUpper = -1;
-			double nomBruttoLower = -1;	
+			double nomBruttoLower = -1;
 
 			do {
 
 				tolerance = rcDTO.getTolerance();
 				nomNetto = rcDTO.getNomNetto();
 				nomBruttoUpper = (nomNetto * tolerance) + nomNetto;
-				nomBruttoLower = nomNetto - (nomNetto * tolerance);	
+				nomBruttoLower = nomNetto - (nomNetto * tolerance);
 
-
-				try {			
-					weightConnector.sendConfirmMessage("Min: " + nomBruttoLower + "kg., Max: " + nomBruttoUpper + "kg."); // bedre tekst og tolerance
+				try {
+					weightConnector
+							.sendConfirmMessage("Min: " + nomBruttoLower + "kg., Max: " + nomBruttoUpper + "kg."); // bedre
+																													// tekst
+																													// og
+																													// tolerance
 					weightConnector.clearSecondaryDisplay();
 				} catch (WeightException e) {
 					e.printStackTrace();
@@ -246,19 +249,17 @@ public class WeightController implements IWeightController {
 					e.printStackTrace();
 				}
 
-				if (currentRaavareWeight < nomBruttoLower) 
-				{
+				if (currentRaavareWeight < nomBruttoLower) {
 					weightConnector.sendConfirmMessage("Weight too low. Min: " + nomBruttoLower + "kg.");
-				}
-				else if (currentRaavareWeight > nomBruttoUpper) 
-				{
+				} else if (currentRaavareWeight > nomBruttoUpper) {
 					weightConnector.sendConfirmMessage("Weight too high. Max: " + nomBruttoUpper + "kg.");
 				}
-				
+
 			} while (currentRaavareWeight < nomBruttoLower || currentRaavareWeight > nomBruttoUpper);
 
 			// tolerances skal beregnes
-			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, tareWeight, currentRaavareWeight, oprId, 0);
+			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, tareWeight, currentRaavareWeight,
+					oprId, 0);
 			try {
 				pbcDAO.createProductBatchComponent(pbcDTO);
 				System.out.println("Created: " + pbcDTO);

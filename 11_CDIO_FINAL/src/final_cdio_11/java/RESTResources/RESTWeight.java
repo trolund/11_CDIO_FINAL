@@ -4,14 +4,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import final_cdio_11.java.RESTResources.controller.IViewController;
-import final_cdio_11.java.RESTResources.controller.IrestWeightController;
+import final_cdio_11.java.RESTResources.controller.IRESTWeightController;
 import final_cdio_11.java.RESTResources.controller.ViewController;
-import final_cdio_11.java.RESTResources.controller.restWeightController;
+import final_cdio_11.java.RESTResources.controller.RESTWeightController;
 
 @Path("/weight")
-public class RESTWEIGHT {
+public class RESTWeight {
 	
-	private final IrestWeightController Controller = new restWeightController();
+	private final IRESTWeightController Controller = new RESTWeightController();
 	
 	@GET
 	@Path("/start")
