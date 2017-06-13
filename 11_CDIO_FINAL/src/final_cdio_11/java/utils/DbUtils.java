@@ -12,6 +12,11 @@ import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
 
+/*
+ * Utility class for resetting the database back with some demonstration data.
+ * resetDatabase method is called, the database is totally wiped and then
+ * restored with demonstration data.
+ */
 public class DbUtils {
 
 	private static final Connector connector = Connector.getInstance();

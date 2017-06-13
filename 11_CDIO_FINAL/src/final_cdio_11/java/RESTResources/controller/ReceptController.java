@@ -13,11 +13,15 @@ import final_cdio_11.java.data.validator.IReceptValidator;
 import final_cdio_11.java.data.validator.ReceptValidator;
 import final_cdio_11.java.handler.TextHandler;
 
+/*
+ * REST Controller for business logic associated with receipt related utilities.
+ */
 public class ReceptController implements IReceptController {
 
 	private final TextHandler textHandler = TextHandler.getInstance();
 	private IReceptValidator receptValidator = new ReceptValidator();
 
+	/* Get Receipt list from the underlying data layer. */
 	@Override
 	public List<ReceptDTO> getReceptList() {
 		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
@@ -33,6 +37,7 @@ public class ReceptController implements IReceptController {
 		return receptList;
 	}
 
+	/* create Receipt in the underlying data layer. */
 	@Override
 	public Response createRecept(ReceptDTO receptDTO) {
 		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
@@ -49,6 +54,7 @@ public class ReceptController implements IReceptController {
 		return Response.status(400).entity(textHandler.errReceiptCreate).build();
 	}
 
+	/* update Receipt in the underlying data layer. */
 	@Override
 	public Response updateRecept(ReceptDTO receptDTO) {
 		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());
@@ -65,6 +71,7 @@ public class ReceptController implements IReceptController {
 		return Response.status(400).entity(textHandler.errReceiptUpdate).build();
 	}
 
+	/* delete Receipt in the underlying data layer. */
 	@Override
 	public Response deleteRecept(int receptId) {
 		IReceptDAO receptDAO = new SQLReceptDAO(Connector.getInstance());

@@ -15,11 +15,15 @@ import final_cdio_11.java.data.validator.IProductBatchValidator;
 import final_cdio_11.java.data.validator.ProductBatchValidator;
 import final_cdio_11.java.handler.TextHandler;
 
+/*
+ * REST Controller for business logic associated with ProductBatch related utilities.
+ */
 public class ProductBatchController implements IProductBatchController {
 
 	private final TextHandler textHandler = TextHandler.getInstance();
 	private final IProductBatchValidator pbValidator = new ProductBatchValidator();
 
+	/* Get ProductBatch list. */
 	@Override
 	public List<ProductBatchDTO> getProductBatchList() {
 		IProductBatchDAO pbDAO = new SQLProductBatchDAO(Connector.getInstance());
@@ -35,6 +39,7 @@ public class ProductBatchController implements IProductBatchController {
 		return pbList;
 	}
 
+	/* Returns receptId for specific ProductBatch */
 	@Override
 	public List<String> getProductBatchReceptIdList() {
 		IProductBatchDAO pbDAO = new SQLProductBatchDAO(Connector.getInstance());
@@ -56,6 +61,7 @@ public class ProductBatchController implements IProductBatchController {
 		return listString;
 	}
 
+	/* Create a productbatch in the underlying data layer. */
 	public Response createProductBatch(PbPOJO pbPOJO) {
 		IProductBatchDAO pbDAO = new SQLProductBatchDAO(Connector.getInstance());
 
@@ -73,6 +79,7 @@ public class ProductBatchController implements IProductBatchController {
 		return Response.status(400).entity(textHandler.errPbCreate).build();
 	}
 
+	/* Update a productbatch in the underlying data layer. */
 	@Override
 	public Response updateProductBatch(PbPOJO data) {
 		ProductBatchDTO pbDTO = new ProductBatchDTO(Integer.parseInt(data.getPbId()), Integer.parseInt(data.getItemStatus()), Integer.parseInt(data.getReceptId()), Integer.parseInt(data.getStatus()));
@@ -91,6 +98,7 @@ public class ProductBatchController implements IProductBatchController {
 		return Response.status(400).entity(textHandler.errPbUpdate).build();
 	}
 
+	/* Delete a productbatch in the underlying data layer. */
 	@Override
 	public Response deleteProductBatch(int pbId) {
 		IProductBatchDAO pbDAO = new SQLProductBatchDAO(Connector.getInstance());

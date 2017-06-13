@@ -5,6 +5,9 @@ import java.util.List;
 
 import final_cdio_11.java.data.Role;
 
+/*
+ * POJO object to temporarily transfer data from data layer to web interface.
+ */
 public class CreateUserFormPOJO {
 
 	private int oprId;
