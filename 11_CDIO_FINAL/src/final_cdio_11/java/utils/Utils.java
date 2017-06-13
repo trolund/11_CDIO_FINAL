@@ -78,6 +78,9 @@ public class Utils {
 		return pwd;
 	}
 
+	/*
+	 * Method use to sleep the thread for millis milliseconds. 
+	 */
 	public void sleep(long millis) {
 		try {
 			Thread.sleep(millis);

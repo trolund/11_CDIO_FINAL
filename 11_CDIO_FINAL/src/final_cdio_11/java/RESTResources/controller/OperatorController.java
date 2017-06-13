@@ -119,7 +119,7 @@ public class OperatorController implements IOperatorController {
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
-		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
+		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), utils.sha256(createUserFormData.getOprPassword()), createUserFormData.getStatus());
 
 		if (!oprValidator.isOprValid(oprDTO)) return textHandler.errOprInvalid;
 

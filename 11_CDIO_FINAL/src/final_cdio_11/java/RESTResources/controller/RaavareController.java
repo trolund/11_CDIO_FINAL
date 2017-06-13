@@ -12,11 +12,15 @@ import final_cdio_11.java.data.dto.RaavareDTO;
 import final_cdio_11.java.data.validator.RaavareValidator;
 import final_cdio_11.java.handler.TextHandler;
 
+/*
+ * REST Controller for business logic associated with raavare related utilities.
+ */
 public class RaavareController implements IRaavareController {
 
 	private final TextHandler textHandler = TextHandler.getInstance();
 	private RaavareValidator raavareValidator = new RaavareValidator();
 
+	/* Get Raavare List from the underlying data layer. */
 	@Override
 	public List<RaavareDTO> getRaavareList() {
 		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
@@ -32,6 +36,7 @@ public class RaavareController implements IRaavareController {
 		return raavareList;
 	}
 
+	/* create Raavare in the underlying data layer. */
 	@Override
 	public Response createRaavare(RaavareDTO raavareDTO) {
 		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
@@ -48,6 +53,7 @@ public class RaavareController implements IRaavareController {
 		return Response.status(400).entity(textHandler.errRaavareCreate).build();
 	}
 
+	/* update Raavare in the underlying data layer. */
 	@Override
 	public Response updateRaavare(RaavareDTO raavareDTO) {
 		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
@@ -64,6 +70,7 @@ public class RaavareController implements IRaavareController {
 		return Response.status(400).entity(textHandler.errRaavareUpdate).build();
 	}
 
+	/* delete Raavare in the underlying data layer. */
 	@Override
 	public Response deleteRaavare(int raavareId) {
 		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());

@@ -13,11 +13,15 @@ import final_cdio_11.java.data.validator.IRaavareBatchValidator;
 import final_cdio_11.java.data.validator.RaavareBatchValidator;
 import final_cdio_11.java.handler.TextHandler;
 
+/*
+ * REST Controller for business logic associated with RaavareBatch related utilities.
+ */
 public class RaavareBatchController implements IRaavareBatchController {
 
 	private final TextHandler textHandler = TextHandler.getInstance();
 	private IRaavareBatchValidator rbValidator = new RaavareBatchValidator();
 
+	/* Get RaavareBatch list from the underlying data layer. */
 	@Override
 	public List<RaavareBatchDTO> getRaavareBatchList() {
 		IRaavareBatchDAO rbDAO = new SQLRaavareBatchDAO(Connector.getInstance());
@@ -33,6 +37,7 @@ public class RaavareBatchController implements IRaavareBatchController {
 		return rbList;
 	}
 
+	/* Create RaavareBatch in the underlying data layer. */
 	@Override
 	public Response createRaavareBatch(RaavareBatchDTO rbDTO) {
 		IRaavareBatchDAO rbDAO = new SQLRaavareBatchDAO(Connector.getInstance());
@@ -49,6 +54,7 @@ public class RaavareBatchController implements IRaavareBatchController {
 		return Response.status(400).entity(textHandler.errRbCreate).build();
 	}
 
+	/* Update RaavareBatch in the underlying data layer. */
 	@Override
 	public Response updateRaavareBatch(RaavareBatchDTO rbDTO) {
 		IRaavareBatchDAO rbDAO = new SQLRaavareBatchDAO(Connector.getInstance());
@@ -65,6 +71,7 @@ public class RaavareBatchController implements IRaavareBatchController {
 		return Response.status(400).entity(textHandler.errRbUpdate).build();
 	}
 
+	/* Delete pdate RaavareBatch in the underlying data layer. */
 	@Override
 	public Response deleteRaavareBatch(int rbId) {
 		IRaavareBatchDAO rbDAO = new SQLRaavareBatchDAO(Connector.getInstance());
