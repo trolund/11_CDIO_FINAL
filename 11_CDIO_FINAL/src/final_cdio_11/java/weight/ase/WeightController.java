@@ -42,6 +42,9 @@ public class WeightController implements IWeightController {
 		this.weightConnector = weightConnector;
 	}
 
+	/*
+	 * Full weight procedure.
+	 */
 	@Override
 	public void weightProcedure() throws WeightException {
 

@@ -11,6 +11,9 @@ import java.net.UnknownHostException;
 import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
+/*
+ * Class to handle connections to the weight. 
+ */
 public class WeightConnector implements IWeightConnector {
 
 	private final Utils utils = Utils.getInstance();
@@ -21,6 +24,7 @@ public class WeightConnector implements IWeightConnector {
 	private BufferedReader in = null;
 	private PrintWriter out = null;
 
+	/* Initialize network connection to the weight. */
 	@Override
 	public void initConnection() throws WeightConnectionException {
 		if (weightSocket != null && weightSocket.isConnected()) return;
@@ -56,6 +60,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Initialize in and out I/O objects. */
 	private void initIO() {
 		try {
 			in = getSocketReader();
@@ -65,6 +70,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Close connection to the weight */
 	@Override
 	public void closeConnection() throws WeightConnectionException {
 		try {
@@ -77,6 +83,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Send rm208 message to the weight and receive int back. */
 	@Override
 	public int rm208Message(String message) throws WeightException {
 		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
@@ -105,7 +112,7 @@ public class WeightConnector implements IWeightConnector {
 			throw new WeightException("Failed to execute RM20 8.", e);
 		}
 
-		// real weight
+		/* real weight */
 		System.out.println("substring userMessage: '" + userMessage.substring(8, userMessage.length() - 1) + "'");
 
 		int oprId = -1;
@@ -119,6 +126,7 @@ public class WeightConnector implements IWeightConnector {
 		return oprId;
 	}
 
+	/* Get the current weight */
 	@Override
 	public double getCurrentWeight() throws WeightException {
 		String socketMessage = "S\r\n";
@@ -138,6 +146,7 @@ public class WeightConnector implements IWeightConnector {
 		return currentWeight;
 	}
 
+	/* Tare the current weight */
 	@Override
 	public double tareWeight() throws WeightException {
 		String socketMessage = "T\r\n";
@@ -158,6 +167,7 @@ public class WeightConnector implements IWeightConnector {
 		return tareWeight;
 	}
 
+	/* send confirmMessage */
 	@Override
 	public void confirmMessage(String message) throws WeightException {
 		String socketMessage = "RM20 8 \"" + message + "\" \"\" \"&3\"\r\n";
@@ -189,6 +199,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Show message in the secondary display */
 	@Override
 	public void secondaryDisplayMessage(String message, int sleepMillis) throws WeightException {
 		String socketMessage = "P111 \"" + message + "\"\r\n";
@@ -207,11 +218,13 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Clear the secondary display. */
 	@Override
 	public void clearSecondaryDisplay() throws WeightException {
 		secondaryDisplayMessage("", 0);
 	}
 
+	/* Send K3 message to the weight. Weight enters K3 mode. */
 	@Override
 	public void sendK3Message() throws WeightException {
 		String message = "K 3\r\n";
@@ -227,6 +240,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Send a non-main display confirm message */
 	@Override
 	public void sendConfirmMessage(String message) throws WeightException {
 		String socketMessage = "P111 \"" + message + "\"\r\n";
@@ -254,6 +268,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Send K1 message to the weight. Weight enters K1 mode. */
 	@Override
 	public void sendK1Message() throws WeightException {
 		String message = "K 1\r\n";
@@ -269,6 +284,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Make the message string be no longer than maxLength. */
 	@Override
 	public String shortString(String message, int maxLength) {
 		if (message.length() > maxLength) {
@@ -277,12 +293,14 @@ public class WeightConnector implements IWeightConnector {
 		return message;
 	}
 
+	/* Quit the weight */
 	@Override
 	public void promptQuit() throws WeightException {
 		sendK1Message();
 		sendConfirmMessage("Proceed to quit");
 	}
 
+	/* Get socket reader object */
 	private BufferedReader getSocketReader() throws WeightException {
 		try {
 			if (in == null) in = new BufferedReader(new InputStreamReader(weightSocket.getInputStream()));
@@ -292,6 +310,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Get socket writer object */
 	private PrintWriter getSocketWriter() throws WeightException {
 		try {
 			if (out == null) out = new PrintWriter(weightSocket.getOutputStream(), true);
@@ -301,6 +320,7 @@ public class WeightConnector implements IWeightConnector {
 		}
 	}
 
+	/* Send message to the socket */
 	private void sendSocketMessage(String socketMessage) {
 		if (out == null) return;
 		out.print(socketMessage);

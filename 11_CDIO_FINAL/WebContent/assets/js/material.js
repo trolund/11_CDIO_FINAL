@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
- $('#refresh_But').click(function() {
+ $("#refresh_But").click(function() {
      $('#table_con').empty(); 
 		loadmaterial(boolAcOnly);
 	}); 
