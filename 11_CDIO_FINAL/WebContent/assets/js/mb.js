@@ -47,7 +47,7 @@ $(document).ready(function() {
                 
                 if (checkedValue) {
                     jQuery.ajax({
-                        url : "api/material/del/" + Id,
+                        url : "api/mb/del/" + Id,
                         method: 'POST',
                         success : function(data) {
                         	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
@@ -67,7 +67,7 @@ $(document).ready(function() {
 
 function addre(){
     
-    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="materialId_" type="text" value=""></td>' + '<td><input id="materialName_"></td>' + '<td><input id="levenradoer_">' + '</td>' + '<td></td>' + '<td><button class="insert_materialb" name="">insert</button></td>' + '</tr>');
+    $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="rbId_" type="text" value=""></td>' + '<td><select class="selinput" id="Mat_val_">' + matOptions + '</select><td><input id="meangde_">' + '</td>' + '<td></td>' + '<td><button class="insert_materialb" name="">insert</button></td>' + '</tr>');
 
      
 }

@@ -7,7 +7,7 @@ $(document).ready(function() {
 		var data = {
             "rbId":$('#rbId_' + id).html(),
             "status":$('#Status_val_' + id).val(),
-            "raavareId":$('#raavareId_' + id).html(), 
+            "raavareId":$('#Mat_val_' + id).val(), 
             "amount":$('#maengde_' + id).val(),
             }; 
       
@@ -50,10 +50,10 @@ function insertsciped(){
 	$(".insert_materialb").click(function() {
         
 		var data = {
-            "rbId":$('#rbId_' + id).html(),
-            "status":$('#Status_val_' + id).val(),
-            "raavareId":$('#raavareId_' + id).html(), 
-            "amount":$('#maengde_' + id).val(),
+            "rbId":$('#rbId_').val(),
+            "status":"0",
+            "raavareId":$('#Mat_val_').val(), 
+            "amount":$('#meangde_').val(),
             }; 
     
         console.log(data);
