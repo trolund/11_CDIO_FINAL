@@ -16,16 +16,16 @@ import final_cdio_11.java.data.dao.SQLReceptComponentDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
 import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.weight.ase.IWeightConnector;
+import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 import final_cdio_11.java.weight.ase.IWeightController;
 import final_cdio_11.java.weight.ase.WeightConnector;
 import final_cdio_11.java.weight.ase.WeightController;
-import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
 
-public class restWeightController implements IrestWeightController {
-	
+public class RESTWeightController implements IRESTWeightController {
+
 	@Override
-	public void start(){
-		
+	public void start() {
+
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -38,7 +38,8 @@ public class restWeightController implements IrestWeightController {
 				IReceptComponentDAO rcDAO = new SQLReceptComponentDAO(Connector.getInstance());
 				IWeightConnector connector = new WeightConnector();
 
-				IWeightController controller = new WeightController(oprDAO, roleDAO, rDAO, pbDAO, pbcDAO, raavareDAO, rcDAO, connector);
+				IWeightController controller = new WeightController(oprDAO, roleDAO, rDAO, pbDAO, pbcDAO, raavareDAO,
+						rcDAO, connector);
 
 				try {
 					controller.weightProcedure();
@@ -47,9 +48,8 @@ public class restWeightController implements IrestWeightController {
 				}
 
 			}
-		}).start();		
-		
-	}
+		}).start();
 
+	}
 
 }
