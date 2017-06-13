@@ -38,8 +38,7 @@ public class RESTWeightController implements IRESTWeightController {
 				IReceptComponentDAO rcDAO = new SQLReceptComponentDAO(Connector.getInstance());
 				IWeightConnector connector = new WeightConnector();
 
-				IWeightController controller = new WeightController(oprDAO, roleDAO, rDAO, pbDAO, pbcDAO, raavareDAO,
-						rcDAO, connector);
+				IWeightController controller = new WeightController(oprDAO, roleDAO, rDAO, pbDAO, pbcDAO, raavareDAO, rcDAO, connector);
 
 				try {
 					controller.weightProcedure();
