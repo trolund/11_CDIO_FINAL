@@ -3,6 +3,8 @@ package final_cdio_11.java.weight.ase;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.midi.Soundbank;
+
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.Role;
 import final_cdio_11.java.data.dao.IOperatorDAO;
@@ -210,22 +212,47 @@ public class WeightController implements IWeightController {
 				}
 			} while (!isRbValid);
 
-			try {
-				weightConnector.sendConfirmMessage("Weighing: '" + raavareName + "'. Press OK"); // bedre tekst og tolerance
-				weightConnector.clearSecondaryDisplay();
-			} catch (WeightException e) {
-				e.printStackTrace();
-			}
-
-			/* Step 12: Vægten af tarabeholder registreres */
 			double currentRaavareWeight = -1;
-			try {
-				currentRaavareWeight = weightConnector.getCurrentWeight();
-				System.out.println("currentWeight: " + currentRaavareWeight);
-				totalRaavareWeight = totalRaavareWeight + currentRaavareWeight;
-			} catch (WeightException e) {
-				e.printStackTrace();
-			}
+			double tolerance = -1;
+			double nomNetto = -1;
+			double nomBruttoUpper = -1;
+			double nomBruttoLower = -1;	
+
+			do {
+
+				tolerance = rcDTO.getTolerance();
+				nomNetto = rcDTO.getNomNetto();
+				nomBruttoUpper = (nomNetto * tolerance) + nomNetto;
+				nomBruttoLower = nomNetto - (nomNetto * tolerance);	
+
+
+				try {			
+					weightConnector.sendConfirmMessage("Min: " + nomBruttoLower + "kg., Max: " + nomBruttoUpper + "kg."); // bedre tekst og tolerance
+					weightConnector.clearSecondaryDisplay();
+				} catch (WeightException e) {
+					e.printStackTrace();
+				}
+
+				/* Step 12: Vægten af tarabeholder registreres */
+
+				try {
+					currentRaavareWeight = weightConnector.getCurrentWeight();
+					System.out.println("currentWeight: " + currentRaavareWeight);
+					totalRaavareWeight = totalRaavareWeight + currentRaavareWeight;
+				} catch (WeightException e) {
+					e.printStackTrace();
+				}
+
+				if (currentRaavareWeight < nomBruttoLower) 
+				{
+					weightConnector.sendConfirmMessage("Weight too low. Min: " + nomBruttoLower + "kg.");
+				}
+				else if (currentRaavareWeight > nomBruttoUpper) 
+				{
+					weightConnector.sendConfirmMessage("Weight too high. Max: " + nomBruttoUpper + "kg.");
+				}
+				
+			} while (currentRaavareWeight < nomBruttoLower || currentRaavareWeight > nomBruttoUpper);
 
 			// tolerances skal beregnes
 			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, tareWeight, currentRaavareWeight, oprId, 0);
