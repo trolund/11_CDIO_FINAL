@@ -3,6 +3,11 @@ package final_cdio_11.java.data.validator;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 import final_cdio_11.java.utils.Utils;
 
+/*
+ * Data transfer object validator class.
+ * This class implements various validation methods
+ * to ensure data integrity.
+ */
 public class ProductBatchValidator implements IProductBatchValidator {
 
 	private final Utils utils = Utils.getInstance();

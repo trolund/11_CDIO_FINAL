@@ -70,7 +70,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			do {
 				raavareList.add(new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return raavareList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

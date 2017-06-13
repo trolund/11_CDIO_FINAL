@@ -14,11 +14,15 @@ import final_cdio_11.java.RESTResources.controller.IRaavareBatchController;
 import final_cdio_11.java.RESTResources.controller.RaavareBatchController;
 import final_cdio_11.java.data.dto.RaavareBatchDTO;
 
+/*
+ * RESTResource to handle RaavareBatch related actions.
+ */
 @Path("/mb")
 public class RESTRaavareBatch {
 
 	private final IRaavareBatchController rbController = new RaavareBatchController();
 
+	/* Get RaavereBatch list */
 	@GET
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -26,6 +30,7 @@ public class RESTRaavareBatch {
 		return rbController.getRaavareBatchList();
 	}
 
+	/* Update RaavareBatch */
 	@POST
 	@Path("/Update")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -33,6 +38,7 @@ public class RESTRaavareBatch {
 		return rbController.updateRaavareBatch(data);
 	}
 
+	/* Delete RaavareBatch */
 	@POST
 	@Path("/del/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -40,6 +46,7 @@ public class RESTRaavareBatch {
 		return rbController.deleteRaavareBatch(id);
 	}
 
+	/* Create RaavareBatch */
 	@POST
 	@Path("/insert")
 	@Produces(MediaType.APPLICATION_JSON)

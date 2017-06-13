@@ -3,6 +3,11 @@ package final_cdio_11.java.data.validator;
 import final_cdio_11.java.data.dto.ReceptDTO;
 import final_cdio_11.java.utils.Utils;
 
+/*
+ * Data transfer object validator class.
+ * This class implements various validation methods
+ * to ensure data integrity.
+ */
 public class ReceptValidator implements IReceptValidator {
 
 	private final Utils utils = Utils.getInstance();
