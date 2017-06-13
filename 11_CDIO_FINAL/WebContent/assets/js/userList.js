@@ -38,18 +38,19 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#Adduser_But").click(function() {
         
-            $('#AdminRoleEdit').prop('checked', false);
-            $('#FarRoleEdit').prop('checked', false);
-            $('#VeakRoleEdit').prop('checked', false);
-            $('#LabRoleEdit').prop('checked', false);
+            $('#adminRole').prop('checked', false);
+            $('#farmaceutRole').prop('checked', false);
+            $('#værkførerRole').prop('checked', false);
+            $('#laborantRole').prop('checked', false);
         
-            $('#statusEdit').val('');
-            $('#oprIdEdit').val('');
-        	$('#oprFirstNameEdit').val(''); 
-        	$('#oprLastNameEdit').val('');
-        	$('#oprIniEdit').val('');
-        	$('#oprEmailEdit').val('');
-        	$('#oprCprEdit').val('');
+            $('#status').val('');
+            $('#oprId').val('');
+        	$('#oprFirstName').val(''); 
+        	$('#oprLastName').val('');
+        	$('#oprIni').val('');
+        	$('#oprEmail').val('');
+        	$('#oprCpr').val('');
+            $('#oprPassword').val('');
         
     	$("#AddUser_Box").show(400);
 	}); 
