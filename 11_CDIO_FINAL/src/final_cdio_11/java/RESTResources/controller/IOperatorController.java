@@ -8,6 +8,10 @@ import final_cdio_11.java.RESTResources.pojo.LoginFormPOJO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
 
+/*
+ * Interface for the REST OperatorController.
+ * This interface contains methods related to operators.
+ */
 public interface IOperatorController {
 	List<OperatorDTO> getOperatorList();
 	String getOperatorRolesAsString(String oprId);

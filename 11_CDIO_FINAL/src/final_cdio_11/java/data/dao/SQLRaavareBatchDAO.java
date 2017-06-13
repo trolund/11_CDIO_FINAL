@@ -69,7 +69,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			do {
 				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return rbList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -102,7 +102,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			do {
 				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return rbList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

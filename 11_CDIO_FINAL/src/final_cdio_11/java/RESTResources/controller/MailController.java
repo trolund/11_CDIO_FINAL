@@ -13,11 +13,15 @@ import final_cdio_11.java.handler.MailHandler;
 import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
+/*
+ * REST Controller for business logic associated with mail related utilities.
+ */
 public class MailController implements IMailController {
 
 	private final TextHandler textHandler = TextHandler.getInstance();
 	private final Utils utils = Utils.getInstance();
 
+	/* Sends an e-mail to an Operators specified e-mail. */
 	public Response sendMail(MailPOJO mailPOJO) {
 		MailHandler mailObj = new MailHandler();
 
@@ -32,6 +36,7 @@ public class MailController implements IMailController {
 		return Response.status(400).entity(textHandler.errMailFailed).build();
 	}
 
+	/* Gives new password to an operator and sends an e-mail. */
 	public Response sendNewPassword(String oprId) {
 		MailHandler mailobj = new MailHandler();
 		SQLOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());

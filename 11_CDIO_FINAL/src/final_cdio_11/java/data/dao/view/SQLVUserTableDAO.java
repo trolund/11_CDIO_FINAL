@@ -20,7 +20,7 @@ public class SQLVUserTableDAO implements IVUserTableDAO {
 		this.connector = connector;
 	}
 
-	/* Returns the VAdminOperator view associated with oprId */
+	/* Returns the VUserTable view associated with oprId */
 	@Override
 	public VUserTableDTO getVUserTable(int oprId) throws DALException {
 		String getVUserTableSql = connector.getQuery("getVUserTableSql");
@@ -46,7 +46,7 @@ public class SQLVUserTableDAO implements IVUserTableDAO {
 		}
 	}
 
-	/* Returns a list of all the objects contained in the VAdminOperator view */
+	/* Returns a list of all the objects contained in the VUserTable view */
 	@Override
 	public List<VUserTableDTO> getVUserTableList() throws DALException {
 		String getVUserTableListSql = connector.getQuery("getVUserTableListSql");

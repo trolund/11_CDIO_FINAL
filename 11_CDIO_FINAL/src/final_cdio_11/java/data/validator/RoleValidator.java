@@ -4,6 +4,11 @@ import final_cdio_11.java.data.Role;
 import final_cdio_11.java.data.dto.RoleDTO;
 import final_cdio_11.java.utils.Utils;
 
+/*
+ * Data transfer object validator class.
+ * This class implements various validation methods
+ * to ensure data integrity.
+ */
 public class RoleValidator implements IRoleValidator {
 
 	private final Utils utils = Utils.getInstance();
