@@ -181,20 +181,32 @@ public class OperatorController implements IOperatorController {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Admin.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Admin.toString()));
 			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Admin.toString(), 1));
+			}
 
 			if (editUserFormData.isFarmaceutRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Farmaceut.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Farmaceut.toString()));
+			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Farmaceut.toString(), 1));
 			}
 
 			if (editUserFormData.isVaerkforerRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Værkfører.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Værkfører.toString()));
 			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Værkfører.toString(), 1));
+			}
 
 			if (editUserFormData.isLaborantRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Laborant.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Laborant.toString()));
+			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Laborant.toString(), 1));
 			}
 
 			return textHandler.succOprUpdate(oprDTO.getOprId());
