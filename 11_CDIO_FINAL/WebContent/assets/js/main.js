@@ -10,6 +10,7 @@ var matOptions;
 $(document).ready(function(){
 	$('#loadingGif').hide();
     $('#AddUser_Box').hide();
+//    $('#startWeight').hide();
     
     $('#login').keydown(function(e) {
     	if (e.keyCode == 13) {
@@ -255,9 +256,23 @@ function loadLoginUser(id) {
 )};
 
 function Roletjek(){ // tjekker hvad der skal vises i web UI
-	if (roles.indexOf("Admin") == -1) { // gem menu punkter som kun skal kunne bruges af admin
+	if (roles.indexOf("Admin") == -1) { // Admin: Admin skal kunne se alt.
 		$('#user_but').hide();
+        $('#startWeight').hide();
 	}
+    if(roles.indexOf("Farmaceut") == -1){ // Farmaceut: Skal kunne se Material og Recepter.
+        $('matbatch_but').hide();
+        $('prodbatch_but').hide();
+    }
+    if(roles.indexOf("Værkfører") == -1){ // Værkfører: Productbatches og material batches.
+        $('mat_but').hide();
+        $('receipt_but').hide();
+    }
+    if(roles.indexOf("Laborant") == -1){ // Laborant: Intet/ eller måske det samme som værkføren.
+        $('#startWeight').hide();
+    }
+    
+    
 }
 
 function loadpb(bool){
