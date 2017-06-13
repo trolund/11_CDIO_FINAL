@@ -151,6 +151,28 @@ $(document).ready(function() {
 	});    
 }); 
 
+
+$(document).ready(function() {
+// Menu Setings --> User button 
+	$("#startWeight").click(function() {
+        
+        jQuery.ajax({
+			url: "api/weight/start",
+			type: "GET",
+			contentType: 'text/plain',
+			success: function(resultData) {
+                $("#startWeight").addClass('.active');
+			},	
+			error : function(jqXHR, textStatus, errorThrown) {
+				$("#startWeight").removeClass('.active');
+			},
+			timeout: 120000,
+		});
+        
+	});    
+}); 
+
+
 // Hent liste af users og oversæt dem til tabel 
 function loadUsers() {
 	var inActiveCount = 0;
@@ -355,7 +377,7 @@ function loadmb(bool){
 	$('#table_con').empty();
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Material Id</td><td>Amount</td><td>Delete</td><td>Edit</td></tr>");
     
-     $.getJSON('api/mb/List', function(data) {
+     $.getJSON('api/material/List', function(data) {
         var materialOptions = "";
         matOptions = "";
         
@@ -380,7 +402,7 @@ function loadmb(bool){
             if (bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="rbId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '"><select id="Mat_val_'+ data[i].rbId  +'">' + matOptions + '</select></td>' + '<td><input id="maengde_' + data[i].rbId + '" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_materialb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="rbId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '"><select class="selinput" id="Mat_val_'+ data[i].rbId  +'">' + matOptions + '</select></td>' + '<td><input id="maengde_' + data[i].rbId + '" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_materialb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
             }
             
             
