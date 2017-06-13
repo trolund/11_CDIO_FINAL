@@ -4,6 +4,7 @@ var roles = null;
 var user = null;
 // recept options.
 var options;
+var matOptions;
 
 // Alt der skal køres ved opstart af application!
 $(document).ready(function(){
@@ -244,6 +245,7 @@ function loadpb(bool){
     
     $.getJSON('api/pb/List', function(data) {
         var receptOptions = "";
+        options ="";
         
         $.each(data, function(i, item) {
             if (receptOptions.indexOf(data[i].receptId) == -1){
@@ -353,6 +355,21 @@ function loadmb(bool){
 	$('#table_con').empty();
     $('#table_con').append("<tr><td>Status</td><td>Id</td><td>Material Id</td><td>Amount</td><td>Delete</td><td>Edit</td></tr>");
     
+     $.getJSON('api/mb/List', function(data) {
+        var materialOptions = "";
+        matOptions = "";
+        
+        $.each(data, function(i, item) {
+            if (materialOptions.indexOf(data[i].raavareId) == -1){
+            	materialOptions += data[i].receptId + ",";
+            	matOptions += "<option value='" + data[i].raavareId + "'>" + data[i].raavareId + "</option>";
+            }
+        });
+        
+        console.log(options);
+    
+    
+    
     $.getJSON('api/mb/List', function(data) {
 	    $.each(data, function(i, item) {
           
@@ -363,10 +380,12 @@ function loadmb(bool){
             if (bool && data[i].status == "1") {
                 
             } else {
-            	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="rbId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '">' + data[i].raavareId + '</td>' + '<td><input id="maengde_' + data[i].rbId + '" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_materialb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
+            	$('#table_con').append('<tr name="' + data[i].rbId + '" id="row">' + status + '<td id="rbId_' + data[i].rbId + '">' + data[i].rbId + '</td>' + '<td id="raavareId_' + data[i].rbId + '"><select id="Mat_val_'+ data[i].rbId  +'">' + matOptions + '</select></td>' + '<td><input id="maengde_' + data[i].rbId + '" value="' + data[i].amount + '">' + '</td>' + '<td><input class="checkbox" type="checkbox" name="' + data[i].rbId + '" name="del"></td>' + '<td><button class="edit_materialb" name="' + data[i].rbId + '">Edit</button></td>' + '</tr>');
             }
             
-            $('#Status_val_' + data[i].raavareId).val(data[i].status);
+            
+            $('#Status_val_' + data[i].rbId).val(data[i].status);
+            $('#Mat_val_' + data[i].rbId).val(data[i].raavareId);
        }); 
         
         $.getScript("assets/js/mb_dy.js", function( data, textStatus, jqxhr ) {
@@ -376,4 +395,6 @@ function loadmb(bool){
             tjekEditLock();
         }); 
     })
+})
 };
+               
