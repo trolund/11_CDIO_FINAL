@@ -37,6 +37,20 @@ $(document).ready(function() {
 // Add user button
 $(document).ready(function() {
 	$("#Adduser_But").click(function() {
+        
+            $('#AdminRoleEdit').prop('checked', false);
+            $('#FarRoleEdit').prop('checked', false);
+            $('#VeakRoleEdit').prop('checked', false);
+            $('#LabRoleEdit').prop('checked', false);
+        
+            $('#statusEdit').val('');
+            $('#oprIdEdit').val('');
+        	$('#oprFirstNameEdit').val(''); 
+        	$('#oprLastNameEdit').val('');
+        	$('#oprIniEdit').val('');
+        	$('#oprEmailEdit').val('');
+        	$('#oprCprEdit').val('');
+        
     	$("#AddUser_Box").show(400);
 	}); 
 });
