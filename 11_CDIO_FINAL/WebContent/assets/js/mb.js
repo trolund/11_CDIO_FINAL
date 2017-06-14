@@ -51,12 +51,11 @@ $(document).ready(function() {
                         method: 'POST',
                         success : function(data) {
                         	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
-                           
-                            showPopup("Material Batch med id: " + data.rbId + " er nu slettet.", true);
+                            showPopup("Material Batch [" + Id + "] was set inactive.", true);
                         },
                         error: function(jqXHR, text, error) { 
                         	console.log('id: ' + Id + ' value: ' + checkedValue + 'was delete failed');
-                            showPopup("Material Batch med id: " + data.rbId + " fejlet ved sletning.", false);
+                            showPopup("Material Batch [" + Id + "] wasn't set inactve.", false);
                         }
                     });         
                 }

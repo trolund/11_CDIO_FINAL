@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		showPopup("Material Batch med id: " + data.rbId + " er ændret.", true);
+          		showPopup("Material Batch [" + id + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Material Batch med id: " + data.rbId + " er ændret.", false);
+            	showPopup("Material Batch [" + id + "] wasn't updated.", false);
 			}
 		});
     }); 

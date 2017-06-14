@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		showPopup("Product Batch med id: " + data.rbId + " er nu ændret.", true);
+          		showPopup("Product Batch [" + id + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Product Batch med id: " + data.rbId + " fejlet ved ændring.", false);
+            	showPopup("Product Batch [" + id + "] wasn't updated.", false);
 			}
 		});
 

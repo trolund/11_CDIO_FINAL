@@ -69,7 +69,6 @@ function login() {
 				$('#login_Bg').hide(1000);
 				$('#login_Bg').hide(200);
 				$('#loadingGif').hide(200);
-                showPopup('hej', true);
 				loadLoginUser(id);
 			} else {
 				$('#msg').css('color', 'red');
@@ -304,7 +303,7 @@ function loadLoginUser(id) {
 				$('#oprRoles').html(resultData).fadeIn(1000); // skriver
 																// roller på
 																// label.
-				$('#content_box').html('Welcome ' + user.oprFirstName + ' ' + user.oprLastName + '. Navigation menu can be found at the left hand side.');
+				$('#content_box').html('Welcome ' + user.oprFirstName + ' ' + user.oprLastName + '. A navigation menu can be found at the left hand side.');
 				Roletjek();
 
 			},

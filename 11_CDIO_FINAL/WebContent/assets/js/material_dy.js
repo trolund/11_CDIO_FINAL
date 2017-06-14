@@ -17,16 +17,11 @@ $(document).ready(function() {
 			data : JSON.stringify(data),
 			contentType: "application/json",
 			method: 'POST',
-//            statusCode: {
-//                200: function(){showPopup("Raavare med id: " + data.raavareId + " er ændret.", true);},
-//                418: function(){showPopup("Raavare med id: " + data.raavareId + " er ændret.", true);},
-//                404: function(){showPopup("Raavare med id: " + data.raavareId + " blev ikke ændret.", false);}
-//            }
 			success : function(data) { 
-          		showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " er ændret.", true);
+          		showPopup("Material [" + $('#raavareId_' + id).html() + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " blev ikke ændret.", false);
+            	showPopup("Material [" + $('#raavareId_' + id).html() + "] wasn't updated.", false);
 			}
 		});
 	}); 

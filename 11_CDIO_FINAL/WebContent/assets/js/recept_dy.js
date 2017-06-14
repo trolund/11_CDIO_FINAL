@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		showPopup("Recept med id: " + data.receptId + " blev ændret.", true);
+          		showPopup("Receipt [" + id + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Recept Batch med id: " + data.receptId + " blev ikke ændret.", false);
+            	showPopup("Receipt [" + id + "] wasn't updated.", false);
 			}
 		});
 

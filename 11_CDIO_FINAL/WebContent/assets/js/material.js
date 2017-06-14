@@ -43,11 +43,11 @@ $(document).ready(function() {
                         method: 'POST',
                         success : function(data) {
                         	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
-                            showPopup('id: ' + Id  + ' value: ' + checkedValue + 'was deleted', true);
+                        	showPopup("Material [" + Id + "] was set inactive.", true);
                         },
                         error: function(jqXHR, text, error) { 
                         	console.log('id: ' + Id + ' value: ' + checkedValue + 'was delete failed');
-                            showPopup('id: ' + Id + ' value: ' + checkedValue + 'was delete failed', false);
+                        	showPopup("Material [" + Id + "] wasn't set inactive.", true);
                         }
                     });         
                 }

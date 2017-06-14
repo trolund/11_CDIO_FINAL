@@ -51,11 +51,11 @@ $(document).ready(function() {
                         method: 'POST',
                         success : function(data) {
                         	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
-                            showPopup("Recept med id: " + data.receptId + " blev slettet.", true);
+                            showPopup("Receipt [" + Id + "] was set inactive.", true);
                         },
                         error: function(jqXHR, text, error) { 
                         	console.log('id: ' + Id + ' value: ' + checkedValue + 'was delete failed');
-                            showPopup("Recept med id: " + data.receptId + " blev ikke slettet.", false);
+                            showPopup("Receipt [" + Id + "] wasn't set inactive.", false);
                         }
                     });         
                 }
