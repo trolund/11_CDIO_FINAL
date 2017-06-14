@@ -1,5 +1,8 @@
 package final_cdio_11.java.RESTResources.pojo;
 
+/*
+ * POJO object to temporarily transfer data from data layer to web interface.
+ */
 public class PbPOJO {
 	
 	private String itemStatus, status, pbId, receptId;

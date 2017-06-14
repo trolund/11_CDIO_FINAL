@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 //Post Update user data
 $(document).ready(function() {
-	$("#Submit_EditUser").click(function() {
+	$("#Submit_profil_settings").click(function() {
 		var data = $('#profilForm').serializeJSON();    
     	console.log(data);
       
@@ -21,7 +21,9 @@ $(document).ready(function() {
 			method: 'POST',
 			success : function(data) {
           		console.log(data);
+                loadLoginUser(user.oprId);
           	  	$('#Editmsg').html(data);
+                
 			},
 			error: function(jqXHR, text, error) { 
             	console.log(data);
@@ -29,4 +31,13 @@ $(document).ready(function() {
 			}
 		});  
 	});   
+});
+
+$(document).ready(function(){
+    $('#newPassword_But').click(function(){
+        var id = user.oprId;
+        $.post("api/mail/newPass/" + id, function( data ) {
+            $('#Editmsg').html("E-mail sent successfully.");
+        });
+    })
 });

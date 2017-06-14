@@ -9,6 +9,11 @@ import javax.mail.internet.InternetAddress;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.utils.Utils;
 
+/*
+ * Data transfer object validator class.
+ * This class implements various validation methods
+ * to ensure data integrity.
+ */
 public class OperatorValidator implements IOperatorValidator {
 
 	private final Utils utils = Utils.getInstance();

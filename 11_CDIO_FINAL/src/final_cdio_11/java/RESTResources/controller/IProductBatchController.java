@@ -7,6 +7,10 @@ import javax.ws.rs.core.Response;
 import final_cdio_11.java.RESTResources.pojo.PbPOJO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 
+/*
+ * Interface for the REST ProductBatchController.
+ * This interface contains methods related to ProductBatch.
+ */
 public interface IProductBatchController {
 	List<ProductBatchDTO> getProductBatchList();
 	List<String> getProductBatchReceptIdList();

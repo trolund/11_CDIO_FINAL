@@ -15,11 +15,15 @@ import final_cdio_11.java.RESTResources.controller.ProductBatchController;
 import final_cdio_11.java.RESTResources.pojo.PbPOJO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
 
+/*
+ * RESTResource to handle productbatch related actions.
+ */
 @Path("/pb")
 public class RESTProductBatch {
 
 	private final IProductBatchController pbController = new ProductBatchController();
 
+	/* Get Productbatch list */
 	@GET
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -27,6 +31,7 @@ public class RESTProductBatch {
 		return pbController.getProductBatchList();
 	}
 
+	/* Update ProductBatch */
 	@POST
 	@Path("/UpdatePB")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -34,6 +39,7 @@ public class RESTProductBatch {
 		return pbController.updateProductBatch(data);
 	}
 
+	/* Delete ProductBatch */
 	@POST
 	@Path("/delPB/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,6 +47,7 @@ public class RESTProductBatch {
 		return pbController.deleteProductBatch(id);
 	}
 
+	/* ProductBatch creation */
 	@POST
 	@Path("/insertPB")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,6 +55,7 @@ public class RESTProductBatch {
 		return pbController.createProductBatch(data);
 	}
 
+	/* Get ProductBatch Recept List */
 	@GET
 	@Path("/repIdList")
 	@Produces(MediaType.APPLICATION_JSON)

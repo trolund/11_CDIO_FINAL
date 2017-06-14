@@ -37,6 +37,21 @@ $(document).ready(function() {
 // Add user button
 $(document).ready(function() {
 	$("#Adduser_But").click(function() {
+        
+            $('#adminRole').prop('checked', false);
+            $('#farmaceutRole').prop('checked', false);
+            $('#værkførerRole').prop('checked', false);
+            $('#laborantRole').prop('checked', false);
+        
+            $('#status').val('');
+            $('#oprId').val('');
+        	$('#oprFirstName').val(''); 
+        	$('#oprLastName').val('');
+        	$('#oprIni').val('');
+        	$('#oprEmail').val('');
+        	$('#oprCpr').val('');
+            $('#oprPassword').val('');
+        
     	$("#AddUser_Box").show(400);
 	}); 
 });

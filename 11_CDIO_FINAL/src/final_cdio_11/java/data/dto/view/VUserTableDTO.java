@@ -1,5 +1,9 @@
 package final_cdio_11.java.data.dto.view;
 
+/*
+ * VUserTable data transfer object.
+ * This class is used to store information about database entities.
+ */
 public class VUserTableDTO {
 
 	private int status;
