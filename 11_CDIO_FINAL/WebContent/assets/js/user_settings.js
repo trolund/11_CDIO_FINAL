@@ -30,3 +30,12 @@ $(document).ready(function() {
 		});  
 	});   
 });
+
+$(document).ready(function(){
+    $('#newPassword_But').click(function(){
+        var id = user.oprId;
+        $.post("api/mail/newPass/" + id, function( data ) {
+            $('#Editmsg').html("E-mail sent successfully.");
+        });
+    })
+});
