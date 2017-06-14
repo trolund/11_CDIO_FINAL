@@ -239,6 +239,16 @@ function loadUsers() {
               
 // load den user logget ind samt dens roller. 
 function loadLoginUser(id) {
+    
+     // hide menu punkter
+		$('#user_but').hide();
+        $('#startWeight').hide();
+        $('matbatch_but').hide();
+        $('prodbatch_but').hide();
+        $('mat_but').hide();
+        $('receipt_but').hide();
+        $('#startWeight').hide();
+    
 	$.getJSON('api/opr/' + id, function(data) {
         user = data;
         userName = data.oprFirstName;

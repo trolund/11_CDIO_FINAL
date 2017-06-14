@@ -11,12 +11,12 @@ import final_cdio_11.java.RESTResources.controller.RESTWeightController;
 @Path("/weight")
 public class RESTWeight {
 	
-	private final IRESTWeightController Controller = new RESTWeightController();
+	private final IRESTWeightController weightController = new RESTWeightController();
 	
 	@GET
 	@Path("/start")
 	public void start(){
-		Controller.start();
+		weightController.start();
 	}
 
 }
