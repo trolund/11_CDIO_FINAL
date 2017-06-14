@@ -318,13 +318,13 @@ function Roletjek() { // tjekker hvad der skal vises i web UI
 											// og Recepter.
 		$('#matbatch_but').show(200);
 		$('#prodbatch_but').show(200);
-		$('mat_but').show(200);
-		$('receipt_but').show(200);
+		$('#mat_but').show(200);
+		$('#receipt_but').show(200);
 	}
 	if (roles.indexOf("Værkfører") != -1) { // Værkfører: Productbatches og
 											// material batches.
-		$('matbatch_but').show(200);
-		$('prodbatch_but').show(200);
+		$('#matbatch_but').show(200);
+		$('#prodbatch_but').show(200);
 		$('#startWeight').show(200);
 	}
 	if (roles.indexOf("Laborant") != -1) { // Laborant: Intet/ eller måske det
