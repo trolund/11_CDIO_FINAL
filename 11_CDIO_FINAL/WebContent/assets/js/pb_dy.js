@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		JSON.stringify(data + 'virker!')
+          		showPopup("Product Batch med id: " + data.rbId + " er nu ændret.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	JSON.stringify(data)
+            	showPopup("Product Batch med id: " + data.rbId + " fejlet ved ændring.", false);
 			}
 		});
 
@@ -74,9 +74,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadpb(boolAcOnly);
+                showPopup("Product Batch med id: " + data.rbId + " er nu oprettet.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+                showPopup("Product Batch med id: " + data.rbId + " blev ikke oprettet.", false);
 			}
 		});
 

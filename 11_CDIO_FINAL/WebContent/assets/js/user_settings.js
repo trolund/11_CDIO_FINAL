@@ -23,11 +23,13 @@ $(document).ready(function() {
           		console.log(data);
                 loadLoginUser(user.oprId);
           	  	$('#Editmsg').html(data);
+                showPopup(data, true);
                 
 			},
 			error: function(jqXHR, text, error) { 
             	console.log(data);
             	$('#Editmsg').html(data);
+                showPopup(data, false);
 			}
 		});  
 	});   

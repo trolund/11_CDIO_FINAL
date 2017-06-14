@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		JSON.stringify(data + 'virker!')
+          		showPopup("Recept med id: " + data.receptId + " blev ændret.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	JSON.stringify(data)
+            	showPopup("Recept Batch med id: " + data.receptId + " blev ikke ændret.", false);
 			}
 		});
 
@@ -73,9 +73,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadrecept(boolAcOnly);
+                showPopup("Recept med id: " + data.receptId + " blev oprettet.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+            	showPopup("Recept med id: " + data.receptId + " blev ikke oprettet.", false);
 			}
 		});
 

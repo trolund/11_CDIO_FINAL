@@ -23,10 +23,10 @@ $(document).ready(function() {
 //                404: function(){showPopup("Raavare med id: " + data.raavareId + " blev ikke ændret.", false);}
 //            }
 			success : function(data) { 
-          		showPopup("Raavare med id: " + data.raavareId + " er ændret.", true);
+          		showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " er ændret.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Raavare med id: " + data.raavareId + " blev ikke ændret.", false);
+            	showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " blev ikke ændret.", false);
 			}
 		});
 	}); 
@@ -69,10 +69,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadmaterial(boolAcOnly);
-                showPopup("Raavare med id: " + data.raavareId + " er oprettet", true);
+                showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " er oprettet", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Raavare med id: " + data.raavareId + " fejled ved oprettelse", false);
+            	showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " fejled ved oprettelse", false);
 			}
 	    });
     }); 

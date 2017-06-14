@@ -65,9 +65,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadmaterial(boolAcOnly);
+                showPopup("Material Batch med id: " + data.rbId + " er oprettet.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+            	showPopup("Material Batch med id: " + data.rbId + " er oprettet.", false);
 			}
 		});
 	}); 
