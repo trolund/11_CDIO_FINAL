@@ -19,6 +19,8 @@ $(document).ready(function() {
 	$('#mat_but').hide();
 	$('#receipt_but').hide();
 	$('#startWeight').hide();
+    $('#StrongManagement').hide();
+    $('#StrongSettigns').hide();
 
 	$('#login').keydown(function(e) {
 		if (e.keyCode == 13) {
@@ -306,6 +308,8 @@ function Roletjek() { // tjekker hvad der skal vises i web UI
 	$('#startWeight').hide();
 
 	if (roles.indexOf("Admin") != -1) { // Admin: Admin skal kunne se alt.
+        $('#StrongSettigns').show(200);
+        $('#StrongManagement').show(200);
 		$('#user_but').show(200);
 		$('#startWeight').show(200);
 		$('#matbatch_but').show(200);
@@ -315,20 +319,22 @@ function Roletjek() { // tjekker hvad der skal vises i web UI
 
 	}
 	if (roles.indexOf("Farmaceut") != -1) { // Farmaceut: Skal kunne se Material
-											// og Recepter.
+		$('#StrongSettigns').show(200);		
+        $('#StrongManagement').show(200);// og Recepter.
 		$('#matbatch_but').show(200);
 		$('#prodbatch_but').show(200);
 		$('#mat_but').show(200);
 		$('#receipt_but').show(200);
 	}
 	if (roles.indexOf("Værkfører") != -1) { // Værkfører: Productbatches og
-											// material batches.
+		$('#StrongSettigns').show(200);									// material batches.
 		$('#matbatch_but').show(200);
+        $('#StrongManagement').show(200);
 		$('#prodbatch_but').show(200);
 		$('#startWeight').show(200);
 	}
 	if (roles.indexOf("Laborant") != -1) { // Laborant: Intet/ eller måske det
-											// samme som værkføren.
+		$('#StrongSettigns').show(200);									// samme som værkføren.
 
 	}
 
