@@ -8,6 +8,7 @@ import final_cdio_11.java.data.Role;
 import final_cdio_11.java.data.dao.IOperatorDAO;
 import final_cdio_11.java.data.dao.IProductBatchComponentDAO;
 import final_cdio_11.java.data.dao.IProductBatchDAO;
+import final_cdio_11.java.data.dao.IRaavareBatchDAO;
 import final_cdio_11.java.data.dao.IRaavareDAO;
 import final_cdio_11.java.data.dao.IReceptComponentDAO;
 import final_cdio_11.java.data.dao.IReceptDAO;
@@ -15,6 +16,7 @@ import final_cdio_11.java.data.dao.IRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.ProductBatchComponentDTO;
 import final_cdio_11.java.data.dto.ProductBatchDTO;
+import final_cdio_11.java.data.dto.RaavareBatchDTO;
 import final_cdio_11.java.data.dto.ReceptComponentDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
 import final_cdio_11.java.weight.ase.IWeightConnector.WeightException;
@@ -28,17 +30,17 @@ public class WeightController implements IWeightController {
 	private IProductBatchComponentDAO pbcDAO;
 	private IReceptComponentDAO rcDAO;
 	private IRaavareDAO raavareDAO;
+	private IRaavareBatchDAO rbDAO;
 	private IWeightConnector weightConnector;
 
-	public WeightController(IOperatorDAO oprDAO, IRoleDAO roleDAO, IReceptDAO receptDAO, IProductBatchDAO pbDAO,
-			IProductBatchComponentDAO pbcDAO, IRaavareDAO raavareDAO, IReceptComponentDAO rcDAO,
-			IWeightConnector weightConnector) {
+	public WeightController(IOperatorDAO oprDAO, IRoleDAO roleDAO, IReceptDAO receptDAO, IProductBatchDAO pbDAO, IProductBatchComponentDAO pbcDAO, IRaavareBatchDAO rbDAO, IRaavareDAO raavareDAO, IReceptComponentDAO rcDAO, IWeightConnector weightConnector) {
 		this.oprDAO = oprDAO;
 		this.roleDAO = roleDAO;
 		this.receptDAO = receptDAO;
 		this.pbDAO = pbDAO;
 		this.pbcDAO = pbcDAO;
 		this.raavareDAO = raavareDAO;
+		this.rbDAO = rbDAO;
 		this.rcDAO = rcDAO;
 		this.weightConnector = weightConnector;
 	}
@@ -61,11 +63,7 @@ public class WeightController implements IWeightController {
 		/* Loop until an authorized operator puts an id. */
 		do {
 			/* Get operator id */
-			try {
-				oprId = weightConnector.rm208Message("Enter oprId. Press OK");
-			} catch (WeightException e) {
-				e.printStackTrace();
-			}
+			oprId = weightConnector.rm208Message("Enter oprId. Press OK");
 
 			/* Check if the operator is authorized. */
 			try {
@@ -222,25 +220,19 @@ public class WeightController implements IWeightController {
 			double nomBruttoLower = -1;
 
 			do {
-
 				tolerance = rcDTO.getTolerance();
 				nomNetto = rcDTO.getNomNetto();
 				nomBruttoUpper = (nomNetto * tolerance) + nomNetto;
 				nomBruttoLower = nomNetto - (nomNetto * tolerance);
 
 				try {
-					weightConnector
-							.sendConfirmMessage("Min: " + nomBruttoLower + "kg., Max: " + nomBruttoUpper + "kg."); // bedre
-																													// tekst
-																													// og
-																													// tolerance
+					weightConnector.sendConfirmMessage("Min: " + nomBruttoLower + "kg., Max: " + nomBruttoUpper + "kg.");
 					weightConnector.clearSecondaryDisplay();
 				} catch (WeightException e) {
 					e.printStackTrace();
 				}
 
 				/* Step 12: Vægten af tarabeholder registreres */
-
 				try {
 					currentRaavareWeight = weightConnector.getCurrentWeight();
 					System.out.println("currentWeight: " + currentRaavareWeight);
@@ -253,13 +245,21 @@ public class WeightController implements IWeightController {
 					weightConnector.sendConfirmMessage("Weight too low. Min: " + nomBruttoLower + "kg.");
 				} else if (currentRaavareWeight > nomBruttoUpper) {
 					weightConnector.sendConfirmMessage("Weight too high. Max: " + nomBruttoUpper + "kg.");
+				} else {
+					try {
+						RaavareBatchDTO rbDTO = rbDAO.getRaavareBatch(rbId);
+						System.out.println("Amount before: " + rbDTO.getAmount());
+						double newAmount = rbDTO.getAmount() - currentRaavareWeight;
+						System.out.println("New amount: " + newAmount);
+						rbDAO.updateRaavareBatch(new RaavareBatchDTO(rbDTO.getRbId(), rbDTO.getRaavareId(), newAmount, rbDTO.getStatus()));
+						System.out.println("Amount after: " + rbDAO.getRaavareBatch(rbId).getAmount());
+					} catch (DALException e) {
+						e.printStackTrace();
+					}
 				}
-
 			} while (currentRaavareWeight < nomBruttoLower || currentRaavareWeight > nomBruttoUpper);
 
-			// tolerances skal beregnes
-			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, tareWeight, currentRaavareWeight,
-					oprId, 0);
+			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, tareWeight, currentRaavareWeight, oprId, 0);
 			try {
 				pbcDAO.createProductBatchComponent(pbcDTO);
 				System.out.println("Created: " + pbcDTO);
@@ -287,10 +287,7 @@ public class WeightController implements IWeightController {
 
 		/* Step: Send K1 besked så vægten kan slukkes. */
 		weightConnector.sendK1Message();
-
 		weightConnector.promptQuit();
-
-		/* Step 18: Stop tråd så ny laborant kan komme til? */
 	}
 
 }
