@@ -32,7 +32,7 @@ public class DbUtils {
 		}
 	}
 
-	private static void resetDatabase() throws DALException, SQLException {
+	public static void resetDatabase() throws DALException, SQLException {
 		if (utils.DEV_ENABLED) utils.logMessage("WARNING: Database is getting reset!");
 		deleteProduktBatchKomponent();
 		deleteProduktBatch();
