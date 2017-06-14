@@ -273,7 +273,7 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 		$('#user_but').hide();
         $('#startWeight').hide();
         $('#matbatch_but').hide();
-        $('#AddUser_Boxprodbatch_but').hide();
+        $('#prodbatch_but').hide();
         $('#mat_but').hide();
         $('#receipt_but').hide();
         $('#startWeight').hide();
@@ -282,6 +282,11 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
 	if (roles.indexOf("Admin") != -1) { // Admin: Admin skal kunne se alt.
 		$('#user_but').show(200);
         $('#startWeight').show(200);
+        $('#matbatch_but').show(200);
+        $('#prodbatch_but').show(200);
+        $('#mat_but').show(200);
+        $('#receipt_but').show(200);
+        
 	}
     if(roles.indexOf("Farmaceut") != -1){ // Farmaceut: Skal kunne se Material og Recepter.
         $('mat_but').show(200);
