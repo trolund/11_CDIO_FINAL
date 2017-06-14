@@ -14,10 +14,10 @@ $(document).ready(function(){
     // hide menu punkter
 		$('#user_but').hide();
         $('#startWeight').hide();
-        $('matbatch_but').hide();
-        $('prodbatch_but').hide();
-        $('mat_but').hide();
-        $('receipt_but').hide();
+        $('#matbatch_but').hide();
+        $('#prodbatch_but').hide();
+        $('#mat_but').hide();
+        $('#receipt_but').hide();
         $('#startWeight').hide();
     
     
@@ -272,10 +272,10 @@ function Roletjek(){ // tjekker hvad der skal vises i web UI
         // hide menu punkter
 		$('#user_but').hide();
         $('#startWeight').hide();
-        $('matbatch_but').hide();
-        $('prodbatch_but').hide();
-        $('mat_but').hide();
-        $('receipt_but').hide();
+        $('#matbatch_but').hide();
+        $('#AddUser_Boxprodbatch_but').hide();
+        $('#mat_but').hide();
+        $('#receipt_but').hide();
         $('#startWeight').hide();
     
     
