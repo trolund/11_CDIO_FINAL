@@ -10,7 +10,16 @@ var matOptions;
 $(document).ready(function(){
 	$('#loadingGif').hide();
     $('#AddUser_Box').hide();
-//    $('#startWeight').hide();
+
+    // hide menu punkter
+		$('#user_but').hide();
+        $('#startWeight').hide();
+        $('matbatch_but').hide();
+        $('prodbatch_but').hide();
+        $('mat_but').hide();
+        $('receipt_but').hide();
+        $('#startWeight').hide();
+    
     
     $('#login').keydown(function(e) {
     	if (e.keyCode == 13) {
@@ -244,7 +253,9 @@ function loadLoginUser(id) {
 			success: function(resultData) {
 				roles = resultData;
 				$('#oprRoles').html(resultData).fadeIn(1000); // skriver roller på label.
+                $('#content_box').html('Velkommen ' + user.oprFirstName + ' ' + user.oprLastName '.');
 				Roletjek();
+                
 			},	
 			error : function(jqXHR, textStatus, errorThrown) {
 				
@@ -256,20 +267,21 @@ function loadLoginUser(id) {
 )};
 
 function Roletjek(){ // tjekker hvad der skal vises i web UI
-	if (roles.indexOf("Admin") == -1) { // Admin: Admin skal kunne se alt.
-		$('#user_but').hide();
-        $('#startWeight').hide();
+	if (roles.indexOf("Admin") != -1) { // Admin: Admin skal kunne se alt.
+		$('#user_but').show(200);
+        $('#startWeight').show(200);
 	}
-    if(roles.indexOf("Farmaceut") == -1){ // Farmaceut: Skal kunne se Material og Recepter.
-        $('matbatch_but').hide();
-        $('prodbatch_but').hide();
+    if(roles.indexOf("Farmaceut") != -1){ // Farmaceut: Skal kunne se Material og Recepter.
+        $('mat_but').show(200);
+        $('receipt_but').show(200);
     }
-    if(roles.indexOf("Værkfører") == -1){ // Værkfører: Productbatches og material batches.
-        $('mat_but').hide();
-        $('receipt_but').hide();
+    if(roles.indexOf("Værkfører") != -1){ // Værkfører: Productbatches og material batches.
+        $('matbatch_but').show(200);
+        $('prodbatch_but').show(200);
+        $('#startWeight').show(200);  
     }
-    if(roles.indexOf("Laborant") == -1){ // Laborant: Intet/ eller måske det samme som værkføren.
-        $('#startWeight').hide();
+    if(roles.indexOf("Laborant") != -1){ // Laborant: Intet/ eller måske det samme som værkføren.
+        
     }
     
     
