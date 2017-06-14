@@ -304,7 +304,7 @@ function loadLoginUser(id) {
 				$('#oprRoles').html(resultData).fadeIn(1000); // skriver
 																// roller på
 																// label.
-				$('#content_box').html('Velkommen ' + user.oprFirstName + '.');
+				$('#content_box').html('Welcome ' + user.oprFirstName + ' ' + user.oprLastName + '. Navigation menu can be found at the left hand side.');
 				Roletjek();
 
 			},
