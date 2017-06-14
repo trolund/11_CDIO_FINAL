@@ -21,7 +21,9 @@ $(document).ready(function() {
 			method: 'POST',
 			success : function(data) {
           		console.log(data);
+                loadLoginUser(user.oprId);
           	  	$('#Editmsg').html(data);
+                
 			},
 			error: function(jqXHR, text, error) { 
             	console.log(data);
