@@ -104,6 +104,9 @@ public class OperatorController implements IOperatorController {
 			return textHandler.errIdInvalid;
 		}
 
+		System.out.println(utils.sha256(password));   
+		System.out.println(oprDTO.getOprPassword());
+		
 		if (utils.sha256(password).equals(oprDTO.getOprPassword())) {
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succLoginMessage(oprId, password));
 			return textHandler.succLoggedIn;
