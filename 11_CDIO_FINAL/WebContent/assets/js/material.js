@@ -43,11 +43,11 @@ $(document).ready(function() {
                         method: 'POST',
                         success : function(data) {
                         	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
-                            console.log(data);
+                            showPopup('id: ' + Id  + ' value: ' + checkedValue + 'was deleted', true);
                         },
                         error: function(jqXHR, text, error) { 
                         	console.log('id: ' + Id + ' value: ' + checkedValue + 'was delete failed');
-                            console.log(data);
+                            showPopup('id: ' + Id + ' value: ' + checkedValue + 'was delete failed', false);
                         }
                     });         
                 }

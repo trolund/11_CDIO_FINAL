@@ -41,16 +41,16 @@ public class RaavareController implements IRaavareController {
 	public Response createRaavare(RaavareDTO raavareDTO) {
 		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
 
-		if (!raavareValidator.isRaavareValid(raavareDTO)) return Response.status(400).entity(textHandler.errRaavareInvalid).build();
+		if (!raavareValidator.isRaavareValid(raavareDTO)) return Response.status(400).entity(textHandler.errRaavareInvalid).type("text/plain").build();
 
 		try {
 			raavareDAO.createRaavare(raavareDTO);
-			return Response.status(200).entity(textHandler.succRaavareCreate).build();
+			return Response.status(200).entity(textHandler.succRaavareCreate).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errRaavareCreate).build();
+		return Response.status(400).entity(textHandler.errRaavareCreate).type("text/plain").build();
 	}
 
 	/* update Raavare in the underlying data layer. */
@@ -58,16 +58,16 @@ public class RaavareController implements IRaavareController {
 	public Response updateRaavare(RaavareDTO raavareDTO) {
 		IRaavareDAO raavareDAO = new SQLRaavareDAO(Connector.getInstance());
 
-		if (!raavareValidator.isRaavareValid(raavareDTO)) return Response.status(400).entity(textHandler.errRaavareInvalid).build();
+		if (!raavareValidator.isRaavareValid(raavareDTO)) return Response.status(400).entity(textHandler.errRaavareInvalid).type("text/plain").build();
 
 		try {
 			raavareDAO.updateRaavare(raavareDTO);
-			return Response.status(200).entity(textHandler.succRaavareUpdate).build();
+			return Response.status(200).entity(textHandler.succRaavareUpdate).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errRaavareUpdate).build();
+		return Response.status(400).entity(textHandler.errRaavareUpdate).type("text/plain").build();
 	}
 
 	/* delete Raavare in the underlying data layer. */
@@ -77,12 +77,12 @@ public class RaavareController implements IRaavareController {
 
 		try {
 			raavareDAO.deleteRaavare(raavareId);
-			return Response.status(200).entity(textHandler.succRaavareDelete).build();
+			return Response.status(200).entity(textHandler.succRaavareDelete).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errRaavareDelete).build();
+		return Response.status(400).entity(textHandler.errRaavareDelete).type("text/plain").build();
 	}
 
 }

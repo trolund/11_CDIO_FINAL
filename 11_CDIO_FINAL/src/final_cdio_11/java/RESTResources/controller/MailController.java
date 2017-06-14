@@ -27,13 +27,13 @@ public class MailController implements IMailController {
 
 		try {
 			mailObj.sendMail(mailPOJO.getTo(), mailPOJO.getMsg(), mailPOJO.getSub());
-			return Response.status(200).entity(textHandler.succMailSent).build();
+			return Response.status(200).entity(textHandler.succMailSent).type("text/plain").build();
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-		return Response.status(400).entity(textHandler.errMailFailed).build();
+		return Response.status(400).entity(textHandler.errMailFailed).type("text/plain").build();
 	}
 
 	/* Gives new password to an operator and sends an e-mail. */
@@ -50,7 +50,7 @@ public class MailController implements IMailController {
 			mailobj.sendMail(oprDTO.getOprEmail(), textHandler.mailMessage(oprDTO, newPass), textHandler.mailNewPassSubject);
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.mailMessage(oprDTO, newPass));
 
-			return Response.status(200).entity(textHandler.succMailSent).build();
+			return Response.status(200).entity(textHandler.succMailSent).type("text/plain").build();
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (MessagingException e) {
@@ -60,7 +60,7 @@ public class MailController implements IMailController {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		return Response.status(400).entity(textHandler.errMailFailed).build();
+		return Response.status(400).entity(textHandler.errMailFailed).type("text/plain").build();
 	}
 
 }

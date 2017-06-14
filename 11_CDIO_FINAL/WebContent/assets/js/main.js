@@ -6,10 +6,13 @@ var user = null;
 var options;
 var matOptions;
 
+var popupTæller = 0;
+
 // Alt der skal køres ved opstart af application!
 $(document).ready(function() {
 	$('#loadingGif').hide();
 	$('#AddUser_Box').hide();
+    $('#myPopup').hide();
 
 	// hide menu punkter
 	$('#user_but').hide();
@@ -66,7 +69,7 @@ function login() {
 				$('#login_Bg').hide(1000);
 				$('#login_Bg').hide(200);
 				$('#loadingGif').hide(200);
-
+                showPopup('hej', true);
 				loadLoginUser(id);
 			} else {
 				$('#msg').css('color', 'red');
@@ -84,6 +87,24 @@ function login() {
 		}
 	})
 };
+    
+   
+
+function showPopup(msg, type){
+    
+    $('body').append('<span style="display:none;" class="popup" id="myPopup_' + popupTæller + '">Popup</span>');
+    
+    if(type){
+        $('#myPopup_' + popupTæller).css("background-color", "green");
+    }
+    else{
+        $('#myPopup_' + popupTæller).css("background-color", "red");
+    }
+    $('#myPopup_' + popupTæller).html(msg);
+    $('#myPopup_' + popupTæller).show(200);
+    $('#myPopup_' + popupTæller).delay(1000).hide(200);
+    popupTæller++;
+}
 
 // menu js
 $(document).ready(function() {

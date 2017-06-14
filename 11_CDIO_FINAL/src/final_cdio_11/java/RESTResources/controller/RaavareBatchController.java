@@ -42,16 +42,16 @@ public class RaavareBatchController implements IRaavareBatchController {
 	public Response createRaavareBatch(RaavareBatchDTO rbDTO) {
 		IRaavareBatchDAO rbDAO = new SQLRaavareBatchDAO(Connector.getInstance());
 
-		if (!rbValidator.isRbValid(rbDTO)) return Response.status(400).entity(textHandler.errRbInvalid).build();
+		if (!rbValidator.isRbValid(rbDTO)) return Response.status(400).entity(textHandler.errRbInvalid).type("text/plain").build();
 
 		try {
 			rbDAO.createRaavareBatch(rbDTO);
-			return Response.status(200).entity(textHandler.succRbCreate).build();
+			return Response.status(200).entity(textHandler.succRbCreate).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errRbCreate).build();
+		return Response.status(400).entity(textHandler.errRbCreate).type("text/plain").build();
 	}
 
 	/* Update RaavareBatch in the underlying data layer. */
@@ -59,16 +59,16 @@ public class RaavareBatchController implements IRaavareBatchController {
 	public Response updateRaavareBatch(RaavareBatchDTO rbDTO) {
 		IRaavareBatchDAO rbDAO = new SQLRaavareBatchDAO(Connector.getInstance());
 
-		if (!rbValidator.isRbValid(rbDTO)) return Response.status(400).entity(textHandler.errRbInvalid).build();
+		if (!rbValidator.isRbValid(rbDTO)) return Response.status(400).entity(textHandler.errRbInvalid).type("text/plain").build();
 
 		try {
 			rbDAO.updateRaavareBatch(rbDTO);
-			return Response.status(200).entity(textHandler.succRbUpdate).build();
+			return Response.status(200).entity(textHandler.succRbUpdate).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errRbUpdate).build();
+		return Response.status(400).entity(textHandler.errRbUpdate).type("text/plain").build();
 	}
 
 	/* Delete pdate RaavareBatch in the underlying data layer. */
@@ -78,12 +78,12 @@ public class RaavareBatchController implements IRaavareBatchController {
 
 		try {
 			rbDAO.deleteRaavareBatch(rbId);
-			return Response.status(200).entity(textHandler.succRbDelete).build();
+			return Response.status(200).entity(textHandler.succRbDelete).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errRbDelete).build();
+		return Response.status(400).entity(textHandler.errRbDelete).type("text/plain").build();
 	}
 
 }

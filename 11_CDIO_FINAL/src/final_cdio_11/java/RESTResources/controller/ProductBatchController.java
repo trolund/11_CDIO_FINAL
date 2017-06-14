@@ -67,16 +67,16 @@ public class ProductBatchController implements IProductBatchController {
 
 		ProductBatchDTO pbDTO = new ProductBatchDTO(Integer.parseInt(pbPOJO.getPbId()), Integer.parseInt(pbPOJO.getItemStatus()), Integer.parseInt(pbPOJO.getReceptId()), Integer.parseInt(pbPOJO.getStatus()));
 
-		if (!pbValidator.isPbValid(pbDTO)) return Response.status(400).entity(textHandler.errPbInvalid).build();
+		if (!pbValidator.isPbValid(pbDTO)) return Response.status(400).entity(textHandler.errPbInvalid).type("text/plain").build();
 
 		try {
 			pbDAO.createProductBatch(pbDTO);
-			return Response.status(200).entity(textHandler.succPbCreate).build();
+			return Response.status(200).entity(textHandler.succPbCreate).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errPbCreate).build();
+		return Response.status(400).entity(textHandler.errPbCreate).type("text/plain").build();
 	}
 
 	/* Update a productbatch in the underlying data layer. */
@@ -84,18 +84,18 @@ public class ProductBatchController implements IProductBatchController {
 	public Response updateProductBatch(PbPOJO data) {
 		ProductBatchDTO pbDTO = new ProductBatchDTO(Integer.parseInt(data.getPbId()), Integer.parseInt(data.getItemStatus()), Integer.parseInt(data.getReceptId()), Integer.parseInt(data.getStatus()));
 
-		if (!pbValidator.isPbValid(pbDTO)) return Response.status(400).entity(textHandler.errPbInvalid).build();
+		if (!pbValidator.isPbValid(pbDTO)) return Response.status(400).entity(textHandler.errPbInvalid).type("text/plain").build();
 
 		SQLProductBatchDAO pbDAO = new SQLProductBatchDAO(Connector.getInstance());
 
 		try {
 			pbDAO.updateProductBatch(pbDTO);
-			return Response.status(200).entity(textHandler.succPbUpdate).build();
+			return Response.status(200).entity(textHandler.succPbUpdate).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errPbUpdate).build();
+		return Response.status(400).entity(textHandler.errPbUpdate).type("text/plain").build();
 	}
 
 	/* Delete a productbatch in the underlying data layer. */
@@ -105,12 +105,12 @@ public class ProductBatchController implements IProductBatchController {
 
 		try {
 			pbDAO.deleteProductBatch(pbId);
-			return Response.status(200).entity(textHandler.succPbDelete).build();
+			return Response.status(200).entity(textHandler.succPbDelete).type("text/plain").build();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
 
-		return Response.status(400).entity(textHandler.errPbDelete).build();
+		return Response.status(400).entity(textHandler.errPbDelete).type("text/plain").build();
 	}
 
 }
