@@ -253,7 +253,7 @@ function loadLoginUser(id) {
 			success: function(resultData) {
 				roles = resultData;
 				$('#oprRoles').html(resultData).fadeIn(1000); // skriver roller på label.
-                $('#content_box').html('Velkommen ' + user.oprFirstName + ' ' + user.oprLastName '.');
+                $('#content_box').html('Velkommen ' + user.oprFirstName + '.');
 				Roletjek();
                 
 			},	
