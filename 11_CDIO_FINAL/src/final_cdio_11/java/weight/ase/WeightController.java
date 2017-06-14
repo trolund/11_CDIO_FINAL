@@ -1,5 +1,6 @@
 package final_cdio_11.java.weight.ase;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -222,11 +223,13 @@ public class WeightController implements IWeightController {
 			do {
 				tolerance = rcDTO.getTolerance();
 				nomNetto = rcDTO.getNomNetto();
+				DecimalFormat df = new DecimalFormat("###.##");
+
 				nomBruttoUpper = (nomNetto * tolerance) + nomNetto;
 				nomBruttoLower = nomNetto - (nomNetto * tolerance);
 
 				try {
-					weightConnector.sendConfirmMessage("Min: " + nomBruttoLower + "kg., Max: " + nomBruttoUpper + "kg.");
+					weightConnector.sendConfirmMessage("Min: " + df.format(nomBruttoLower) + "kg., Max: " + df.format(nomBruttoUpper) + "kg.");
 					weightConnector.clearSecondaryDisplay();
 				} catch (WeightException e) {
 					e.printStackTrace();
