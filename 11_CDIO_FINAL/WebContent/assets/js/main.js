@@ -17,6 +17,7 @@ $(document).ready(function() {
 	// hide menu punkter
 	$('#user_but').hide();
 	$('#startWeight').hide();
+	$('#resetDatabase').hide();
 	$('#matbatch_but').hide();
 	$('#prodbatch_but').hide();
 	$('#mat_but').hide();
@@ -101,7 +102,7 @@ function showPopup(msg, type){
     }
     $('#myPopup_' + popupTæller).html(msg);
     $('#myPopup_' + popupTæller).show(200);
-    $('#myPopup_' + popupTæller).delay(1000).hide(200);
+    $('#myPopup_' + popupTæller).delay(1900).hide(200);
     popupTæller++;
 }
 
@@ -190,9 +191,32 @@ $(document).ready(function() {
 			contentType : 'text/plain',
 			success : function(resultData) {
 				$("#startWeight").addClass('.active');
+				showPopup("Attempting to initialize weight system...", true);
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				$("#startWeight").removeClass('.active');
+				showPopup("Weight system initialization failed.", false);
+			},
+			timeout : 120000,
+		});
+
+	});
+});
+
+$(document).ready(function() {
+	$("#resetDatabase").click(function() {
+
+		jQuery.ajax({
+			url : "api/db/reset",
+			type : "GET",
+			contentType : 'text/plain',
+			success : function(resultData) {
+				$("#resetDatabase").addClass('.active');
+				showPopup(resultData, true);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				$("#resetDatabase").removeClass('.active');
+				showPopup(resultData, false);
 			},
 			timeout : 120000,
 		});
@@ -300,10 +324,17 @@ function loadLoginUser(id) {
 			contentType : 'text/plain',
 			success : function(resultData) {
 				roles = resultData;
-				$('#oprRoles').html(resultData).fadeIn(1000); // skriver
-																// roller på
-																// label.
-				$('#content_box').html('Welcome ' + user.oprFirstName + ' ' + user.oprLastName + '. A navigation menu can be found at the left hand side.');
+				$('#oprRoles').html(resultData).fadeIn(1000);			
+				
+				var roleString;
+		
+				if (roles.indexOf("Admin") !== -1) {
+					roleString = "Administrator detected. Full system access granted.";
+				} else {
+					roleString = "";
+				}
+				
+				$('#content_box').html('Welcome ' + user.oprFirstName + ' ' + user.oprLastName + '. A navigation menu can be found at the left hand side of the page.\r\n\r\n' + roleString);
 				Roletjek();
 
 			},
@@ -332,6 +363,7 @@ function Roletjek() { // tjekker hvad der skal vises i web UI
         $('#StrongManagement').show(200);
 		$('#user_but').show(200);
 		$('#startWeight').show(200);
+		$('#resetDatabase').show(200);
 		$('#matbatch_but').show(200);
 		$('#prodbatch_but').show(200);
 		$('#mat_but').show(200);
