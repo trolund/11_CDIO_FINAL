@@ -63,11 +63,7 @@ public class WeightController implements IWeightController {
 		/* Loop until an authorized operator puts an id. */
 		do {
 			/* Get operator id */
-			try {
-				oprId = weightConnector.rm208Message("Enter oprId. Press OK");
-			} catch (WeightException e) {
-				e.printStackTrace();
-			}
+			oprId = weightConnector.rm208Message("Enter oprId. Press OK");
 
 			/* Check if the operator is authorized. */
 			try {
