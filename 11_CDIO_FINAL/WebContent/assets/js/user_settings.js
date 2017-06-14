@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 //Post Update user data
 $(document).ready(function() {
-	$("#Submit_EditUser").click(function() {
+	$("#Submit_profil_settings").click(function() {
 		var data = $('#profilForm').serializeJSON();    
     	console.log(data);
       
