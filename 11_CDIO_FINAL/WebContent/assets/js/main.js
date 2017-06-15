@@ -334,7 +334,7 @@ function loadLoginUser(id) {
 					roleString = "";
 				}
 				
-				$('#content_box').html('Welcome ' + user.oprFirstName + ' ' + user.oprLastName + '. A navigation menu can be found at the left hand side of the page.\r\n\r\n' + roleString);
+				$('#content_box').html('<h1>Welcome ' + user.oprFirstName + ' ' + user.oprLastName + '.</h1><br><br><p> A navigation menu can be found at the left hand side of the page.</p><br><br>' + roleString);
 				Roletjek();
 
 			},
@@ -556,7 +556,7 @@ function loadrecept(bool) {
 																		+ '</tr>');
 											}
 
-											$('#Status_val_' + data[i].pbId)
+											$('#Status_val_' + data[i].receptId)
 													.val(data[i].status);
 										});
 

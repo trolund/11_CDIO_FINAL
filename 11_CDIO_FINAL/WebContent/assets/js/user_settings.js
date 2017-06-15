@@ -15,7 +15,7 @@ $(document).ready(function() {
     	console.log(data);
       
       	jQuery.ajax({
-			url : "api/opr/updateopr",
+			url : "api/opr/updateoprNoRols",
 			data : data,
 			contentType: "application/json",
 			method: 'POST',

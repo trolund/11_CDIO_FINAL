@@ -101,5 +101,14 @@ public class RESTOperator {
 	public String updateOperator(EditUserFormPOJO editUserFormData) throws DALException {
 		return oprController.updateOperator(editUserFormData);
 	}
+	
+	/* Operator update uden roller */
+	@POST
+	@Path("/updateoprNoRols")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateOperatorNorols(EditUserFormPOJO editUserFormData) throws DALException {
+		return oprController.updateOperatorNoRols(editUserFormData);
+	}
 
 }

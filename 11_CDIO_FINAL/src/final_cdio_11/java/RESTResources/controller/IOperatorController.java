@@ -21,4 +21,5 @@ public interface IOperatorController {
 	String updateOperator(EditUserFormPOJO editUserFormData);
 	boolean deleteOperator(String oprId);
 	OperatorDTO createOperatorPOJO(String oprId);
+	String updateOperatorNoRols(EditUserFormPOJO editUserFormData);
 }
