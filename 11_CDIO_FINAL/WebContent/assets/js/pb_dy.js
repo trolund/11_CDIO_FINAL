@@ -74,10 +74,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadpb(boolAcOnly);
-                showPopup("Product Batch med id: " + data.rbId + " er nu oprettet.", true);
+                 showPopup("Product Batch [" + data.rbId + "] was created.", true);
 			},
 			error: function(jqXHR, text, error) { 
-                showPopup("Product Batch med id: " + data.rbId + " blev ikke oprettet.", false);
+                 showPopup("Product Batch [" + data.rbId + "] wasn't created.", false);
 			}
 		});
 
