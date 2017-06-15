@@ -2,106 +2,94 @@
 <h1>User Management</h1>
 <!--create user popup-->
 <div id="AddUser_Box" class="popup_box">
-  <img name="add" class="cancel_Icon" src="assets/img/cancel_icon.png"> 
+    <img name="add" class="cancel_Icon" src="assets/img/cancel_icon.png">
     <h1>Add User</h1>
-  <form id="CreateUserForm" method="POST" action="api/opr/addopr">
-  
-    Id <br>
-    <input type="text" name="oprId" id="oprId">
-    <br>
-  	First Name <br>
-    <input type="text" name="oprFirstName" id="oprFirstName">	
-    <br>
-    Last Name <br>
-    <input type="text" name="oprLastName" id="oprLastName">	
-    <br>
-    Initials <br>
-    <input type="text" name="oprIni" id="oprIni">
-    <br>
-    E-mail <br>
-    <input type="text" name="oprEmail" id="oprEmail">	
-    <br>
-    Cpr <br>
-    <input type="text" name="oprCpr" id="oprCpr">
-    <br>
-    Password <br>
-    <input type="text" name="oprPassword" id="oprPassword">
-    <br>
-  
-    Privileges <br>
-     <input type="checkbox" name="adminRole" id="adminRole"> Admin<br>
-     <input type="checkbox" name="farmaceutRole" id="farmaceutRole"> Farmaceut<br>
-     <input type="checkbox" name="værkførerRole" id="værkførerRole"> Værkfører<br>
-     <input type="checkbox" name="laborantRole" id="laborantRole"> Laborant <br>  
-  	<br>
-  	<br>
-  	
-  	<input class="button" id="Submit_CreateUser" type="button" value="Add user">
-    <input class="button" id="Submit_CreateUser_dummy" type="button" value="Add Dummy user">
-    
-    <p id="msg"></p>
-    <p id="CreateMSG"></p>
-</form> 
+    <form id="CreateUserForm" method="POST" action="api/opr/addopr">
+
+        Id <br>
+        <input type="text" name="oprId" id="oprId">
+        <br> First Name <br>
+        <input type="text" name="oprFirstName" id="oprFirstName">
+        <br> Last Name <br>
+        <input type="text" name="oprLastName" id="oprLastName">
+        <br> Initials <br>
+        <input type="text" name="oprIni" id="oprIni">
+        <br> E-mail <br>
+        <input type="text" name="oprEmail" id="oprEmail">
+        <br> Cpr <br>
+        <input type="text" name="oprCpr" id="oprCpr">
+        <br> Password <br>
+        <input type="text" name="oprPassword" id="oprPassword">
+        <br> Privileges <br>
+        <input type="checkbox" name="adminRole" id="adminRole"> Admin<br>
+        <input type="checkbox" name="farmaceutRole" id="farmaceutRole"> Farmaceut<br>
+        <input type="checkbox" name="værkførerRole" id="værkførerRole"> Værkfører<br>
+        <input type="checkbox" name="laborantRole" id="laborantRole"> Laborant <br>
+        <br>
+        <br>
+
+        <input class="button" id="Submit_CreateUser" type="button" value="Add user">
+        <input class="button" id="Submit_CreateUser_dummy" type="button" value="Add Dummy user">
+
+        <p id="msg"></p>
+        <p id="CreateMSG"></p>
+    </form>
 </div>
-<!--create user popup slut--> 
+<!--create user popup slut-->
 
 <!--edit user popup-->
 <div id="editUser_Box" class="popup_box">
-  <img name="edit" class="cancel_Icon" src="assets/img/cancel_icon.png">  
+    <img name="edit" class="cancel_Icon" src="assets/img/cancel_icon.png">
     <h1>Edit User</h1>
-  <form id="editUserForm" method="POST">
-  Status <br>
-      <select id="statusEdit" name="status">
+    <form id="editUserForm" method="POST">
+        Status <br>
+        <select id="statusEdit" name="status">
   <option value="0">Active</option>
   <option value="1">Inactive</option>
-      </select> <br><br>
-    Id<br> 
-    <input type="text" name="oprId" id="oprIdEdit" readonly>
-    <br>
-  	First Name <br>
-    <input type="text" name="oprFirstName" id="oprFirstNameEdit">	
-    <br>
-    Last Name <br>
-    <input type="text" name="oprLastName" id="oprLastNameEdit">	
-    <br>
-    Initials <br>
-    <input type="text" name="oprIni" id="oprIniEdit">
-    <br>
-    E-mail <br>
-    <input type="text" name="oprEmail" id="oprEmailEdit">	
-    <br>
-    Cpr <br>
-    <input type="text" name="oprCpr" id="oprCprEdit">
-    <br>
-    Password <br>
-    <input class="button" type="button" id="newPassword_But" value="New Password">
-    <br>
-    
-    Privileges <br>  
-    <input type="checkbox" name="adminRole" id="AdminRoleEdit"> Admin<br>
-    <input type="checkbox" name="farmaceutRole" id="FarRoleEdit"> Farmaceut<br>
-    <input type="checkbox" name="vaerkforerRole" id="VeakRoleEdit"> Værkfører<br>
-    <input type="checkbox" name="laborantRole" id="LabRoleEdit"> Laborant <br>    
-      
-  <br><br>
-  <input class="button" id="Submit_EditUser" type="button" value="Confirm Edit">
-    <p id="Editmsg"></p>
-</form> 
+      </select> <br><br> Id
+        <br>
+        <input type="text" name="oprId" id="oprIdEdit" readonly>
+        <br> First Name <br>
+        <input type="text" name="oprFirstName" id="oprFirstNameEdit">
+        <br> Last Name <br>
+        <input type="text" name="oprLastName" id="oprLastNameEdit">
+        <br> Initials <br>
+        <input type="text" name="oprIni" id="oprIniEdit">
+        <br> E-mail <br>
+        <input type="text" name="oprEmail" id="oprEmailEdit">
+        <br> Cpr <br>
+        <input type="text" name="oprCpr" id="oprCprEdit">
+        <br> Password <br>
+        <input class="button" type="button" id="newPassword_But" value="New Password">
+        <br> Privileges <br>
+        <input type="checkbox" name="adminRole" id="AdminRoleEdit"> Admin<br>
+        <input type="checkbox" name="farmaceutRole" id="FarRoleEdit"> Farmaceut<br>
+        <input type="checkbox" name="vaerkforerRole" id="VeakRoleEdit"> Værkfører<br>
+        <input type="checkbox" name="laborantRole" id="LabRoleEdit"> Laborant <br>
+
+        <br><br>
+        <input class="button" id="Submit_EditUser" type="button" value="Confirm Edit">
+        <p id="Editmsg"></p>
+    </form>
 </div>
-<!--edit user slut--> 
+<!--edit user slut-->
 <div class="top">
-<button id="Adduser_But">Add User</button><button id="refresh_But">Refresh List</button><div id="activeCount" class="countBox"></div><div id="inActiveCount" class="countBox"></div><div id="totCount" class="countBox"></div></div>
-<table id="table_con"> 
-<tr>  
-  <td>Status</td>
-  <td>Id</td>
-  <td>First Name</td>
-  <td>Last Name</td>
-  <td>Initials</td>
-  <td>E-mail</td>
-  <td>Cpr</td>
-  <td>Roles</td>
-  <td>Delete</td>
-  <td>Edit</td>
-</tr>
+    <button id="Adduser_But">Add User</button><button id="refresh_But">Refresh List</button>
+    <div id="activeCount" class="countBox"></div>
+    <div id="inActiveCount" class="countBox"></div>
+    <div id="totCount" class="countBox"></div>
+</div>
+<table id="table_con">
+    <tr>
+        <td>Status</td>
+        <td>Id</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Initials</td>
+        <td>E-mail</td>
+        <td>Cpr</td>
+        <td>Roles</td>
+        <td>Delete</td>
+        <td>Edit</td>
+    </tr>
 </table>
