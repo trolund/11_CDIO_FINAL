@@ -45,7 +45,7 @@ public class MailController implements IMailController {
 
 		try {
 			OperatorDTO oprDTO = oprDAO.getOperator(Integer.parseInt(oprId));
-			oprDAO.updateOperator(new OperatorDTO(oprDTO.getOprId(), oprDTO.getOprFirstName(), oprDTO.getOprLastName(), oprDTO.getOprIni(), oprDTO.getOprEmail(), oprDTO.getOprCpr(), newPass, oprDTO.getStatus()));
+			oprDAO.updateOperator(new OperatorDTO(oprDTO.getOprId(), oprDTO.getOprFirstName(), oprDTO.getOprLastName(), oprDTO.getOprIni(), oprDTO.getOprEmail(), oprDTO.getOprCpr(), utils.sha256(newPass), oprDTO.getStatus()));
 
 			mailobj.sendMail(oprDTO.getOprEmail(), textHandler.mailMessage(oprDTO, newPass), textHandler.mailNewPassSubject);
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.mailMessage(oprDTO, newPass));
