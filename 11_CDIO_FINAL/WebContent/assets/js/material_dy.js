@@ -64,10 +64,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadmaterial(boolAcOnly);
-                showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " er oprettet", true);
+             	showPopup("Material [" + $('#raavareId_' + id).html() + "] was created.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Raavare med id: " + $('#raavareId_' + id).html() + " fejled ved oprettelse", false);
+            	showPopup("Material [" + $('#raavareId_' + id).html() + "] wasn't created.", false);
 			}
 	    });
     }); 

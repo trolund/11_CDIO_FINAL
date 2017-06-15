@@ -73,10 +73,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadrecept(boolAcOnly);
-                showPopup("Recept med id: " + data.receptId + " blev oprettet.", true);
+                 showPopup("Receipt [" + data.receptId + "] was created.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	showPopup("Recept med id: " + data.receptId + " blev ikke oprettet.", false);
+            	showPopup("Receipt [" + data.receptId + "] wasn't created.", false);
 			}
 		});
 
