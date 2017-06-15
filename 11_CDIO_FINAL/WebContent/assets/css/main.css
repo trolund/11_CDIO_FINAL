@@ -204,7 +204,7 @@ h2 {
     box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
 }
 
-button{
+button {
     border-radius: 5px !important;
     outline:none;
     padding: 5px;
@@ -215,6 +215,24 @@ button{
 }
 
 button:hover{
+    color: #fff;
+    background-color: #173e43;
+    -webkit-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+    box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);
+}
+
+.button {
+    border-radius: 5px !important;
+    outline:none;
+    padding: 5px;
+    background-color: #3fb0ac;
+    border: solid #173e43 1px;
+    -webkit-transition: all .2s; /* Safari */
+    transition: all .2s;
+}
+
+.button:hover{
     color: #fff;
     background-color: #173e43;
     -webkit-box-shadow: inset 7px 9px 25px -9px rgba(0,0,0,0.75);

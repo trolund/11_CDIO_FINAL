@@ -37,14 +37,14 @@ $(document).ready(function() {
         
 		var id = $(this).prop('name');
         
+        $('#AdminRoleEdit').prop('checked', false);
+        $('#FarRoleEdit').prop('checked', false);
+        $('#VeakRoleEdit').prop('checked', false);
+        $('#LabRoleEdit').prop('checked', false);
+        
         console.log("click:" + id);
         
 		$.getJSON('api/opr/RoleList/' + id, function(roleData) {
-            
-			$('#AdminRoleEdit').prop('checked', false);
-            $('#FarRoleEdit').prop('checked', false);
-            $('#VeakRoleEdit').prop('checked', false);
-            $('#LabRoleEdit').prop('checked', false);
             
             console.log('her:');
             console.log(roleData);

@@ -107,7 +107,7 @@ public class OperatorController implements IOperatorController {
 		System.out.println(utils.sha256(password));   
 		System.out.println(oprDTO.getOprPassword());
 		
-		if (utils.sha256(password).equals(oprDTO.getOprPassword())) {
+		if (utils.sha256(password).equals(oprDTO.getOprPassword()) && oprDTO.getStatus() == 0) {
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succLoginMessage(oprId, password));
 			return textHandler.succLoggedIn;
 		} else {
@@ -265,6 +265,36 @@ public class OperatorController implements IOperatorController {
 		createUserFormPOJO.setOprCpr(oprDTO.getOprCpr());
 		createUserFormPOJO.setOprPassword(oprDTO.getOprPassword());
 		return oprDTO;
+	}
+	
+	
+	/* Update an Operator in the underlying data layer. uden roller */
+	@Override
+	public String updateOperatorNoRols(EditUserFormPOJO editUserFormData) {
+		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
+
+		OperatorDTO oprDTO = null;
+		try {
+			oprDTO = new OperatorDTO(editUserFormData.getOprId(), editUserFormData.getOprFirstName(), editUserFormData.getOprLastName(), editUserFormData.getOprIni(), editUserFormData.getOprEmail(), editUserFormData.getOprCpr(), oprDAO.getOperator(editUserFormData.getOprId()).getOprPassword(), editUserFormData.getStatus());
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+
+		if (!oprValidator.isOprValid(oprDTO)) return textHandler.errOprInvalid;
+
+		try {
+			oprDAO.updateOperator(oprDTO);
+			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succOprUpdate(oprDTO.getOprId()));
+
+			return textHandler.succOprUpdate(oprDTO.getOprId());
+		} catch (DALException e) {
+			e.printStackTrace();
+			return textHandler.errOprCreation;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		return textHandler.errOprUpdate; // skulle vi ikke heller have en response her?
 	}
 
 }
