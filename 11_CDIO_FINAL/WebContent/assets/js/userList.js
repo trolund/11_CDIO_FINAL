@@ -24,6 +24,13 @@ $(document).ready(function() {
           		console.log(data);
           	  	$('#Editmsg').html(data);
            	 	loadUsers();
+                
+                
+                $('#AdminRoleEdit').prop('checked', false);
+                $('#FarRoleEdit').prop('checked', false);
+                $('#VeakRoleEdit').prop('checked', false);
+                $('#LabRoleEdit').prop('checked', false);
+                   
 			},
 			error: function(jqXHR, text, error) { 
             	console.log(data);
