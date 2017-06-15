@@ -23,11 +23,15 @@ import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
 
+/*
+ * RESTResource to handle operator related actions.
+ */
 @Path("/opr")
 public class RESTOperator {
 
 	private final IOperatorController oprController = new OperatorController();
 
+	/* Operator deletion */
 	@POST
 	@Path("/deleteOpr")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -36,6 +40,7 @@ public class RESTOperator {
 		return oprController.deleteOperator(oprId);
 	}
 
+	/* Operator password verification */
 	@POST
 	@Path("/verify")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -44,6 +49,7 @@ public class RESTOperator {
 		return oprController.verifyOperatorLogin(loginFormData);
 	}
 
+	/* Operator creation */
 	@POST
 	@Path("/addopr")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -52,6 +58,7 @@ public class RESTOperator {
 		return oprController.createOperator(createUserFormData);
 	}
 
+	/* OperatorPOJO */
 	@GET
 	@Path("/{oprId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -59,6 +66,7 @@ public class RESTOperator {
 		return oprController.createOperatorPOJO(oprId);
 	}
 
+	/* Operator list */
 	@GET
 	@Path("/getOprList")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -66,6 +74,7 @@ public class RESTOperator {
 		return oprController.getOperatorList();
 	}
 
+	/* Operator roles from id */
 	@GET
 	@Path("/getOprRoleList/{oprId}")
 	@Produces(MediaType.TEXT_HTML)
@@ -73,6 +82,7 @@ public class RESTOperator {
 		return oprController.getOperatorRolesAsString(oprId);
 	}
 
+	/* Operator roleList from id */
 	@GET
 	@Path("/RoleList/{oprId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -83,6 +93,7 @@ public class RESTOperator {
 		return operatorRoleList;
 	}
 
+	/* Operator update */
 	@POST
 	@Path("/updateopr")
 	@Produces(MediaType.TEXT_PLAIN)

@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
- $('#refresh_But').click(function() {
+ $("#refresh_But").click(function() {
      $('#table_con').empty(); 
 		loadmaterial(boolAcOnly);
 	}); 
@@ -43,11 +43,11 @@ $(document).ready(function() {
                         method: 'POST',
                         success : function(data) {
                         	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
-                            console.log(data);
+                        	showPopup("Material [" + Id + "] was set inactive.", true);
                         },
                         error: function(jqXHR, text, error) { 
                         	console.log('id: ' + Id + ' value: ' + checkedValue + 'was delete failed');
-                            console.log(data);
+                        	showPopup("Material [" + Id + "] wasn't set inactive.", true);
                         }
                     });         
                 }

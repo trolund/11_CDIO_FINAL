@@ -51,11 +51,11 @@ $(document).ready(function() {
                         method: 'POST',
                         success : function(data) {
                         	console.log('id: ' + Id  + ' value: ' + checkedValue + 'was deleted');
-                            console.log(data);
+                            showPopup("Receipt [" + Id + "] was set inactive.", true);
                         },
                         error: function(jqXHR, text, error) { 
                         	console.log('id: ' + Id + ' value: ' + checkedValue + 'was delete failed');
-                            console.log(data);
+                            showPopup("Receipt [" + Id + "] wasn't set inactive.", false);
                         }
                     });         
                 }
@@ -66,10 +66,7 @@ $(document).ready(function() {
     });
 
 function addre(){
-    
     $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="receptId_" type="text" value=""></td>' + '<td><input id="receptName_"></td>' + '<td></td>' + '<td><button class="insert_recept" name="">insert</button></td>' + '</tr>');
-
-     
 }
 
 // add recept button

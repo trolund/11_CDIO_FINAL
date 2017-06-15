@@ -9,6 +9,7 @@ import java.util.List;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dto.ReceptDTO;
+import final_cdio_11.java.utils.Utils;
 
 /*
  * Recept data access object implementation.
@@ -61,6 +62,9 @@ public class SQLReceptDAO implements IReceptDAO {
 		List<ReceptDTO> receptList = new ArrayList<>();
 		PreparedStatement getReceptListStmt = null;
 		ResultSet rs = null;
+		
+		Utils.getInstance().sleep(21);
+		
 		try {
 			getReceptListStmt = connector.getConnection().prepareStatement(getReceptListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getReceptListStmt.executeQuery();

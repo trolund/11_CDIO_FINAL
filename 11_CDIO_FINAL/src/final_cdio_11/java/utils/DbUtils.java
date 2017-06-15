@@ -12,6 +12,11 @@ import final_cdio_11.java.data.dao.SQLRoleDAO;
 import final_cdio_11.java.data.dto.OperatorDTO;
 import final_cdio_11.java.data.dto.RoleDTO;
 
+/*
+ * Utility class for resetting the database back with some demonstration data.
+ * resetDatabase method is called, the database is totally wiped and then
+ * restored with demonstration data.
+ */
 public class DbUtils {
 
 	private static final Connector connector = Connector.getInstance();
@@ -27,7 +32,7 @@ public class DbUtils {
 		}
 	}
 
-	private static void resetDatabase() throws DALException, SQLException {
+	public static void resetDatabase() throws DALException, SQLException {
 		if (utils.DEV_ENABLED) utils.logMessage("WARNING: Database is getting reset!");
 		deleteProduktBatchKomponent();
 		deleteProduktBatch();
@@ -179,7 +184,7 @@ public class DbUtils {
 
 	private static void createSampleReceptKomponent() throws SQLException {
 		if (utils.DEV_ENABLED) utils.logMessage("Creating sample receptkomponent...");
-		connector.getConnection().prepareStatement("INSERT INTO receptkomponent(recept_id, raavare_id, nom_netto, tolerance, status) VALUES (1, 1, 10.0, 0.1, 0), (1, 2, 2.0, 0.1, 0), (1, 5, 2.0, 0.1, 0), (2, 1, 10.0, 0.1, 0), (2, 3, 2.0, 0.1, 0), (2, 5, 1.5, 0.1, 0), (2, 6, 1.5, 0.1, 0), (3, 1, 10.0, 0.1, 0), (3, 4, 1.5, 0.1, 0), (3, 5, 1.5, 0.1, 0), (3, 6, 1.0, 0.1, 0), (3, 7, 1.0, 0.1, 0);").executeUpdate();
+		connector.getConnection().prepareStatement("INSERT INTO receptkomponent(recept_id, raavare_id, nom_netto, tolerance, status) VALUES (1, 1, 0.3, 0.1, 0), (1, 2, 0.3, 0.1, 0), (1, 5, 0.3, 0.1, 0), (2, 1, 0.3, 0.1, 0), (2, 3, 0.5, 0.1, 0), (2, 5, 0.4, 0.1, 0), (2, 6, 0.4, 0.1, 0), (3, 1, 0.2, 0.1, 0), (3, 4, 0.6, 0.1, 0), (3, 5, 0.2, 0.1, 0), (3, 6, 0.2, 0.1, 0), (3, 7, 0.4, 0.1, 0);").executeUpdate();
 		if (utils.DEV_ENABLED) utils.logMessage("Done.");
 	}
 

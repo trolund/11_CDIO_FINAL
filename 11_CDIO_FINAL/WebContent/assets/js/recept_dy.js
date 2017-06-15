@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		JSON.stringify(data + 'virker!')
+          		showPopup("Receipt [" + id + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	JSON.stringify(data)
+            	showPopup("Receipt [" + id + "] wasn't updated.", false);
 			}
 		});
 
@@ -73,9 +73,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadrecept(boolAcOnly);
+                 showPopup("Receipt [" + data.receptId + "] was created.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+            	showPopup("Receipt [" + data.receptId + "] wasn't created.", false);
 			}
 		});
 

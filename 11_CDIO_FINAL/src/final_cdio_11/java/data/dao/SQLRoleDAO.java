@@ -9,6 +9,7 @@ import java.util.List;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dto.RoleDTO;
+import final_cdio_11.java.utils.Utils;
 
 /*
  * Role data access object implementation.
@@ -33,6 +34,9 @@ public class SQLRoleDAO implements IRoleDAO {
 		String getOprRolesSql = connector.getQuery("getOprRolesSql");
 		PreparedStatement getOprRolesStmt = null;
 		ResultSet rs = null;
+		
+		Utils.getInstance().sleep(46);
+		
 		try {
 			getOprRolesStmt = connector.getConnection().prepareStatement(getOprRolesSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			getOprRolesStmt.setInt(1, oprId);

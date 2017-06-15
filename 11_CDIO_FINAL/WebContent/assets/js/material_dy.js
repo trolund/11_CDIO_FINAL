@@ -18,10 +18,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		JSON.stringify(data + 'virker!')
+          		showPopup("Material [" + $('#raavareId_' + id).html() + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	JSON.stringify(data)
+            	showPopup("Material [" + $('#raavareId_' + id).html() + "] wasn't updated.", false);
 			}
 		});
 	}); 
@@ -64,9 +64,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadmaterial(boolAcOnly);
+             	showPopup("Material [" + $('#raavareId_' + id).html() + "] was created.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+            	showPopup("Material [" + $('#raavareId_' + id).html() + "] wasn't created.", false);
 			}
 	    });
     }); 

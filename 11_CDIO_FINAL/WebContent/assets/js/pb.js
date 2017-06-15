@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  $('#checkbox_val_ac').click(function() {
+  $("#checkbox_val_ac").click(function() {
       
       $('#table_con').empty(); 
       
@@ -50,12 +50,14 @@ $(document).ready(function() {
                         url : "api/pb/delPB/" + pbId,
                         method: 'POST',
                         success : function(data) {
-                        	console.log('id: ' + pbId  + ' value: ' + checkedValue + 'was deleted');
+                        	console.log('Product Batch [' + pbId  + '] value' + checkedValue + 'was deleted');
                             console.log(data);
+                        	showPopup("Product Batch [" + pbId + "] was set inactive.", true);
                         },
                         error: function(jqXHR, text, error) { 
                         	console.log('id: ' + pbId + ' value: ' + checkedValue + 'was delete failed');
                             console.log(data);
+                            showPopup("Product Batch [" + pbId + "] wasn't set inactive.", true);
                         }
                     });         
                 }

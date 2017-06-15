@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		JSON.stringify(data + 'virker!')
+          		showPopup("Product Batch [" + id + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	JSON.stringify(data)
+            	showPopup("Product Batch [" + id + "] wasn't updated.", false);
 			}
 		});
 
@@ -74,9 +74,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadpb(boolAcOnly);
+                 showPopup("Product Batch [" + data.rbId + "] was created.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+                 showPopup("Product Batch [" + data.rbId + "] wasn't created.", false);
 			}
 		});
 

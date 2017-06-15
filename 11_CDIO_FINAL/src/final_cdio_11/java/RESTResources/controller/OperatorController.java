@@ -20,12 +20,16 @@ import final_cdio_11.java.data.validator.OperatorValidator;
 import final_cdio_11.java.handler.TextHandler;
 import final_cdio_11.java.utils.Utils;
 
+/*
+ * REST Controller for business logic associated with Operator related utilities.
+ */
 public class OperatorController implements IOperatorController {
 
 	private final Utils utils = Utils.getInstance();
 	private final TextHandler textHandler = TextHandler.getInstance();
 	private IOperatorValidator oprValidator = new OperatorValidator();
 
+	/* Gets an Operator list */
 	@Override
 	public List<OperatorDTO> getOperatorList() {
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
@@ -39,6 +43,7 @@ public class OperatorController implements IOperatorController {
 		return oprList;
 	}
 
+	/* Concatenates all roles to a single String and returns it. */
 	@Override
 	public String getOperatorRolesAsString(String oprId) {
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
@@ -63,6 +68,7 @@ public class OperatorController implements IOperatorController {
 		return returnString.toString();
 	}
 
+	/* Returns a List containing the roles of a specific operator */
 	@Override
 	public List<RoleDTO> getOperatorRoleList(String oprId) {
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
@@ -80,6 +86,7 @@ public class OperatorController implements IOperatorController {
 		return null;
 	}
 
+	/* Verifies an Operators id and password. */
 	@Override
 	public String verifyOperatorLogin(LoginFormPOJO loginFormData) {
 		int oprId = loginFormData.getOprId();
@@ -97,6 +104,9 @@ public class OperatorController implements IOperatorController {
 			return textHandler.errIdInvalid;
 		}
 
+		System.out.println(utils.sha256(password));   
+		System.out.println(oprDTO.getOprPassword());
+		
 		if (utils.sha256(password).equals(oprDTO.getOprPassword())) {
 			if (utils.DEV_ENABLED) utils.logMessage(textHandler.succLoginMessage(oprId, password));
 			return textHandler.succLoggedIn;
@@ -106,12 +116,13 @@ public class OperatorController implements IOperatorController {
 		}
 	}
 
+	/* Create an Operator in the underlying data layer. */
 	@Override
 	public String createOperator(CreateUserFormPOJO createUserFormData) {
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
 		IRoleDAO roleDAO = new SQLRoleDAO(Connector.getInstance());
 
-		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), createUserFormData.getOprPassword(), createUserFormData.getStatus());
+		OperatorDTO oprDTO = new OperatorDTO(createUserFormData.getOprId(), createUserFormData.getOprFirstName(), createUserFormData.getOprLastName(), createUserFormData.getOprIni(), createUserFormData.getOprEmail(), createUserFormData.getOprCpr(), utils.sha256(createUserFormData.getOprPassword()), createUserFormData.getStatus());
 
 		if (!oprValidator.isOprValid(oprDTO)) return textHandler.errOprInvalid;
 
@@ -150,6 +161,7 @@ public class OperatorController implements IOperatorController {
 		return textHandler.errOprCreate; // skulle vi ikke heller have en response her?
 	}
 
+	/* Update an Operator in the underlying data layer. */
 	@Override
 	public String updateOperator(EditUserFormPOJO editUserFormData) {
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
@@ -172,20 +184,32 @@ public class OperatorController implements IOperatorController {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Admin.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Admin.toString()));
 			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Admin.toString(), 1));
+			}
 
 			if (editUserFormData.isFarmaceutRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Farmaceut.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Farmaceut.toString()));
+			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Farmaceut.toString(), 1));
 			}
 
 			if (editUserFormData.isVaerkforerRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Værkfører.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Værkfører.toString()));
 			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Værkfører.toString(), 1));
+			}
 
 			if (editUserFormData.isLaborantRole()) {
 				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Laborant.toString(), 0));
 				if (utils.DEV_ENABLED) utils.logMessage(textHandler.succRoleAdd(editUserFormData.getOprId(), Role.Laborant.toString()));
+			}
+			else{
+				roleDAO.updateRole(new RoleDTO(editUserFormData.getOprId(), Role.Laborant.toString(), 1));
 			}
 
 			return textHandler.succOprUpdate(oprDTO.getOprId());
@@ -199,6 +223,7 @@ public class OperatorController implements IOperatorController {
 		return textHandler.errOprUpdate; // skulle vi ikke heller have en response her?
 	}
 
+	/* Create an Operator in the underlying data layer. */
 	@Override
 	public boolean deleteOperator(String oprId) {
 		IOperatorDAO oprDAO = new SQLOperatorDAO(Connector.getInstance());
@@ -220,6 +245,7 @@ public class OperatorController implements IOperatorController {
 		}
 	}
 
+	/* Create an OperatorPOJO. */
 	@Override
 	public OperatorDTO createOperatorPOJO(String oprId) {
 

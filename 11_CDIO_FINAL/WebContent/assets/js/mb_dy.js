@@ -7,7 +7,7 @@ $(document).ready(function() {
 		var data = {
             "rbId":$('#rbId_' + id).html(),
             "status":$('#Status_val_' + id).val(),
-            "raavareId":$('#raavareId_' + id).html(), 
+            "raavareId":$('#Mat_val_' + id).val(), 
             "amount":$('#maengde_' + id).val(),
             }; 
       
@@ -19,10 +19,10 @@ $(document).ready(function() {
 			contentType: "application/json",
 			method: 'POST',
 			success : function(data) { 
-          		JSON.stringify(data + 'virker!')
+          		showPopup("Material Batch [" + id + "] was updated.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	JSON.stringify(data)
+            	showPopup("Material Batch [" + id + "] wasn't updated.", false);
 			}
 		});
     }); 
@@ -50,10 +50,10 @@ function insertsciped(){
 	$(".insert_materialb").click(function() {
         
 		var data = {
-            "rbId":$('#rbId_' + id).html(),
-            "status":$('#Status_val_' + id).val(),
-            "raavareId":$('#raavareId_' + id).html(), 
-            "amount":$('#maengde_' + id).val(),
+            "rbId":$('#rbId_').val(),
+            "status":"0",
+            "raavareId":$('#Mat_val_').val(), 
+            "amount":$('#meangde_').val(),
             }; 
     
         console.log(data);
@@ -65,9 +65,10 @@ function insertsciped(){
 			method: 'POST',
 			success : function(data) {
                  loadmaterial(boolAcOnly);
+                 showPopup("Material Batch [" + data.rbId + "] was created.", true);
 			},
 			error: function(jqXHR, text, error) { 
-            	
+            	showPopup("Material Batch [" + data.rbId + "] wasn't created.", false);
 			}
 		});
 	}); 

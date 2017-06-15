@@ -14,11 +14,15 @@ import final_cdio_11.java.RESTResources.controller.IReceptController;
 import final_cdio_11.java.RESTResources.controller.ReceptController;
 import final_cdio_11.java.data.dto.ReceptDTO;
 
+/*
+ * RESTResource to handle receipt related actions.
+ */
 @Path("/recept")
 public class RESTRecept {
 
 	private final IReceptController receptController = new ReceptController();
 
+	/* Get receipt list */
 	@GET
 	@Path("/List")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -26,6 +30,7 @@ public class RESTRecept {
 		return receptController.getReceptList();
 	}
 
+	/* Update receipt */
 	@POST
 	@Path("/Update")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -33,6 +38,7 @@ public class RESTRecept {
 		return receptController.updateRecept(data);
 	}
 
+	/* Delete receipt */
 	@POST
 	@Path("/del/{pbId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -40,6 +46,7 @@ public class RESTRecept {
 		return receptController.deleteRecept(id);
 	}
 
+	/* Create receipt */
 	@POST
 	@Path("/insert")
 	@Produces(MediaType.APPLICATION_JSON)

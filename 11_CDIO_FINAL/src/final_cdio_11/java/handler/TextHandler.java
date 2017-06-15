@@ -4,6 +4,7 @@ import final_cdio_11.java.data.dto.OperatorDTO;
 
 /*
  * Singleton TextHandler class.
+ * This class contains all the used text, ports, etc.
  */
 public class TextHandler {
 

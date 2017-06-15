@@ -1,5 +1,8 @@
 package final_cdio_11.java.weight.ase;
 
+/*
+ * Interface for the weight connector class.
+ */
 public interface IWeightConnector {
 	void initConnection() throws WeightConnectionException;
 	void closeConnection() throws WeightConnectionException;
@@ -15,6 +18,9 @@ public interface IWeightConnector {
 	String shortString(String message, int maxLength);
 	void promptQuit() throws WeightException;
 
+	/*
+	 * Custom WeightException.
+	 */
 	public class WeightException extends Exception {
 		private static final long serialVersionUID = 1L;
 
@@ -27,6 +33,9 @@ public interface IWeightConnector {
 		}
 	}
 
+	/*
+	 * Custom WeightException specific for connection related issues.
+	 */
 	public class WeightConnectionException extends WeightException {
 		private static final long serialVersionUID = 1L;
 

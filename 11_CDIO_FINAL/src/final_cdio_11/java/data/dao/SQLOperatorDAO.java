@@ -33,11 +33,11 @@ public class SQLOperatorDAO implements IOperatorDAO {
 		String getOprSql = connector.getQuery("getOprSql");
 		PreparedStatement getOprStmt = null;
 		ResultSet rs = null;
-		
+
 		// Sleep for debugging
 		Utils.getInstance().sleep(100);
 		//
-		
+
 		try {
 			getOprStmt = connector.getConnection().prepareStatement(getOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			getOprStmt.setInt(1, oprId);
@@ -135,7 +135,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			updateOprStmt.setString(3, opr.getOprIni());
 			updateOprStmt.setString(4, opr.getOprEmail());
 			updateOprStmt.setString(5, opr.getOprCpr());
-			updateOprStmt.setString(6, Utils.getInstance().sha256(opr.getOprPassword()));
+			updateOprStmt.setString(6, opr.getOprPassword());
 			updateOprStmt.setInt(7, opr.getStatus());
 			updateOprStmt.setInt(8, opr.getOprId());
 			updateOprStmt.executeUpdate();
