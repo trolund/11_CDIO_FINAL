@@ -352,6 +352,7 @@ function Roletjek() { // tjekker hvad der skal vises i web UI
 	// hide menu punkter
 	$('#user_but').hide();
 	$('#startWeight').hide();
+	$('#resetDatabase').hide();
 	$('#matbatch_but').hide();
 	$('#prodbatch_but').hide();
 	$('#mat_but').hide();
