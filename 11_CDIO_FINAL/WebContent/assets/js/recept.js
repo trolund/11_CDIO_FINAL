@@ -64,7 +64,7 @@ $(document).ready(function() {
         loadrecept(boolAcOnly);
         }); 
     });
-
+	
 function addre(){
     $("#table_con tr:first-child").after('<tr name="" id="row">' + '<td value="0" id="status_" style="color: green;">Active</td>' + '<td><input id="receptId_" type="text" value=""></td>' + '<td><input id="receptName_"></td>' + '<td></td>' + '<td><button class="insert_recept" name="">insert</button></td>' + '</tr>');
 }

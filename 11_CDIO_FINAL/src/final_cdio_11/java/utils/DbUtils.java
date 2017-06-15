@@ -196,7 +196,7 @@ public class DbUtils {
 
 	private static void createSampleProduktBatch() throws SQLException {
 		if (utils.DEV_ENABLED) utils.logMessage("Creating sample produktbatch...");
-		connector.getConnection().prepareStatement("INSERT INTO produktbatch(pb_id, recept_id, item_status, status) VALUES (1, 1, 2, 0), (2, 1, 2, 0), (3, 2, 2, 0), (4, 3, 1, 0), (5, 3, 0, 0);").executeUpdate();
+		connector.getConnection().prepareStatement("INSERT INTO produktbatch(pb_id, recept_id, item_status, status) VALUES (1, 1, 2, 0), (2, 1, 2, 0), (3, 2, 2, 0), (4, 3, 1, 0), (5, 1, 0, 0);").executeUpdate();
 		if (utils.DEV_ENABLED) utils.logMessage("Done.");
 	}
 
