@@ -64,12 +64,14 @@ public class OperatorController implements IOperatorController {
 			return "None.";
 		}
 
+		
+		
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
 			RoleDTO roleDTO = (RoleDTO) iterator.next();
 			if (iterator.hasNext() && roleDTO.getStatus() == 0 ) returnString.append(roleDTO.getRoleName() + ", ");
-			else if(roleDTO.getStatus() == 0)returnString.append(roleDTO.getRoleName() + ".");
 		}
-		return returnString.toString();
+		
+		return returnString.toString().replaceAll(", $", ".");
 	}
 
 	/* Returns a List containing the roles of a specific operator */
@@ -83,7 +85,7 @@ public class OperatorController implements IOperatorController {
 			List<RoleDTO> List = new ArrayList<RoleDTO>();
 			
 			for (int i = 0; i < oprRoleList.size(); i++) {
-				if(oprRoleList.get(i).getStatus() == 1){
+				if(oprRoleList.get(i).getStatus() == 0){
 					List.add((oprRoleList.get(i)));
 				}
 			}
