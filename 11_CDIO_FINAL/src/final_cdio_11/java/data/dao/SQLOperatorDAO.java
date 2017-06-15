@@ -106,7 +106,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			createOprStmt.setString(4, opr.getOprIni());
 			createOprStmt.setString(5, opr.getOprEmail());
 			createOprStmt.setString(6, opr.getOprCpr());
-			createOprStmt.setString(7, Utils.getInstance().sha256(opr.getOprPassword()));
+			createOprStmt.setString(7, opr.getOprPassword());
 			createOprStmt.setInt(8, opr.getStatus());
 			createOprStmt.executeUpdate();
 		} catch (SQLException e) {

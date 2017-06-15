@@ -1,5 +1,6 @@
 package final_cdio_11.java.RESTResources.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,6 +53,9 @@ public class OperatorController implements IOperatorController {
 
 		try {
 			oprRoleList = roleDAO.getOprRoles(Integer.parseInt(oprId));
+			
+			
+			
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
@@ -60,12 +64,14 @@ public class OperatorController implements IOperatorController {
 			return "None.";
 		}
 
+		
+		
 		for (Iterator<RoleDTO> iterator = oprRoleList.iterator(); iterator.hasNext();) {
 			RoleDTO roleDTO = (RoleDTO) iterator.next();
-			if (iterator.hasNext()) returnString.append(roleDTO.getRoleName() + ", ");
-			else returnString.append(roleDTO.getRoleName() + ".");
+			if (iterator.hasNext() && roleDTO.getStatus() == 0 ) returnString.append(roleDTO.getRoleName() + ", ");
 		}
-		return returnString.toString();
+		
+		return returnString.toString().replaceAll(", $", ".");
 	}
 
 	/* Returns a List containing the roles of a specific operator */
@@ -76,7 +82,15 @@ public class OperatorController implements IOperatorController {
 
 		try {
 			oprRoleList = roleDAO.getOprRoles(Integer.parseInt(oprId));
-			return oprRoleList;
+			List<RoleDTO> List = new ArrayList<RoleDTO>();
+			
+			for (int i = 0; i < oprRoleList.size(); i++) {
+				if(oprRoleList.get(i).getStatus() == 0){
+					List.add((oprRoleList.get(i)));
+				}
+			}
+			
+			return List;
 		} catch (DALException e) {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
