@@ -60,32 +60,41 @@ public class DbUtils {
 		// Create Admin
 		oprDAO.createOperator(new OperatorDTO(10, "Admin", "Admin", "ADM", "webadmin@group11.com", "2412997890", utils.sha256("root"), 0));
 		roleDAO.createRole(new RoleDTO(10, Role.Admin.toString(), 0));
-		roleDAO.createRole(new RoleDTO(10, Role.Farmaceut.toString(), 0));
-		roleDAO.createRole(new RoleDTO(10, Role.Laborant.toString(), 0));
-		roleDAO.createRole(new RoleDTO(10, Role.Værkfører.toString(), 0));
+		roleDAO.createRole(new RoleDTO(10, Role.Farmaceut.toString(), 1));
+		roleDAO.createRole(new RoleDTO(10, Role.Laborant.toString(), 1));
+		roleDAO.createRole(new RoleDTO(10, Role.Værkfører.toString(), 1));
 		if (utils.DEV_ENABLED) utils.logMessage("Created operator Admin...");
 
 		// Create Stig 
 		oprDAO.createOperator(new OperatorDTO(1, "Stig", "Høgh", "SH", "shg@dtu.dk", "0911974321", utils.sha256("rootstig"), 0));
+		roleDAO.createRole(new RoleDTO(1, Role.Admin.toString(), 1));
 		roleDAO.createRole(new RoleDTO(1, Role.Farmaceut.toString(), 0));
-		roleDAO.createRole(new RoleDTO(1, Role.Laborant.toString(), 0));
-		roleDAO.createRole(new RoleDTO(1, Role.Værkfører.toString(), 0));
+		roleDAO.createRole(new RoleDTO(1, Role.Laborant.toString(), 1));
+		roleDAO.createRole(new RoleDTO(1, Role.Værkfører.toString(), 1));
 		if (utils.DEV_ENABLED) utils.logMessage("Created operator Stig...");
 
 		// Create Finn
 		oprDAO.createOperator(new OperatorDTO(2, "Finn", "Gustafsson", "FG", "fiu@dtu.dk", "1302924680", utils.sha256("rootfinn"), 0));
-		roleDAO.createRole(new RoleDTO(2, Role.Farmaceut.toString(), 0));
-		roleDAO.createRole(new RoleDTO(2, Role.Værkfører.toString(), 0));
+		roleDAO.createRole(new RoleDTO(2, Role.Admin.toString(), 1));
+		roleDAO.createRole(new RoleDTO(2, Role.Farmaceut.toString(), 1));
+		roleDAO.createRole(new RoleDTO(2, Role.Laborant.toString(), 0));
+		roleDAO.createRole(new RoleDTO(2, Role.Værkfører.toString(), 1));
 		if (utils.DEV_ENABLED) utils.logMessage("Created operator Finn...");
 
 		// Create Ronnie
 		oprDAO.createOperator(new OperatorDTO(3, "Ronnie", "Dalsgaard", "RD", "ronniedalsgaard@gmail.com", "1103866547", utils.sha256("rootronnie"), 0));
+		roleDAO.createRole(new RoleDTO(3, Role.Admin.toString(), 1));
+		roleDAO.createRole(new RoleDTO(3, Role.Farmaceut.toString(), 1));
+		roleDAO.createRole(new RoleDTO(3, Role.Laborant.toString(), 1));
 		roleDAO.createRole(new RoleDTO(3, Role.Værkfører.toString(), 0));
 		if (utils.DEV_ENABLED) utils.logMessage("Created operator Ronnie...");
 
 		// Create Christian
 		oprDAO.createOperator(new OperatorDTO(4, "Christian", "Budtz", "CB", "s136400@student.dtu.dk", "2902915432", utils.sha256("rootchristian"), 0));
-		roleDAO.createRole(new RoleDTO(4, Role.Farmaceut.toString(), 0));
+		roleDAO.createRole(new RoleDTO(4, Role.Admin.toString(), 0));
+		roleDAO.createRole(new RoleDTO(4, Role.Farmaceut.toString(), 1));
+		roleDAO.createRole(new RoleDTO(4, Role.Laborant.toString(), 0));
+		roleDAO.createRole(new RoleDTO(4, Role.Værkfører.toString(), 1));
 		if (utils.DEV_ENABLED) utils.logMessage("Created operator Christian...");
 
 		// Create Troels
