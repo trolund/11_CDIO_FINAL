@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IReceptComponentDAO;
 import final_cdio_11.java.data.dao.SQLReceptComponentDAO;
 import final_cdio_11.java.data.dto.ReceptComponentDTO;
 
@@ -19,7 +20,7 @@ public class TestSQLReceptComponentDAO {
 	/*
 	 * Required objects.
 	 */
-	private SQLReceptComponentDAO rcDAO;
+	private IReceptComponentDAO rcDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -91,9 +92,13 @@ public class TestSQLReceptComponentDAO {
 		try {
 			List<ReceptComponentDTO> rcList = rcDAO.getReceptComponentList();
 			System.out.println("\n" + spr + " Testing SQLReceptComponentDAO.getRCList() Positive " + spr);
+
+			if (rcList == null) fail("Failed: Failed to retrieve ReceptComponentList!");
+
 			for (int i = 0; i < rcList.size(); i++) {
 				System.out.println(i + ": " + rcList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -110,10 +115,15 @@ public class TestSQLReceptComponentDAO {
 		try {
 			int receptId = 1;
 			List<ReceptComponentDTO> rcList = rcDAO.getReceptComponentList(receptId);
+
 			System.out.println("\n" + spr + " Testing SQLReceptComponentDAO.getRCList(" + receptId + ") Positive " + spr);
+
+			if (rcList == null) fail("Failed: Failed to retrieve ReceptComponentList!");
+
 			for (int i = 0; i < rcList.size(); i++) {
 				System.out.println(i + ": " + rcList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -130,8 +140,7 @@ public class TestSQLReceptComponentDAO {
 		try {
 			/* Make sure the ReceptComponentDTO does not already exist. */
 			int receptId = 1;
-			int raavareId = 2;
-			rcDAO.deleteReceptComponent(receptId, raavareId);
+			int raavareId = 3;
 
 			System.out.println("\n" + spr + " Testing SQLReceptComponentDAO.createRC(rcDTO) Positive " + spr);
 
@@ -153,9 +162,8 @@ public class TestSQLReceptComponentDAO {
 	@Test
 	public void testCreateRCNegative() {
 		try {
-			int receptId = 2;
-			int raavareId = 1;
-
+			int receptId = 1;
+			int raavareId = 2;
 			System.out.println("\n" + spr + " Testing SQLReceptComponentDAO.createRC(rcDTO) Negative " + spr);
 
 			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 23.23, 44.44, 0);
@@ -177,12 +185,8 @@ public class TestSQLReceptComponentDAO {
 	public void testUpdateRCPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLReceptComponentDAO.updateRC(rcDTO) Positive " + spr);
-			/* Creating ReceptComponentDTO to make sure that it exists. */
 			int receptId = 2;
 			int raavareId = 3;
-			rcDAO.deleteReceptComponent(receptId, raavareId);
-			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 50.00, 66.44, 0);
-			rcDAO.createReceptComponent(rcDTO);
 
 			double newNomNetto = 234.43;
 			double newTolerance = 32.325;
@@ -213,14 +217,12 @@ public class TestSQLReceptComponentDAO {
 	public void testDeletePBCPositive() {
 		try {
 			System.out.println("\n" + spr + "Testing SQLReceptComponentDAO.deleteRC(receptId, raavareId) Positive " + spr);
+
 			/* Creating ReceptComponentDTO to make sure that it exists. */
 			int receptId = 2;
-			int raavareId = 2;
-			rcDAO.deleteReceptComponent(receptId, raavareId);
-			ReceptComponentDTO rcDTO = new ReceptComponentDTO(receptId, raavareId, 50.00, 66.44, 0);
-			rcDAO.createReceptComponent(rcDTO);
+			int raavareId = 1;
 
-			System.out.println("Created: " + rcDTO);
+			System.out.println("Created: " + rcDAO.getReceptComponent(receptId, raavareId));
 			rcDAO.deleteReceptComponent(receptId, raavareId);
 			System.out.println("Deleted.");
 

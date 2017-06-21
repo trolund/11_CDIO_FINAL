@@ -9,6 +9,7 @@ import java.util.List;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dto.ReceptDTO;
+import final_cdio_11.java.utils.Utils;
 
 /*
  * Recept data access object implementation.
@@ -61,6 +62,9 @@ public class SQLReceptDAO implements IReceptDAO {
 		List<ReceptDTO> receptList = new ArrayList<>();
 		PreparedStatement getReceptListStmt = null;
 		ResultSet rs = null;
+		
+		Utils.getInstance().sleep(21);
+		
 		try {
 			getReceptListStmt = connector.getConnection().prepareStatement(getReceptListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getReceptListStmt.executeQuery();
@@ -70,7 +74,7 @@ public class SQLReceptDAO implements IReceptDAO {
 			do {
 				receptList.add(new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return receptList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -119,8 +123,8 @@ public class SQLReceptDAO implements IReceptDAO {
 		try {
 			updateReceptStmt = connector.getConnection().prepareStatement(updateReceptSql);
 			updateReceptStmt.setString(1, recept.getReceptName());
-			updateReceptStmt.setInt(2, recept.getReceptId());
-			updateReceptStmt.setInt(3, recept.getStatus());
+			updateReceptStmt.setInt(2, recept.getStatus());
+			updateReceptStmt.setInt(3, recept.getReceptId());
 			updateReceptStmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

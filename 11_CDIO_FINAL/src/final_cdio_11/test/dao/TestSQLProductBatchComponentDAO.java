@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IProductBatchComponentDAO;
 import final_cdio_11.java.data.dao.SQLProductBatchComponentDAO;
 import final_cdio_11.java.data.dto.ProductBatchComponentDTO;
 
@@ -19,7 +20,7 @@ public class TestSQLProductBatchComponentDAO {
 	/*
 	 * Required objects.
 	 */
-	private SQLProductBatchComponentDAO pbcDAO;
+	private IProductBatchComponentDAO pbcDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -46,12 +47,13 @@ public class TestSQLProductBatchComponentDAO {
 	public void testGetPBCPositive() {
 		try {
 			int pbId = 1;
-			int rbId = 2;
+			int rbId = 4;
+
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.getPBC(" + pbId + ", " + rbId + ") Positive " + spr);
 
 			System.out.println("Receiving ProductBatchComponentDTO with pbId: " + pbId + ", rbId: " + rbId + ".");
-			ProductBatchComponentDTO pbcDTO = pbcDAO.getProductBatchComponent(pbId, rbId);
-			System.out.println("Received: " + pbcDTO);
+			ProductBatchComponentDTO newPbcDTO = pbcDAO.getProductBatchComponent(pbId, rbId);
+			System.out.println("Received: " + newPbcDTO);
 
 			System.out.println(lspr);
 		} catch (DALException e) {
@@ -69,8 +71,6 @@ public class TestSQLProductBatchComponentDAO {
 		try {
 			int pbId = 54;
 			int rbId = 43;
-			/* Make sure that the ProductBatchComponentDTO does not exist. */
-			pbcDAO.deleteProductBatchComponent(pbId, rbId);
 
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.getPBC(" + pbId + ", " + rbId + ") Negative " + spr);
 
@@ -94,9 +94,13 @@ public class TestSQLProductBatchComponentDAO {
 		try {
 			List<ProductBatchComponentDTO> pbcList = pbcDAO.getProductBatchComponentList();
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.getPBCList() Positive " + spr);
+
+			if (pbcList == null) fail("Failed: Failed to retrieve ProductBatchComponentList!");
+
 			for (int i = 0; i < pbcList.size(); i++) {
 				System.out.println(i + ": " + pbcList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -112,11 +116,16 @@ public class TestSQLProductBatchComponentDAO {
 	public void testGetPBCListParameterPositive() {
 		try {
 			int rbId = 1;
+
 			List<ProductBatchComponentDTO> pbcList = pbcDAO.getProductBatchComponentList(rbId);
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.getPBCList(" + rbId + ") Positive " + spr);
+
+			if (pbcList == null) fail("Failed: Failed to retrieve ProductBatchComponentList!");
+
 			for (int i = 0; i < pbcList.size(); i++) {
 				System.out.println(i + ": " + pbcList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -131,10 +140,8 @@ public class TestSQLProductBatchComponentDAO {
 	@Test
 	public void testCreatePBCPositive() {
 		try {
-			/* Make sure the ProductBatchComponentDTO does not already exist. */
-			int pbId = 1;
-			int rbId = 2;
-			pbcDAO.deleteProductBatchComponent(pbId, rbId);
+			int pbId = 2;
+			int rbId = 3;
 
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.createPBC(pbcDTO) Positive " + spr);
 
@@ -158,9 +165,10 @@ public class TestSQLProductBatchComponentDAO {
 		try {
 			int pbId = 1;
 			int rbId = 2;
-			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.createPBC(pbcDTO) Negative " + spr);
 
 			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 432.23, 23.23, 1, 0);
+
+			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.createPBC(pbcDTO) Negative " + spr);
 			pbcDAO.createProductBatchComponent(pbcDTO);
 			System.out.println("Created: " + pbcDTO);
 
@@ -179,17 +187,14 @@ public class TestSQLProductBatchComponentDAO {
 	public void testUpdatePBCPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.updatePBC(pbcDTO) Positive " + spr);
-			/* Creating pbcDTO to make sure that it exists. */
+
 			int pbId = 2;
-			int rbId = 3;
-			pbcDAO.deleteProductBatchComponent(pbId, rbId);
-			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 99.99, 11.22, 1, 0);
-			pbcDAO.createProductBatchComponent(pbcDTO);
+			int rbId = 5;
 
 			double newTara = 23423.234;
 			double newNetto = 555.342;
 
-			ProductBatchComponentDTO updatedPbcDTO = new ProductBatchComponentDTO(pbId, rbId, newTara, newNetto, 1, 0);
+			ProductBatchComponentDTO updatedPbcDTO = new ProductBatchComponentDTO(pbId, rbId, newTara, newNetto, 2, 0);
 
 			System.out.println("Created: " + pbcDAO.getProductBatchComponent(pbId, rbId));
 			pbcDAO.updateProductBatchComponent(updatedPbcDTO);
@@ -198,7 +203,7 @@ public class TestSQLProductBatchComponentDAO {
 			double expected = newTara;
 			double actual = pbcDAO.getProductBatchComponent(pbId, rbId).getTara();
 
-			assertEquals("Failed: The updated name does not match!", expected, actual, 0);
+			assertEquals("Failed: The updated tara does not match!", expected, actual, 0);
 
 			System.out.println(lspr);
 		} catch (DALException e) {
@@ -215,16 +220,17 @@ public class TestSQLProductBatchComponentDAO {
 	public void testDeletePBCPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLProductBatchComponentDAO.deletePBC(pbId, rbId) Positive " + spr);
-			/* Creating ProductBatchComponentDTO to make sure that it exists. */
+
 			int pbId = 2;
-			int rbId = 3;
-			pbcDAO.deleteProductBatchComponent(pbId, rbId);
+			int rbId = 2;
+
 			ProductBatchComponentDTO pbcDTO = new ProductBatchComponentDTO(pbId, rbId, 22.22, 33.33, 1, 0);
-			pbcDAO.createProductBatchComponent(pbcDTO);
 
 			System.out.println("Created: " + pbcDTO);
 			pbcDAO.deleteProductBatchComponent(pbId, rbId);
 			System.out.println("Deleted.");
+
+			if (pbcDAO.getProductBatchComponent(pbId, rbId).getStatus() != 1) fail("Failed: Failed to delete existing ProductBatchComponentDTO!");
 
 			System.out.println(lspr);
 		} catch (DALException e) {

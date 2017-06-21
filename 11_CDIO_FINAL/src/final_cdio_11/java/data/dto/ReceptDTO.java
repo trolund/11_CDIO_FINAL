@@ -15,6 +15,10 @@ public class ReceptDTO {
 		this.receptName = receptName;
 		this.status = status;
 	}
+	
+	public ReceptDTO(){ // til rest json mapping
+		
+	}
 
 	public int getReceptId() {
 		return receptId;
@@ -28,9 +32,21 @@ public class ReceptDTO {
 		return status;
 	}
 
+	public void setReceptId(int receptId) {
+		this.receptId = receptId;
+	}
+
+	public void setReceptName(String receptName) {
+		this.receptName = receptName;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "ReceptDTO [receptId=" + receptId + ", receptName=" + receptName + ". status=" + status + "]";
+		return "ReceptDTO [receptId=" + receptId + ", receptName=" + receptName + ", status=" + status + "]";
 	}
 
 }

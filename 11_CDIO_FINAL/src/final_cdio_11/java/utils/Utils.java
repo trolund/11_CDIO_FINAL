@@ -6,6 +6,8 @@ import java.util.Date;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import final_cdio_11.java.handler.TextHandler;
+
 /*
  * Singleton class for various utilities.
  */
@@ -16,25 +18,28 @@ public class Utils {
 	 */
 	private static final Utils instance = new Utils();
 
-
 	/*
 	 * Application Flags
 	 */
 	public final boolean DEV_ENABLED = true;
-	public final boolean TEST_ENABLED = false;
 
 	/*
 	 * Class object fields.
 	 */
-	private final TextHandler textHandler;
+	private final TextHandler textHandler = TextHandler.getInstance();
 
 	/*
 	 * Private constructor. Can't be instantiated.
 	 */
 	private Utils() {
-		textHandler = TextHandler.getInstance();
 		if (DEV_ENABLED) logMessage(textHandler.devStartUpMessage);
-		else if (TEST_ENABLED) logMessage(textHandler.testStartUpMessage);
+	}
+
+	/*
+	 * Getter for the singleton instance.
+	 */
+	public static synchronized Utils getInstance() {
+		return instance;
 	}
 
 	/*
@@ -74,10 +79,14 @@ public class Utils {
 	}
 
 	/*
-	 * Getter for the singleton instance.
+	 * Method use to sleep the thread for millis milliseconds. 
 	 */
-	public static synchronized Utils getInstance() {
-		return instance;
+	public void sleep(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

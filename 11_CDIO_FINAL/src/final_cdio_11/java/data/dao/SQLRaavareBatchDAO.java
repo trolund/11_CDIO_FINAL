@@ -69,7 +69,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			do {
 				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return rbList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -102,7 +102,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			do {
 				rbList.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return rbList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -125,7 +125,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 		PreparedStatement createRBStmt = null;
 		try {
 			createRBStmt = connector.getConnection().prepareStatement(createRBSql);
-			createRBStmt.setInt(1, rbDTO.getrBId());
+			createRBStmt.setInt(1, rbDTO.getRbId());
 			createRBStmt.setInt(2, rbDTO.getRaavareId());
 			createRBStmt.setDouble(3, rbDTO.getAmount());
 			createRBStmt.setInt(4, rbDTO.getStatus());
@@ -153,7 +153,7 @@ public class SQLRaavareBatchDAO implements IRaavareBatchDAO {
 			updateRBStmt = connector.getConnection().prepareStatement(updateRBCSql);
 			updateRBStmt.setDouble(1, rbDTO.getAmount());
 			updateRBStmt.setInt(2, rbDTO.getStatus());
-			updateRBStmt.setInt(3, rbDTO.getrBId());
+			updateRBStmt.setInt(3, rbDTO.getRbId());
 			updateRBStmt.setInt(4, rbDTO.getRaavareId());
 			updateRBStmt.executeUpdate();
 		} catch (SQLException e) {

@@ -72,7 +72,7 @@ public class SQLProductBatchComponentDAO implements IProductBatchComponentDAO {
 			do {
 				pbcList.add(new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return pbcList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -104,7 +104,7 @@ public class SQLProductBatchComponentDAO implements IProductBatchComponentDAO {
 			do {
 				pbcList.add(new ProductBatchComponentDTO(rs.getInt("pb_id"), rs.getInt("rb_id"), rs.getDouble("tara"), rs.getDouble("netto"), rs.getInt("opr_id"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return pbcList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IRaavareDAO;
 import final_cdio_11.java.data.dao.SQLRaavareDAO;
 import final_cdio_11.java.data.dto.RaavareDTO;
 
@@ -19,7 +20,7 @@ public class TestSQLRaavareDAO {
 	/*
 	 * Required objects.
 	 */
-	private SQLRaavareDAO raavareDAO;
+	private IRaavareDAO raavareDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -46,6 +47,7 @@ public class TestSQLRaavareDAO {
 	public void testGetRaavarePositive() {
 		try {
 			int raavareId = 1;
+
 			System.out.println("\n" + spr + " Testing SQLRaavareDAO.getRaavare(" + raavareId + ") Positive " + spr);
 
 			System.out.println("Receiving raavareDTO with raavareId: " + raavareId);
@@ -89,9 +91,13 @@ public class TestSQLRaavareDAO {
 		try {
 			List<RaavareDTO> raavareList = raavareDAO.getRaavareList();
 			System.out.println("\n" + spr + " Testing SQLRaavareDAO.getRaavareList() Positive " + spr);
+
+			if (raavareList == null) fail("Failed: Failed to retrieve raavareList!");
+
 			for (int i = 0; i < raavareList.size(); i++) {
 				System.out.println(i + ": " + raavareList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -106,9 +112,7 @@ public class TestSQLRaavareDAO {
 	@Test
 	public void testCreateRaavarePositive() {
 		try {
-			/* Make sure the RaavareDTO does not already exist. */
-			int raavareId = 324;
-			raavareDAO.deleteRaavare(raavareId);
+			int raavareId = 30;
 
 			System.out.println("\n" + spr + " Testing SQLRaavareDAO.createRaavare(raavareDTO) Positive " + spr);
 
@@ -152,11 +156,7 @@ public class TestSQLRaavareDAO {
 	public void testUpdateRaavarePositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLRaavareDAO.updateRaavare(raavareDTO) Positive " + spr);
-			/* Creating RaavareDTO to make sure that it exists. */
-			int raavareId = 423;
-			raavareDAO.deleteRaavare(423);
-			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Fish", "Fish Sticks", 0);
-			raavareDAO.createRaavare(raavareDTO);
+			int raavareId = 3;
 
 			String newName = "Salt Fish";
 			String newSupplier = "US of A";
@@ -168,7 +168,7 @@ public class TestSQLRaavareDAO {
 			System.out.println("Updated: " + raavareDAO.getRaavare(raavareId));
 
 			String expected = newName;
-			String actual = raavareDAO.getRaavare(raavareId).getraavareName();
+			String actual = raavareDAO.getRaavare(raavareId).getRaavareName();
 
 			assertEquals("Failed: The updated name does not match!", expected, actual);
 
@@ -187,13 +187,9 @@ public class TestSQLRaavareDAO {
 	public void testDeleteRaavarePositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLRaavareDAO.deleteRaavare(raavareId) Positive " + spr);
-			/* Creating RaavareDTO to make sure that it exists. */
-			int raavareId = 334;
-			raavareDAO.deleteRaavare(raavareId);
-			RaavareDTO raavareDTO = new RaavareDTO(raavareId, "Veron", "Weat & Co.", 0);
-			raavareDAO.createRaavare(raavareDTO);
+			int raavareId = 4;
 
-			System.out.println("Created: " + raavareDTO);
+			System.out.println("Created: " + raavareDAO.getRaavare(raavareId));
 			raavareDAO.deleteRaavare(raavareId);
 			System.out.println("Deleted.");
 

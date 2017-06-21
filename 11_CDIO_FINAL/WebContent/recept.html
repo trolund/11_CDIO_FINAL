@@ -1,0 +1,33 @@
+<script src="assets/js/recept.js">
+
+
+</script>
+<h1>Receipt Management</h1>
+<div class="top">
+    <div class="view_buts_L">
+        <button id="Addrecept_But">Add Receipt</button><button id="refresh_But">Refresh List</button>
+    </div>
+    <div class="view_buts">
+        <p class="left">Edit lock:</p>
+        <label class="switch left">
+  <input id="checkbox_val" type="checkbox" style="margin-right: 0px; right: auto;">
+  <div class="slider round"></div>
+</label>
+        <p class="left">Show only active:</p>
+        <label class="switch">
+  <input id="checkbox_val_ac" type="checkbox" style="bottom: 0px; margin-left:5px;">
+  <div class="slider round"></div>
+</label>
+
+        <button class="view_buts button" id="recept_del_But">Delete Marked</button>
+    </div>
+</div>
+<table id="table_con">
+    <tr>
+        <td>Status</td>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Delete</td>
+        <td>Edit</td>
+    </tr>
+</table>

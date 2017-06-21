@@ -17,12 +17,16 @@ public class RaavareDTO {
 		this.supplier = supplier;
 		this.status = status;
 	}
+	
+	public RaavareDTO(){
+		
+	}
 
 	public int getRaavareId() {
 		return raavareId;
 	}
 
-	public String getraavareName() {
+	public String getRaavareName() {
 		return raavareName;
 	}
 

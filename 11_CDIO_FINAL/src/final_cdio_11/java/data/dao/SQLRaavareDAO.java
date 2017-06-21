@@ -9,6 +9,7 @@ import java.util.List;
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
 import final_cdio_11.java.data.dto.RaavareDTO;
+import final_cdio_11.java.utils.Utils;
 
 /*
  * Raavare data access object implementation.
@@ -61,6 +62,9 @@ public class SQLRaavareDAO implements IRaavareDAO {
 		List<RaavareDTO> raavareList = new ArrayList<>();
 		PreparedStatement getRaavareListStmt = null;
 		ResultSet rs = null;
+		
+		Utils.getInstance().sleep(100);
+		
 		try {
 			getRaavareListStmt = connector.getConnection().prepareStatement(getRaavareListSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = getRaavareListStmt.executeQuery();
@@ -70,7 +74,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 			do {
 				raavareList.add(new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return raavareList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -94,7 +98,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 		try {
 			createRaavareStmt = connector.getConnection().prepareStatement(createRaavareSql);
 			createRaavareStmt.setInt(1, raavare.getRaavareId());
-			createRaavareStmt.setString(2, raavare.getraavareName());
+			createRaavareStmt.setString(2, raavare.getRaavareName());
 			createRaavareStmt.setString(3, raavare.getSupplier());
 			createRaavareStmt.setInt(4, raavare.getStatus());
 			createRaavareStmt.executeUpdate();
@@ -119,7 +123,7 @@ public class SQLRaavareDAO implements IRaavareDAO {
 		PreparedStatement updateRaavareStmt = null;
 		try {
 			updateRaavareStmt = connector.getConnection().prepareStatement(updateRaavareSql);
-			updateRaavareStmt.setString(1, raavare.getraavareName());
+			updateRaavareStmt.setString(1, raavare.getRaavareName());
 			updateRaavareStmt.setString(2, raavare.getSupplier());
 			updateRaavareStmt.setInt(3, raavare.getStatus());
 			updateRaavareStmt.setInt(4, raavare.getRaavareId());
@@ -143,6 +147,9 @@ public class SQLRaavareDAO implements IRaavareDAO {
 	public void deleteRaavare(int raavareId) throws DALException {
 		String deleteRaavareSql = connector.getQuery("deleteRaavareSql");
 		PreparedStatement deleteRaavareStmt = null;
+		
+		Utils.getInstance().sleep(40);
+		
 		try {
 			deleteRaavareStmt = connector.getConnection().prepareStatement(deleteRaavareSql);
 			deleteRaavareStmt.setInt(1, raavareId);

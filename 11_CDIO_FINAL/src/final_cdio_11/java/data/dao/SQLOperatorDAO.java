@@ -33,6 +33,11 @@ public class SQLOperatorDAO implements IOperatorDAO {
 		String getOprSql = connector.getQuery("getOprSql");
 		PreparedStatement getOprStmt = null;
 		ResultSet rs = null;
+
+		// Sleep for debugging
+		Utils.getInstance().sleep(100);
+		//
+
 		try {
 			getOprStmt = connector.getConnection().prepareStatement(getOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			getOprStmt.setInt(1, oprId);
@@ -71,7 +76,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			do {
 				oprList.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("opr_efternavn"), rs.getString("ini"), rs.getString("email"), rs.getString("cpr"), rs.getString("password"), rs.getInt("status")));
 			} while (rs.next());
-			
+
 			return oprList;
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage(), e);
@@ -92,6 +97,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 	public void createOperator(OperatorDTO opr) throws DALException {
 		String createOprSql = connector.getQuery("createOprSql");
 		PreparedStatement createOprStmt = null;
+
 		try {
 			createOprStmt = connector.getConnection().prepareStatement(createOprSql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			createOprStmt.setInt(1, opr.getOprId());
@@ -100,7 +106,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			createOprStmt.setString(4, opr.getOprIni());
 			createOprStmt.setString(5, opr.getOprEmail());
 			createOprStmt.setString(6, opr.getOprCpr());
-			createOprStmt.setString(7, Utils.getInstance().sha256(opr.getOprPassword()));
+			createOprStmt.setString(7, opr.getOprPassword());
 			createOprStmt.setInt(8, opr.getStatus());
 			createOprStmt.executeUpdate();
 		} catch (SQLException e) {
@@ -129,7 +135,7 @@ public class SQLOperatorDAO implements IOperatorDAO {
 			updateOprStmt.setString(3, opr.getOprIni());
 			updateOprStmt.setString(4, opr.getOprEmail());
 			updateOprStmt.setString(5, opr.getOprCpr());
-			updateOprStmt.setString(6, Utils.getInstance().sha256(opr.getOprPassword()));
+			updateOprStmt.setString(6, opr.getOprPassword());
 			updateOprStmt.setInt(7, opr.getStatus());
 			updateOprStmt.setInt(8, opr.getOprId());
 			updateOprStmt.executeUpdate();

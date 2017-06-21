@@ -26,10 +26,6 @@ public class OperatorDTO {
 		this.status = status;
 	}
 
-	public void setOprPassword(String oprPassword) {
-		this.oprPassword = oprPassword;
-	}
-
 	public int getOprId() {
 		return oprId;
 	}

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IRaavareBatchDAO;
 import final_cdio_11.java.data.dao.SQLRaavareBatchDAO;
 import final_cdio_11.java.data.dto.RaavareBatchDTO;
 
@@ -19,7 +20,7 @@ public class TestSQLRaavareBatchDAO {
 	/*
 	 * Required objects.
 	 */
-	private SQLRaavareBatchDAO rbDAO;
+	private IRaavareBatchDAO rbDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -46,6 +47,7 @@ public class TestSQLRaavareBatchDAO {
 	public void testGetRaavareBatchPositive() {
 		try {
 			int rbId = 1;
+
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.getRaavareBatch(" + rbId + ") Positive " + spr);
 
 			System.out.println("Receiving RaavareBatchDTO with rbId: " + rbId + ".");
@@ -66,10 +68,7 @@ public class TestSQLRaavareBatchDAO {
 	@Test
 	public void testGetRaavareBatchNegative() {
 		try {
-			int rbId = 102;
-
-			/* Make sure that the ProductBatchDTO does not exist. */
-			rbDAO.deleteRaavareBatch(rbId);
+			int rbId = 1032;
 
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.getRaavareBatch(" + rbId + ") Negative " + spr);
 
@@ -93,9 +92,13 @@ public class TestSQLRaavareBatchDAO {
 		try {
 			List<RaavareBatchDTO> rbList = rbDAO.getRaavareBatchList();
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.getRaavareBatchList() Positive " + spr);
+
+			if (rbList == null) fail("Failed: Failed to retrieve SQLRaavareBatchDAO.getRaavareBatchList()!");
+
 			for (int i = 0; i < rbList.size(); i++) {
 				System.out.println(i + ": " + rbList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -111,11 +114,17 @@ public class TestSQLRaavareBatchDAO {
 	public void testGetRaavareBatchListParameterPositive() {
 		try {
 			int raavareId = 1;
+
 			List<RaavareBatchDTO> rbList = rbDAO.getRaavareBatchList(raavareId);
+
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.getRaavareBatchList(" + raavareId + ") Positive " + spr);
+
+			if (rbList == null) fail("Failed: Failed to retrieve SQLRaavareBatchDAO.getRaavareBatchList()!");
+
 			for (int i = 0; i < rbList.size(); i++) {
 				System.out.println(i + ": " + rbList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
@@ -130,9 +139,7 @@ public class TestSQLRaavareBatchDAO {
 	@Test
 	public void testCreateRaavareBatchPositive() {
 		try {
-			/* Make sure the RaavareBatchDTO does not already exist. */
-			int rbId = 234;
-			rbDAO.deleteRaavareBatch(rbId);
+			int rbId = 23;
 
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.createRaavareBatch(rbDTO) Positive " + spr);
 
@@ -176,15 +183,11 @@ public class TestSQLRaavareBatchDAO {
 	public void testUpdateRaavareBatchPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.updateRaavareBatch(rbDTO) Positive " + spr);
-			/* Creating RaavareBatchDTO to make sure that it exists. */
-			int rbId = 423;
-			rbDAO.deleteRaavareBatch(rbId);
-			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 5435, 0);
-			rbDAO.createRaavareBatch(rbDTO);
 
+			int rbId = 3;
 			int newAmount = 9999;
 
-			RaavareBatchDTO updatedRbDTO = new RaavareBatchDTO(rbId, 1, newAmount, 0);
+			RaavareBatchDTO updatedRbDTO = new RaavareBatchDTO(rbId, 3, newAmount, 0);
 
 			System.out.println("Created: " + rbDAO.getRaavareBatch(rbId));
 			rbDAO.updateRaavareBatch(updatedRbDTO);
@@ -210,15 +213,16 @@ public class TestSQLRaavareBatchDAO {
 	public void testDeleteRaavareBatchPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLRaavareBatchDAO.deleteRaavareBatch(rbId) Positive " + spr);
-			/* Creating RaavareBatchDTO to make sure that it exists. */
 			int rbId = 4552;
-			rbDAO.deleteRaavareBatch(rbId);
-			RaavareBatchDTO rbDTO = new RaavareBatchDTO(rbId, 1, 666669, 0);
-			rbDAO.createRaavareBatch(rbDTO);
 
-			System.out.println("Created: " + rbDTO);
+			/* Create it */
+			rbDAO.createRaavareBatch(new RaavareBatchDTO(rbId, 1, 20, 0));
+
+			System.out.println("Created: " + rbDAO.getRaavareBatch(rbId));
 			rbDAO.deleteRaavareBatch(rbId);
 			System.out.println("Deleted.");
+
+			if (rbDAO.getRaavareBatch(rbId).getStatus() != 1) fail("Failed: Failed to delete existing RaavareBatchDTO!");
 
 			System.out.println(lspr);
 		} catch (DALException e) {

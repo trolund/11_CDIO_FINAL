@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import final_cdio_11.java.data.Connector;
 import final_cdio_11.java.data.DALException;
+import final_cdio_11.java.data.dao.IReceptDAO;
 import final_cdio_11.java.data.dao.SQLReceptDAO;
 import final_cdio_11.java.data.dto.ReceptDTO;
 
@@ -19,7 +20,7 @@ public class TestSQLReceptDAO {
 	/*
 	 * Required objects.
 	 */
-	private SQLReceptDAO receptDAO;
+	private IReceptDAO receptDAO;
 	private final String spr = "#############";
 	private final String lspr = spr + spr + spr + spr + spr + spr;
 
@@ -66,7 +67,7 @@ public class TestSQLReceptDAO {
 	@Test
 	public void testGetReceptNegative() {
 		try {
-			int receptId = 423;
+			int receptId = 42342;
 			System.out.println("\n" + spr + " Testing SQLReceptDAO.getRecept(" + receptId + ") Negative " + spr);
 
 			System.out.println("Receiving receptDTO with receptId: " + receptId);
@@ -88,38 +89,19 @@ public class TestSQLReceptDAO {
 	public void testGetReceptListPositive() {
 		try {
 			List<ReceptDTO> receptList = receptDAO.getReceptList();
+
 			System.out.println("\n" + spr + " Testing SQLReceptDAO.getReceptList() Positive " + spr);
+
+			if (receptList == null) fail("Failed: Failed to retrieve receptList!");
+
 			for (int i = 0; i < receptList.size(); i++) {
 				System.out.println(i + ": " + receptList.get(i));
 			}
+
 			System.out.println(lspr);
 		} catch (DALException e) {
 			System.out.println(e.getMessage());
 			fail("Failed: Failed to retrieve receptList!");
-			System.out.println(lspr);
-		}
-	}
-
-	/*
-	 * Testing SQLReceptDAO.createRecept(receptDTO) Positive atomic test
-	 */
-	@Test
-	public void testCreateReceptPositive() {
-		try {
-			/* Make sure the ReceptDTO does not already exist. */
-			int receptId = 4234;
-			receptDAO.deleteRecept(receptId);
-
-			System.out.println("\n" + spr + " Testing SQLReceptDAO.createRecept(receptDTO) Positive " + spr);
-
-			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed", 0);
-			receptDAO.createRecept(receptDTO);
-			System.out.println("Created: " + receptDTO);
-
-			System.out.println(lspr);
-		} catch (DALException e) {
-			System.out.println(e.getMessage());
-			fail("Failed: Failed to create ReceptDTO!");
 			System.out.println(lspr);
 		}
 	}
@@ -131,7 +113,6 @@ public class TestSQLReceptDAO {
 	public void testCreateReceptNegative() {
 		try {
 			int receptId = 1;
-
 			System.out.println("\n" + spr + " Testing SQLReceptDAO.createRecept(receptDTO) Negative " + spr);
 
 			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed", 0);
@@ -153,11 +134,7 @@ public class TestSQLReceptDAO {
 	public void testUpdateReceptPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLReceptDAO.updateRecept(receptDTO) Positive " + spr);
-			/* Creating ReceptDTO to make sure that it exists. */
-			int receptId = 32;
-			receptDAO.deleteRecept(receptId);
-			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed Chocolates", 0);
-			receptDAO.createRecept(receptDTO);
+			int receptId = 1;
 
 			String newName = "Unmixed Fish";
 
@@ -187,15 +164,13 @@ public class TestSQLReceptDAO {
 	public void testDeleteReceptPositive() {
 		try {
 			System.out.println("\n" + spr + " Testing SQLReceptDAO.deleteRecept(receptId) Positive " + spr);
-			/* Creating ReceptDTO to make sure that it exists. */
-			int receptId = 433;
-			receptDAO.deleteRecept(receptId);
-			ReceptDTO receptDTO = new ReceptDTO(receptId, "Mixed Seafood", 0);
-			receptDAO.createRecept(receptDTO);
+			int receptId = 3;
 
-			System.out.println("Created: " + receptDTO);
+			System.out.println("Created: " + receptDAO.getRecept(receptId));
 			receptDAO.deleteRecept(receptId);
 			System.out.println("Deleted.");
+
+			if (receptDAO.getRecept(receptId).getStatus() != 1) fail("Failed: Failed to delete existing ReceptDTO!");
 
 			System.out.println(lspr);
 		} catch (DALException e) {
